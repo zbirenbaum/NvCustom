@@ -1,0 +1,51 @@
+-- --toggle termwrapper from normie and term mode
+-- -- user custom mappings
+-- -- e.g: name = { "mode" , "keys" , "cmd" , "options"}
+-- -- name: can be empty or something unique with repect to other custom mappings
+-- --    { mode, key, cmd } or name = { mode, key, cmd }
+-- -- mode: usage: mode or { mode1, mode2 }, multiple modes allowed, available modes => :h map-modes,
+-- -- keys: multiple keys allowed, same synxtax as modes
+-- -- cmd:  for vim commands, must use ':' at start and add <CR> at the end if want to execute
+-- -- options: see :h nvim_set_keymap() opts section
+-- --vim.map("n", "<C-x>", [[<Cmd> Ttoggle <CR>]], vim.opt) --  bottt
+-- --vim.map("t", "<C-x>", [[<C-\><C-n> <Cmd> Ttoggle <CR>]], vim.opt) --  bottt
+--    -- clear_all = {
+-- M.mappings = {
+-- --toggle termwrapper from normie and term mode
+-- --map('n', '<A-i>', '<CMD>lua require("FTerm").toggle()<CR>', opts)
+-- --map('t', '<A-i>', '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>', opts)
+-- --map("n", "<C-l>", [[<Cmd>vnew term://zsh <CR>]], opt) -- over right
+-- --map("n", "<C-x>", [[<Cmd> split term://zsh | resize 10 <CR>]], opt) --  bottt
+--
+-- --legacied
+-- n_ttoggle = {
+--     "n",
+--     "<C-x>",
+--     "<Cmd> Ttoggle <CR>"
+--   },
+--   t_ttoggle = {
+--     "t",
+--     "<C-x>",
+--     "<C-\\><C-n> <Cmd> Ttoggle <CR>"
+--   },
+--   ftn_ttoggle = {
+--     "n",
+--     "<A-i>",
+--     "<C-n><CMD>lua require('FTerm').toggle()<CR>"
+--   },
+--   ftt_ttoggle = {
+--     "t",
+--     "<A-i>",
+--     "<C-\\><C-n><CMD>lua require('FTerm').toggle()<CR>"
+--   },
+--   -- coq_tab = {
+--   --   "i",
+--   --   "<Tab>",
+--   --   "<CMD>lua vim.cmd.pumvisible()?<C-n><CR>"
+--   -- },
+-- --map('t', '<A-i>', '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>', opts)
+--    --    "n",
+--    --    "<leader>cc",
+--    --    "gg0vG$d",
+--    -- },
+-- }
