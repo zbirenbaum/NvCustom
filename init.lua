@@ -83,7 +83,27 @@ hooks.add("install_plugins", function(use)
       "mfussenegger/nvim-dap-python",
     },
   }
+  
+  use { 
+    'alvarosevilla95/luatab.nvim',
+    requires='kyazdani42/nvim-web-devicons',
+    after="NvChad/nvim-base16.lua",
+    config=function()
+      require "custom.plugins.luatab"
+    end,
+    }
   -- use {
-  --   'folke/tokyonight.nvim',
+  --   "alvarosevilla95/luatab.nvim",
+  --   -- disable = not plugin_status.luatab,
+  --   after = "nvim-web-devicons",
+  --   setup = function()
+  --      require "custom.plugins.luatab"
+  --   end,
+  --   requires = {
+  --     ""
+  --   }
   -- }
+  use {
+    'folke/tokyonight.nvim',
+  }
 end)

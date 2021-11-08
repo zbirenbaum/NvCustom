@@ -1,6 +1,6 @@
 require "custom.set_globals"
-vim.cmd[[ syntax enable ]]
---vim.cmd[[ hi TabLineFill guifg=black2 guibg=black ctermfg=black2 ctermbg=black ]] --broke pls fix
+vim.cmd[[ hi TabLineFill guibg=#000000 ]] --broke pls fix, command works, but not staying applied on init
+--vim.cmd[[ syntax enable ]]
 --require "custom.theme_override"
 local M = {}
 M.options, M.ui, M.mappings, M.plugins = {}, {}, {}, {}
@@ -94,6 +94,8 @@ M.plugins = {
     --if coq_nvim is true, set these to false
     dap = true,
     dapui = true,
+    --tabline
+    lualine=true,
   },
   options = {
     lspconfig = {
@@ -244,7 +246,7 @@ return M
     --   end
     --   return tbl
     -- end
-    -- 
+    --
     -- local tbl = {
       --   autopairs = "custom.plugins.autopairs",
       --   signature="custom.plugins.lspsignature",

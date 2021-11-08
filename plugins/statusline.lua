@@ -2,6 +2,7 @@ if not pcall(require, "feline") then
   return
 end
 
+vim.cmd[[ hi TabLineFill guibg=#000000 ]] --broke pls fix
 local colors = {
     bg = '#282c34',
     fg = '#abb2bf',
