@@ -3,15 +3,15 @@
 local hooks = require "core.hooks"
 local plugin_status = require("core.utils").load_config().plugins.status
 
-local function afterchoice()
-  if plugin_status.coq_nvim then
-    return "coq_nvim"
-  elseif plugin_status.cmp then
-    return "nvim-cmp"
-  end
-end
-
-local aft = afterchoice()
+-- local function afterchoice()
+--   if plugin_status.coq_nvim then
+--     return "coq_nvim"
+--   elseif plugin_status.cmp then
+--     return "nvim-cmp"
+--   end
+-- end
+-- 
+-- local aft = afterchoice()
 
 hooks.add("install_plugins", function(use)
   use {
@@ -54,15 +54,15 @@ hooks.add("install_plugins", function(use)
       {'ms-jpq/coq.thirdparty', branch = '3p'},
     },
   }
-  use {
-    "windwp/nvim-autopairs",
-    after = aft,
-    disable = not plugin_status.autopairs,
-    config = function()
-      --require "custom.plugins.coq_configs.autopairs_coq"
-      require "custom.plugins.autopairs_selection"
-    end,
-  }
+  -- use {
+  --   "windwp/nvim-autopairs",
+  --   after = aft,
+  --   disable = not plugin_status.autopairs,
+  --   config = function()
+  --     --require "custom.plugins.coq_configs.autopairs_coq"
+  --     require "custom.plugins.autopairs_selection"
+  --   end,
+  -- }
 
   use {
     "rcarriga/nvim-dap-ui",
@@ -83,27 +83,15 @@ hooks.add("install_plugins", function(use)
       "mfussenegger/nvim-dap-python",
     },
   }
-  
-  use { 
-    'alvarosevilla95/luatab.nvim',
-    requires='kyazdani42/nvim-web-devicons',
-    after="NvChad/nvim-base16.lua",
-    config=function()
-      require "custom.plugins.luatab"
-    end,
-    }
-  -- use {
-  --   "alvarosevilla95/luatab.nvim",
-  --   -- disable = not plugin_status.luatab,
-  --   after = "nvim-web-devicons",
-  --   setup = function()
-  --      require "custom.plugins.luatab"
-  --   end,
-  --   requires = {
-  --     ""
-  --   }
-  -- }
   use {
-    'folke/tokyonight.nvim',
+    'seblj/nvim-tabline',
+    requires='kyazdani42/nvim-web-devicons',
+    disable = not plugin_status.tabline,
+    config=function()
+      require "custom.plugins.tabline"
+    end,
   }
+  -- use {
+  --   'folke/tokyonight.nvim',
+  -- }
 end)

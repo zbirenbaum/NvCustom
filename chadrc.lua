@@ -1,5 +1,5 @@
 require "custom.set_globals"
-vim.cmd[[ hi TabLineFill guibg=#000000 ]] --broke pls fix, command works, but not staying applied on init
+--vim.cmd[[ hi TabLineFill guibg=#000000 ]] --broke pls fix, command works, but not staying applied on init
 --vim.cmd[[ syntax enable ]]
 --require "custom.theme_override"
 local M = {}
@@ -41,6 +41,7 @@ M.options = {
 
 -- ui configs
 M.ui = {
+  hl_override = "custom.plugins.hl_override",
   italic_comments = true,
   -- theme to be used, check available themes with `<leader> + t + h`
   --theme = "tokyonight",
@@ -86,7 +87,7 @@ M.plugins = {
     termwrapper = false,
     toggleterm = true,
     jqx = true,
-    autopairs = true,
+    --autopairs = true,
     --     fterm = true,
     -- Completions, choose 1
     coq_nvim = false,
@@ -94,8 +95,7 @@ M.plugins = {
     --if coq_nvim is true, set these to false
     dap = true,
     dapui = true,
-    --tabline
-    lualine=true,
+    tabline=true,
   },
   options = {
     lspconfig = {
@@ -132,7 +132,7 @@ M.plugins = {
     signature=require("custom.plugins.lspsignature_selection"),
     feline="custom.plugins.feline",
     nvim_cmp="custom.plugins.cmp_configs.cmp",
-    bufferline="custom.plugins.bufferline"
+    bufferline="custom.plugins.bufferline",
     --nvim_autopairs=require("custom.plugins.autopairs_selection"),
     --signature="custom.plugins.lspsignature_coq",
   },
