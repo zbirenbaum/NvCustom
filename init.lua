@@ -54,6 +54,15 @@ hooks.add("install_plugins", function(use)
       {'ms-jpq/coq.thirdparty', branch = '3p'},
     },
   }
+  use {
+  "folke/trouble.nvim",
+  requires = "kyazdani42/nvim-web-devicons",
+  --after = "nvim-lspconfig",
+  disable = not plugin_status.trouble,
+  config = function()
+    require("custom.plugins.trouble")
+  end
+}
   -- use {
   --   "windwp/nvim-autopairs",
   --   after = aft,

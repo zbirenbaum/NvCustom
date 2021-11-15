@@ -96,6 +96,8 @@ M.plugins = {
     dap = true,
     dapui = true,
     tabline=true,
+    --organized diagnostics
+    trouble = true,
   },
   options = {
     lspconfig = {
