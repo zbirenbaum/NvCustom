@@ -60,13 +60,6 @@ end
 
 horizontal_mappings "<C-x>"
 float_mappings "<A-i>"
--- local map_opts = {noremap = true}
---
--- vim.api.nvim_buf_set_keymap(0, 'n', '<C-x>', "<CMD>1ToggleTerm size=10 direction='horizontal'<CR>", map_opts)
--- vim.api.nvim_buf_set_keymap(0, 't', '<C-x>', "<ESC><CMD>ToggleTerm<CR>", map_opts)
---
--- vim.api.nvim_buf_set_keymap(0, 'n', '<A-i>', "<CMD>v:count2 .. ToggleTerm size=10 direction='float'<CR>", map_opts)
--- vim.api.nvim_buf_set_keymap(0, 't', '<A-i>', "<CMD>v:count2 .. ToggleTerm size=10 direction='float'<CR>", map_opts)
 
 function _G.set_terminal_keymaps()
    local opts = { noremap = true }

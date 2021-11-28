@@ -31,14 +31,6 @@ hooks.add("install_plugins", function(use)
     end,
   }
   use {
-    "oberblastmeister/termwrapper.nvim",
-    disable = not plugin_status.termwrapper,
-    event = "BufRead",
-    config = function()
-      require "custom.plugins.termwrapper"
-    end,
-  }
-  use {
     "gennaro-tedesco/nvim-jqx",
     disable = not plugin_status.jqx,
   }
@@ -63,16 +55,6 @@ hooks.add("install_plugins", function(use)
     require("custom.plugins.trouble")
   end
 }
-  -- use {
-  --   "windwp/nvim-autopairs",
-  --   after = aft,
-  --   disable = not plugin_status.autopairs,
-  --   config = function()
-  --     --require "custom.plugins.coq_configs.autopairs_coq"
-  --     require "custom.plugins.autopairs_selection"
-  --   end,
-  -- }
-
   use {
     "rcarriga/nvim-dap-ui",
     after = "nvim-dap",
@@ -100,6 +82,25 @@ hooks.add("install_plugins", function(use)
       require "custom.plugins.tabline"
     end,
   }
+  
+  -- use {
+  --   "windwp/nvim-autopairs",
+  --   after = aft,
+  --   disable = not plugin_status.autopairs,
+  --   config = function()
+  --     --require "custom.plugins.coq_configs.autopairs_coq"
+  --     require "custom.plugins.autopairs_selection"
+  --   end,
+  -- }
+
+  -- use {
+  --   "oberblastmeister/termwrapper.nvim",
+  --   disable = not plugin_status.termwrapper,
+  --   event = "BufRead",
+  --   config = function()
+  --     require "custom.plugins.termwrapper"
+  --   end,
+  -- }
   -- use {
   --   'folke/tokyonight.nvim',
   -- }
