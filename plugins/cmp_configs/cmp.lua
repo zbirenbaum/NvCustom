@@ -25,7 +25,7 @@ vim.cmd [[highlight! CmpItemAbbrMatchFuzzy guibg=NONE guifg=#569CD6]]
 vim.cmd [[highlight! CmpItemKindConstructor guifg=#ae43f0]]
 vim.cmd [[highlight! CmpItemKindVariable guibg=NONE guifg=#9CDCFE]]
 vim.cmd [[highlight! CmpItemKindInterface guibg=NONE guifg=#f90c71]]
-vim.cmd [[highlight! CmpItemKindFolder guifg=#9CDCFE]]
+vim.cmd [[highlight! CmpItemKindFolder guifg=#2986cc]]
 vim.cmd [[highlight! CmpItemKindMethod guifg=#C586C0]]
 
 -- vim.cmd [[highlight! CmpItemKindText guifg=vibrant_green]]

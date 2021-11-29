@@ -82,7 +82,17 @@ hooks.add("install_plugins", function(use)
       require "custom.plugins.tabline"
     end,
   }
-  
+  --vscode style popup for ex mode
+  use {
+    'VonHeikemen/fine-cmdline.nvim',
+    disable = not plugin_status.cmdline,
+    config=function()
+      require "custom.plugins.cmdline"
+    end,
+    requires = {
+      {'MunifTanjim/nui.nvim'}
+    }
+  }
   -- use {
   --   "windwp/nvim-autopairs",
   --   after = aft,

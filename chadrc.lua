@@ -1,4 +1,5 @@
 require "custom.set_globals"
+require "custom.mappings"
 --vim.cmd[[ hi TabLineFill guibg=#000000 ]] --broke pls fix, command works, but not staying applied on init
 --vim.cmd[[ syntax enable ]]
 --require "custom.theme_override"
@@ -98,6 +99,8 @@ M.plugins = {
     tabline=true,
     --organized diagnostics
     trouble = true,
+    --vscode style ex mode
+    cmdline = false,
   },
   options = {
     lspconfig = {
