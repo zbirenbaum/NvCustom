@@ -33,7 +33,7 @@ M.options = {
     copy_del = true, -- copy deleted text ( dd key ), visual and normal mode
     insert_nav = true, -- navigation in insertmode
     window_nav = true,
-    theme_toggler = false,
+    theme_toggler = true,
     -- used for updater
     update_url = "https://github.com/NvChad/NvChad",
     update_branch = "main",
@@ -47,15 +47,16 @@ M.ui = {
   -- theme to be used, check available themes with `<leader> + t + h`
   --theme = "tokyonight",
   theme = "tokyonight",
+  --theme = "onedark",
 
   -- toggle between two themes, see theme_toggler mappings
   theme_toggler = {
-    "onedark",
     "tokyonight",
+    --"tomorrow-night"
   },
   -- Enable this only if your terminal has the colorscheme set which nvchad uses
   -- For Ex : if you have onedark set in nvchad, set onedark's bg color on your terminal
-  transparency = false,
+  transparency = true,
 }
 
 -- these are plugin related options
@@ -127,7 +128,7 @@ M.plugins = {
       shortline = true,
       shown = {},
       -- default, round , slant , block , arrow
-      style = "default",
+      style = "custom",
     },
     esc_insertmode_timeout = 300,
   },
@@ -135,9 +136,10 @@ M.plugins = {
   default_plugin_config_replace = {
     --signature="custom.plugins.cmp_configs.lspsignature_cmp",
     signature=require("custom.plugins.lspsignature_selection"),
-    feline="custom.plugins.feline",
+    feline="custom.plugins.statusline_builder.builder",
     nvim_cmp="custom.plugins.cmp_configs.cmp",
     bufferline="custom.plugins.bufferline",
+    --feline="custom.plugins.feline",
     --nvim_autopairs=require("custom.plugins.autopairs_selection"),
     --signature="custom.plugins.lspsignature_coq",
   },
