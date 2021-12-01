@@ -14,7 +14,9 @@ M.setup = function(attach, capabilities)
     settings = {
       python =  {
         analysis = {
-          autoSearchPaths = false,
+          stubPath = "./typings",
+          --autoSearchPaths = false,
+          autoSearchPaths = true,
           useLibraryCodeForTypes = true,
           diagnosticMode = 'openFilesOnly',
         }
