@@ -2,11 +2,11 @@ local colors = require("colors").get()
 local lsp = require "feline.providers.lsp"
 local C = {}
 local config = require("core.utils").load_config().plugins.options.statusline
+local shortline = config.shortline == false and true
 -- statusline style
 -- if show short statusline on small screens
 --local shortline = config.shortline == false and true
 
-local shortline = true
 -- local colors = {
 --       bg = '#282c34',
 --       fg = '#abb2bf',
@@ -133,7 +133,7 @@ C.dir = {
     bg=colors.lightbg,
   },
   left_sep = {
-    str = "  " .. statusline_style.left,
+    str = " " .. statusline_style.left,
     hl = {
       fg=colors.lightbg,
       bg=empty,
@@ -173,7 +173,31 @@ C.git = {
     },
     icon = "  ",
   },
+
   branch = {
+    provider = "git_branch",
+    enabled = shortline or function(winid)
+        local path = vim.fn.expand('%:p')
+        local cwd = vim.fn.getcwd()
+        local gitrepo = false
+        if path:find(cwd) ~= nil then
+          gitrepo=true
+        end
+      return gitrepo and vim.api.nvim_win_get_width(winid) > 70
+    end,
+    hl = {
+      fg = colors.nord_blue,
+      bg= empty,
+    },
+    icon = {
+      str = "  ",
+      hl = {
+        fg = colors.green,
+        bg = empty,
+      },
+    },
+  },
+  branch_bg = {
     provider = "git_branch",
     enabled = shortline or function(winid)
         local path = vim.fn.expand('%:p')
