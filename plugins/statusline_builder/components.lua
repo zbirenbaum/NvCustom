@@ -1,20 +1,38 @@
 local colors = require("colors").get()
 local lsp = require "feline.providers.lsp"
---local lsp = require "feline.providers.lsp"
 local C = {}
---local config = require("core.utils").load_config().plugins.options.statusline
+local config = require("core.utils").load_config().plugins.options.statusline
 -- statusline style
 -- if show short statusline on small screens
 --local shortline = config.shortline == false and true
-local shortline = true
 
+local shortline = true
+-- local colors = {
+--       bg = '#282c34',
+--       fg = '#abb2bf',
+--       yellow = '#e0af68',
+--       cyan = '#56b6c2',
+--       darkblue = '#081633',
+--       green = '#98c379',
+--       orange = '#d19a66',
+--       violet = '#a9a1e1',
+--       magenta = '#c678dd',
+--       blue = '#61afef',
+--       red = '#e86671'
+--   }
 local statusline_style = {
     left = "",
-    right = "",
+    right = "",
     main_icon = "  ",
-    vi_mode_icon = " ",
+    vi_mode_icon = "⚡",
     position_icon = " ",
 }
+
+local sep_spaces= {
+    left = " ",
+    right = "",
+}
+local empty="NONE"
 
 local mode_colors = {
   ["n"] = { "NORMAL", colors.red },
@@ -39,25 +57,26 @@ local mode_colors = {
   ["!"] = { "SHELL", colors.green },
 }
 
+
 local chad_mode_hl = function()
   return {
     fg=mode_colors[vim.fn.mode()][2],
-    bg=colors.statusline_bg,
+    bg=colors.lightbg,
   }
 end
 
 C.main_icon = {
   provider = statusline_style.main_icon,
   hl = {
-    fg=colors.statusline_bg,
+    fg=empty,
     bg=colors.nord_blue,
   },
-  right_sep = {
+  left_sep={
     str = statusline_style.right,
     hl = {
       fg=colors.nord_blue,
       bg=colors.lightbg,
-    }
+    },
   },
 }
 
@@ -79,9 +98,25 @@ C.file={
     fg = colors.white,
     bg = colors.lightbg,
   },
-
-  right_sep = { str = statusline_style.right, hl = { fg = colors.lightbg, bg = colors.lightbg2 } },
+  left_sep = {
+    str = sep_spaces.left,
+    hl = {
+      fg=colors.lightbg,
+      bg=empty,
+    },
+  },
+  right_sep = {
+    str = " ",
+    hl = {
+      fg=colors.lightbg,
+      bg=empty,
+    }
+  },
 }
+
+
+--   right_sep = { str = statusline_style.right, hl = { fg = colors.lightbg, bg = colors.lightbg2 } },
+-- }
 
 C.dir = {
   provider = function()
@@ -90,59 +125,109 @@ C.dir = {
   end,
 
   enabled = shortline or function(winid)
-    return vim.api.nvim_win_get_width(winid) > 80
+     return vim.api.nvim_win_get_width(winid) > 80
   end,
 
   hl = {
-    fg = colors.grey_fg2,
-    bg = colors.lightbg2,
+    fg=colors.cyan,
+    bg=colors.lightbg,
+  },
+  left_sep = {
+    str = "  " .. statusline_style.left,
+    hl = {
+      fg=colors.lightbg,
+      bg=empty,
+    }
   },
   right_sep = {
-    str = statusline_style.right,
-    hi = {
-      fg = colors.lightbg2,
-      bg = colors.statusline_bg,
+    str = sep_spaces.right,
+    hl = {
+      fg=colors.lightbg,
+      bg=empty,
     },
   },
 }
 
 C.git = {
-  [1]={
+  added={
     provider = "git_diff_added",
     hl = {
       fg = colors.green,
-      bg = colors.statusline_bg,
+      bg = empty,
     },
-    icon = " ",
+    icon = "  ",
   },
-  [2]={
+  changed={
     provider = "git_diff_changed",
     hl = {
       fg = colors.orange,
-      bg = colors.statusline_bg,
+      bg = empty,
     },
-    icon = "   ",
+    icon = "  ",
   },
-  [3]={
+  removed={
     provider = "git_diff_removed",
     hl = {
       fg = colors.red,
-      bg = colors.statusline_bg,
+      bg = empty,
     },
     icon = "  ",
   },
   branch = {
     provider = "git_branch",
     enabled = shortline or function(winid)
-      return vim.api.nvim_win_get_width(winid) > 70
+        local path = vim.fn.expand('%:p')
+        local cwd = vim.fn.getcwd()
+        local gitrepo = false
+        if path:find(cwd) ~= nil then
+          gitrepo=true
+        end
+      return gitrepo and vim.api.nvim_win_get_width(winid) > 70
     end,
     hl = {
-      fg = colors.grey_fg2,
-      bg = colors.statusline_bg,
+      fg = colors.nord_blue,
+      bg = colors.lightbg,
     },
-    icon = "  ",
+    icon = {
+      str = "  ",
+      hl = {
+        fg = colors.green,
+        bg = colors.lightbg,
+      },
+    },
+    left_sep = {
+      str = " " .. statusline_style.left,
+      hl = {
+        fg=colors.lightbg,
+        bg=empty,
+      }
+    },
+  },
+  git_sep = {
+    provider = " ",
+    enabled = function(winid)
+        local path = vim.fn.expand('%:p')
+        local cwd = vim.fn.getcwd()
+        local gitrepo = false
+        if path:find(cwd) ~= nil then
+          gitrepo=true
+        end
+      return gitrepo and vim.api.nvim_win_get_width(winid) > 70
+    end,
+    hl = {
+      bg=colors.lightbg,
+      fg=empty,
+    },
+    right_sep = {
+      str = statusline_style.right,
+      hl = {
+        fg=colors.lightbg,
+        bg=empty,
+      }
+    }
   }
 }
+
 C.diagnostics={
   errors = {
     provider = "diagnostic_errors",
@@ -150,7 +235,7 @@ C.diagnostics={
       return lsp.diagnostics_exist "Error"
     end,
 
-    hl = { fg = colors.red },
+    hl = { bg=empty, fg = colors.red },
     icon = "  ",
   },
   warnings = {
@@ -158,7 +243,7 @@ C.diagnostics={
     enabled = function()
       return lsp.diagnostics_exist "Warning"
     end,
-    hl = { fg = colors.yellow },
+    hl = { bg=empty, fg = colors.yellow },
     icon = "  ",
   },
   hints = {
@@ -166,7 +251,7 @@ C.diagnostics={
     enabled = function()
       return lsp.diagnostics_exist "Hint"
     end,
-    hl = { fg = colors.grey_fg2 },
+    hl = { bg=empty, fg = colors.grey_fg2 },
     icon = "  ",
   },
   info = {
@@ -174,8 +259,13 @@ C.diagnostics={
     enabled = function()
       return lsp.diagnostics_exist "Information"
     end,
-    hl = { fg = colors.green },
+    hl = { bg=empty, fg = colors.green },
     icon = "  ",
+  },
+  
+  spacer = {
+    provider = "  ",
+    hl = { bg=empty, fg = colors.empty },
   }
 }
 C.progress = {
@@ -214,25 +304,35 @@ C.progress = {
   hl = { fg = colors.green },
 }
 C.lsp = {
-  provider = function()
-    if next(vim.lsp.buf_get_clients()) ~= nil then
-      return "  LSP"
-    else
-      return ""
-    end
-  end,
+  provider="lsp_client_names",
+  -- provider = function()
+  --   if next(vim.lsp.buf_get_clients()) ~= nil then
+  --     return "  LSP"
+  --   else
+  --     return ""
+  --   end
+  -- end,
   enabled = shortline or function(winid)
     return vim.api.nvim_win_get_width(winid) > 70
   end,
-  hl = { fg = colors.grey_fg2, bg = colors.statusline_bg },
+  hl = { fg = colors.nord_blue, bg = empty },
 }
 C.mode = {
   left_sep = {
     provider = statusline_style.left,
     hl = function()
       return {
-        fg = mode_colors[vim.fn.mode()][2],
-        bg = colors.statusline_bg,
+        fg = colors.lightbg,
+        bg = empty,
+      }
+    end,
+  },
+  right_sep = {
+    provider = statusline_style.right,
+    hl = function()
+      return {
+        fg = colors.lightbg,
+        bg = empty,
       }
     end,
   },
@@ -240,27 +340,27 @@ C.mode = {
     provider = statusline_style.vi_mode_icon,
     hl = function()
       return {
-        fg = colors.statusline_bg,
-        bg = mode_colors[vim.fn.mode()][2],
+        bg = colors.lightbg,
+        fg = mode_colors[vim.fn.mode()][2],
       }
     end,
   },
   mode_string = {
     provider = function()
-      return " " .. mode_colors[vim.fn.mode()][1] .. " "
+      return "" .. mode_colors[vim.fn.mode()][1] .. " "
     end,
     hl = chad_mode_hl,
   }
 }
 C.location = {
   left_sep = {
-    provider = statusline_style.left,
+    provider = " " .. statusline_style.left,
     enabled = shortline or function(winid)
       return vim.api.nvim_win_get_width(winid) > 90
     end,
     hl = {
       fg = colors.green,
-      bg = colors.statusline_bg,
+      bg = empty,
     },
   },
   loc_icon = {

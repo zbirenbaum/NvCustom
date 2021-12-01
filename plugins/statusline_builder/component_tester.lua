@@ -1,3 +1,5 @@
+package.path = './components.lua' .. package.path
+
 local components_table = require "components"
 
 function dump(o)
@@ -12,4 +14,4 @@ function dump(o)
       return tostring(o)
    end
 end
-print(dump(components_table.main_icon['hl']))
+print(dump(components_table.git.added))

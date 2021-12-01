@@ -28,6 +28,7 @@ vim.g.python3_host_prog = "/home/zach/.virtualenvs/py3nvim/bin/python"
 vim.g.python_host_prog = "/home/zach/.virtualenvs/py2nvim/bin/python"
 vim.o.cmdheight = 1
 
+vim.cmd[[ set noshowmode "off" ]]
 -- if has_key(environ(), 'TMUX')
 --   augroup tmux_something
 --     autocmd VimResume  * call system('tmux set status off')

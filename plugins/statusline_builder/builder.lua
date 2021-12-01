@@ -12,15 +12,39 @@ table.insert(components.active, {})
 
 local ct = require("custom.plugins.statusline_builder.components")
 local left = {}
-table.insert(left, ct.main_icon)
+local right = {}
+local middle = {}
+--table.insert(left, ct.main_icon)
+--
+
+table.insert(left, ct.mode.left_sep)
+table.insert(left, ct.mode.mode_icon)
+table.insert(left, ct.mode.mode_string)
+table.insert(left, ct.mode.right_sep)
 table.insert(left, ct.file)
-table.insert(left, ct.dir)
 
-table.insert(left, ct.git.added)
-table.insert(left, ct.git.changed)
-table.insert(left, ct.git.removed)
 
+table.insert(left, ct.diagnostics.errors)
+table.insert(left, ct.diagnostics.warnings)
+table.insert(left, ct.diagnostics.hints)
+table.insert(left, ct.diagnostics.info)
+table.insert(left, ct.diagnostics.spacer)
+
+table.insert(right, ct.lsp)
+table.insert(right, ct.git.branch)
+table.insert(right, ct.git.git_sep)
+
+table.insert(right, ct.git.added)
+table.insert(right, ct.git.changed)
+table.insert(right, ct.git.removed)
+--table.insert(right, ct.dir)
+
+table.insert(right, ct.location.left_sep)
+table.insert(right, ct.location.loc_icon)
+table.insert(right, ct.location.loc_string)
 components.active[1] = left
+components.active[2] = middle
+components.active[3] = right
 
 
 local InactiveStatusHL = {
