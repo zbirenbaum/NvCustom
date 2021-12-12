@@ -4,7 +4,8 @@ M.setup_lsp = function(attach, capabilities)
   local lspconfig = require "lspconfig"
 
   -- lspservers with default config
-  local servers = { "pyright", "lua", "ccls" }
+  -- "ccls", 
+  local servers = { "pyright", "lua", "clangd" }
 
   for _, lsp in ipairs(servers) do
       if lsp == "pyright" then

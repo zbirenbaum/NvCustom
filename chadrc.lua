@@ -9,7 +9,7 @@ M.options, M.ui, M.mappings, M.plugins = {}, {}, {}, {}
 M.options = {
   -- NeoVim/Vim options
   clipboard = "unnamedplus",
-  cmdheight = 1,
+  cmdheight = 0,
   ruler = false,
   hidden = true,
   ignorecase = true,
@@ -89,7 +89,7 @@ M.plugins = {
     termwrapper = false,
     toggleterm = true,
     jqx = true,
-    --autopairs = true,
+    autopairs = true,
     --     fterm = true,
     -- Completions, choose 1
     coq_nvim = false,
@@ -102,6 +102,9 @@ M.plugins = {
     trouble = true,
     --vscode style ex mode
     cmdline = false,
+    lspkind = true,
+    --cmdheight rfc
+    cmdheight = true,
   },
   options = {
     lspconfig = {

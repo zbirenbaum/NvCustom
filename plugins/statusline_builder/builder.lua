@@ -17,10 +17,10 @@ local middle = {}
 --table.insert(left, ct.main_icon)
 --
 
-table.insert(left, ct.mode.left_sep)
-table.insert(left, ct.mode.mode_icon)
+--table.insert(left, ct.mode.left_sep)
+--table.insert(left, ct.mode.mode_icon)
 table.insert(left, ct.mode.mode_string)
-table.insert(left, ct.mode.right_sep)
+--table.insert(left, ct.mode.right_sep)
 table.insert(left, ct.dir)
 table.insert(left, ct.file)
 
@@ -39,7 +39,7 @@ table.insert(right, ct.git.added)
 table.insert(right, ct.git.changed)
 table.insert(right, ct.git.removed)
 
-table.insert(right, ct.location.left_sep)
+--table.insert(right, ct.location.left_sep)
 table.insert(right, ct.location.loc_icon)
 table.insert(right, ct.location.loc_string)
 components.active[1] = left

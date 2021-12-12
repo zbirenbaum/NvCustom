@@ -24,7 +24,7 @@ local statusline_style = {
     left = "",
     right = "",
     main_icon = "  ",
-    vi_mode_icon = "⚡",
+    vi_mode_icon = " ⚡",
     position_icon = " ",
 }
 
@@ -61,7 +61,8 @@ local mode_colors = {
 local chad_mode_hl = function()
   return {
     fg=mode_colors[vim.fn.mode()][2],
-    bg=colors.lightbg,
+    --bg=colors.lightbg,
+    bg = empty,
   }
 end
 
@@ -85,8 +86,11 @@ C.file={
     local filename = vim.fn.expand "%:t"
     local extension = vim.fn.expand "%:e"
     local icon = require("nvim-web-devicons").get_icon(filename, extension)
+    if filename == nil or filename == "" or filename == " " then
+      return ""
+    end
     if icon == nil then
-      icon = " "
+      icon = ""
       return icon
     end
     return " " .. icon .. " " .. filename .. " "
@@ -364,14 +368,14 @@ C.mode = {
     provider = statusline_style.vi_mode_icon,
     hl = function()
       return {
-        bg = colors.lightbg,
+        bg = empty, --colors.lightbg,
         fg = mode_colors[vim.fn.mode()][2],
       }
     end,
   },
   mode_string = {
     provider = function()
-      return "" .. mode_colors[vim.fn.mode()][1] .. " "
+      return " " .. mode_colors[vim.fn.mode()][1] .. ""
     end,
     hl = chad_mode_hl,
   }
@@ -388,13 +392,15 @@ C.location = {
     },
   },
   loc_icon = {
-    provider = statusline_style.position_icon,
+    provider = "  " .. statusline_style.position_icon,
     enabled = shortline or function(winid)
       return vim.api.nvim_win_get_width(winid) > 90
     end,
     hl = {
-      fg = colors.black,
-      bg = colors.green,
+      fg = colors.green,
+      bg=empty,
+      --fg = colors.black,
+      --bg = colors.green,
     },
   },
   loc_string = {
@@ -403,12 +409,12 @@ C.location = {
       local total_line = vim.fn.line "$"
 
       if current_line == 1 then
-        return " Top "
+        return "Top "
       elseif current_line == vim.fn.line "$" then
-        return " Bot "
+        return "Bot "
       end
       local result, _ = math.modf((current_line / total_line) * 100)
-      return " " .. result .. "%% "
+      return "" .. result .. "%% "
     end,
 
     enabled = shortline or function(winid)
@@ -417,7 +423,9 @@ C.location = {
 
     hl = {
       fg = colors.green,
-      bg = colors.one_bg,
+      bg = empty,
+--      fg = colors.green,
+--      bg = colors.one_bg,
     },
   },
 }

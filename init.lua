@@ -47,32 +47,32 @@ hooks.add("install_plugins", function(use)
     },
   }
   use {
-  "folke/trouble.nvim",
-  requires = "kyazdani42/nvim-web-devicons",
-  --after = "nvim-lspconfig",
-  disable = not plugin_status.trouble,
-  config = function()
-    require("custom.plugins.trouble")
-  end
-}
-  use {
-    "rcarriga/nvim-dap-ui",
-    after = "nvim-dap",
+    "folke/trouble.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+    --after = "nvim-lspconfig",
+    disable = not plugin_status.trouble,
     config = function()
-      require("dapui").setup()
-    end,
+      require("custom.plugins.trouble")
+    end
   }
   use {
     'mfussenegger/nvim-dap',
     after = "coq_nvim",
     disable = not plugin_status.dap,
     config = function()
-      require "custom.plugins.dap_configs.python"
+      require "custom.plugins.dap"
     end,
     requires = {
       "Pocco81/DAPInstall.nvim",
       "mfussenegger/nvim-dap-python",
     },
+  }
+  use {
+    "rcarriga/nvim-dap-ui",
+    after = "nvim-dap",
+    config = function()
+      require("dapui").setup()
+    end,
   }
   use {
     'seblj/nvim-tabline',
@@ -92,6 +92,17 @@ hooks.add("install_plugins", function(use)
     requires = {
       {'MunifTanjim/nui.nvim'}
     }
+  }
+  use {
+    "onsails/lspkind-nvim",
+    disable=not plugin_status.lspkind,
+  }
+  use {
+    "rcarriga/nvim-notify",
+    disable=not plugin_status.cmdheight,
+    config=function()
+      require "custom.msgfunc.msgfunc"
+    end
   }
   -- use {
   --   "windwp/nvim-autopairs",

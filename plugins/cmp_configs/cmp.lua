@@ -1,5 +1,7 @@
 local present, cmp = pcall(require, "cmp")
 local colors = require("colors").get()
+local lspkind = require("custom.plugins.cmp_configs.lspkind")
+local custom_comp = require("custom.plugins.cmp_configs.custom_type_comparator")
 
 if not present then
   return
@@ -14,6 +16,7 @@ vim.opt.completeopt = "menuone,noselect"
 -- vim.cmd [[highlight! link CmpItemKindInterface colors.green]]
 
 ------------------
+
 
 vim.cmd [[highlight! CmpItemKindText guifg=LightGrey]]
 vim.cmd [[highlight! CmpItemKindFunction guifg=#C586C0]]
@@ -60,25 +63,24 @@ cmp.setup {
     end,
   },
   formatting = {
-    format = function(entry, vim_item)
-      -- load lspkind icons
-      vim_item.kind = string.format(
-      "%s",
-      require("custom.plugins.cmp_configs.lspkind_icons").icons[vim_item.kind]
-      )
-
-      vim_item.menu = ({
-      --   -- nvim_lsp = "「LSP」 ",
-      --   -- nvim_lua = "「Lua」 ",
-      --   -- buffer = "「BUF」 ",
-        nvim_lsp = "",
-        nvim_lua = "",
-        buffer = "",
-      })[entry.source.name]
-
-      return vim_item
-    end,
+    format = lspkind.cmp_format({with_text = false, maxwidth = 50})
   },
+--     format = function(entry, vim_item)
+--       -- load lspkind icons
+--       vim_item.kind = string.format(
+--       "%s",
+--       require("custom.plugins.cmp_configs.lspkind_icons").icons[vim_item.kind]
+--       )
+--       vim_item.menu = ({
+--       --   -- nvim_lsp = "「LSP」 ",
+--       --   -- nvim_lua = "「Lua」 ",
+--       --   -- buffer = "「BUF」 ",
+--         nvim_lsp = "",
+--         nvim_lua = "",
+--         buffer = "",
+--       })[entry.source.name]
+--       return vim_item
+--     end,
   mapping = {
 
     ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
@@ -129,11 +131,40 @@ cmp.setup {
     ghost_text = true,
   },
   sources = {
-    { name = "nvim_lsp" },
-    { name = "luasnip" },
-    { name = "buffer" },
-    { name = "nvim_lua" },
-    { name = "path" },
+    { name = "nvim_lsp", max_item_count = 5 },
+    { name = "luasnip", max_item_count = 2 },
+    { name = "buffer", max_item_count = 5 },
+    { name = "nvim_lua", max_item_count = 5 },
+    { name = "path", max_item_count = 10},
+--     { name = "nvim_lsp", max_item_count=10},
+-- --    { name = "luasnip"},
+--     { name = "buffer", max_item_count=2},
+-- --    { name = "nvim_lua"},
+--     { name = "path", max_item_count=10},
   },
   preselect = cmp.PreselectMode.Item,
+--   sorting = {
+--     comparators = {
+--       custom_comp.disable_snip,
+--       custom_comp.disable_text,
+--       cmp.config.compare.offset,
+--       cmp.config.compare.exact,
+--       cmp.config.compare.score,
+--       cmp.config.compare.recently_used,
+--       cmp.config.compare.kind,
+--       cmp.config.compare.sort_text,
+--       cmp.config.compare.length,
+--       cmp.config.compare.order,
+--       
+-- --       cmp.config.compare.offset,
+-- --       cmp.config.compare.score,
+-- --       cmp.config.compare.recently_used,
+-- --       cmp.config.compare.exact,
+-- --       custom_comp.kind_sort,
+-- -- --      cmp.config.compare.kind,
+-- --       cmp.config.compare.sort_text,
+-- --       cmp.config.compare.length,
+-- --       cmp.config.compare.order,
+--     },
+--   },
 }
