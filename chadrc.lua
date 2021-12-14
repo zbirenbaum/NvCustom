@@ -9,7 +9,7 @@ M.options, M.ui, M.mappings, M.plugins = {}, {}, {}, {}
 M.options = {
   -- NeoVim/Vim options
   clipboard = "unnamedplus",
-  cmdheight = 0,
+  cmdheight = 1,
   ruler = false,
   hidden = true,
   ignorecase = true,
@@ -60,6 +60,7 @@ M.ui = {
 }
 
 -- these are plugin related options
+-- 
 M.plugins = {
   -- enable and disable plugins (false for disable)
   status = {
@@ -104,7 +105,7 @@ M.plugins = {
     cmdline = false,
     lspkind = true,
     --cmdheight rfc
-    cmdheight = true,
+    cmdheight = false,
   },
   options = {
     lspconfig = {

@@ -29,7 +29,7 @@ vim.g.python_host_prog = "/home/zach/.virtualenvs/py2nvim/bin/python"
 --vim.o.nosc = true
 --vim.o.cmdheight = 0
 
-vim.cmd[[ set noshowmode "off" ]]
+vim.cmd[[ set noshowmode ]]
 vim.cmd[[ set nosc ]]
 --set initial state on bufenter
 
