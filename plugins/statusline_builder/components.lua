@@ -3,34 +3,18 @@ local lsp = require "feline.providers.lsp"
 local C = {}
 local config = require("core.utils").load_config().plugins.options.statusline
 local shortline = config.shortline == false and true
--- statusline style
--- if show short statusline on small screens
---local shortline = config.shortline == false and true
 
--- local colors = {
---       bg = '#282c34',
---       fg = '#abb2bf',
---       yellow = '#e0af68',
---       cyan = '#56b6c2',
---       darkblue = '#081633',
---       green = '#98c379',
---       orange = '#d19a66',
---       violet = '#a9a1e1',
---       magenta = '#c678dd',
---       blue = '#61afef',
---       red = '#e86671'
---   }
 local statusline_style = {
-    left = "",
-    right = "",
-    main_icon = "  ",
-    vi_mode_icon = " ⚡",
-    position_icon = " ",
+  left = "",
+  right = "",
+  main_icon = "  ",
+  vi_mode_icon = " ⚡",
+  position_icon = " ",
 }
 
 local sep_spaces= {
-    left = " ",
-    right = "",
+  left = " ",
+  right = "",
 }
 local empty="NONE"
 
@@ -129,7 +113,7 @@ C.dir = {
   end,
 
   enabled = shortline or function(winid)
-     return vim.api.nvim_win_get_width(winid) > 80
+    return vim.api.nvim_win_get_width(winid) > 80
   end,
 
   hl = {
@@ -181,12 +165,12 @@ C.git = {
   branch = {
     provider = "git_branch",
     enabled = shortline or function(winid)
-        local path = vim.fn.expand('%:p')
-        local cwd = vim.fn.getcwd()
-        local gitrepo = false
-        if path:find(cwd) ~= nil then
-          gitrepo=true
-        end
+      local path = vim.fn.expand('%:p')
+      local cwd = vim.fn.getcwd()
+      local gitrepo = false
+      if path:find(cwd) ~= nil then
+        gitrepo=true
+      end
       return gitrepo and vim.api.nvim_win_get_width(winid) > 70
     end,
     hl = {
@@ -204,12 +188,12 @@ C.git = {
   branch_bg = {
     provider = "git_branch",
     enabled = shortline or function(winid)
-        local path = vim.fn.expand('%:p')
-        local cwd = vim.fn.getcwd()
-        local gitrepo = false
-        if path:find(cwd) ~= nil then
-          gitrepo=true
-        end
+      local path = vim.fn.expand('%:p')
+      local cwd = vim.fn.getcwd()
+      local gitrepo = false
+      if path:find(cwd) ~= nil then
+        gitrepo=true
+      end
       return gitrepo and vim.api.nvim_win_get_width(winid) > 70
     end,
     hl = {
@@ -234,12 +218,12 @@ C.git = {
   git_sep = {
     provider = " ",
     enabled = function(winid)
-        local path = vim.fn.expand('%:p')
-        local cwd = vim.fn.getcwd()
-        local gitrepo = false
-        if path:find(cwd) ~= nil then
-          gitrepo=true
-        end
+      local path = vim.fn.expand('%:p')
+      local cwd = vim.fn.getcwd()
+      local gitrepo = false
+      if path:find(cwd) ~= nil then
+        gitrepo=true
+      end
       return gitrepo and vim.api.nvim_win_get_width(winid) > 70
     end,
     hl = {
@@ -290,7 +274,7 @@ C.diagnostics={
     hl = { bg=empty, fg = colors.green },
     icon = "  ",
   },
-  
+
   spacer = {
     provider = "  ",
     hl = { bg=empty, fg = colors.empty },
@@ -333,13 +317,6 @@ C.progress = {
 }
 C.lsp = {
   provider="lsp_client_names",
-  -- provider = function()
-  --   if next(vim.lsp.buf_get_clients()) ~= nil then
-  --     return "  LSP"
-  --   else
-  --     return ""
-  --   end
-  -- end,
   enabled = shortline or function(winid)
     return vim.api.nvim_win_get_width(winid) > 70
   end,
@@ -424,9 +401,31 @@ C.location = {
     hl = {
       fg = colors.green,
       bg = empty,
---      fg = colors.green,
---      bg = colors.one_bg,
+      --      fg = colors.green,
+      --      bg = colors.one_bg,
     },
+  },
+}
+C.gps = {
+  provider = function ()
+    local filename = vim.fn.expand "%:t"
+    local extension = vim.fn.expand "%:e"
+    if filename == nil or filename == "" or filename == " " then
+      return ""
+    else
+      local gps = require "custom.plugins.statusline_builder.gps"
+      if gps and gps.is_available() then
+        return gps.get_location()
+      else
+	return ""
+      end
+    end
+  end,
+  hl = {
+    fg = "#EA2DEF",
+    bg = empty,
+    --      fg = colors.green,
+    --      bg = colors.one_bg,
   },
 }
 

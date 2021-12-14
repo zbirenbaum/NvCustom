@@ -32,6 +32,8 @@ table.insert(left, ct.diagnostics.hints)
 table.insert(left, ct.diagnostics.info)
 table.insert(left, ct.diagnostics.spacer)
 
+--disabled for slow startup
+--table.insert(left, ct.gps)
 table.insert(right, ct.git.branch)
 --table.insert(right, ct.git.git_sep)
 

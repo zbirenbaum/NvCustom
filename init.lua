@@ -10,7 +10,7 @@ local plugin_status = require("core.utils").load_config().plugins.status
 --     return "nvim-cmp"
 --   end
 -- end
--- 
+--
 -- local aft = afterchoice()
 
 hooks.add("install_plugins", function(use)
@@ -103,6 +103,13 @@ hooks.add("install_plugins", function(use)
     config=function()
       require "custom.msgfunc.msgfunc"
     end
+  }
+  --slow startup, not using
+  use {
+    "SmiteshP/nvim-gps",
+    after="feline.nvim",
+    disable=true
+--    requires={"nvim-treesitter/nvim-treesitter"},
   }
   -- use {
   --   "windwp/nvim-autopairs",
