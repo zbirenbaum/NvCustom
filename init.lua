@@ -13,13 +13,23 @@ local plugin_status = require("core.utils").load_config().plugins.status
 --
 -- local aft = afterchoice()
 
+
 hooks.add("install_plugins", function(use)
   use {
     "akinsho/toggleterm.nvim",
     disable = not plugin_status.toggleterm,
-    event = "BufRead",
+    event = "BufEnter",
     config = function()
       require "custom.plugins.toggleterm"
+    end,
+  }
+  use {
+    "phaazon/hop.nvim",
+    branch='v1',
+    disable = not plugin_status.hop,
+    event = "BufRead",
+    config = function()
+      require "custom.plugins.hop"
     end,
   }
   use {
@@ -33,6 +43,7 @@ hooks.add("install_plugins", function(use)
   use {
     "gennaro-tedesco/nvim-jqx",
     disable = not plugin_status.jqx,
+    event = "BufRead",
   }
   use {
     'ms-jpq/coq_nvim',
@@ -69,6 +80,7 @@ hooks.add("install_plugins", function(use)
   }
   use {
     "rcarriga/nvim-dap-ui",
+    disable = not plugin_status.dap,
     after = "nvim-dap",
     config = function()
       require("dapui").setup()
@@ -104,6 +116,16 @@ hooks.add("install_plugins", function(use)
       require "custom.msgfunc.msgfunc"
     end
   }
+  use {
+    'monkoose/matchparen.nvim',
+    disable = not plugin_status.matchparen,
+    config = function()
+      require("custom.plugins.matchparen")
+    end,
+  }
+  --   --opt = true,
+  --   end,
+  -- }
   --slow startup, not using
   use {
     "SmiteshP/nvim-gps",
@@ -111,6 +133,14 @@ hooks.add("install_plugins", function(use)
     disable=true
 --    requires={"nvim-treesitter/nvim-treesitter"},
   }
+  -- use {
+  --   "gelguy/wilder.nvim",
+  --   disabled = true,
+  --   --not plugin_status.wilder,
+  --   config = function ()
+  --     require("custom.plugins.wilder")
+  --   end
+  -- }
   -- use {
   --   "windwp/nvim-autopairs",
   --   after = aft,

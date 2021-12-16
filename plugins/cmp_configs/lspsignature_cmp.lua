@@ -5,6 +5,7 @@ lspsignature.setup {
   floating_window = true,
   fix_pos = true,
   hint_enable = false,
+  floating_window_above_cur_line = true, -- try to place the floating above the current line when possible Note:
   --  hint_prefix = " ",
   --  hint_scheme = "String",
   hi_parameter = "LspSignatureActiveParameter",

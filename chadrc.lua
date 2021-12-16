@@ -1,10 +1,11 @@
+vim.g.python_host_skip_check=1
 require "custom.set_globals"
 require "custom.mappings"
 --vim.cmd[[ hi TabLineFill guibg=#000000 ]] --broke pls fix, command works, but not staying applied on init
 --vim.cmd[[ syntax enable ]]
 --require "custom.theme_override"
 local M = {}
-M.options, M.ui, M.mappings, M.plugins = {}, {}, {}, {}
+--M.options, M.ui, M.mappings, M.plugins = {}, {}, {}, {}
 
 M.options = {
   -- NeoVim/Vim options
@@ -16,6 +17,7 @@ M.options = {
   mapleader = " ",
   mouse = "a",
   number = true,
+  nav_wrapper = true,
   -- relative numbers in normal mode tool at the bottom of options.lua
   numberwidth = 2,
   relativenumber = true,
@@ -83,10 +85,8 @@ M.plugins = {
     telescope_media = true, -- see media files in telescope picker
     truezen = true, -- no distraction mode for nvim
     vim_fugitive = true, -- git in nvim
-    vim_matchup = true, -- % magic, match it but improved
 
     --My Plugins
-    lightspeed = true,
     termwrapper = false,
     toggleterm = true,
     jqx = true,
@@ -96,16 +96,24 @@ M.plugins = {
     coq_nvim = false,
     cmp = true,
     --if coq_nvim is true, set these to false
-    dap = true,
-    dapui = true,
+    dap = false,
     tabline=true,
     --organized diagnostics
-    trouble = true,
+    trouble = false,
     --vscode style ex mode
     cmdline = false,
     lspkind = true,
     --cmdheight rfc
     cmdheight = false,
+    --its kinda cool and no real slowdown for me, but not lua so disabled out of principle
+    wilder=false,
+    --choose 1
+    vim_matchup = false, -- % magic, match it but improved
+    --broken for now
+    matchparen=true,
+    --choose 1
+    lightspeed = true,
+    hop = false,
   },
   options = {
     lspconfig = {
@@ -138,8 +146,8 @@ M.plugins = {
   },
   --default_plugin_config_replace = tbl
   default_plugin_config_replace = {
-    --signature="custom.plugins.cmp_configs.lspsignature_cmp",
-    signature=require("custom.plugins.lspsignature_selection"),
+    signature="custom.plugins.cmp_configs.lspsignature_cmp",
+    --signature=require("custom.plugins.lspsignature_selection"),
     feline="custom.plugins.statusline_builder.builder",
     nvim_cmp="custom.plugins.cmp_configs.cmp",
     bufferline="custom.plugins.bufferline",

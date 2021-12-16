@@ -74,8 +74,9 @@ C.file={
       return ""
     end
     if icon == nil then
-      icon = ""
-      return icon
+      return " " .. filename .. " "
+      --icon = ""
+      --return icon
     end
     return " " .. icon .. " " .. filename .. " "
   end,
@@ -143,6 +144,7 @@ C.git = {
       fg = colors.green,
       bg = empty,
     },
+    --icon = "  ",
     icon = "  ",
   },
   changed={
@@ -159,6 +161,7 @@ C.git = {
       fg = colors.red,
       bg = empty,
     },
+    --icon = "  ",
     icon = "  ",
   },
 
