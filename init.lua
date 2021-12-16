@@ -113,7 +113,7 @@ hooks.add("install_plugins", function(use)
     "rcarriga/nvim-notify",
     disable=not plugin_status.cmdheight,
     config=function()
-      require "custom.msgfunc.msgfunc"
+      require "custom.unofficial_cmdheight_msgfunc.msgfunc"
     end
   }
   use {
