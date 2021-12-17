@@ -1,6 +1,7 @@
 vim.g.python_host_skip_check=1
 require "custom.set_globals"
 require "custom.mappings"
+require "custom.custom_commands"
 --vim.cmd[[ hi TabLineFill guibg=#000000 ]] --broke pls fix, command works, but not staying applied on init
 --vim.cmd[[ syntax enable ]]
 --require "custom.theme_override"
@@ -180,10 +181,10 @@ M.mappings = {
   },
   --better window movement
   window_nav = {
-    moveLeft = "<C-h>",
-    moveRight = "<C-l>",
-    moveUp = "<C-k>",
-    moveDown = "<C-j>",
+    moveLeft = "<C-w>h",
+    moveRight = "<C-w>l",
+    moveUp = "<C-w>k",
+    moveDown = "<C-w>j",
   },
   -- terminal related mappings
   terminal = {
