@@ -247,7 +247,7 @@ C.diagnostics={
   errors = {
     provider = "diagnostic_errors",
     enabled = function()
-      return lsp.diagnostics_exist "Error"
+      return lsp.diagnostics_exist "ERROR"
     end,
 
     hl = { bg=empty, fg = colors.red },
@@ -256,7 +256,7 @@ C.diagnostics={
   warnings = {
     provider = "diagnostic_warnings",
     enabled = function()
-      return lsp.diagnostics_exist "Warning"
+      return lsp.diagnostics_exist "WARN"
     end,
     hl = { bg=empty, fg = colors.yellow },
     icon = "  ",
@@ -264,7 +264,7 @@ C.diagnostics={
   hints = {
     provider = "diagnostic_hints",
     enabled = function()
-      return lsp.diagnostics_exist "Hint"
+      return lsp.diagnostics_exist "HINT"
     end,
     hl = { bg=empty, fg = colors.grey_fg2 },
     icon = "  ",
@@ -272,7 +272,7 @@ C.diagnostics={
   info = {
     provider = "diagnostic_info",
     enabled = function()
-      return lsp.diagnostics_exist "Information"
+      return lsp.diagnostics_exist "INFO"
     end,
     hl = { bg=empty, fg = colors.green },
     icon = "  ",

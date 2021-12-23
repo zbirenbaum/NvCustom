@@ -100,7 +100,7 @@ M.plugins = {
     dap = false,
     tabline=true,
     --organized diagnostics
-    trouble = false,
+    trouble = true,
     --vscode style ex mode
     cmdline = false,
     lspkind = true,
