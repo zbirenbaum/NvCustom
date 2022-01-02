@@ -10,7 +10,7 @@ table.insert(components.active, {})
 table.insert(components.active, {})
 table.insert(components.active, {})
 
-local ct = require("custom.plugins.statusline_builder.components")
+local ct = require("custom.plugins.overrides.statusline_builder.components")
 local left = {}
 local right = {}
 local middle = {}

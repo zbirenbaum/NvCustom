@@ -1,8 +1,9 @@
 --require('dap-python').setup("/home/zach/.virtualenvs/py3nvim/bin/python")
 local adapters = {'python'}  --list your adapters here
+require("custom.plugins.dap.dap_configs.dap_install")
 
 for _, adapter in ipairs(adapters) do
-  require("custom.plugins.dap_configs." .. adapter)
+  require("custom.plugins.dap.dap_configs." .. adapter)
 end
 
 local function dap_mappings()
@@ -22,11 +23,19 @@ local function dap_mappings()
       silent = true,
       noremap = true,
    })
-   vim.api.nvim_set_keymap("n", "<C-s>", '<Cmd>lua require"dap".step_over()<CR>', {
+   vim.api.nvim_set_keymap("n", "<C-o>", '<Cmd>lua require"dap".step_out()<CR>', {
       silent = true,
       noremap = true,
    })
-   vim.api.nvim_set_keymap("n", "<C-S>", '<Cmd>lua require"dap".step_into()<CR>', {
+   vim.api.nvim_set_keymap("n", "<C-o>", '<Cmd>lua require"dap".step_out()<CR>', {
+      silent = true,
+      noremap = true,
+   })
+   vim.api.nvim_set_keymap("n", "<C-n>", '<Cmd>lua require"dap".step_over()<CR>', {
+      silent = true,
+      noremap = true,
+   })
+   vim.api.nvim_set_keymap("n", "<C-s>", '<Cmd>lua require"dap".step_into()<CR>', {
       silent = true,
       noremap = true,
    })

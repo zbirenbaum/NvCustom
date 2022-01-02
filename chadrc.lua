@@ -1,12 +1,16 @@
+require('impatient')
+require('impatient').enable_profile()
+--require('packer_compiled')
 vim.g.python_host_skip_check=1
 require "custom.set_globals"
 require "custom.mappings"
-require "custom.custom_commands"
+--require "custom.custom_commands"
 --vim.cmd[[ hi TabLineFill guibg=#000000 ]] --broke pls fix, command works, but not staying applied on init
 --vim.cmd[[ syntax enable ]]
 --require "custom.theme_override"
 local M = {}
 --M.options, M.ui, M.mappings, M.plugins = {}, {}, {}, {}
+
 
 M.options = {
   -- NeoVim/Vim options
@@ -22,10 +26,10 @@ M.options = {
   -- relative numbers in normal mode tool at the bottom of options.lua
   numberwidth = 2,
   relativenumber = true,
-  expandtab = true,
+  expandtab = false,
   shiftwidth = 2,
   smartindent = true,
-  tabstop = 8, -- Number of spaces that a <Tab> in the file counts for
+  tabstop = 2, -- Number of spaces that a <Tab> in the file counts for
   timeoutlen = 400,
   -- interval for writing swap file to disk, also used by gitsigns
   updatetime = 250,
@@ -45,7 +49,7 @@ M.options = {
 
 -- ui configs
 M.ui = {
-  hl_override = "custom.plugins.hl_override",
+  hl_override = "custom.plugins.overrides.hl_override",
   italic_comments = true,
   -- theme to be used, check available themes with `<leader> + t + h`
   --theme = "tokyonight",
@@ -63,7 +67,6 @@ M.ui = {
 }
 
 -- these are plugin related options
--- 
 M.plugins = {
   -- enable and disable plugins (false for disable)
   status = {
@@ -94,10 +97,11 @@ M.plugins = {
     autopairs = true,
     --     fterm = true,
     -- Completions, choose 1
+		-- currently coq unsupported due to updates in cmp making it fall behind in usefulness. coq will work again soonish but will be temp broken due to new dir structure
     coq_nvim = false,
     cmp = true,
     --if coq_nvim is true, set these to false
-    dap = false,
+    dap = true,
     tabline=true,
     --organized diagnostics
     trouble = true,
@@ -118,7 +122,7 @@ M.plugins = {
   },
   options = {
     lspconfig = {
-      setup_lspconf = require('custom.plugins.lsp_config_selection'),
+      setup_lspconf = require('custom.plugins.overrides.lsp_config_selection'),
       --setup_lspconf = 'custom.plugins.cmp_configs.lsp_config_cmp'
       --setup_lspconf = "custom.plugins.lsp_config",
     },
@@ -147,11 +151,11 @@ M.plugins = {
   },
   --default_plugin_config_replace = tbl
   default_plugin_config_replace = {
-    signature="custom.plugins.cmp_configs.lspsignature_cmp",
-    --signature=require("custom.plugins.lspsignature_selection"),
-    feline="custom.plugins.statusline_builder.builder",
-    nvim_cmp="custom.plugins.cmp_configs.cmp",
-    bufferline="custom.plugins.bufferline",
+    signature="custom.plugins.overrides.cmp_configs.lspsignature_cmp",
+    feline="custom.plugins.overrides.statusline_builder.builder",
+    nvim_cmp="custom.plugins.overrides.cmp_configs.cmp",
+    bufferline="custom.plugins.overrides.bufferline",
+    nvim_treesitter = "custom.plugins.overrides.treesitter",
     --feline="custom.plugins.feline",
     --nvim_autopairs=require("custom.plugins.autopairs_selection"),
     --signature="custom.plugins.lspsignature_coq",

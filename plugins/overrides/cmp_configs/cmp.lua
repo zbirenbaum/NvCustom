@@ -1,7 +1,7 @@
 local present, cmp = pcall(require, "cmp")
 local colors = require("colors").get()
-local lspkind = require("custom.plugins.cmp_configs.lspkind")
-local custom_comp = require("custom.plugins.cmp_configs.custom_type_comparator")
+local lspkind = require("custom.plugins.overrides.cmp_configs.lspkind")
+local custom_comp = require("custom.plugins.overrides.cmp_configs.custom_type_comparator")
 
 if not present then
   return
