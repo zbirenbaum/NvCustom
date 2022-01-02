@@ -1,5 +1,5 @@
 # Config Guide
-Below are some descriptions of the various folders and files you will find here. I haven't had time to make a full setup guide but probably will in a week or two. (as of Dec. 16) At the bottom are the last couple lines of the startuptime log. Spoiler, with no file, its ~25 milliseconds, and 039 illiseconds opening a file like chadrc which triggers the max number of plugins. This is quite literally about 40-50% faster than vanilla NvChad. It comes at the sacrafice of a very brief flashing of highlighted text on startup, but I will be making a flag to disable the optimization soon.
+Below are some descriptions of the various folders and files you will find here. I haven't had time to make a full setup guide but probably will in a week or two. (as of Dec. 16) At the bottom are the last couple lines of the startuptime log. Spoiler, with no file, its ~25 milliseconds, and ~39 milliseconds opening a file like chadrc which triggers the max number of plugins. This is quite literally about 40-50% faster than vanilla NvChad. It comes at the sacrafice of a very brief flashing of highlighted text on startup, but I will be making a flag to disable the optimization soon.
 
 ## custom/
 ### chadrc.lua
