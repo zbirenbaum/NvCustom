@@ -1,5 +1,5 @@
 --require("core.utils").packer_lazy_load 
---require("nvim-treesitter")
+require("nvim-treesitter")
 
 
 vim.defer_fn(function()

@@ -31,6 +31,7 @@ table.insert(left, ct.diagnostics.warnings)
 table.insert(left, ct.diagnostics.hints)
 table.insert(left, ct.diagnostics.info)
 table.insert(left, ct.diagnostics.spacer)
+table.insert(middle, ct.progress)
 
 --disabled for slow startup
 --table.insert(left, ct.gps)

@@ -3,12 +3,14 @@ local colors = require("colors").get()
 local lspkind = require("custom.plugins.overrides.cmp_configs.lspkind")
 local custom_comp = require("custom.plugins.overrides.cmp_configs.custom_type_comparator")
 
+
 if not present then
   return
 end
 vim.opt.completeopt = "menuone,noselect"
 --VSCODE style highlights
 --vim.cmd[[ syntax on ]]
+
 
 
 --
@@ -22,7 +24,7 @@ vim.opt.completeopt = "menuone,noselect"
  vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
     virtual_text = {
        prefix = "",
-       spacing = 4,
+       spacing = 8,
     },
     signs = true,
     underline = true,
@@ -72,11 +74,10 @@ vim.cmd [[highlight! CmpItemKindMethod guifg=#C586C0]]
 
 
 cmp.setup {
-  
   snippet = {
-    expand = function(args)
-      require("luasnip").lsp_expand(args.body)
-    end,
+     expand = function(args)
+       require("luasnip").lsp_expand(args.body)
+     end,
   },
   formatting = {
     format = lspkind.cmp_format({with_text = false, maxwidth = 50})
@@ -98,7 +99,16 @@ cmp.setup {
 --       return vim_item
 --     end,
   mapping = {
-
+		["<PageUp>"] = function(fallback)
+			for i = 1, 10 do
+				cmp.mapping.select_prev_item()(nil)
+			end
+		end,
+		["<PageDown>"] = function(fallback)
+			for i = 1, 10 do
+				cmp.mapping.select_next_item()(nil)
+			end
+		end,
     ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
     ["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
     ["<C-d>"] = cmp.mapping.scroll_docs(-4),
@@ -129,12 +139,28 @@ cmp.setup {
     ghost_text = true,
   },
   sources = {
-    { name = "nvim_lsp", max_item_count = 5 },
-    { name = "luasnip", max_item_count = 2 },
-    { name = "buffer", max_item_count = 5 },
-    { name = "nvim_lua", max_item_count = 5 },
-    { name = "path", max_item_count = 10},
+    { name = "nvim_lsp"},
+--    { name = "luasnip" },
+--    { name = "buffer" },
+--    { name = "nvim_lua" },
+    { name = "path"},
+		--, max_item_count = 10},
   },
+	
+	sorting = {
+			comparators = {
+				cmp.config.compare.recently_used,
+				cmp.config.compare.offset,
+				cmp.config.compare.score,
+				cmp.config.compare.sort_text,
+				cmp.config.compare.length,
+				cmp.config.compare.order,
+			},
+	},
   preselect = cmp.PreselectMode.Item,
 }
+--set max height of items
+vim.cmd [[ set pumheight=8 ]]
+
+
 

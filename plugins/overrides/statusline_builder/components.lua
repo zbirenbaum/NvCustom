@@ -283,41 +283,45 @@ C.diagnostics={
     hl = { bg=empty, fg = colors.empty },
   }
 }
+
 C.progress = {
-  provider = function()
-    local Lsp = vim.lsp.util.get_progress_messages()[1]
-    if Lsp then
-      local msg = Lsp.message or ""
-      local percentage = Lsp.percentage or 0
-      local title = Lsp.title or ""
-      local spinners = {
-        "",
-        "",
-        "",
-      }
+   provider = function()
+      local Lsp = vim.lsp.util.get_progress_messages()[1]
 
-      local success_icon = {
-        "",
-        "",
-        "",
-      }
+      if Lsp then
+         local msg = Lsp.message or ""
+         local percentage = Lsp.percentage or 0
+         local title = Lsp.title or ""
+         local spinners = {
+            "",
+            "",
+            "",
+         }
 
-      local ms = vim.loop.hrtime() / 1000000
-      local frame = math.floor(ms / 120) % #spinners
+         local success_icon = {
+            "",
+            "",
+            "",
+         }
 
-      if percentage >= 70 then
-        return string.format(" %%<%s %s %s (%s%%%%) ", success_icon[frame + 1], title, msg, percentage)
-      else
-        return string.format(" %%<%s %s %s (%s%%%%) ", spinners[frame + 1], title, msg, percentage)
+         local ms = vim.loop.hrtime() / 1000000
+         local frame = math.floor(ms / 120) % #spinners
+
+         if percentage >= 70 then
+            return string.format(" %%<%s %s %s (%s%%%%) ", success_icon[frame + 1], title, msg, percentage)
+         end
+
+         return string.format(" %%<%s %s %s (%s%%%%) ", spinners[frame + 1], title, msg, percentage)
       end
-    end
-    return ""
-  end,
-  enabled = shortline or function(winid)
-    return vim.api.nvim_win_get_width(winid) > 80
-  end,
-  hl = { fg = colors.green },
+
+      return ""
+   end,
+   enabled = shortline or function(winid)
+      return vim.api.nvim_win_get_width(winid) > 80
+   end,
+   hl = { fg = colors.green, bg = empty },
 }
+
 C.lsp = {
   provider="lsp_client_names",
   enabled = shortline or function(winid)
