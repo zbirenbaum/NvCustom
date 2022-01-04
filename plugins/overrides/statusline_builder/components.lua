@@ -81,7 +81,7 @@ C.file={
     return " " .. icon .. " " .. filename .. " "
   end,
   enabled = shortline or function(winid)
-    return vim.api.nvim_win_get_width(winid) > 70
+    return vim.api.nvim_win_get_width(tonumber(winid) or 0) > 70
   end,
   hl = {
     fg = colors.white,
@@ -114,7 +114,7 @@ C.dir = {
   end,
 
   enabled = shortline or function(winid)
-    return vim.api.nvim_win_get_width(winid) > 80
+    return vim.api.nvim_win_get_width(tonumber(winid) or 0) > 80
   end,
 
   hl = {
@@ -174,7 +174,7 @@ C.git = {
       if path:find(cwd) ~= nil then
         gitrepo=true
       end
-      return gitrepo and vim.api.nvim_win_get_width(winid) > 70
+      return gitrepo and vim.api.nvim_win_get_width(tonumber(winid) or 0) > 70
     end,
     hl = {
       fg = colors.nord_blue,
@@ -197,7 +197,7 @@ C.git = {
       if path:find(cwd) ~= nil then
         gitrepo=true
       end
-      return gitrepo and vim.api.nvim_win_get_width(winid) > 70
+      return gitrepo and vim.api.nvim_win_get_width(tonumber(winid) or 0) > 70
     end,
     hl = {
       fg = colors.nord_blue,
@@ -227,7 +227,7 @@ C.git = {
       if path:find(cwd) ~= nil then
         gitrepo=true
       end
-      return gitrepo and vim.api.nvim_win_get_width(winid) > 70
+      return gitrepo and vim.api.nvim_win_get_width(tonumber(winid) or 0) > 70
     end,
     hl = {
       bg=colors.lightbg,
@@ -317,7 +317,7 @@ C.progress = {
       return ""
    end,
    enabled = shortline or function(winid)
-      return vim.api.nvim_win_get_width(winid) > 80
+      return vim.api.nvim_win_get_width(tonumber(winid) or 0) > 80
    end,
    hl = { fg = colors.green, bg = empty },
 }
@@ -325,7 +325,7 @@ C.progress = {
 C.lsp = {
   provider="lsp_client_names",
   enabled = shortline or function(winid)
-    return vim.api.nvim_win_get_width(winid) > 70
+    return vim.api.nvim_win_get_width(tonumber(winid) or 0) > 70
   end,
   hl = { fg = colors.nord_blue, bg = empty },
 }
@@ -368,7 +368,7 @@ C.location = {
   left_sep = {
     provider = " " .. statusline_style.left,
     enabled = shortline or function(winid)
-      return vim.api.nvim_win_get_width(winid) > 90
+      return vim.api.nvim_win_get_width(tonumber(winid) or 0) > 90
     end,
     hl = {
       fg = colors.green,
@@ -378,7 +378,7 @@ C.location = {
   loc_icon = {
     provider = "  " .. statusline_style.position_icon,
     enabled = shortline or function(winid)
-      return vim.api.nvim_win_get_width(winid) > 90
+      return vim.api.nvim_win_get_width(tonumber(winid) or 0) > 90
     end,
     hl = {
       fg = colors.green,
@@ -402,7 +402,7 @@ C.location = {
     end,
 
     enabled = shortline or function(winid)
-      return vim.api.nvim_win_get_width(winid) > 90
+      return vim.api.nvim_win_get_width(tonumber(winid) or 0) > 90
     end,
 
     hl = {

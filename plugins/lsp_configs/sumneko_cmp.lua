@@ -1,5 +1,6 @@
 local M = {}
 
+
 M.setup_luaLsp = function(attach, capabilities)
   --local sumneko_root_path = vim.fn.getenv "HOME" .. "/sumneko_lua"
   local sumneko_root_path = "/home/zach/progfiles/lua-language-server"--/usr/share/lua-language-server"
@@ -10,6 +11,7 @@ M.setup_luaLsp = function(attach, capabilities)
   local runtime_path = vim.split(package.path, ";")
   table.insert(runtime_path, "lua/?.lua")
   table.insert(runtime_path, "lua/?/init.lua")
+
 
   require("lspconfig").sumneko_lua.setup{
     cmd = { sumneko_binary, "-E", sumneko_root_path .. "/main.lua" },
@@ -28,11 +30,11 @@ M.setup_luaLsp = function(attach, capabilities)
           path = runtime_path,
         },
         workspace = {
-          library=vim.api.nvim_get_runtime_file("", true),
-          -- library = {
-          --   [vim.fn.expand "$VIMRUNTIME/lua"] = true,
-          --   [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
-          -- },
+--          library=vim.api.nvim_get_runtime_file("", true),
+					library = {
+					  [vim.fn.expand "$VIMRUNTIME/lua"] = true,
+					  [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
+					},
           maxPreload = 100000,
           preloadFileSize = 10000,
         },
@@ -43,5 +45,6 @@ M.setup_luaLsp = function(attach, capabilities)
     },
   }
 end
+
 
 return M.setup_luaLsp()

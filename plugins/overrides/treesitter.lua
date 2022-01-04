@@ -1,4 +1,4 @@
---require("core.utils").packer_lazy_load 
+--require("core.utils").packer_lazy_load
 require("nvim-treesitter")
 
 

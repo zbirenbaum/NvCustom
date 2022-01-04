@@ -119,6 +119,11 @@ hooks.add("install_plugins", function(use)
     after="feline.nvim",
     disable=true
   }
+	use {
+		"folke/lua-dev.nvim",
+		ft='lua',
+		after="nvim-lspconfig"
+	}
 end)
 
 

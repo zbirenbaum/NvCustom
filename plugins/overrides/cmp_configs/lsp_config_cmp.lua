@@ -15,7 +15,8 @@ M.setup_lsp = function(attach, capabilities)
 			elseif lsp == "pylance" then
         require("custom.plugins.lsp_configs." .. lsp)
       elseif lsp == "lua" then
-        require("custom.plugins.lsp_configs.sumneko_cmp")
+--        require("custom.plugins.lsp_configs.sumneko_cmp")
+        require("custom.plugins.lsp_configs.alternate_luastart")
       elseif lsp == "ccls" then
         require("custom.plugins.lsp_configs.ccls_cmp")
       else
