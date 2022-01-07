@@ -1,3 +1,5 @@
 custom_commands
 examples
 debugging
+plugins/.etc_contrib/examples
+plugins/.etc_contrib/debugging
