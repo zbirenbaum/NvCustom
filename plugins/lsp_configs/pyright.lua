@@ -15,6 +15,7 @@ M.setup = function(attach, capabilities)
     settings = {
       python =  {
         analysis = {
+          autoImportCompletions = false,
           autoSearchPaths = false,
           useLibraryCodeForTypes = false,
           diagnosticMode = 'openFilesOnly',

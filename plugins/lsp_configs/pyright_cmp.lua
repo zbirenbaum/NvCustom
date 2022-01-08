@@ -9,15 +9,14 @@ M.setup = function(attach, capabilities)
     on_attach = attach,
     root_dir = util.root_pattern(".git", "setup.py",  "setup.cfg", "pyproject.toml", "requirements.txt");
     flags = {
-      debounce_text_changes = 150,
+      debounce_text_changes = 1,
     },
     settings = {
       python =  {
         analysis = {
-          stubPath = "./typings",
-          --autoSearchPaths = false,
-          autoSearchPaths = true,
-          useLibraryCodeForTypes = true,
+          --stubPath = "./typings",
+          autoSearchPaths = false,
+          useLibraryCodeForTypes = false,
           diagnosticMode = 'openFilesOnly',
         }
       }
