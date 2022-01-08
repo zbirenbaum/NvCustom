@@ -1,0 +1,52 @@
+
+-- CmdUndefined			When a user command is used but it isn't
+-- 				defined.  Useful for defining a command only
+-- 				when it's used.  The pattern is matched
+-- 				against the command name.  Both <amatch> and
+-- 				<afile> expand to the command name.
+-- 				NOTE: Autocompletion won't work until the
+-- 				command is defined.  An alternative is to
+-- 				always define the user command and have it
+-- 				invoke an autoloaded function.  See |autoload|.
+-- 							*CmdlineChanged*
+-- CmdlineChanged			After a change was made to the text inside
+-- 				command line.  Be careful not to mess up the
+-- 				command line, it may cause Vim to lock up.
+-- 				<afile> expands to the |cmdline-char|.
+-- 							*CmdlineEnter*
+-- CmdlineEnter			After entering the command-line (including
+-- 				non-interactive use of ":" in a mapping: use
+-- 				|<Cmd>| instead to avoid this).
+-- 				<afile> expands to the |cmdline-char|.
+-- 				Sets these |v:event| keys:
+-- 				    cmdlevel
+-- 				    cmdtype
+-- 							*CmdlineLeave*
+-- CmdlineLeave			Before leaving the command-line (including
+-- 				non-interactive use of ":" in a mapping: use
+-- 				|<Cmd>| instead to avoid this).
+-- 				<afile> expands to the |cmdline-char|.
+-- 				Sets these |v:event| keys:
+-- 				    abort (mutable)
+-- 				    cmdlevel
+-- 				    cmdtype
+-- 				Note: `abort` can only be changed from false
+-- 				to true: cannot execute an already aborted
+-- 				cmdline by changing it to false.
+-- 							*CmdwinEnter*
+-- CmdwinEnter			After entering the command-line window.
+-- 				Useful for setting options specifically for
+-- 				this special type of window.
+-- 				<afile> expands to a single character,
+-- 				indicating the type of command-line.
+-- 				|cmdwin-char|
+-- 							*CmdwinLeave*
+-- CmdwinLeave			Before leaving the command-line window.
+-- 				Useful to clean up any global setting done
+-- 				with CmdwinEnter.
+-- 				<afile> expands to a single character,
+-- 				indicating the type of command-line.
+-- 				|cmdwin-char|
+
+vim.cmd [[ autocmd CmdlineEnter * set laststatus=0 ]]
+vim.cmd [[ autocmd CmdlineLeave * set laststatus=1 ]]

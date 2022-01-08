@@ -10,7 +10,7 @@ table.insert(components.active, {})
 table.insert(components.active, {})
 table.insert(components.active, {})
 
-local ct = require("custom.plugins.statusline_builder.components")
+local ct = require("custom.plugins.overrides.statusline_builder.components")
 local left = {}
 local right = {}
 local middle = {}
@@ -31,7 +31,10 @@ table.insert(left, ct.diagnostics.warnings)
 table.insert(left, ct.diagnostics.hints)
 table.insert(left, ct.diagnostics.info)
 table.insert(left, ct.diagnostics.spacer)
+table.insert(middle, ct.progress)
 
+--disabled for slow startup
+--table.insert(left, ct.gps)
 table.insert(right, ct.git.branch)
 --table.insert(right, ct.git.git_sep)
 

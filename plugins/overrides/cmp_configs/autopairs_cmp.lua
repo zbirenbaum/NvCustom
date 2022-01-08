@@ -1,4 +1,5 @@
 local M = {}
+vim.g.matchup_matchparen_offscreen = {method = 'popup'}
 M.autopairs = function()
    local present1, autopairs = pcall(require, "nvim-autopairs")
    local present2, cmp_autopairs = pcall(require, "nvim-autopairs.completion.cmp")

@@ -3,34 +3,18 @@ local lsp = require "feline.providers.lsp"
 local C = {}
 local config = require("core.utils").load_config().plugins.options.statusline
 local shortline = config.shortline == false and true
--- statusline style
--- if show short statusline on small screens
---local shortline = config.shortline == false and true
 
--- local colors = {
---       bg = '#282c34',
---       fg = '#abb2bf',
---       yellow = '#e0af68',
---       cyan = '#56b6c2',
---       darkblue = '#081633',
---       green = '#98c379',
---       orange = '#d19a66',
---       violet = '#a9a1e1',
---       magenta = '#c678dd',
---       blue = '#61afef',
---       red = '#e86671'
---   }
 local statusline_style = {
-    left = "",
-    right = "",
-    main_icon = "  ",
-    vi_mode_icon = " ⚡",
-    position_icon = " ",
+  left = "",
+  right = "",
+  main_icon = "  ",
+  vi_mode_icon = " ⚡",
+  position_icon = " ",
 }
 
 local sep_spaces= {
-    left = " ",
-    right = "",
+  left = " ",
+  right = "",
 }
 local empty="NONE"
 
@@ -90,13 +74,14 @@ C.file={
       return ""
     end
     if icon == nil then
-      icon = ""
-      return icon
+      return " " .. filename .. " "
+      --icon = ""
+      --return icon
     end
     return " " .. icon .. " " .. filename .. " "
   end,
   enabled = shortline or function(winid)
-    return vim.api.nvim_win_get_width(winid) > 70
+    return vim.api.nvim_win_get_width(tonumber(winid) or 0) > 70
   end,
   hl = {
     fg = colors.white,
@@ -129,7 +114,7 @@ C.dir = {
   end,
 
   enabled = shortline or function(winid)
-     return vim.api.nvim_win_get_width(winid) > 80
+    return vim.api.nvim_win_get_width(tonumber(winid) or 0) > 80
   end,
 
   hl = {
@@ -159,6 +144,7 @@ C.git = {
       fg = colors.green,
       bg = empty,
     },
+    --icon = "  ",
     icon = "  ",
   },
   changed={
@@ -175,19 +161,20 @@ C.git = {
       fg = colors.red,
       bg = empty,
     },
+    --icon = "  ",
     icon = "  ",
   },
 
   branch = {
     provider = "git_branch",
     enabled = shortline or function(winid)
-        local path = vim.fn.expand('%:p')
-        local cwd = vim.fn.getcwd()
-        local gitrepo = false
-        if path:find(cwd) ~= nil then
-          gitrepo=true
-        end
-      return gitrepo and vim.api.nvim_win_get_width(winid) > 70
+      local path = vim.fn.expand('%:p')
+      local cwd = vim.fn.getcwd()
+      local gitrepo = false
+      if path:find(cwd) ~= nil then
+        gitrepo=true
+      end
+      return gitrepo and vim.api.nvim_win_get_width(tonumber(winid) or 0) > 70
     end,
     hl = {
       fg = colors.nord_blue,
@@ -204,13 +191,13 @@ C.git = {
   branch_bg = {
     provider = "git_branch",
     enabled = shortline or function(winid)
-        local path = vim.fn.expand('%:p')
-        local cwd = vim.fn.getcwd()
-        local gitrepo = false
-        if path:find(cwd) ~= nil then
-          gitrepo=true
-        end
-      return gitrepo and vim.api.nvim_win_get_width(winid) > 70
+      local path = vim.fn.expand('%:p')
+      local cwd = vim.fn.getcwd()
+      local gitrepo = false
+      if path:find(cwd) ~= nil then
+        gitrepo=true
+      end
+      return gitrepo and vim.api.nvim_win_get_width(tonumber(winid) or 0) > 70
     end,
     hl = {
       fg = colors.nord_blue,
@@ -234,13 +221,13 @@ C.git = {
   git_sep = {
     provider = " ",
     enabled = function(winid)
-        local path = vim.fn.expand('%:p')
-        local cwd = vim.fn.getcwd()
-        local gitrepo = false
-        if path:find(cwd) ~= nil then
-          gitrepo=true
-        end
-      return gitrepo and vim.api.nvim_win_get_width(winid) > 70
+      local path = vim.fn.expand('%:p')
+      local cwd = vim.fn.getcwd()
+      local gitrepo = false
+      if path:find(cwd) ~= nil then
+        gitrepo=true
+      end
+      return gitrepo and vim.api.nvim_win_get_width(tonumber(winid) or 0) > 70
     end,
     hl = {
       bg=colors.lightbg,
@@ -260,7 +247,7 @@ C.diagnostics={
   errors = {
     provider = "diagnostic_errors",
     enabled = function()
-      return lsp.diagnostics_exist "Error"
+      return lsp.diagnostics_exist "ERROR"
     end,
 
     hl = { bg=empty, fg = colors.red },
@@ -269,7 +256,7 @@ C.diagnostics={
   warnings = {
     provider = "diagnostic_warnings",
     enabled = function()
-      return lsp.diagnostics_exist "Warning"
+      return lsp.diagnostics_exist "WARN"
     end,
     hl = { bg=empty, fg = colors.yellow },
     icon = "  ",
@@ -277,7 +264,7 @@ C.diagnostics={
   hints = {
     provider = "diagnostic_hints",
     enabled = function()
-      return lsp.diagnostics_exist "Hint"
+      return lsp.diagnostics_exist "HINT"
     end,
     hl = { bg=empty, fg = colors.grey_fg2 },
     icon = "  ",
@@ -285,63 +272,60 @@ C.diagnostics={
   info = {
     provider = "diagnostic_info",
     enabled = function()
-      return lsp.diagnostics_exist "Information"
+      return lsp.diagnostics_exist "INFO"
     end,
     hl = { bg=empty, fg = colors.green },
     icon = "  ",
   },
-  
+
   spacer = {
     provider = "  ",
     hl = { bg=empty, fg = colors.empty },
   }
 }
+
 C.progress = {
-  provider = function()
-    local Lsp = vim.lsp.util.get_progress_messages()[1]
-    if Lsp then
-      local msg = Lsp.message or ""
-      local percentage = Lsp.percentage or 0
-      local title = Lsp.title or ""
-      local spinners = {
-        "",
-        "",
-        "",
-      }
+   provider = function()
+      local Lsp = vim.lsp.util.get_progress_messages()[1]
 
-      local success_icon = {
-        "",
-        "",
-        "",
-      }
+      if Lsp then
+         local msg = Lsp.message or ""
+         local percentage = Lsp.percentage or 0
+         local title = Lsp.title or ""
+         local spinners = {
+            "",
+            "",
+            "",
+         }
 
-      local ms = vim.loop.hrtime() / 1000000
-      local frame = math.floor(ms / 120) % #spinners
+         local success_icon = {
+            "",
+            "",
+            "",
+         }
 
-      if percentage >= 70 then
-        return string.format(" %%<%s %s %s (%s%%%%) ", success_icon[frame + 1], title, msg, percentage)
-      else
-        return string.format(" %%<%s %s %s (%s%%%%) ", spinners[frame + 1], title, msg, percentage)
+         local ms = vim.loop.hrtime() / 1000000
+         local frame = math.floor(ms / 120) % #spinners
+
+         if percentage >= 70 then
+            return string.format(" %%<%s %s %s (%s%%%%) ", success_icon[frame + 1], title, msg, percentage)
+         end
+
+         return string.format(" %%<%s %s %s (%s%%%%) ", spinners[frame + 1], title, msg, percentage)
       end
-    end
-    return ""
-  end,
-  enabled = shortline or function(winid)
-    return vim.api.nvim_win_get_width(winid) > 80
-  end,
-  hl = { fg = colors.green },
+
+      return ""
+   end,
+   enabled = shortline or function(winid)
+      return vim.api.nvim_win_get_width(tonumber(winid) or 0) > 80
+   end,
+   hl = { fg = colors.green, bg = empty },
 }
+
 C.lsp = {
   provider="lsp_client_names",
-  -- provider = function()
-  --   if next(vim.lsp.buf_get_clients()) ~= nil then
-  --     return "  LSP"
-  --   else
-  --     return ""
-  --   end
-  -- end,
   enabled = shortline or function(winid)
-    return vim.api.nvim_win_get_width(winid) > 70
+    return vim.api.nvim_win_get_width(tonumber(winid) or 0) > 70
   end,
   hl = { fg = colors.nord_blue, bg = empty },
 }
@@ -384,7 +368,7 @@ C.location = {
   left_sep = {
     provider = " " .. statusline_style.left,
     enabled = shortline or function(winid)
-      return vim.api.nvim_win_get_width(winid) > 90
+      return vim.api.nvim_win_get_width(tonumber(winid) or 0) > 90
     end,
     hl = {
       fg = colors.green,
@@ -394,7 +378,7 @@ C.location = {
   loc_icon = {
     provider = "  " .. statusline_style.position_icon,
     enabled = shortline or function(winid)
-      return vim.api.nvim_win_get_width(winid) > 90
+      return vim.api.nvim_win_get_width(tonumber(winid) or 0) > 90
     end,
     hl = {
       fg = colors.green,
@@ -418,15 +402,37 @@ C.location = {
     end,
 
     enabled = shortline or function(winid)
-      return vim.api.nvim_win_get_width(winid) > 90
+      return vim.api.nvim_win_get_width(tonumber(winid) or 0) > 90
     end,
 
     hl = {
       fg = colors.green,
       bg = empty,
---      fg = colors.green,
---      bg = colors.one_bg,
+      --      fg = colors.green,
+      --      bg = colors.one_bg,
     },
+  },
+}
+C.gps = {
+  provider = function ()
+    local filename = vim.fn.expand "%:t"
+    local extension = vim.fn.expand "%:e"
+    if filename == nil or filename == "" or filename == " " then
+      return ""
+    else
+      local gps = require "custom.plugins.statusline_builder.gps"
+      if gps and gps.is_available() then
+        return gps.get_location()
+      else
+	return ""
+      end
+    end
+  end,
+  hl = {
+    fg = "#EA2DEF",
+    bg = empty,
+    --      fg = colors.green,
+    --      bg = colors.one_bg,
   },
 }
 

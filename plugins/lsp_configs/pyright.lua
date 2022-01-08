@@ -10,7 +10,7 @@ M.setup = function(attach, capabilities)
     on_attach = attach,
     root_dir = util.root_pattern(".git", "setup.py",  "setup.cfg", "pyproject.toml", "requirements.txt");
     flags = {
-      debounce_text_changes = 150,
+      debounce_text_changes = 500,
     },
     settings = {
       python =  {
