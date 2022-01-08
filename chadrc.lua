@@ -2,6 +2,7 @@ require('impatient')
 require('impatient').enable_profile()
 -- j
 --require('packer_compiled')
+--vim.g.ttymouse=""
 vim.g.python_host_skip_check=1
 require "custom.utils.set_globals"
 require "custom.utils.mappings"
@@ -21,7 +22,7 @@ M.options = {
   hidden = true,
   ignorecase = true,
   mapleader = " ",
-  mouse = "a",
+  mouse = "",
   number = true,
   nav_wrapper = true,
   -- relative numbers in normal mode tool at the bottom of options.lua
@@ -120,7 +121,8 @@ M.plugins = {
     --choose 1
     lightspeed = true,
     hop = false,
-		gps = false
+		gps = true,
+		luadev = false,
   },
   options = {
     lspconfig = {

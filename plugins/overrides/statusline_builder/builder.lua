@@ -34,7 +34,7 @@ table.insert(left, ct.diagnostics.spacer)
 table.insert(middle, ct.progress)
 
 --disabled for slow startup
---table.insert(middle, ct.gps)
+vim.defer_fn(function() table.insert(middle, ct.gps) end, 120)
 table.insert(right, ct.git.branch)
 --table.insert(right, ct.git.git_sep)
 

@@ -1,3 +1,10 @@
+local plugin_status = require("core.utils").load_config().plugins.status
+local gps = nil
+
+if plugin_status.gps then
+	vim.defer_fn(function() gps = require("custom.plugins.overrides.statusline_builder.gps").setup() end, 100)
+end
+
 local colors = require("colors").get()
 local lsp = require "feline.providers.lsp"
 local C = {}
@@ -66,8 +73,7 @@ C.main_icon = {
 }
 
 C.file={
-  provider = function()
-    local filename = vim.fn.expand "%:t"
+  provider = function() local filename = vim.fn.expand "%:t"
     local extension = vim.fn.expand "%:e"
     local icon = require("nvim-web-devicons").get_icon(filename, extension)
     if filename == nil or filename == "" or filename == " " then
@@ -420,12 +426,10 @@ C.gps = {
     if filename == nil or filename == "" or filename == " " then
       return ""
     else
---			local present, gps = pcall(require, "nvim-gps")
-      local gps = require("custom.plugins.overrides.statusline_builder.gps")
-      if gps then
+      if gps ~= nil then
         return gps.get_location()
       else
-	return ""
+				return ""
       end
     end
   end,
