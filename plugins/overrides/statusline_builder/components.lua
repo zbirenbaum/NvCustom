@@ -420,8 +420,9 @@ C.gps = {
     if filename == nil or filename == "" or filename == " " then
       return ""
     else
-      local gps = require "custom.plugins.statusline_builder.gps"
-      if gps and gps.is_available() then
+--			local present, gps = pcall(require, "nvim-gps")
+      local gps = require("custom.plugins.overrides.statusline_builder.gps")
+      if gps then
         return gps.get_location()
       else
 	return ""

@@ -34,7 +34,7 @@ table.insert(left, ct.diagnostics.spacer)
 table.insert(middle, ct.progress)
 
 --disabled for slow startup
---table.insert(left, ct.gps)
+--table.insert(middle, ct.gps)
 table.insert(right, ct.git.branch)
 --table.insert(right, ct.git.git_sep)
 

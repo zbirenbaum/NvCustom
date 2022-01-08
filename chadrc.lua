@@ -120,6 +120,7 @@ M.plugins = {
     --choose 1
     lightspeed = true,
     hop = false,
+		gps = false
   },
   options = {
     lspconfig = {

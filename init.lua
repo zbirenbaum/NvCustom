@@ -51,8 +51,22 @@ customPlugins.add(function(use)
 		ft='lua',
 		after="nvim-lspconfig"
 	}
+  use {
+    "folke/trouble.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+    after = "nvim-lspconfig",
+    disable = not plugin_status.trouble,
+    config = function()
+      require("custom.plugins.custom_plugin_configs.trouble")
+    end
+  }
+	use {
+    "SmiteshP/nvim-gps",
+    after="nvim-lspconfig",
+    event = "VimEnter",
+		disable = not plugin_status.gps
+  }
  end)
- 
 
 -- hooks.add("install_plugins", function(use)
 --   use {
@@ -122,11 +136,6 @@ customPlugins.add(function(use)
 --     config=function()
 --       require "custom.unofficial_cmdheight_msgfunc.msgfunc"
 --     end
---   }
---   use {
---     "SmiteshP/nvim-gps",
---     after="feline.nvim",
---     disable=true
 --   }
 -- 	use {
 -- 		"folke/lua-dev.nvim",
