@@ -1,9 +1,3 @@
-local plugin_status = require("core.utils").load_config().plugins.status
-local gps = nil
-
-if plugin_status.gps then
-	vim.defer_fn(function() gps = require("custom.plugins.overrides.statusline_builder.gps").setup() end, 100)
-end
 
 local colors = require("colors").get()
 local lsp = require "feline.providers.lsp"
@@ -419,26 +413,31 @@ C.location = {
     },
   },
 }
-C.gps = {
-  provider = function ()
-    local filename = vim.fn.expand "%:t"
-    local extension = vim.fn.expand "%:e"
-    if filename == nil or filename == "" or filename == " " then
-      return ""
-    else
-      if gps ~= nil then
-        return gps.get_location()
-      else
-				return ""
-      end
-    end
-  end,
-  hl = {
-    fg = "#EA2DEF",
-    bg = empty,
-    --      fg = colors.green,
-    --      bg = colors.one_bg,
-  },
-}
+
+
+C.gps = function(gps)
+		local gps_tbl = {
+			provider = function ()
+				local filename = vim.fn.expand "%:t"
+				if filename == nil or filename == "" or filename == " " then
+					return ""
+				else
+					local avail, loc = pcall(gps.get_location)
+					if avail and loc ~= "error" then
+						return loc
+					else
+						return ""
+					end
+				end
+			end,
+			hl = {
+				fg = "#EA2DEF",
+				bg = empty,
+				--      fg = colors.green,
+				--      bg = colors.one_bg,
+			},
+		}
+		return gps_tbl
+end
 
 return C
