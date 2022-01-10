@@ -7,6 +7,12 @@ local plugin_status = require("core.utils").load_config().plugins.status
 customPlugins.add(function(use)
 	use 'lewis6991/impatient.nvim'
 	use {
+		'theHamsta/nvim-semantic-tokens',
+		config = function ()
+			require "custom.plugins.semantic_tokens"
+		end,
+	}
+	use {
 		"akinsho/toggleterm.nvim",
 		disable = not plugin_status.toggleterm,
 		event = "BufEnter",
