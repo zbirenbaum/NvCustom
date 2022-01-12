@@ -6,6 +6,14 @@ local plugin_status = require("core.utils").load_config().plugins.status
 
 customPlugins.add(function(use)
 	use 'lewis6991/impatient.nvim'
+
+	use {
+    'vlime/vlime',
+    config = function()
+      rtp = 'vim/'
+    end,
+		ft = "lisp"
+	}
 	use {
 		"akinsho/toggleterm.nvim",
 		disable = not plugin_status.toggleterm,
