@@ -53,18 +53,6 @@ M.options = {
 M.ui = {
   hl_override = "custom.plugins.overrides.hl_override",
   italic_comments = true,
-  -- theme to be used, check available themes with `<leader> + t + h`
-  --theme = "tokyonight",
- -- theme = "tokyonight",
-  --theme = "onedark",
-
-  -- toggle between two themes, see theme_toggler mappings
-  -- theme_toggler = {
-  --   "tokyonight",
-  --   --"tomorrow-night"
-  -- },
-  -- Enable this only if your terminal has the colorscheme set which nvchad uses
-  -- For Ex : if you have onedark set in nvchad, set onedark's bg color on your terminal
   transparency = true,
 }
 
@@ -82,10 +70,7 @@ M.plugins = {
     esc_insertmode = true, -- escape from insert mode using custom keys
     feline = true, -- statusline
     gitsigns = true, -- gitsigns in statusline
-
-
     lspsignature = true, -- lsp enhancements
-
     neoformat = true, -- universal formatter
     neoscroll = true, -- smooth scroll
     telescope_media = true, -- see media files in telescope picker
@@ -97,7 +82,7 @@ M.plugins = {
     toggleterm = true,
     jqx = true,
     autopairs = true,
-    --     fterm = true,
+
     -- Completions, choose 1
 		-- currently coq unsupported due to updates in cmp making it fall behind in usefulness. coq will work again soonish but will be temp broken due to new dir structure
     coq_nvim = false,
@@ -127,31 +112,7 @@ M.plugins = {
   options = {
     lspconfig = {
     	setup_lspconf = require('custom.plugins.overrides.lsp_config_selection'),
-      --setup_lspconf = 'custom.plugins.cmp_configs.lsp_config_cmp'
-      --setup_lspconf = "custom.plugins.lsp_config",
     },
-    nvimtree = {
-      enable_git = 0,
-    },
-    luasnip = {
-      snippet_path = {},
-    },
-    statusline = { -- statusline related options
-      -- these are filetypes, not pattern matched
-      -- shown filetypes will overrule hidden filetypes
-      hidden = {
-        "help",
-        "dashboard",
-        "NvimTree",
-        "terminal",
-      },
-      -- show short statusline on small screens
-      shortline = true,
-      shown = {},
-      -- default, round , slant , block , arrow
-      ------------------style = "custom",
-    },
-    esc_insertmode_timeout = 300,
   },
   --default_plugin_config_replace = tbl
   default_plugin_config_replace = {
@@ -166,36 +127,11 @@ M.plugins = {
   },
 }
 
--- mappings -- don't use a single keymap twice --
--- non plugin mappings
 M.mappings = {
 }
 
--- all plugins related mappings
 M.mappings.plugins = {
 }
 
 
 return M
-
--- function get_default_config_replace()
-  --   if M.plugins.status.coq then
-  --     tbl = {
-    --       autopairs = "custom.plugins.autopairs",
-    --       signature="custom.plugins.lspsignature",
-    --       feline="custom.plugins.feline",
-    --     }
-    --   else
-    --     tbl = {"custom.plugins.feline",}
-    --   end
-    --   return tbl
-    -- end
-    --
-    -- local tbl = {
-      --   autopairs = "custom.plugins.autopairs",
-      --   signature="custom.plugins.lspsignature",
-      --   feline="custom.plugins.feline",
-      -- }
-      -- local conf_repl = get_default_config_replace()
-      -- print(conf_repl)
-      -- non plugin normal, available without any plugins
