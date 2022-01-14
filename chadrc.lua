@@ -82,6 +82,9 @@ M.plugins = {
     toggleterm = true,
     jqx = true,
     autopairs = true,
+		marks = false,
+		gps = true,
+		luadev = false,
 
     -- Completions, choose 1
 		-- currently coq unsupported due to updates in cmp making it fall behind in usefulness. coq will work again soonish but will be temp broken due to new dir structure
@@ -106,8 +109,6 @@ M.plugins = {
     --choose 1
     lightspeed = true,
     hop = false,
-		gps = true,
-		luadev = false,
   },
   options = {
     lspconfig = {

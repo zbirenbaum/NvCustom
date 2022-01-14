@@ -83,6 +83,16 @@ customPlugins.add(function(use)
 			require("core.utils").packer_lazy_load "neoscroll.nvim"
 		end,
 	}
+	use {
+		"chentau/marks.nvim",
+		disable = not plugin_status.marks,
+		config = function ()
+			require("custom.plugins.custom_plugin_configs.marks")
+		end,
+		setup = function()
+			require("core.utils").packer_lazy_load "marks.nvim"
+		end,
+	}
 end)
 
 -- hooks.add("install_plugins", function(use)
