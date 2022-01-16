@@ -5,11 +5,7 @@
 
 local M = {}
 
-M.setup = function ()
-	local present, gps = pcall(require, "nvim-gps")
-	if not present then
-	 return nil
-	else
+M.setup = function (gps)
 		gps.setup({
 			icons = {
 				["class-name"] = ' ',      -- Classes and class-like objects
@@ -67,7 +63,6 @@ M.setup = function ()
 			depth_limit_indicator = ".."
 		})
 		return gps
-	end
 end
 
-return M.setup()
+return M

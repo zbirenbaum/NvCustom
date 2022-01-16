@@ -83,7 +83,7 @@ M.plugins = {
     jqx = true,
     autopairs = true,
 		marks = false,
-		gps = true,
+		gps = false,
 		luadev = false,
 
     -- Completions, choose 1
@@ -117,6 +117,9 @@ M.plugins = {
   },
   --default_plugin_config_replace = tbl
   default_plugin_config_replace = {
+    telescope = {
+			prompt_prefix = " ?  ",
+    },
     signature="custom.plugins.overrides.cmp_configs.lspsignature_cmp",
     feline="custom.plugins.overrides.statusline_builder.builder",
     nvim_cmp="custom.plugins.overrides.cmp_configs.cmp",
