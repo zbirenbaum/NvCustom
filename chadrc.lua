@@ -90,7 +90,6 @@ M.plugins = {
 		-- currently coq unsupported due to updates in cmp making it fall behind in usefulness. coq will work again soonish but will be temp broken due to new dir structure
     coq_nvim = false,
     cmp = true,
-    --if coq_nvim is true, set these to false
     dap = true,
     tabline=true,
     --organized diagnostics
