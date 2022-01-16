@@ -97,14 +97,24 @@ customPlugins.add(function(use)
 	use {
 		'mfussenegger/nvim-dap',
 		disable = not plugin_status.dap,
-		config = function()
-			require "custom.plugins.dap.dap_setup"
+		config = function ()
+			require "custom.plugins.dap.dap_setup".config()
+		end,
+		setup = function ()
+			require "custom.plugins.dap.dap_setup".setup()
 		end,
 		requires = {
 			"Pocco81/DAPInstall.nvim",
 			"jbyuki/one-small-step-for-vimkind",
 		},
-		setup = require("core.utils").packer_lazy_load "nvim-dap"
+		after="nvim-lspconfig",
+	}
+	use {
+		"theHamsta/nvim-dap-virtual-text",
+		after = "nvim-dap",
+		config = function ()
+			require("nvim-dap-virtual-text").setup()
+		end,
 	}
 end)
 

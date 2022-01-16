@@ -1,47 +1,32 @@
---require('dap-python').setup("/home/zach/.virtualenvs/py3nvim/bin/python")
-local adapters = {'python', 'lua'}  --list your adapters here
-require("custom.plugins.dap.dap_configs.dap_install")
+local M = {}
 
-for _, adapter in ipairs(adapters) do
-  require("custom.plugins.dap.dap_configs." .. adapter)
+M.config = function ()
+	local adapters = {'python', 'lua'}  --list your adapters here
+	require("custom.plugins.dap.dap_configs.dap_install")
+
+	for _, adapter in ipairs(adapters) do
+		require("custom.plugins.dap.dap_configs." .. adapter)
+	end
 end
 
-local function dap_mappings()
-   vim.api.nvim_set_keymap("n", "<Leader>r", '<Cmd>lua require"dap".repl.toggle()<CR>', {
-      silent = true,
-      noremap = true,
-   })
-   vim.api.nvim_set_keymap("n", "<Leader>d", '<Cmd>lua require"dapui".toggle()<CR>', {
-      silent = true,
-      noremap = true,
-   })
-   vim.api.nvim_set_keymap("n", "<C-b>", '<Cmd>lua require"dap".toggle_breakpoint()<CR>', {
-      silent = true,
-      noremap = true,
-   })
-   vim.api.nvim_set_keymap("n", "<C-c>", '<Cmd>:lua require"dap".continue()<CR>',{
-      silent = true,
-      noremap = true,
-   })
-   vim.api.nvim_set_keymap("n", "<C-o>", '<Cmd>lua require"dap".step_out()<CR>', {
-      silent = true,
-      noremap = true,
-   })
-   vim.api.nvim_set_keymap("n", "<C-o>", '<Cmd>lua require"dap".step_out()<CR>', {
-      silent = true,
-      noremap = true,
-   })
-   vim.api.nvim_set_keymap("n", "<C-n>", '<Cmd>lua require"dap".step_over()<CR>', {
-      silent = true,
-      noremap = true,
-   })
-   vim.api.nvim_set_keymap("n", "<C-s>", '<Cmd>lua require"dap".step_into()<CR>', {
-      silent = true,
-      noremap = true,
-   })
+M.setup = function ()
+	vim.keymap.set('n', '<C-b>', function () require("dap").toggle_breakpoint() end, {silent=true, noremap=true})
+	vim.keymap.set('n', '<Leader>r', function () require("dap").repl.toggle() end, {silent=true, noremap=true})
+	vim.keymap.set('n', '<Leader>d', function () require("dapui").toggle() end, {silent=true, noremap=true})
+	vim.keymap.set('n', '<C-o>', function () require("dap").step_out() end, {silent=true, noremap=true})
+	vim.keymap.set('n', '<C-n>', function () require("dap").step_into() end, {silent=true, noremap=true})
+	vim.keymap.set('n', '<C-c>',
+		function()
+			if vim.bo.filetype == "lua" and not require("dap").session() then
+				require("osv").run_this()
+			else
+				require("dap").continue()
+			end
+		end,
+		{silent=true, noremap=true})
 end
 
-dap_mappings()
+return M
 
 --if you do not want to use dapui, specific widget windows can be loaded via lua instead like so
 -- vim.api.nvim_set_keymap("n", "<Leader>s", '<Cmd>lua require"custom.plugins.dap_configs.widget_config".load_scope_in_sidebar()<CR>', {
