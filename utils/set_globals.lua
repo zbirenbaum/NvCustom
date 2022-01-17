@@ -12,6 +12,7 @@
 
 vim.g.python3_host_prog = "/home/zach/.virtualenvs/py3nvim/bin/python"
 vim.g.python_host_prog = "/home/zach/.virtualenvs/py2nvim/bin/python"
+vim.cmd[[ set shada = '200,f1,<200,:50,/50 ]]
 --vim.o.nosc = true
 --vim.o.cmdheight = 0
 
