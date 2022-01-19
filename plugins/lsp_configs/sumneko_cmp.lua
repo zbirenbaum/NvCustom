@@ -30,11 +30,12 @@ M.setup_luaLsp = function(attach, capabilities)
           path = runtime_path,
         },
         workspace = {
---          library=vim.api.nvim_get_runtime_file("", true),
-					library = {
-					  [vim.fn.expand "$VIMRUNTIME/lua"] = true,
-					  [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
-					},
+          --          library=vim.api.nvim_get_runtime_file("", true),
+          library = {
+            [vim.fn.expand "$VIMRUNTIME/lua"] = true,
+            [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
+            [vim.fn.expand "$HOME/.config/nvim/lua"] = true,
+          },
           maxPreload = 100000,
           preloadFileSize = 10000,
         },

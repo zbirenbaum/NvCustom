@@ -1,17 +1,11 @@
+local M = {}
+
 require('impatient')
 require('impatient').enable_profile()
--- j
---require('packer_compiled')
---vim.g.ttymouse=""
+
 vim.g.python_host_skip_check=1
 require "custom.utils.set_globals"
-require "custom.utils.mappings"
---require "custom.custom_commands"
---vim.cmd[[ hi TabLineFill guibg=#000000 ]] --broke pls fix, command works, but not staying applied on init
---vim.cmd[[ syntax enable ]]
---require "custom.theme_override"
-local M = {}
---M.options, M.ui, M.mappings, M.plugins = {}, {}, {}, {}
+require "custom.utils.mappings".navigation()
 
 
 M.options = {
@@ -28,10 +22,10 @@ M.options = {
   -- relative numbers in normal mode tool at the bottom of options.lua
   numberwidth = 2,
   relativenumber = true,
-  expandtab = false,
+  expandtab = true,
   shiftwidth = 2,
   smartindent = true,
-  tabstop = 2, -- Number of spaces that a <Tab> in the file counts for
+  tabstop = 8, -- Number of spaces that a <Tab> in the file counts for
   timeoutlen = 400,
   -- interval for writing swap file to disk, also used by gitsigns
   updatetime = 250,
@@ -76,22 +70,22 @@ M.plugins = {
     telescope_media = true, -- see media files in telescope picker
     truezen = true, -- no distraction mode for nvim
     vim_fugitive = true, -- git in nvim
+    nvimtree=false,
 
     --My Plugins
-    termwrapper = false,
     toggleterm = true,
     jqx = true,
     autopairs = true,
-		marks = false,
-		gps = false,
-		luadev = false,
+    marks = false,
+    gps = false,
+    luadev = false,
 
     -- Completions, choose 1
-		-- currently coq unsupported due to updates in cmp making it fall behind in usefulness. coq will work again soonish but will be temp broken due to new dir structure
+    -- currently coq unsupported due to updates in cmp making it fall behind in usefulness. coq will work again soonish but will be temp broken due to new dir structure
     coq_nvim = false,
     cmp = true,
     dap = true,
-    tabline=true,
+    tabline=false,
     --organized diagnostics
     trouble = true,
     --vscode style ex mode
@@ -111,13 +105,13 @@ M.plugins = {
   },
   options = {
     lspconfig = {
-    	setup_lspconf = require('custom.plugins.overrides.lsp_config_selection'),
+      setup_lspconf = require('custom.plugins.overrides.lsp_config_selection'),
     },
   },
   --default_plugin_config_replace = tbl
   default_plugin_config_replace = {
     telescope = {
-			prompt_prefix = " ?  ",
+      prompt_prefix = " ?  ",
     },
     signature="custom.plugins.overrides.cmp_configs.lspsignature_cmp",
     feline="custom.plugins.overrides.statusline_builder.builder",
@@ -136,5 +130,5 @@ M.mappings = {
 M.mappings.plugins = {
 }
 
-
 return M
+

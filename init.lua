@@ -1,122 +1,117 @@
--- This is where you custom modules and plugins goes.
--- See the wiki for a guide on how to extend NvChad
-
 local customPlugins = require "core.customPlugins"
 local plugin_status = require("core.utils").load_config().plugins.status
 
 customPlugins.add(function(use)
-	use 'lewis6991/impatient.nvim'
-	use {
-		"akinsho/toggleterm.nvim",
-		disable = not plugin_status.toggleterm,
-		event = "BufEnter",
-		config = function()
-			require "custom.plugins.custom_plugin_configs.toggleterm"
-		end,
-	}
-	use {
-		"ggandor/lightspeed.nvim",
-		disable = not plugin_status.lightspeed,
-		event = "BufRead",
-		config = function()
-			require "custom.plugins.custom_plugin_configs.lightspeed"
-		end,
-	}
-	use {
-		"gennaro-tedesco/nvim-jqx",
-		disable = not plugin_status.jqx,
-		event = "BufRead",
-	}
-	use {
-		"onsails/lspkind-nvim",
-		disable=not plugin_status.lspkind,
-		event = "BufRead",
-	}
-	use {
-		'monkoose/matchparen.nvim',
-		disable = not plugin_status.matchparen,
-		config = function()
-			require("custom.plugins.custom_plugin_configs.matchparen")
-		end,
-	}
-	use {
-		'seblj/nvim-tabline',
-		requires='kyazdani42/nvim-web-devicons',
-		disable = not plugin_status.tabline,
-		config=function()
-			require "custom.plugins.custom_plugin_configs.tabline"
-		end,
-	}
-	use {
-		"folke/lua-dev.nvim",
-		ft='lua',
-		after="nvim-lspconfig",
-		disable = not plugin_status.luadev,
-	}
-	use {
-		"folke/trouble.nvim",
-		requires = "kyazdani42/nvim-web-devicons",
-		after = "nvim-lspconfig",
-		disable = not plugin_status.trouble,
-		config = function()
-			require("custom.plugins.custom_plugin_configs.trouble")
-		end
-	}
-	use {
-		"SmiteshP/nvim-gps",
-		after="nvim-lspconfig",
-		opt=true,
-		event = "VimEnter",
-		setup = function()
-			require("core.utils").packer_lazy_load "nvim-gps"
-		end,
-		disable = not plugin_status.gps
-	}
-	use {
-		"karb94/neoscroll.nvim",
-		disable = not plugin_status.neoscroll,
-		opt = true,
-		config = function()
-			require("custom.plugins.custom_plugin_configs.neoscroll")
-		end,
-		setup = function()
-			require("core.utils").packer_lazy_load "neoscroll.nvim"
-		end,
-	}
-	use {
-		"chentau/marks.nvim",
-		disable = not plugin_status.marks,
-		config = function ()
-			require("custom.plugins.custom_plugin_configs.marks")
-		end,
-		setup = function()
-			require("core.utils").packer_lazy_load "marks.nvim"
-		end,
-	}
-
-	use {
-		'mfussenegger/nvim-dap',
-		disable = not plugin_status.dap,
-		config = function ()
-			require "custom.plugins.dap.dap_setup".config()
-		end,
-		setup = function ()
-			require "custom.plugins.dap.dap_setup".setup()
-		end,
-		requires = {
-			"Pocco81/DAPInstall.nvim",
-			"jbyuki/one-small-step-for-vimkind",
-		},
-		after="nvim-lspconfig",
-	}
-	use {
-		"theHamsta/nvim-dap-virtual-text",
-		after = "nvim-dap",
-		config = function ()
-			require("nvim-dap-virtual-text").setup()
-		end,
-	}
+  use 'lewis6991/impatient.nvim'
+  use {
+    "akinsho/toggleterm.nvim",
+    disable = not plugin_status.toggleterm,
+    event = "BufEnter",
+    config = function()
+      require "custom.plugins.custom_plugin_configs.toggleterm"
+    end,
+  }
+  use {
+    "ggandor/lightspeed.nvim",
+    disable = not plugin_status.lightspeed,
+    event = "BufRead",
+    config = function()
+      require "custom.plugins.custom_plugin_configs.lightspeed"
+    end,
+  }
+  use {
+    "gennaro-tedesco/nvim-jqx",
+    disable = not plugin_status.jqx,
+    event = "BufRead",
+  }
+  use {
+    "onsails/lspkind-nvim",
+  }
+  use {
+    'monkoose/matchparen.nvim',
+    disable = not plugin_status.matchparen,
+    config = function()
+      require("custom.plugins.custom_plugin_configs.matchparen")
+    end,
+  }
+  use {
+    'seblj/nvim-tabline',
+    requires='kyazdani42/nvim-web-devicons',
+    disable = not plugin_status.tabline,
+    config=function()
+      require "custom.plugins.custom_plugin_configs.tabline"
+    end,
+  }
+  use {
+    "folke/lua-dev.nvim",
+    ft='lua',
+    after="nvim-lspconfig",
+    disable = not plugin_status.luadev,
+  }
+  use {
+    "folke/trouble.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+    after = "nvim-lspconfig",
+    disable = not plugin_status.trouble,
+    config = function()
+      require("custom.plugins.custom_plugin_configs.trouble")
+    end
+  }
+  use {
+    "SmiteshP/nvim-gps",
+    after="nvim-lspconfig",
+    opt=true,
+    event = "VimEnter",
+    setup = function()
+      require("core.utils").packer_lazy_load "nvim-gps"
+    end,
+    disable = not plugin_status.gps
+  }
+  use {
+    "karb94/neoscroll.nvim",
+    disable = not plugin_status.neoscroll,
+    opt = true,
+    config = function()
+      require("custom.plugins.custom_plugin_configs.neoscroll")
+    end,
+    setup = function()
+      require("core.utils").packer_lazy_load "neoscroll.nvim"
+    end,
+  }
+  use {
+    "chentau/marks.nvim",
+    disable = not plugin_status.marks,
+    config = function ()
+      require("custom.plugins.custom_plugin_configs.marks")
+    end,
+    setup = function()
+      require("core.utils").packer_lazy_load "marks.nvim"
+    end,
+  }
+  use {
+    'mfussenegger/nvim-dap',
+    disable = not plugin_status.dap,
+    config = function ()
+      require "custom.plugins.dap.dap_setup".config()
+    end,
+    setup = function ()
+      require("custom.utils.mappings").dap()
+    end,
+    requires = {
+      "Pocco81/DAPInstall.nvim",
+      "jbyuki/one-small-step-for-vimkind",
+    },
+    after="nvim-lspconfig",
+  }
+  use {
+   "theHamsta/nvim-dap-virtual-text",
+   after = "nvim-dap",
+   config = function ()
+     require("nvim-dap-virtual-text").setup()
+   end,
+  }
 end)
+
 
 -- hooks.add("install_plugins", function(use)
 --   use {
