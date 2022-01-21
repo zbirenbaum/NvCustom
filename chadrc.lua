@@ -62,9 +62,7 @@ M.plugins = {
       colorizer = true,
       comment = true, -- universal commentor
       dashboard = false, -- a nice looking dashboard
-      esc_insertmode = true, -- escape from insert mode using custom keys
-      feline = true, -- statusline
-      gitsigns = true, -- gitsigns in statusline
+      esc_insertmode = true, -- escape from insert mode using custom keys feline = true, -- statusline gitsigns = true, -- gitsigns in statusline
       lspsignature = true, -- lsp enhancements
       neoformat = true, -- universal formatter
       neoscroll = true, -- smooth scroll
@@ -127,34 +125,34 @@ M.plugins = {
             add = { hl = "DiffAdd", text = ">", numhl = "GitSignsAddNr" },
          }
       },
+      bufferline = { options= {buffer_close_icon = "+"}},
       nvim_colorizer = { --#000000
          user_default_options = {
               mode = "foreground"
          },
       },
-      bufferline = { options= {buffer_close_icon = "+"}},
-
+      nvim_cmp="custom.plugins.overrides.cmp_configs.cmp",
+      feline = function ()
+         require("custom.plugins.overrides.statusline_builder.builder")
+      end,
       signature="custom.plugins.overrides.cmp_configs.lspsignature_cmp",
-      feline="custom.plugins.overrides.statusline_builder.builder",
-      nvim_cmp = {
-         formatting = {
-            format = function(entry, vim_item)
-               local icons = require "plugins.configs.lspkind_icons"
-               
-               icons = vim.tbl_deep_extend("force", icons, { Text="[]", TypeParameter="[]", Unit="[]"})
-               vim_item.kind = string.format("%s %s", icons[vim_item.kind], vim_item.kind)
-
-               vim_item.menu = ({
-                  nvim_lsp = "[LSP]",
-                  nvim_lua = "[Lua]",
-                  buffer = "[BUF]",
-               })[entry.source.name]
-
-               return vim_item
-            end,
-         },
-      }
-      --nvim_cmp="custom.plugins.overrides.cmp_configs.cmp",
+      -- nvim_cmp = {
+      --    formatting = {
+      --       format = function(entry, vim_item)
+      --          local icons = require "plugins.configs.lspkind_icons"
+      --          icons = vim.tbl_deep_extend("force", icons, { Text="[]", TypeParameter="[]", Unit="[]"})
+      --          vim_item.kind = string.format("%s %s", icons[vim_item.kind], vim_item.kind)
+      --
+      --          vim_item.menu = ({
+      --             nvim_lsp = "[LSP]",
+      --             nvim_lua = "[Lua]",
+      --             buffer = "[BUF]",
+      --          })[entry.source.name]
+      --
+      --          return vim_item
+      --       end,
+      --    },
+      -- }
       --bufferline="custom.plugins.overrides.bufferline",
       --feline="custom.plugins.feline",
       --nvim_autopairs=require("custom.plugins.autopairs_selection"),
