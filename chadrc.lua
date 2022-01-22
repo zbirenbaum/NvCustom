@@ -110,10 +110,8 @@ M.plugins = {
    },
    --default_plugin_config_replace = tbl
    default_plugin_config_replace = {
+      feline = function () require("custom.plugins.overrides.statusline_builder.builder") end,
       signature="custom.plugins.overrides.cmp_configs.lspsignature_cmp",
-      feline = function ()
-         require("custom.plugins.overrides.statusline_builder.builder")
-      end,
       nvim_cmp="custom.plugins.overrides.cmp_configs.cmp",
       --bufferline="custom.plugins.overrides.bufferline",
       nvim_treesitter = "custom.plugins.overrides.treesitter",
