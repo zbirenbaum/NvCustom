@@ -7,7 +7,6 @@ vim.g.python_host_skip_check=1
 require "custom.utils.set_globals"
 require "custom.utils.mappings".navigation()
 
-
 M.options = {
    -- NeoVim/Vim options
    clipboard = "unnamedplus",
@@ -40,7 +39,7 @@ M.options = {
       -- used for updater
       update_url = "https://github.com/NvChad/NvChad",
       update_branch = "main",
-   },
+   }
 }
 
 -- ui configs
@@ -105,7 +104,7 @@ M.plugins = {
    options = {
       lspconfig = {
          --setup_lspconf = require('custom.plugins.overrides.lsp_config_selection'),
-         setup_lspconf = "custom.plugins.overrides.cmp_configs.lsp_config_cmp"
+         setup_lspconf = "custom.plugins.overrides.cmp_configs.lsp_config_cmp",
       },
    },
    --default_plugin_config_replace = tbl
@@ -118,14 +117,9 @@ M.plugins = {
       --feline="custom.plugins.feline",
       --nvim_autopairs=require("custom.plugins.autopairs_selection"),
       --signature="custom.plugins.lspsignature_coq",
-   },
+   }
 }
 
-M.mappings = {
-}
-
-M.mappings.plugins = {
-}
+M.mappings = {plugins = {}}
 
 return M
-

@@ -4,7 +4,7 @@ require("nvim-treesitter")
 
 vim.defer_fn(function()
   require("nvim-treesitter.configs").setup {
-    indent = { enable = true },
+    indent = { enable = false },
     highlight = {
       enable = true,
       use_languagetree = true,
