@@ -9,7 +9,7 @@ require "custom.utils.mappings".navigation()
 
 
 M.options = {
--- NeoVim/Vim options
+   -- NeoVim/Vim options
    clipboard = "unnamedplus",
    cmdheight = 1,
    ruler = false,
@@ -32,14 +32,14 @@ M.options = {
    undofile = true, -- keep a permanent undo (across restarts)
    -- NvChad options
    nvChad = {
-   copy_cut = true, -- copy cut text ( x key ), visual and normal mode
-   copy_del = true, -- copy deleted text ( dd key ), visual and normal mode
-   insert_nav = true, -- navigation in insertmode
-   window_nav = true,
-   theme_toggler = true,
-   -- used for updater
-   update_url = "https://github.com/NvChad/NvChad",
-   update_branch = "main",
+      copy_cut = true, -- copy cut text ( x key ), visual and normal mode
+      copy_del = true, -- copy deleted text ( dd key ), visual and normal mode
+      insert_nav = true, -- navigation in insertmode
+      window_nav = true,
+      theme_toggler = false,
+      -- used for updater
+      update_url = "https://github.com/NvChad/NvChad",
+      update_branch = "main",
    },
 }
 
@@ -54,58 +54,59 @@ M.ui = {
 M.plugins = {
    -- enable and disable plugins (false for disable)
    status = {
-   autosave = false, -- to autosave files
-   blankline = true, -- beautified blank lines
-   bufferline = false, -- buffer shown as tabs
-   cheatsheet = true, -- fuzzy search your commands/keymappings
-   colorizer = true,
-   comment = true, -- universal commentor
-   dashboard = false, -- a nice looking dashboard
-   esc_insertmode = true, -- escape from insert mode using custom keys
-   feline = true, -- statusline
-   gitsigns = true, -- gitsigns in statusline
-   lspsignature = true, -- lsp enhancements
-   neoformat = true, -- universal formatter
-   neoscroll = true, -- smooth scroll
-   telescope_media = true, -- see media files in telescope picker
-   truezen = true, -- no distraction mode for nvim
-   vim_fugitive = true, -- git in nvim
-   nvimtree=false,
+      autosave = false, -- to autosave files
+      blankline = true, -- beautified blank lines
+      bufferline = false, -- buffer shown as tabs
+      cheatsheet = true, -- fuzzy search your commands/keymappings
+      colorizer = true,
+      comment = true, -- universal commentor
+      dashboard = false, -- a nice looking dashboard
+      esc_insertmode = true, -- escape from insert mode using custom keys
+      feline = true, -- statusline
+      gitsigns = true, -- gitsigns in statusline
+      lspsignature = true, -- lsp enhancements
+      neoformat = true, -- universal formatter
+      neoscroll = true, -- smooth scroll
+      telescope_media = true, -- see media files in telescope picker
+      truezen = true, -- no distraction mode for nvim
+      vim_fugitive = true, -- git in nvim
+      nvimtree=false,
 
-   --My Plugins
-   toggleterm = true,
-   jqx = true,
-   autopairs = true,
-   marks = false,
-   gps = false,
-   luadev = false,
+      --My Plugins
+      toggleterm = true,
+      jqx = true,
+      autopairs = true,
+      marks = false,
+      gps = false,
+      luadev = false,
 
-   -- Completions, choose 1
-   -- currently coq unsupported due to updates in cmp making it fall behind in usefulness. coq will work again soonish but will be temp broken due to new dir structure
-   coq_nvim = false,
-   cmp = true,
-   dap = true,
-   tabline=false,
-   --organized diagnostics
-   trouble = true,
-   --vscode style ex mode
-   cmdline = false,
-   lspkind = true,
-   --cmdheight rfc
-   cmdheight = false,
-   --its kinda cool and no real slowdown for me, but not lua so disabled out of principle
-   wilder=false,
-   --choose 1
-   vim_matchup = false, -- % magic, match it but improved
-   --broken for now
-   matchparen=true,
-   --choose 1
-   lightspeed = true,
-   hop = false,
+      -- Completions, choose 1
+      -- currently coq unsupported due to updates in cmp making it fall behind in usefulness. coq will work again soonish but will be temp broken due to new dir structure
+      coq_nvim = false,
+      cmp = true,
+      dap = true,
+      tabline=false,
+      --organized diagnostics
+      trouble = true,
+      --vscode style ex mode
+      cmdline = false,
+      lspkind = true,
+      --cmdheight rfc
+      cmdheight = false,
+      --its kinda cool and no real slowdown for me, but not lua so disabled out of principle
+      wilder=false,
+      --choose 1
+      vim_matchup = false, -- % magic, match it but improved
+      --broken for now
+      matchparen=true,
+      --choose 1
+      lightspeed = true,
+      hop = false,
    },
    options = {
       lspconfig = {
-         setup_lspconf = require('custom.plugins.overrides.lsp_config_selection'),
+         --setup_lspconf = require('custom.plugins.overrides.lsp_config_selection'),
+         setup_lspconf = "custom.plugins.overrides.cmp_configs.lsp_config_cmp"
       },
    },
    --default_plugin_config_replace = tbl
