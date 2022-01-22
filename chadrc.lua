@@ -65,7 +65,6 @@ M.plugins = {
       feline = true, -- statusline
       gitsigns = true, -- gitsigns in statusline
       lspsignature = true, -- lsp enhancements
-      neoformat = true, -- universal formatter
       neoscroll = true, -- smooth scroll
       telescope_media = true, -- see media files in telescope picker
       truezen = true, -- no distraction mode for nvim
