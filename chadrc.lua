@@ -1,7 +1,7 @@
 local M = {}
 
-require('impatient')
-require('impatient').enable_profile()
+-- require('impatient')
+-- require('impatient').enable_profile()
 
 vim.g.python_host_skip_check=1
 require "custom.utils.set_globals"

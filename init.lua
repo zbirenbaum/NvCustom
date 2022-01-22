@@ -2,7 +2,7 @@ local customPlugins = require "core.customPlugins"
 local plugin_status = require("core.utils").load_config().plugins.status
 
 customPlugins.add(function(use)
-  use 'lewis6991/impatient.nvim'
+  --use 'lewis6991/impatient.nvim'
   use {
     "akinsho/toggleterm.nvim",
     disable = not plugin_status.toggleterm,
@@ -57,16 +57,16 @@ customPlugins.add(function(use)
       require("custom.plugins.custom_plugin_configs.trouble")
     end
   }
-  use {
-    "SmiteshP/nvim-gps",
-    after="nvim-lspconfig",
-    opt=true,
-    event = "VimEnter",
-    setup = function()
-      require("core.utils").packer_lazy_load "nvim-gps"
-    end,
-    disable = not plugin_status.gps
-  }
+  -- use {
+  --   "SmiteshP/nvim-gps",
+  --   after="nvim-lspconfig",
+  --   opt=true,
+  --   event = "VimEnter",
+  --   setup = function()
+  --     require("core.utils").packer_lazy_load "nvim-gps"
+  --   end,
+  --   disable = not plugin_status.gps
+  -- }
   use {
     "karb94/neoscroll.nvim",
     disable = not plugin_status.neoscroll,

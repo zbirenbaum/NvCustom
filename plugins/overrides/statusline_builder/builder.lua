@@ -3,8 +3,8 @@ local lsp = require "feline.providers.lsp"
 -- local lsp = require "feline.providers.lsp"
 
 local components = {
-	active = {},
-	inactive = {},
+   active = {},
+   inactive = {},
 }
 table.insert(components.active, {})
 table.insert(components.active, {})
@@ -36,17 +36,17 @@ table.insert(middle, ct.progress)
 --disabled for slow startup
 
 local function insert_gps()
-	local present, gps = pcall(require, "nvim-gps")
-	if not present then
-	 return nil
-	else
-		gps_provider = require("custom.plugins.overrides.statusline_builder.gps").setup(gps)
-		if gps_provider.is_available() then
-			table.insert(middle, ct.gps(gps_provider))
-		end
-	end
+   local present, gps = pcall(require, "nvim-gps")
+   if not present then
+      return nil
+   else
+      gps_provider = require("custom.plugins.overrides.statusline_builder.gps").setup(gps)
+      if gps_provider.is_available() then
+         table.insert(middle, ct.gps(gps_provider))
+      end
+   end
 end
-vim.defer_fn(insert_gps, 150)
+--vim.defer_fn(insert_gps, 150)
 
 table.insert(right, ct.git.branch)
 --table.insert(right, ct.git.git_sep)
@@ -64,24 +64,24 @@ components.active[3] = right
 
 
 local InactiveStatusHL = {
-	fg = colors.one_bg2,
-	bg = "NONE",
-	style = "underline",
+   fg = colors.one_bg2,
+   bg = "NONE",
+   style = "underline",
 }
 
 components.inactive = {
-	{
-		{
-			provider = " ",
-			hl = InactiveStatusHL,
-		},
-	},
+   {
+      {
+         provider = " ",
+         hl = InactiveStatusHL,
+      },
+   },
 }
 
 require("feline").setup {
-	colors = {
-		bg = colors.statusline_bg,
-		fg = colors.fg,
-	},
-	components = components,
+   colors = {
+      bg = colors.statusline_bg,
+      fg = colors.fg,
+   },
+   components = components,
 }
