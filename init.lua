@@ -135,6 +135,7 @@ customPlugins.add(function(use)
       config = function()
          require "custom.plugins.completion_plugins.cmp_configs.cmp"
       end,
+      setup = require("core.utils").packer_lazy_load "nvim-cmp"
    }
 
    use {
