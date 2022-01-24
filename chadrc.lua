@@ -103,9 +103,12 @@ M.plugins = {
    },
    options = {
       lspconfig = {
-         --setup_lspconf = require('custom.plugins.overrides.lsp_config_selection'),
          setup_lspconf = "custom.plugins.overrides.cmp_configs.lsp_config_cmp",
+         --setup_lspconf = require('custom.plugins.overrides.lsp_config_selection'),
       },
+      cmp = {
+         lazy_load = true,
+      }
    },
    --default_plugin_config_replace = tbl
    default_plugin_config_replace = {
