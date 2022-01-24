@@ -47,6 +47,7 @@ M.ui = {
    hl_override = "custom.plugins.overrides.hl_override",
    italic_comments = true,
    transparency = true,
+   theme = "onedark",
 }
 
 -- these are plugin related options
@@ -67,7 +68,6 @@ M.plugins = {
       neoscroll = true, -- smooth scroll
       telescope_media = true, -- see media files in telescope picker
       truezen = true, -- no distraction mode for nvim
-      vim_fugitive = true, -- git in nvim
       nvimtree=false,
 
       --My Plugins
@@ -85,7 +85,7 @@ M.plugins = {
       dap = true,
       tabline=false,
       --organized diagnostics
-      trouble = true,
+      trouble = false,
       --vscode style ex mode
       cmdline = false,
       lspkind = true,
@@ -106,9 +106,6 @@ M.plugins = {
          setup_lspconf = "custom.plugins.overrides.cmp_configs.lsp_config_cmp",
          --setup_lspconf = require('custom.plugins.overrides.lsp_config_selection'),
       },
-      cmp = {
-         lazy_load = true,
-      }
    },
    --default_plugin_config_replace = tbl
    default_plugin_config_replace = {

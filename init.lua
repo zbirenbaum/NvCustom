@@ -96,6 +96,7 @@ customPlugins.add(function(use)
    use {
       "theHamsta/nvim-dap-virtual-text",
       after = "nvim-dap",
+      disable = not plugin_status.dap,
       config = function ()
          require("nvim-dap-virtual-text").setup()
       end,
@@ -103,98 +104,61 @@ customPlugins.add(function(use)
    use {
       "neovim/nvim-lspconfig",
       module = "lspconfig",
-      config = function()
-         
-         require("plugins.configs.others").lsp_handlers()
-
-         local function on_attach(_, bufnr)
-            local function buf_set_option(...)
-               vim.api.nvim_buf_set_option(bufnr, ...)
-            end
-
-            -- Enable completion triggered by <c-x><c-o>
-            buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
-
-            require("core.mappings").lspconfig()
-         end
-
-         local capabilities = vim.lsp.protocol.make_client_capabilities()
-         capabilities.textDocument.completion.completionItem.documentationFormat = { "markdown", "plaintext" }
-         capabilities.textDocument.completion.completionItem.snippetSupport = true
-         capabilities.textDocument.completion.completionItem.preselectSupport = true
-         capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
-         capabilities.textDocument.completion.completionItem.labelDetailsSupport = true
-         capabilities.textDocument.completion.completionItem.deprecatedSupport = true
-         capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
-         capabilities.textDocument.completion.completionItem.tagSupport = { valueSet = { 1 } }
-         capabilities.textDocument.completion.completionItem.resolveSupport = {
-            properties = {
-               "documentation",
-               "detail",
-               "additionalTextEdits",
-            },
-         }
-
-         -- requires a file containing user's lspconfigs
-         require("custom.plugins.overrides.cmp_configs.lsp_config_cmp").setup_lsp(on_attach, capabilities)
-      end,
-      -- lazy load!
       setup = function()
          require("core.utils").packer_lazy_load "nvim-lspconfig"
+         -- reload the current file so lsp actually starts for it
          vim.defer_fn(function()
             vim.cmd 'if &ft == "packer" | echo "" | else | silent! e %'
          end, 0)
       end,
-      opt = true,
+      config = function() require("custom.plugins.lsp_plugins.lsp_config") end,
    }
    use {
       "ray-x/lsp_signature.nvim",
       after = "nvim-lspconfig",
+      disable = not plugin_status.lsp_signature,
       config = function()
-         require "custom.plugins.overrides.cmp_configs.lspsignature_cmp"
+         require "custom.plugins.completion_plugins.cmp_configs.lspsignature_cmp"
       end,
    }
       -- load luasnips + cmp related in insert mode only
-    use {
+   use {
       "rafamadriz/friendly-snippets",
       disable = not plugin_status.cmp,
       event = "InsertEnter",
    }
-
+   
    use {
       "hrsh7th/nvim-cmp",
-      after = "friendly-snippits",
+      after = "nvim-lspconfig",
+      disable = not plugin_status.cmp,
       config = function()
-         require "custom.plugins.overrides.cmp_configs.cmp"
+         require "custom.plugins.completion_plugins.cmp_configs.cmp"
       end,
    }
 
    use {
       "L3MON4D3/LuaSnip",
+      disable = not plugin_status.cmp,
       wants = "friendly-snippets",
       after = "nvim-cmp",
       config = function()
-         local luasnip = require "luasnip"
-         luasnip.config.set_config {
-            history = true,
-            updateevents = "TextChanged,TextChangedI",
-         }
-         require("luasnip/loaders/from_vscode").load()
+         local present, luasnip = pcall(require, "luasnip")
+         if present then
+            local default = {
+               history = true,
+               updateevents = "TextChanged,TextChangedI",
+            }
+            luasnip.config.set_config(default)
+            require("luasnip/loaders/from_vscode").load()
+         end
       end,
    }
-
    use {
       "saadparwaiz1/cmp_luasnip",
-      disable = not plugin_status.cmp,
       after = "LuaSnip",
    }
-
-   use {
-      "hrsh7th/cmp-nvim-lua",
-      disable = not plugin_status.cmp,
-      after = "cmp_luasnip",
-   }
-
+   use {"hrsh7th/cmp-nvim-lua", after = "cmp_luasnip",}
    use {
       "hrsh7th/cmp-nvim-lsp",
       disable = not plugin_status.cmp,
@@ -212,18 +176,12 @@ customPlugins.add(function(use)
       disable = not plugin_status.cmp,
       after = "cmp-buffer",
    }
-
    use {
       "windwp/nvim-autopairs",
       disable = not plugin_status.autopairs,
       after = "nvim-cmp",
       config = function()
-         local autopairs = require "nvim-autopairs"
-         local cmp_autopairs = require "nvim-autopairs.completion.cmp"
-         autopairs.setup { fast_wrap = {} }
-         local cmp = require "cmp"
-         cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+         require("custom.plugins.lsp_plugins.autopairs")
       end,
    }
 end)
-
