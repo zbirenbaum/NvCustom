@@ -52,8 +52,10 @@ customPlugins.add(function(use)
       event = "InsertEnter",
    }
    use {
-      "hrsh7th/nvim-cmp",
-      after = "friendly-snippets",
+      "zbirenbaum/nvim-cmp",
+      branch="config_throttle",
+      --after = "friendly-snippets",
+      after="cmp-path",
       disable = not plugin_status.cmp,
       config = function()
          require "custom.plugins.completion_plugins.cmp_configs.cmp"
@@ -62,8 +64,9 @@ customPlugins.add(function(use)
    use {
       "L3MON4D3/LuaSnip",
       disable = not plugin_status.cmp,
-      wants = "friendly-snippets",
-      after = "nvim-cmp",
+      --wants = "friendly-snippets",
+      --after = "nvim-cmp",
+      after = "friendly-snippets",
       config = function()
          local present, luasnip = pcall(require, "luasnip")
          if present then

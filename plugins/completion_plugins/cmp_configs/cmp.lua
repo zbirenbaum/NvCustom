@@ -60,7 +60,9 @@ cmp.setup {
       autocomplete = {
          require('cmp.types').cmp.TriggerEvent.InsertEnter,
          require('cmp.types').cmp.TriggerEvent.TextChanged
-      }
+      },
+      keyword_length = 1,
+      throttle_time = 20,
    },
    mapping = {
       ["<PageUp>"] = function()
