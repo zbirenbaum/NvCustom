@@ -6,7 +6,7 @@ customPlugins.add(function(use)
    use {
       "akinsho/toggleterm.nvim",
       disable = not plugin_status.toggleterm,
-      event = "BufEnter",
+      event = "BufReadPost",
       config = function()
          require "custom.plugins.custom_plugin_configs.toggleterm"
       end,
@@ -14,18 +14,19 @@ customPlugins.add(function(use)
    use {
       "ggandor/lightspeed.nvim",
       disable = not plugin_status.lightspeed,
-      event = "BufRead",
       config = function()
          require "custom.plugins.custom_plugin_configs.lightspeed"
       end,
+      event = "BufReadPost"
    }
    use {
       "gennaro-tedesco/nvim-jqx",
       disable = not plugin_status.jqx,
-      event = "BufRead",
+      event = "BufReadPost",
    }
    use {
       "onsails/lspkind-nvim",
+      wants = "nvim-cmp"
    }
    use {
       'monkoose/matchparen.nvim',
@@ -79,29 +80,6 @@ customPlugins.add(function(use)
       end,
    }
    use {
-      'mfussenegger/nvim-dap',
-      disable = not plugin_status.dap,
-      config = function ()
-         require "custom.plugins.dap.dap_setup".config()
-      end,
-      setup = function ()
-         require("custom.utils.mappings").dap()
-      end,
-      requires = {
-         "Pocco81/DAPInstall.nvim",
-         "jbyuki/one-small-step-for-vimkind",
-      },
-      after="nvim-lspconfig",
-   }
-   use {
-      "theHamsta/nvim-dap-virtual-text",
-      after = "nvim-dap",
-      disable = not plugin_status.dap,
-      config = function ()
-         require("nvim-dap-virtual-text").setup()
-      end,
-   }
-   use {
       "neovim/nvim-lspconfig",
       module = "lspconfig",
       setup = function()
@@ -127,15 +105,14 @@ customPlugins.add(function(use)
       disable = not plugin_status.cmp,
       event = "InsertEnter",
    }
-   
    use {
       "hrsh7th/nvim-cmp",
-      after = "nvim-lspconfig",
+      after = "friendly-snippets",
       disable = not plugin_status.cmp,
       config = function()
          require "custom.plugins.completion_plugins.cmp_configs.cmp"
       end,
-      setup = require("core.utils").packer_lazy_load "nvim-cmp"
+--      setup = require("core.utils").packer_lazy_load "nvim-cmp"
    }
 
    use {
@@ -186,3 +163,34 @@ customPlugins.add(function(use)
       end,
    }
 end)
+--dap stuff
+--[[
+   use {
+      'mfussenegger/nvim-dap',
+      disable = not plugin_status.dap,
+      config = function ()
+         require "custom.plugins.dap.dap_setup".config()
+      end,
+      setup = function ()
+         require("custom.utils.mappings").dap()
+      end,
+      after="osv",
+   }
+   use {
+      "Pocco81/DAPInstall.nvim",
+      module = "dap-install",
+      after = "nvim-cmp",
+   }
+   use {
+      "jbyuki/one-small-step-for-vimkind",
+      after = "dap-install",
+   }
+   use {
+      "theHamsta/nvim-dap-virtual-text",
+      after = "nvim-dap",
+      disable = not plugin_status.dap,
+      config = function ()
+         require("nvim-dap-virtual-text").setup()
+      end,
+   }
+--]]

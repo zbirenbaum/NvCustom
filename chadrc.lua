@@ -55,11 +55,7 @@ M.plugins = {
    -- enable and disable plugins (false for disable)
    status = {
       autosave = false, -- to autosave files
-      blankline = true, -- beautified blank lines
       bufferline = false, -- buffer shown as tabs
-      cheatsheet = true, -- fuzzy search your commands/keymappings
-      colorizer = true,
-      comment = true, -- universal commentor
       dashboard = false, -- a nice looking dashboard
       esc_insertmode = true, -- escape from insert mode using custom keys
       feline = true, -- statusline
@@ -71,8 +67,6 @@ M.plugins = {
       nvimtree=false,
 
       --My Plugins
-      toggleterm = true,
-      jqx = true,
       autopairs = true,
       marks = false,
       gps = false,
@@ -82,7 +76,7 @@ M.plugins = {
       -- currently coq unsupported due to updates in cmp making it fall behind in usefulness. coq will work again soonish but will be temp broken due to new dir structure
       coq_nvim = false,
       cmp = true,
-      dap = true,
+      dap = false,
       tabline=false,
       --organized diagnostics
       trouble = false,
@@ -98,8 +92,15 @@ M.plugins = {
       --broken for now
       matchparen=true,
       --choose 1
-      lightspeed = true,
       hop = false,
+      --disabled for testing
+      lightspeed = true,
+      jqx = true,
+      toggleterm = true,
+      blankline = true, -- beautified blank lines
+      cheatsheet = false, -- fuzzy search your commands/keymappings
+      colorizer = false,
+      comment = true, -- universal commentor
    },
    options = {
       lspconfig = {
