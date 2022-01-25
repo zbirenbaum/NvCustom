@@ -1,5 +1,0 @@
-
-036.066  000.036  000.036: sourcing /home/zach/.local/share/nvim/site/pack/packer/opt/nvim-colorizer.lua/plugin/colorizer.vim
-039.704  001.051  001.051: sourcing /home/zach/.local/share/nvim/site/pack/packer/opt/indent-blankline.nvim/plugin/indent_blankline.vim
-042.191  000.047  000.047: sourcing /home/zach/.local/share/nvim/site/pack/packer/opt/nvim-jqx/plugin/nvim-jqx.vim
-042.435  000.032  000.032: sourcing /home/zach/.local/share/nvim/site/pack/packer/opt/toggleterm.nvim/plugin/toggleterm.vim
