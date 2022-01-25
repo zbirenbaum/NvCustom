@@ -39,7 +39,7 @@ vim.g.loaded_netrwPlugin = 1
 vim.g.loaded_netrwSettings = 1
 vim.g.loaded_netrwFileHandlers = 1
 vim.g.loaded_ftplugin = 1
-
+--
 -- if vim.env.TMUX then
 --   vim.g.t_SI = "\\<Esc>Ptmux;\\<Esc>\\e[5 q\\<Esc>\\\\"
 --   vim.g.t_EI = "\\<Esc>Ptmux;\\<Esc>\\e[1 q\\<Esc>\\\\"

@@ -76,7 +76,7 @@ M.plugins = {
       -- currently coq unsupported due to updates in cmp making it fall behind in usefulness. coq will work again soonish but will be temp broken due to new dir structure
       coq_nvim = false,
       cmp = true,
-      dap = false,
+      dap = true,
       tabline=false,
       --organized diagnostics
       trouble = false,
