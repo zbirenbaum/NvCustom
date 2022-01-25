@@ -1,0 +1,162 @@
+
+
+times in msec
+ clock   self+sourced   self:  sourced script
+ clock   elapsed:              other lines
+
+000.009  000.009: --- NVIM STARTING ---
+000.281  000.272: locale set
+000.568  000.287: inits 1
+000.580  000.012: window checked
+003.466  002.887: parsing arguments
+003.551  000.085: expanding arguments
+003.566  000.015: inits 2
+004.004  000.438: init highlight
+004.007  000.003: waiting for UI
+005.244  001.237: done waiting for UI
+005.263  000.019: init screen for UI
+005.283  000.019: init default mappings
+005.354  000.072: init default autocommands
+005.912  000.046  000.046: sourcing /home/zach/progfiles/neovim-git/share/nvim/runtime/ftplugin.vim
+005.998  000.027  000.027: sourcing /home/zach/progfiles/neovim-git/share/nvim/runtime/indent.vim
+006.037  000.005  000.005: sourcing /usr/share/nvim/archlinux.vim
+006.039  000.023  000.018: sourcing /etc/xdg/nvim/sysinit.vim
+011.361  005.305  005.305: sourcing /home/zach/.config/nvim/init.lua
+011.372  000.617: sourcing vimrc file(s)
+011.504  000.026  000.026: sourcing /home/zach/progfiles/neovim-git/share/nvim/runtime/filetype.lua
+017.222  005.699  005.699: sourcing /home/zach/progfiles/neovim-git/share/nvim/runtime/filetype.vim
+017.411  000.075  000.075: sourcing /home/zach/progfiles/neovim-git/share/nvim/runtime/syntax/synload.vim
+017.492  000.236  000.161: sourcing /home/zach/progfiles/neovim-git/share/nvim/runtime/syntax/syntax.vim
+018.083  000.015  000.015: sourcing /home/zach/progfiles/neovim-git/share/nvim/runtime/plugin/gzip.vim
+018.109  000.010  000.010: sourcing /home/zach/progfiles/neovim-git/share/nvim/runtime/plugin/health.vim
+018.208  000.086  000.086: sourcing /home/zach/progfiles/neovim-git/share/nvim/runtime/plugin/man.vim
+018.236  000.012  000.012: sourcing /home/zach/progfiles/neovim-git/share/nvim/runtime/plugin/matchit.vim
+018.265  000.012  000.012: sourcing /home/zach/progfiles/neovim-git/share/nvim/runtime/plugin/matchparen.vim
+018.295  000.017  000.017: sourcing /home/zach/progfiles/neovim-git/share/nvim/runtime/plugin/netrwPlugin.vim
+018.464  000.012  000.012: sourcing /home/zach/.local/share/nvim/rplugin.vim
+018.470  000.161  000.149: sourcing /home/zach/progfiles/neovim-git/share/nvim/runtime/plugin/rplugin.vim
+018.595  000.108  000.108: sourcing /home/zach/progfiles/neovim-git/share/nvim/runtime/plugin/shada.vim
+018.629  000.012  000.012: sourcing /home/zach/progfiles/neovim-git/share/nvim/runtime/plugin/spellfile.vim
+018.665  000.015  000.015: sourcing /home/zach/progfiles/neovim-git/share/nvim/runtime/plugin/tarPlugin.vim
+018.691  000.010  000.010: sourcing /home/zach/progfiles/neovim-git/share/nvim/runtime/plugin/tohtml.vim
+018.725  000.018  000.018: sourcing /home/zach/progfiles/neovim-git/share/nvim/runtime/plugin/tutor.vim
+018.757  000.015  000.015: sourcing /home/zach/progfiles/neovim-git/share/nvim/runtime/plugin/zipPlugin.vim
+021.285  002.458  002.458: sourcing /home/zach/.config/nvim/plugin/packer_compiled.lua
+021.474  001.191: loading rtp plugins
+021.734  000.079  000.079: sourcing /home/zach/.local/share/nvim/site/pack/packer/start/DAPInstall.nvim/plugin/dicmds.vim
+021.920  000.006  000.006: sourcing /home/zach/.local/share/nvim/site/pack/packer/start/coq.artifacts/plugin/coq.artifacts.vim
+022.019  000.007  000.007: sourcing /home/zach/.local/share/nvim/site/pack/packer/start/coq.thirdparty/plugin/coq_3p.vim
+022.258  000.035  000.035: sourcing /home/zach/.local/share/nvim/site/pack/packer/start/plenary.nvim/plugin/plenary.vim
+022.400  000.799: loading packages
+022.884  000.484: loading after plugins
+022.897  000.013: inits 3
+024.838  001.941: reading ShaDa
+026.915  000.077  000.077: sourcing /home/zach/progfiles/neovim-git/share/nvim/runtime/ftplugin/lua.vim
+027.750  000.044  000.044: sourcing /home/zach/progfiles/neovim-git/share/nvim/runtime/indent/lua.vim
+029.000  000.733  000.733: sourcing /home/zach/progfiles/neovim-git/share/nvim/runtime/syntax/lua.vim
+030.048  004.356: opening buffers
+030.206  000.158: BufEnter autocommands
+030.209  000.003: editing files in windows
+037.557  000.046  000.046: sourcing /home/zach/.local/share/nvim/site/pack/packer/opt/nvim-web-devicons/plugin/nvim-web-devicons.vim
+041.668  011.412: VimEnter autocommands
+041.673  000.005: UIEnter autocommands
+042.565  000.206  000.206: sourcing /home/zach/progfiles/neovim-git/share/nvim/runtime/autoload/provider/clipboard.vim
+042.572  000.693: before starting main loop
+044.140  001.568: first screen update
+044.143  000.002: --- NVIM STARTED ---
+
+
+times in msec
+ clock   self+sourced   self:  sourced script
+ clock   elapsed:              other lines
+
+000.013  000.013: --- NVIM STARTING ---
+000.308  000.295: locale set
+000.590  000.282: inits 1
+000.603  000.013: window checked
+003.317  002.715: parsing arguments
+003.360  000.043: expanding arguments
+003.376  000.017: inits 2
+003.834  000.457: init highlight
+003.835  000.001: waiting for UI
+004.665  000.830: done waiting for UI
+004.686  000.020: init screen for UI
+004.704  000.019: init default mappings
+004.773  000.069: init default autocommands
+005.352  000.046  000.046: sourcing /home/zach/progfiles/neovim-git/share/nvim/runtime/ftplugin.vim
+005.454  000.030  000.030: sourcing /home/zach/progfiles/neovim-git/share/nvim/runtime/indent.vim
+005.499  000.005  000.005: sourcing /usr/share/nvim/archlinux.vim
+005.502  000.027  000.022: sourcing /etc/xdg/nvim/sysinit.vim
+010.657  005.135  005.135: sourcing /home/zach/.config/nvim/init.lua
+010.671  000.659: sourcing vimrc file(s)
+010.824  000.035  000.035: sourcing /home/zach/progfiles/neovim-git/share/nvim/runtime/filetype.lua
+017.511  006.665  006.665: sourcing /home/zach/progfiles/neovim-git/share/nvim/runtime/filetype.vim
+017.744  000.087  000.087: sourcing /home/zach/progfiles/neovim-git/share/nvim/runtime/syntax/synload.vim
+017.838  000.272  000.186: sourcing /home/zach/progfiles/neovim-git/share/nvim/runtime/syntax/syntax.vim
+018.564  000.020  000.020: sourcing /home/zach/progfiles/neovim-git/share/nvim/runtime/plugin/gzip.vim
+018.595  000.012  000.012: sourcing /home/zach/progfiles/neovim-git/share/nvim/runtime/plugin/health.vim
+018.801  000.191  000.191: sourcing /home/zach/progfiles/neovim-git/share/nvim/runtime/plugin/man.vim
+018.833  000.014  000.014: sourcing /home/zach/progfiles/neovim-git/share/nvim/runtime/plugin/matchit.vim
+018.867  000.013  000.013: sourcing /home/zach/progfiles/neovim-git/share/nvim/runtime/plugin/matchparen.vim
+018.902  000.019  000.019: sourcing /home/zach/progfiles/neovim-git/share/nvim/runtime/plugin/netrwPlugin.vim
+019.064  000.014  000.014: sourcing /home/zach/.local/share/nvim/rplugin.vim
+019.073  000.156  000.142: sourcing /home/zach/progfiles/neovim-git/share/nvim/runtime/plugin/rplugin.vim
+019.229  000.130  000.130: sourcing /home/zach/progfiles/neovim-git/share/nvim/runtime/plugin/shada.vim
+019.268  000.013  000.013: sourcing /home/zach/progfiles/neovim-git/share/nvim/runtime/plugin/spellfile.vim
+019.310  000.018  000.018: sourcing /home/zach/progfiles/neovim-git/share/nvim/runtime/plugin/tarPlugin.vim
+019.340  000.011  000.011: sourcing /home/zach/progfiles/neovim-git/share/nvim/runtime/plugin/tohtml.vim
+019.379  000.020  000.020: sourcing /home/zach/progfiles/neovim-git/share/nvim/runtime/plugin/tutor.vim
+019.415  000.018  000.018: sourcing /home/zach/progfiles/neovim-git/share/nvim/runtime/plugin/zipPlugin.vim
+022.334  002.838  002.838: sourcing /home/zach/.config/nvim/plugin/packer_compiled.lua
+022.539  001.422: loading rtp plugins
+022.800  000.083  000.083: sourcing /home/zach/.local/share/nvim/site/pack/packer/start/DAPInstall.nvim/plugin/dicmds.vim
+022.932  000.006  000.006: sourcing /home/zach/.local/share/nvim/site/pack/packer/start/coq.artifacts/plugin/coq.artifacts.vim
+023.042  000.008  000.008: sourcing /home/zach/.local/share/nvim/site/pack/packer/start/coq.thirdparty/plugin/coq_3p.vim
+023.306  000.038  000.038: sourcing /home/zach/.local/share/nvim/site/pack/packer/start/plenary.nvim/plugin/plenary.vim
+023.451  000.778: loading packages
+023.981  000.529: loading after plugins
+023.994  000.013: inits 3
+026.191  002.198: reading ShaDa
+039.176  000.067  000.067: sourcing /home/zach/progfiles/neovim-git/share/nvim/runtime/ftplugin/lua.vim
+039.905  000.039  000.039: sourcing /home/zach/progfiles/neovim-git/share/nvim/runtime/indent/lua.vim
+040.971  000.641  000.641: sourcing /home/zach/progfiles/neovim-git/share/nvim/runtime/syntax/lua.vim
+043.320  001.352  001.352: sourcing /home/zach/.local/share/nvim/site/pack/packer/opt/lightspeed.nvim/plugin/lightspeed.vim
+043.746  000.052  000.052: sourcing /home/zach/.local/share/nvim/site/pack/packer/opt/nvim-jqx/plugin/nvim-jqx.vim
+045.383  001.282  001.282: sourcing /home/zach/.local/share/nvim/site/pack/packer/opt/coq_nvim/plugin/coq.vim
+045.559  000.033  000.033: sourcing /home/zach/.local/share/nvim/site/pack/packer/opt/coq_nvim/ftdetect/coq-snip.vim
+048.003  000.268  000.268: sourcing /home/zach/.local/share/nvim/site/pack/packer/opt/nvim-lspconfig/plugin/lspconfig.vim
+051.433  002.405  002.405: sourcing /home/zach/.local/share/nvim/site/pack/packer/opt/nvim-treesitter/plugin/nvim-treesitter.vim
+051.747  000.016  000.016: sourcing /home/zach/.local/share/nvim/site/pack/packer/opt/nvim-treesitter/ftdetect/fusion.vim
+051.786  000.016  000.016: sourcing /home/zach/.local/share/nvim/site/pack/packer/opt/nvim-treesitter/ftdetect/gdresource.vim
+051.843  000.013  000.013: sourcing /home/zach/.local/share/nvim/site/pack/packer/opt/nvim-treesitter/ftdetect/gdscript.vim
+051.889  000.026  000.026: sourcing /home/zach/.local/share/nvim/site/pack/packer/opt/nvim-treesitter/ftdetect/glimmer.vim
+051.930  000.011  000.011: sourcing /home/zach/.local/share/nvim/site/pack/packer/opt/nvim-treesitter/ftdetect/glsl.vim
+051.956  000.011  000.011: sourcing /home/zach/.local/share/nvim/site/pack/packer/opt/nvim-treesitter/ftdetect/gowork.vim
+051.988  000.018  000.018: sourcing /home/zach/.local/share/nvim/site/pack/packer/opt/nvim-treesitter/ftdetect/graphql.vim
+052.020  000.013  000.013: sourcing /home/zach/.local/share/nvim/site/pack/packer/opt/nvim-treesitter/ftdetect/hack.vim
+052.055  000.016  000.016: sourcing /home/zach/.local/share/nvim/site/pack/packer/opt/nvim-treesitter/ftdetect/hcl.vim
+052.082  000.011  000.011: sourcing /home/zach/.local/share/nvim/site/pack/packer/opt/nvim-treesitter/ftdetect/heex.vim
+052.109  000.011  000.011: sourcing /home/zach/.local/share/nvim/site/pack/packer/opt/nvim-treesitter/ftdetect/hjson.vim
+052.138  000.011  000.011: sourcing /home/zach/.local/share/nvim/site/pack/packer/opt/nvim-treesitter/ftdetect/json5.vim
+052.171  000.015  000.015: sourcing /home/zach/.local/share/nvim/site/pack/packer/opt/nvim-treesitter/ftdetect/ledger.vim
+052.199  000.010  000.010: sourcing /home/zach/.local/share/nvim/site/pack/packer/opt/nvim-treesitter/ftdetect/nix.vim
+052.227  000.010  000.010: sourcing /home/zach/.local/share/nvim/site/pack/packer/opt/nvim-treesitter/ftdetect/prisma.vim
+052.253  000.010  000.010: sourcing /home/zach/.local/share/nvim/site/pack/packer/opt/nvim-treesitter/ftdetect/pug.vim
+052.282  000.012  000.012: sourcing /home/zach/.local/share/nvim/site/pack/packer/opt/nvim-treesitter/ftdetect/ql.vim
+052.322  000.020  000.020: sourcing /home/zach/.local/share/nvim/site/pack/packer/opt/nvim-treesitter/ftdetect/query.vim
+052.352  000.011  000.011: sourcing /home/zach/.local/share/nvim/site/pack/packer/opt/nvim-treesitter/ftdetect/surface.vim
+052.379  000.010  000.010: sourcing /home/zach/.local/share/nvim/site/pack/packer/opt/nvim-treesitter/ftdetect/teal.vim
+052.407  000.010  000.010: sourcing /home/zach/.local/share/nvim/site/pack/packer/opt/nvim-treesitter/ftdetect/tlaplus.vim
+052.434  000.011  000.011: sourcing /home/zach/.local/share/nvim/site/pack/packer/opt/nvim-treesitter/ftdetect/yang.vim
+052.795  000.040  000.040: sourcing /home/zach/.local/share/nvim/site/pack/packer/opt/toggleterm.nvim/plugin/toggleterm.vim
+056.785  001.186  001.186: sourcing /home/zach/.local/share/nvim/site/pack/packer/opt/indent-blankline.nvim/plugin/indent_blankline.vim
+062.818  028.968: opening buffers
+062.985  000.167: BufEnter autocommands
+062.989  000.003: editing files in windows
+065.833  000.064  000.064: sourcing /home/zach/.local/share/nvim/site/pack/packer/opt/nvim-web-devicons/plugin/nvim-web-devicons.vim
+069.347  006.294: VimEnter autocommands
+069.352  000.006: UIEnter autocommands
+071.307  000.206  000.206: sourcing /home/zach/progfiles/neovim-git/share/nvim/runtime/autoload/provider/clipboard.vim
+071.315  001.757: before starting main loop
+075.944  004.629: first screen update
+075.951  000.007: --- NVIM STARTED ---

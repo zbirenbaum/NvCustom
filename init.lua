@@ -15,7 +15,12 @@ customPlugins.add(function(use)
          end, 0)
       end,
       config = function()
-         require("custom.plugins.lsp_plugins.lsp_config")
+         plugin_status = require("core.utils").load_config().plugins.status
+         local completion_engine = plugin_status.cmp and "cmp" or plugin_status.coq and "coq"
+         if completion_engine == "coq" then
+            return false
+         end
+         require("custom.plugins.lsp_plugins.lsp_config_unified").setup(completion_engine)
       end,
    }
    use {
@@ -45,6 +50,22 @@ customPlugins.add(function(use)
       "onsails/lspkind-nvim",
    }
    -- completion stuff
+   use {
+      'ms-jpq/coq_nvim',
+      branch = 'coq',
+      disable = not plugin_status.coq,
+      event = "BufReadPost",
+      config = function()
+         require("custom.plugins.completion_plugins.coq_configs.coq").config()
+      end,
+      setup = function()
+         require("custom.plugins.completion_plugins.coq_configs.coq").setup()
+      end,
+      requires = {
+         {'ms-jpq/coq.artifacts', branch = 'artifacts'},
+         {'ms-jpq/coq.thirdparty', branch = '3p'},
+      },
+   }
    -- load luasnips + cmp related in insert mode only
    use {
       "rafamadriz/friendly-snippets",

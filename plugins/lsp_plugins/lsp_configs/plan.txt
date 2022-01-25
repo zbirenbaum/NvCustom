@@ -1,0 +1,3 @@
+first, create versions of each lsp config file which returns ONLY the setup table and does not actually perform setup
+Next, use plugin_status to determine which completion engine to use in init.lua and pass as a parameter
+then, use this to call the setup_function determiner and then continue as normal in a loop
