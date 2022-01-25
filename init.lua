@@ -52,7 +52,7 @@ customPlugins.add(function(use)
       event = "InsertEnter",
    }
    use {
-      "zbirenbaum/nvim-cmp",
+      "hrsh7th/nvim-cmp",
       after = "friendly-snippets",
       disable = not plugin_status.cmp,
       config = function()
