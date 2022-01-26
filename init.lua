@@ -196,4 +196,11 @@ customPlugins.add(function(use)
          require("core.utils").packer_lazy_load "marks.nvim"
       end,
    }
+
+   use {
+      "rcarriga/nvim-notify",
+      config = function ()
+         require("custom.notify_setup")
+      end,
+   }
 end)

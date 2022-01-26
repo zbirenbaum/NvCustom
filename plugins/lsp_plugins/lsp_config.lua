@@ -1,5 +1,5 @@
-vim.defer_fn(function() require("custom.plugins.lsp_plugins.lsp_handlers").setup() end, 0)
-
+--vim.defer_fn(function() require("custom.plugins.lsp_plugins.lsp_handlers").setup() end, 0)
+require("custom.plugins.lsp_plugins.lsp_handlers").setup()
 local function on_attach(_, bufnr)
    local function buf_set_option(...)
       vim.api.nvim_buf_set_option(bufnr, ...)
@@ -18,7 +18,7 @@ capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
 capabilities.textDocument.completion.completionItem.labelDetailsSupport = true
 capabilities.textDocument.completion.completionItem.deprecatedSupport = true
 capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
-capabilities.textDocument.completion.completionItem.tagSupport = { valueSet = { 1 } }
+capabilities.textDocument.completion.completionItem.tagSupport = { valueSet = { 1 }}
 capabilities.textDocument.completion.completionItem.resolveSupport = {
    properties = {
       "documentation",

@@ -10,18 +10,23 @@ M.setup = function()
    lspSymbol("Info", "")
    lspSymbol("Hint", "")
    lspSymbol("Warn", "")
-
-   vim.diagnostic.config {
-      virtual_text = {
-         prefix = "",
-      },
-      signs = true,
-      underline = true,
-      update_in_insert = false,
-   }
-
+  -- vim.o.updatetime = 250
+ --  vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
+   require("custom.plugins.lsp_plugins.diagnostic_config")
+--    vim.diagnostic.config {
+--       virtual_text = false,
+--       -- virtual_text = {
+--       --     prefix = "",
+--       -- },
+-- --      virtualTextCurrentLineOnly=true,
+--       signs = true,
+--       underline = true,
+--       update_in_insert = true,
+--    }
+   --vim.lsp.handlers["textDocument/publishDiagnostics"]
    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
       border = "single",
+      vim.diagnostic.open_float(nil, {focus=false})
    })
    vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
       border = "single",
