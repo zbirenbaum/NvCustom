@@ -1,55 +1,9 @@
 local present, cmp = pcall(require, "cmp")
---local colors = require("colors").get()
 local lspkind = require("custom.plugins.completion_plugins.cmp_configs.lspkind")
---local custom_comp = require("custom.plugins.overrides.cmp_configs.custom_type_comparator")
-
 if not present then
    return
 end
-
-
 vim.opt.completeopt = "menuone,noselect"
-
-
-local function lspSymbol(name, icon)
-   local hl = "DiagnosticSign" .. name
-   vim.fn.sign_define(hl, { text = icon, numhl = hl, texthl = hl })
-end
-
-lspSymbol("Error", "")
-lspSymbol("Info", "")
-lspSymbol("Hint", "")
-lspSymbol("Warn", "")
-
-vim.diagnostic.config {
-   virtual_text = {
-      prefix = "",
-   },
-   signs = true,
-   underline = true,
-   update_in_insert = false,
-}
-
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single",})
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {border = "single",})
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-   virtual_text = { prefix = "",},
-   signs = true,
-   underline = true,
-   update_in_insert = false, -- update diagnostics insert mode
-})
-
--- suppress error messages from lang servers
-vim.notify = function(msg, log_level)
-   if msg:match "exit code" then
-      return
-   end
-   if log_level == vim.log.levels.ERROR then
-      vim.api.nvim_err_writeln(msg)
-   else
-      vim.api.nvim_echo({ { msg } }, true, {})
-   end
-end
 
 cmp.setup {
    snippet = {expand = function(args) require("luasnip").lsp_expand(args.body) end},
@@ -136,3 +90,25 @@ vim.cmd [[highlight! CmpItemKindVariable guibg=NONE guifg=#9CDCFE]]
 vim.cmd [[highlight! CmpItemKindInterface guibg=NONE guifg=#f90c71]]
 vim.cmd [[highlight! CmpItemKindFolder guifg=#2986cc]]
 vim.cmd [[highlight! CmpItemKindMethod guifg=#C586C0]]
+
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local setup_lsp = function(attach)
+   local lspconfig = require "lspconfig"
+   local default_servers = {"clangd"}
+   local custom_servers = {"pylance", "sumneko_lua"}
+
+   for _, lsp in ipairs(custom_servers) do
+      require("custom.plugins.lsp_plugins.lsp_configs.cmp." .. lsp).setup(attach, capabilities)
+   end
+
+   for _, lsp in ipairs(default_servers) do
+      lspconfig[lsp].setup{
+         on_attach = attach,
+         capabilities = capabilities,
+         flags = {
+            debounce_text_changes = 150,
+         }
+      }
+   end
+end
+setup_lsp(on_attach)
