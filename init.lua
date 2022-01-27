@@ -55,7 +55,7 @@ customPlugins.add(function(use)
       "zbirenbaum/nvim-cmp",
       branch="config_throttle",
       --after = "friendly-snippets",
-      after="cmp-path",
+      after="friendly-snippets",
       disable = not plugin_status.cmp,
       config = function()
          require "custom.plugins.completion_plugins.cmp_configs.cmp"
