@@ -25,7 +25,7 @@ end
 
 M.config = function()
    require("coq")
-   require("custom.plugins.lsp_plugins.lsp_config_unified").setup("coq")
+   require("custom.plugins.lsp_plugins.lsp_init").setup_lsp("coq")
 end
 
 return M

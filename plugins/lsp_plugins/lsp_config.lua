@@ -8,24 +8,6 @@ local function on_attach(_, bufnr)
 
    require("core.mappings").lspconfig()
 end
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-local completionItem = capabilities.textDocument.completion.completionItem
-completionItem.documentationFormat = { "markdown", "plaintext" }
-completionItem.snippetSupport = true
-completionItem.preselectSupport = true
-completionItem.insertReplaceSupport = true
-completionItem.labelDetailsSupport = true
-completionItem.deprecatedSupport = true
-completionItem.commitCharactersSupport = true
-completionItem.tagSupport = { valueSet = { 1 } }
-completionItem.resolveSupport = {
-   properties = {
-      "documentation",
-      "detail",
-      "additionalTextEdits",
-   },
-}
---local capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 local setup_lsp = function(attach)
    local lspconfig = require "lspconfig"

@@ -20,7 +20,7 @@ customPlugins.add(function(use)
          if completion_engine == "coq" then
             return false
          end
-         require("custom.plugins.lsp_plugins.lsp_config_unified").setup(completion_engine)
+         require("custom.plugins.lsp_plugins.lsp_init").setup_lsp(completion_engine)
       end,
    }
    use {
@@ -215,3 +215,4 @@ customPlugins.add(function(use)
       end,
    }
 end)
+

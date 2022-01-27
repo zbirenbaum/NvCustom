@@ -90,25 +90,3 @@ vim.cmd [[highlight! CmpItemKindVariable guibg=NONE guifg=#9CDCFE]]
 vim.cmd [[highlight! CmpItemKindInterface guibg=NONE guifg=#f90c71]]
 vim.cmd [[highlight! CmpItemKindFolder guifg=#2986cc]]
 vim.cmd [[highlight! CmpItemKindMethod guifg=#C586C0]]
-
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-local setup_lsp = function(attach)
-   local lspconfig = require "lspconfig"
-   local default_servers = {"clangd"}
-   local custom_servers = {"pylance", "sumneko_lua"}
-
-   for _, lsp in ipairs(custom_servers) do
-      require("custom.plugins.lsp_plugins.lsp_configs.cmp." .. lsp).setup(attach, capabilities)
-   end
-
-   for _, lsp in ipairs(default_servers) do
-      lspconfig[lsp].setup{
-         on_attach = attach,
-         capabilities = capabilities,
-         flags = {
-            debounce_text_changes = 150,
-         }
-      }
-   end
-end
-setup_lsp(on_attach)
