@@ -1,6 +1,5 @@
 local M = {}
 
-
 M.config_table = function(attach, capabilities)
    --local sumneko_root_path = vim.fn.getenv "HOME" .. "/sumneko_lua"
    local sumneko_root_path = "/usr/share/lua-language-server"--/usr/share/lua-language-server"
@@ -16,7 +15,7 @@ M.config_table = function(attach, capabilities)
       on_attach = attach,
       capabilities = capabilities,
       flags = {
-         debounce_text_changes = 150,
+         debounce_text_changes = 300,
       },
       settings = {
          Lua = {
@@ -30,6 +29,7 @@ M.config_table = function(attach, capabilities)
             workspace = {
                --          library=vim.api.nvim_get_runtime_file("", true),
                library = {
+                  [vim.fn.expand "~/.config/nvim"] = true,
                   [vim.fn.expand "$VIMRUNTIME/lua"] = true,
                   [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
                   [vim.fn.expand "$HOME/.config/nvim/lua"] = true,

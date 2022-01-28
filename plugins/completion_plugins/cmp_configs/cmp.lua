@@ -3,8 +3,8 @@ local lspkind = require("custom.plugins.completion_plugins.cmp_configs.lspkind")
 if not present then
    return
 end
-vim.opt.completeopt = "menuone,noselect"
 
+vim.opt.completeopt = "menuone,noselect"
 cmp.setup {
    snippet = {expand = function(args) require("luasnip").lsp_expand(args.body) end},
    formatting = {
@@ -15,6 +15,10 @@ cmp.setup {
          require('cmp.types').cmp.TriggerEvent.InsertEnter,
          require('cmp.types').cmp.TriggerEvent.TextChanged
       }
+   },
+   documentation = {
+      border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+      winhighlight = 'NormalFloat:NormalFloat,FloatBorder:FloatBorder',
    },
    mapping = {
       ["<PageUp>"] = function()

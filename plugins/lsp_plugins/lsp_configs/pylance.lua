@@ -1,32 +1,33 @@
 local M = {}
 
-M.setup = function(attach, capabilities)
-   local util = require "lspconfig.util"
-   local messages = {}
-   local bin_name = 'pylance-langserver'
-   local cmd = { bin_name, '--stdio' }
+local util = require "lspconfig.util"
+--local messages = {}
+local bin_name = 'pylance-langserver'
+local cmd = { bin_name, '--stdio' }
 
-   if vim.fn.has 'win32' == 1 then
-      cmd = { 'cmd.exe', '/C', bin_name, '--stdio' }
-   end
+if vim.fn.has 'win32' == 1 then
+   cmd = { 'cmd.exe', '/C', bin_name, '--stdio' }
+end
 
-   local root_files = {
-      'pyproject.toml',
-      'setup.py',
-      'setup.cfg',
-      'requirements.txt',
-      'Pipfile',
-      'pyrightconfig.json',
+local root_files = {
+   'pyproject.toml',
+   'setup.py',
+   'setup.cfg',
+   'requirements.txt',
+   'Pipfile',
+   'pyrightconfig.json',
+}
+
+local function organize_imports()
+   local params = {
+      command = 'pylance.organizeimports',
+      arguments = { vim.uri_from_bufnr(0) },
    }
+   vim.lsp.buf.execute_command(params)
+end
 
-   local function organize_imports()
-      local params = {
-         command = 'pylance.organizeimports',
-         arguments = { vim.uri_from_bufnr(0) },
-      }
-      vim.lsp.buf.execute_command(params)
-   end
 
+local add_default = function()
    local configs = require "lspconfig.configs"
    configs["pylance"] = {
       default_config = {
@@ -39,16 +40,16 @@ M.setup = function(attach, capabilities)
                analysis = {
                   autoSearchPaths = true,
                   diagnosticMode = 'openFilesOnly',
-                  --					useLibraryCodeForTypes = true,
-                  --					typeshedPath = "/home/zach/progfiles/pylance/extension/dist/bundled/stubs/",
                   reportMissingTypeStubs = true,
                }
             },
          },
       },
    }
+end
 
-   require("lspconfig").pylance.setup{
+M.config_table = function(attach, capabilities)
+   local config = {
       on_attach = attach,
       capabilities = capabilities,
       cmd = cmd,
@@ -79,6 +80,9 @@ M.setup = function(attach, capabilities)
          ]],
       },
    }
+   return config
 end
+
+add_default()
 
 return M
