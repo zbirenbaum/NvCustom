@@ -4,21 +4,32 @@ if not present then
    return
 end
 
+
+
 vim.opt.completeopt = "menuone,noselect"
 cmp.setup {
    snippet = {expand = function(args) require("luasnip").lsp_expand(args.body) end},
+   style = {
+      winhighlight = 'NormalFloat:NormalFloat,FloatBorder:FloatBorder',
+   },
    formatting = {
       format = lspkind.cmp_format({with_text = false, maxwidth = 50})
    },
    completion = {
       autocomplete = {
          require('cmp.types').cmp.TriggerEvent.InsertEnter,
-         require('cmp.types').cmp.TriggerEvent.TextChanged
-      }
+         require('cmp.types').cmp.TriggerEvent.TextChanged,
+      },
    },
-   documentation = {
-      border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-      winhighlight = 'NormalFloat:NormalFloat,FloatBorder:FloatBorder',
+   window = {
+      completion = {
+         border='rounded',
+         scrollbar = '║',
+      },
+      documentation = {
+         border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+         winhighlight = 'NormalFloat:NormalFloat,FloatBorder:FloatBorder',
+      },
    },
    mapping = {
       ["<PageUp>"] = function()
@@ -80,17 +91,27 @@ cmp.setup {
    preselect = cmp.PreselectMode.Item,
 }
 --set max height of items
-vim.cmd [[ set pumheight=8 ]]
+vim.cmd [[ set pumheight=6 ]]
 --set highlights
+
+--lsp kind
 vim.cmd [[highlight! CmpItemKindText guifg=LightGrey]]
 vim.cmd [[highlight! CmpItemKindFunction guifg=#C586C0]]
 vim.cmd [[highlight! CmpItemKindClass guifg=Orange]]
 vim.cmd [[highlight! CmpItemKindKeyword guifg=#f90c71]]
 vim.cmd [[highlight! CmpItemKindSnippet guifg=#565c64]]
-vim.cmd [[highlight! CmpItemAbbrMatch guibg=NONE guifg=#569CD6]]
-vim.cmd [[highlight! CmpItemAbbrMatchFuzzy guibg=NONE guifg=#569CD6]]
 vim.cmd [[highlight! CmpItemKindConstructor guifg=#ae43f0]]
 vim.cmd [[highlight! CmpItemKindVariable guibg=NONE guifg=#9CDCFE]]
 vim.cmd [[highlight! CmpItemKindInterface guibg=NONE guifg=#f90c71]]
 vim.cmd [[highlight! CmpItemKindFolder guifg=#2986cc]]
+vim.cmd [[highlight! CmpItemKindReference guifg=#922b21]]
 vim.cmd [[highlight! CmpItemKindMethod guifg=#C586C0]]
+vim.cmd [[highlight! CmpItemMenu guibg=#C586C0 guifg=#C586C0]]
+--background
+vim.cmd [[highlight! Pmenu guibg=#10171f]]
+vim.cmd [[highlight! PmenuSel guibg=NONE guifg=NONE gui=bold,underline guisp=#569CD6]]
+
+--menu items
+vim.cmd [[highlight! CmpItemAbbr guibg=NONE guifg=#565c64]]
+vim.cmd [[highlight! CmpItemAbbrMatch guibg=NONE guifg=#569CD6]]
+vim.cmd [[highlight! CmpItemAbbrMatchFuzzy guibg=NONE guifg=#569CD6]]

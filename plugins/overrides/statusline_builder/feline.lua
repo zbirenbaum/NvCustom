@@ -1,4 +1,3 @@
-
 local colors = require("colors").get()
 local lsp = require "feline.providers.lsp"
 

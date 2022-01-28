@@ -99,7 +99,7 @@ M.plugins = {
       toggleterm = true,
       blankline = true, -- beautified blank lines
       cheatsheet = false, -- fuzzy search your commands/keymappings
-      colorizer = false,
+      colorizer = true,
       comment = true, -- universal commentor
    },
    options = {

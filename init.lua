@@ -73,7 +73,8 @@ customPlugins.add(function(use)
       event = "InsertEnter",
    }
    use {
-      "hrsh7th/nvim-cmp",
+      "Iron-E/nvim-cmp", --float menu
+      branch = "feat/completion-menu-borders",
       after = "friendly-snippets",
       disable = not plugin_status.cmp,
       config = function()

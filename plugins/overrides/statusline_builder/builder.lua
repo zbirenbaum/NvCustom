@@ -35,17 +35,7 @@ table.insert(middle, ct.progress)
 
 --disabled for slow startup
 
-local function insert_gps()
-   local present, gps = pcall(require, "nvim-gps")
-   if not present then
-      return nil
-   else
-      gps_provider = require("custom.plugins.overrides.statusline_builder.gps").setup(gps)
-      if gps_provider.is_available() then
-         table.insert(middle, ct.gps(gps_provider))
-      end
-   end
-end
+table.insert(middle, ct.signature(80))
 --vim.defer_fn(insert_gps, 150)
 
 table.insert(right, ct.git.branch)

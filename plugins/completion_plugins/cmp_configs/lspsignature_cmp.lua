@@ -1,18 +1,19 @@
 local lspsignature = require("lsp_signature")
 lspsignature.setup {
   bind = true,
-  doc_lines = 2,
-  floating_window = true,
+  doc_lines = 1,
+  floating_window = false,
   fix_pos = true,
-  hint_enable = false,
+  hint_enable = true,
+  always_trigger=false,
   floating_window_above_cur_line = true, -- try to place the floating above the current line when possible Note:
-  floating_window_off_x = 0, -- adjust float windows x position.
+  floating_window_off_x = 1, -- adjust float windows x position.
   floating_window_off_y = 0, -- adjust float windows y position.
-  --  hint_prefix = " ",
+  hint_prefix = "| ",
   --  hint_scheme = "String",
   hi_parameter = "LspSignatureActiveParameter",
   --  virt_text_pos = "eol",
-  max_height = 4,
+  max_height = 1,
   max_width = 120, -- max_width of signature floating_window, line will be wrapped if exceed max_width
   handler_opts = {
     border = "rounded", -- double, single, shadow, none
@@ -21,3 +22,5 @@ lspsignature.setup {
   padding = "", -- character to pad on left and right of signature can be ' ', or '|'  etc
   transparency=20,
 }
+require("lsp_signature").status_line(20)
+

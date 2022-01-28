@@ -14,6 +14,7 @@ M.config_table = function(attach, capabilities)
       cmd = { sumneko_binary, "-E", sumneko_root_path .. "/main.lua" },
       on_attach = attach,
       capabilities = capabilities,
+      completion = { callSnippet = "Both" },
       flags = {
          debounce_text_changes = 300,
       },
