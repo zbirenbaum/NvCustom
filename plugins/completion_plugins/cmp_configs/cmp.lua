@@ -4,8 +4,6 @@ if not present then
    return
 end
 
-
-
 vim.opt.completeopt = "menuone,noselect"
 cmp.setup {
    snippet = {expand = function(args) require("luasnip").lsp_expand(args.body) end},
@@ -29,6 +27,7 @@ cmp.setup {
       documentation = {
          border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
          winhighlight = 'NormalFloat:NormalFloat,FloatBorder:FloatBorder',
+         scrollbar = '║',
       },
    },
    mapping = {
@@ -109,7 +108,7 @@ vim.cmd [[highlight! CmpItemKindMethod guifg=#C586C0]]
 vim.cmd [[highlight! CmpItemMenu guibg=#C586C0 guifg=#C586C0]]
 --background
 vim.cmd [[highlight! Pmenu guibg=#10171f]]
-vim.cmd [[highlight! PmenuSel guibg=NONE guifg=NONE gui=bold,underline guisp=#569CD6]]
+vim.cmd [[highlight! PmenuSel guibg=NONE guifg=NONE gui=underline guisp=#569CD6]]
 
 --menu items
 vim.cmd [[highlight! CmpItemAbbr guibg=NONE guifg=#565c64]]

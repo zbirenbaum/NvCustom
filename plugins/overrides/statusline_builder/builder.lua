@@ -35,7 +35,7 @@ table.insert(middle, ct.progress)
 
 --disabled for slow startup
 
-table.insert(middle, ct.signature(80))
+--table.insert(middle, ct.signature(80))
 --vim.defer_fn(insert_gps, 150)
 
 table.insert(right, ct.git.branch)
