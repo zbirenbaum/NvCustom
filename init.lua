@@ -129,10 +129,9 @@ customPlugins.add(function(use)
       disable = not plugin_status.autopairs or not plugin_status.cmp,
       after = "nvim-cmp",
       config = function()
-         require("custom.plugins.lsp_plugins.autopairs")
+         require("custom.plugins.completion_plugins.autopairs")
       end,
    }
-
    --dap stuff
    use {
       'mfussenegger/nvim-dap',
