@@ -3,6 +3,13 @@ local plugin_status = require("core.utils").load_config().plugins.status
 
 customPlugins.add(function(use)
    use 'lewis6991/impatient.nvim'
+   use {
+      "sbulav/nredir.nvim",
+      cmd="Nredir",
+      setup=function()
+         require("custom.utils.mappings").redir()
+      end,
+   }
    --lsp stuff
    use {
       "neovim/nvim-lspconfig",
