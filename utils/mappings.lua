@@ -21,6 +21,11 @@ M.dap = function ()
     end,
     {silent=true, noremap=true})
 end
+M.redir = function ()
+   vim.keymap.set('n', '<leader>n', ':Nredir luafile %<CR><C-w>h')
+   --vim.cmd[[au InsertEnter * lua require('custom.redir')]]
+   --vim.cmd[[command! -nargs=1 -complete=command Nredir lua require'custom.redir'.nredir(<q-args>)]]
+end
 
 return M
 
