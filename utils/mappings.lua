@@ -1,8 +1,11 @@
 local M = {}
 M.navigation = function ()
-  vim.keymap.set('n', '<C-l>', '$', {silent=true, noremap=true})
-  vim.keymap.set('n', '<C-h>', '^', {silent=true, noremap=true})
-  vim.keymap.set('c', '<C-c>', '<C-e>', {silent=true, noremap=true})
+   vim.cmd [[ 
+      au VimEnter * lua
+         \ vim.keymap.set('n', '<C-l>', '$', {silent=true, noremap=true})
+         \ vim.keymap.set('n', '<C-h>', '^', {silent=true, noremap=true})
+         \ vim.keymap.set('c', '<C-c>', '<C-e>', {silent=true, noremap=true}) 
+   ]]
 end
 
 M.dap = function ()

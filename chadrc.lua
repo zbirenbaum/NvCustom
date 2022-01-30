@@ -72,7 +72,6 @@ M.plugins = {
       luadev = false,
 
       -- Completions, choose 1
-      -- currently coq unsupported due to updates in cmp making it fall behind in usefulness. coq will work again soonish but will be temp broken due to new dir structure
       coq = false,
       cmp = true,
       dap = true,

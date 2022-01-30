@@ -37,6 +37,17 @@ customPlugins.add(function(use)
       disable = not plugin_status.luadev,
    }
    use {
+      "bfredl/nvim-luadev",
+      ft='lua',
+      cmd={"Luadev", "Luadev-run", "Luadev-RunWord", "Luadev-Complete"},
+      after="nvim-lspconfig",
+      config = function()
+         vim.schedule(function()
+            require("luadev")
+         end)
+      end,
+   }
+   use {
       "folke/trouble.nvim",
       requires = "kyazdani42/nvim-web-devicons",
       after = "nvim-lspconfig",
