@@ -2,7 +2,6 @@ local customPlugins = require "core.customPlugins"
 local plugin_status = require("core.utils").load_config().plugins.status
 
 customPlugins.add(function(use)
-   use 'lewis6991/impatient.nvim'
    --lsp stuff
    use {
       "neovim/nvim-lspconfig",

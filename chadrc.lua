@@ -1,12 +1,11 @@
 local M = {}
 
-require('impatient')
-require('impatient').enable_profile()
+-- require('impatient')
+-- require('impatient').enable_profile()
 
 vim.g.python_host_skip_check=1
 require "custom.utils.set_globals"
 require "custom.utils.mappings".navigation()
-
 M.options = {
    -- NeoVim/Vim options
    clipboard = "unnamedplus",
@@ -118,7 +117,11 @@ M.plugins = {
       --feline="custom.plugins.feline",
       --nvim_autopairs=require("custom.plugins.autopairs_selection"),
       --signature="custom.plugins.lspsignature_coq",
-   }
+   },
+   default_plugin_remove= {
+    telescope = true,
+    nvim_tree = true,
+  },
 }
 
 M.mappings = {plugins = {}}
