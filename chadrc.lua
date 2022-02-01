@@ -1,4 +1,5 @@
 local M = {}
+--local userPlugins = require "custom.plugins_table" -- path to table
 
 -- require('impatient')
 -- require('impatient').enable_profile()
@@ -6,6 +7,7 @@ local M = {}
 vim.g.python_host_skip_check=1
 require "custom.utils.set_globals"
 require "custom.utils.mappings".navigation()
+
 M.options = {
    -- NeoVim/Vim options
    clipboard = "unnamedplus",
@@ -51,6 +53,7 @@ M.ui = {
 
 -- these are plugin related options
 M.plugins = {
+ --  install = userPlugins,
    -- enable and disable plugins (false for disable)
    status = {
       autosave = false, -- to autosave files
