@@ -1,7 +1,6 @@
 local M = {}
 
-local util = require "lspconfig.util"
---local messages = {}
+local util = require "lspconfig.util" --local messages = {}
 local bin_name = 'pylance-langserver'
 local cmd = { bin_name, '--stdio' }
 
@@ -9,6 +8,8 @@ if vim.fn.has 'win32' == 1 then
    cmd = { 'cmd.exe', '/C', bin_name, '--stdio' }
 end
 
+
+--
 local root_files = {
    'pyproject.toml',
    'setup.py',
@@ -26,6 +27,24 @@ local function organize_imports()
    vim.lsp.buf.execute_command(params)
 end
 
+local function get_python_path(workspace)
+   local path = util.path
+  -- Use activated virtualenv.
+  if vim.env.VIRTUAL_ENV then
+    return path.join(vim.env.VIRTUAL_ENV, 'bin', 'python')
+  end
+
+  -- Find and use virtualenv in workspace directory.
+  for _, pattern in ipairs({'*', '.*'}) do
+    local match = vim.fn.glob(path.join(workspace, pattern, 'pyvenv.cfg'))
+    if match ~= '' then
+      return path.join(path.dirname(match), 'bin', 'python')
+    end
+  end
+
+  -- Fallback to system Python.
+  return vim.fn.exepath('python3') or vim.fn.exepath('python') or 'python'
+end
 
 local add_default = function()
    local configs = require "lspconfig.configs"
@@ -37,6 +56,7 @@ local add_default = function()
          single_file_support = true,
          settings = {
             python = {
+               venvPath=vim.env.VIRTUAL_ENV and vim.env.VIRTUAL_ENV .. "/bin/python" or nil,
                analysis = {
                   autoSearchPaths = true,
                   diagnosticMode = 'openFilesOnly',
@@ -58,11 +78,13 @@ M.config_table = function(attach, capabilities)
       single_file_support = true,
       settings = {
          python = {
+            venvPath = vim.env.VIRTUAL_ENV and vim.env.VIRTUAL_ENV or nil,
+--            pythonPath = pypath,
             analysis = {
                autoSearchPaths = true,
-               useLibraryCodeForTypes = false,
+               useLibraryCodeForTypes = true,
                diagnosticMode = 'openFilesOnly',
-               reportMissingTypeStubs = true,
+--               reportMissingTypeStubs = true,
             },
          },
       },

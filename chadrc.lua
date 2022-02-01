@@ -5,8 +5,11 @@ local M = {}
 -- require('impatient').enable_profile()
 
 vim.g.python_host_skip_check=1
+
 require "custom.utils.set_globals"
 require "custom.utils.mappings".navigation()
+
+vim.cmd[[autocmd! TermOpen term://* lua require('custom.utils.mappings').terminal()]]
 
 M.options = {
    -- NeoVim/Vim options
@@ -97,7 +100,7 @@ M.plugins = {
       --disabled for testing
       lightspeed = true,
       jqx = true,
-      toggleterm = true,
+      toggleterm = false,
       blankline = true, -- beautified blank lines
       cheatsheet = false, -- fuzzy search your commands/keymappings
       colorizer = true,
