@@ -100,7 +100,7 @@ M.plugins = {
       --disabled for testing
       lightspeed = true,
       jqx = true,
-      toggleterm = false,
+      toggleterm = true,
       blankline = true, -- beautified blank lines
       cheatsheet = false, -- fuzzy search your commands/keymappings
       colorizer = true,
