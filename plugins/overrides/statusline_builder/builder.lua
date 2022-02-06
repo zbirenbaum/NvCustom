@@ -1,4 +1,4 @@
-local colors = require("colors").get()
+local colors = require("custom.colors.scheme")
 -- local lsp = require "feline.providers.lsp"
 
 local components = {

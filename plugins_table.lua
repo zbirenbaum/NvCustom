@@ -1,6 +1,30 @@
 local plugin_status = require("core.utils").load_config().plugins.status
 
 local plugins = {
+   ["EdenEast/nightfox.nvim"] = {
+      "EdenEast/nightfox.nvim",
+      config = function ()
+         require("custom.nightfox")
+      end
+   },
+   -- ["NvChad/nvim-base16.lua"] = {
+   --    "NvChad/nvim-base16.lua",
+   --    after = "packer.nvim",
+   --    config = function()
+   --       require("custom.colors_default").init()
+   --    end,
+   -- },
+
+
+   ["kyazdani42/nvim-web-devicons"] = {
+      "kyazdani42/nvim-web-devicons",
+--      after = "nvim-base16.lua",
+      -- config = function ()
+      --    -- require("custom.colors.icons")
+      --    -- require("custom.colors.highlights")
+      -- end,
+   },
+
    ["neovim/nvim-lspconfig"] = {
       "neovim/nvim-lspconfig",
       module = "lspconfig",
