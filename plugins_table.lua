@@ -1,6 +1,16 @@
 local plugin_status = require("core.utils").load_config().plugins.status
 
 local plugins = {
+   ["lukas-reineke/indent-blankline.nvim"] = {
+      "lukas-reineke/indent-blankline.nvim",
+      after = "nvim-treesitter",
+      config = function ()
+         require("custom.plugins.custom_plugin_configs.indent_blankline")
+      end,
+   },
+   ["nathom/filetype.nvim"] = {
+      "nathom/filetype.nvim",
+   },
    ["neovim/nvim-lspconfig"] = {
       "neovim/nvim-lspconfig",
       module = "lspconfig",

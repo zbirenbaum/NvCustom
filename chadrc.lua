@@ -56,7 +56,7 @@ M.ui = {
 
 -- these are plugin related options
 M.plugins = {
- --  install = userPlugins,
+   --  install = userPlugins,
    -- enable and disable plugins (false for disable)
    status = {
       autosave = false, -- to autosave files
@@ -115,8 +115,8 @@ M.plugins = {
    --default_plugin_config_replace = tbl
    default_plugin_config_replace = {
       feline = function () require("custom.plugins.overrides.statusline_builder.builder") end,
---      signature="custom.plugins.overrides.cmp_configs.lspsignature_cmp",
---      nvim_cmp="custom.plugins.overrides.cmp_configs.cmp",
+      --      signature="custom.plugins.overrides.cmp_configs.lspsignature_cmp",
+      --      nvim_cmp="custom.plugins.overrides.cmp_configs.cmp",
       --bufferline="custom.plugins.overrides.bufferline",
       nvim_treesitter = "custom.plugins.overrides.treesitter",
       --feline="custom.plugins.feline",
@@ -124,9 +124,10 @@ M.plugins = {
       --signature="custom.plugins.lspsignature_coq",
    },
    default_plugin_remove= {
-    telescope = true,
-    nvim_tree = true,
-  },
+      "nvim-telescope/telescope.nvim",
+      "lukas-reineke/indent-blankline.nvim",
+      "nvim-telescope/telescope.nvim",
+   },
 }
 
 M.mappings = {plugins = {}}
