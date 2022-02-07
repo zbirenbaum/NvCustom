@@ -1,6 +1,13 @@
 local plugin_status = require("core.utils").load_config().plugins.status
 
+
 local plugins = {
+   ["nathom/filetype.nvim"] = {
+      "nathom/filetype.nvim",
+      config = function ()
+         require("custom.plugins.custom_plugin_configs.filetype")
+      end,
+   },
    ["neovim/nvim-lspconfig"] = {
       "neovim/nvim-lspconfig",
       module = "lspconfig",
@@ -81,8 +88,9 @@ local plugins = {
       event = "InsertEnter",
    },
    ["hrsh7th/nvim-cmp"] = {
-      "Iron-E/nvim-cmp", --float menu
-      branch = "feat/completion-menu-borders",
+      "hrsh7th/nvim-cmp",
+      --"Iron-E/nvim-cmp", --float menu
+--      branch = "feat/completion-menu-borders",
       after = "friendly-snippets",
       disable = not plugin_status.cmp,
       config = function()

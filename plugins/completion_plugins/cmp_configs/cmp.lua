@@ -4,6 +4,7 @@ if not present then
    return
 end
 
+
 vim.opt.completeopt = "menuone,noselect"
 cmp.setup {
    snippet = {expand = function(args) require("luasnip").lsp_expand(args.body) end},
@@ -19,16 +20,16 @@ cmp.setup {
          require('cmp.types').cmp.TriggerEvent.TextChanged,
       },
    },
+   documentation = {
+      border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+      winhighlight = 'NormalFloat:NormalFloat,FloatBorder:FloatBorder',
+      scrollbar = '║',
+   },
    window = {
-      completion = {
-         border='rounded',
-         scrollbar = '║',
-      },
-      documentation = {
-         border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-         winhighlight = 'NormalFloat:NormalFloat,FloatBorder:FloatBorder',
-         scrollbar = '║',
-      },
+   --    completion = {
+   --       border='rounded',
+   --       scrollbar = '║',
+   --    },
    },
    mapping = {
       ["<PageUp>"] = function()
@@ -69,6 +70,16 @@ cmp.setup {
    experimental = {
       native_menu = false,
       ghost_text = true,
+--      horizontal_search=true,
+   },
+   
+   view = {
+      --entries = {name='wildmenu', seperator='|'},
+      documentation = {
+         border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+         winhighlight = 'NormalFloat:NormalFloat,FloatBorder:FloatBorder',
+         scrollbar = '║',
+      },
    },
    sources = {
       { name = "nvim_lsp", group_index = 1},

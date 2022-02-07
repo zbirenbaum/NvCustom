@@ -8,6 +8,7 @@ vim.g.python_host_skip_check=1
 
 require "custom.utils.set_globals"
 require "custom.utils.mappings".navigation()
+require "custom.utils.mappings".development()
 
 vim.cmd[[autocmd! TermOpen term://* lua require('custom.utils.mappings').terminal()]]
 

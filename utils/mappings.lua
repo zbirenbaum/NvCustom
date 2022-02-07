@@ -36,6 +36,11 @@ M.terminal = function ()
 -- if you only want these mappings for toggle term use term://*toggleterm#* instead
 end
 
+M.development = function ()
+   local opts = { noremap = true }
+   vim.api.nvim_buf_set_keymap(0, "n", "<C-f>", "<CMD>luafile %<CR>", opts)
+end
+
 return M
 
 -- vim.api.nvim_buf_set_keymap(0, "n", "<C-l>", "$", opts)
