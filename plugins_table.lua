@@ -91,8 +91,8 @@ local plugins = {
       event = "InsertEnter",
    },
    ["hrsh7th/nvim-cmp"] = {
-      "Iron-E/nvim-cmp", --float menu
-      branch = "feat/completion-menu-borders",
+      "hrsh7th/nvim-cmp", --float menu
+--      branch = "feat/completion-menu-borders",
       after = "friendly-snippets",
       disable = not plugin_status.cmp,
       config = function()
