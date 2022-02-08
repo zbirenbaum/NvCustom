@@ -1,6 +1,15 @@
 local plugin_status = require("core.utils").load_config().plugins.status
 
 local plugins = {
+   ["nvim-neorg/neorg"] = {
+      "nvim-neorg/neorg",
+      ft = "norg",
+      after = "nvim-treesitter", -- You may want to specify Telescope here as well
+      disable=true,
+      setup = function ()
+         vim.cmd[[packadd neorg]]
+      end,
+   },
    ["lukas-reineke/indent-blankline.nvim"] = {
       "lukas-reineke/indent-blankline.nvim",
       after = "nvim-treesitter",
@@ -10,17 +19,18 @@ local plugins = {
    },
    ["nathom/filetype.nvim"] = {
       "nathom/filetype.nvim",
+      config = function ()
+         require("filetype").setup({
+            overrides = { function_extensions = {["norg"] = function () vim.bo.filetype = "norg" end,}}
+         })
+      end,
    },
    ["neovim/nvim-lspconfig"] = {
       "neovim/nvim-lspconfig",
       module = "lspconfig",
-      setup = function()
-         require("core.utils").packer_lazy_load "nvim-lspconfig"
-         -- reload the current file so lsp actually starts for it
-         vim.schedule_wrap(function()
-            vim.cmd 'if &ft == "packer" | echo "" | else | silent! e %'
-         end, 0)
-      end,
+     setup = function()
+         vim.cmd[[packadd nvim-lspconfig]]
+     end,
       config = function()
          plugin_status = require("core.utils").load_config().plugins.status
          local completion_engine = plugin_status.cmp and "cmp" or plugin_status.coq and "coq"
@@ -92,7 +102,7 @@ local plugins = {
    },
    ["hrsh7th/nvim-cmp"] = {
       "hrsh7th/nvim-cmp", --float menu
---      branch = "feat/completion-menu-borders",
+      --      branch = "feat/completion-menu-borders",
       after = "friendly-snippets",
       disable = not plugin_status.cmp,
       config = function()
