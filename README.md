@@ -13,7 +13,7 @@ a couple etc mappings
 ### set_globals.lua
 sets environment variables. If you clone this repo, you will likely need to change some stuff in here.
 
-##custom/plugins
+## custom/plugins
 ### cmp, CoQ, and lsp guide
 You will notice there are a bunch of folders with 'cmp' and 'CoQ' and the like in their name. These provide the functionality for hotswapping cmp and CoQ in the chadrc file, as cmp and CoQ require different configs for certain plugins like autopairs.
 ### lsp configs
