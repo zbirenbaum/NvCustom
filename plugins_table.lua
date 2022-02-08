@@ -1,6 +1,12 @@
 local plugin_status = require("core.utils").load_config().plugins.status
 
 local plugins = {
+   ["nvim-chadterm"] = {
+      "zbirenbaum/nvim-chadterm",
+      config = function ()
+         require("chadterm").setup()
+      end
+   },
    ["nvim-neorg/neorg"] = {
       "nvim-neorg/neorg",
       ft = "norg",

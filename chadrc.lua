@@ -9,10 +9,6 @@ vim.g.python_host_skip_check=1
 require "custom.utils.set_globals"
 require "custom.utils.mappings".navigation()
 
-vim.keymap.set("n","<C-x>", function() require("custom.terminal").new_or_toggle("horizontal") end, {silent=true, noremap=true})
-vim.keymap.set("t","<C-x>", function() require("custom.terminal").new_or_toggle("horizontal") end, {silent=true, noremap=true})
-
-vim.cmd[[autocmd! TermOpen term://* lua require('custom.utils.mappings').terminal()]]
 
 M.options = {
    -- NeoVim/Vim options
