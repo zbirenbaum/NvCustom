@@ -1,6 +1,6 @@
 # Config Guide
 ## IMPORTANT NOTE:
-This repo will not work at the moment with the normal NvChad repo due to some changes there (which in my tests have caused minor issues even with a vanilla config). It will be updated soon to work with vanilla NvChad when I have the time, but for now you can use my fork zbirenbaum/NvChad which can be cloned here: https://github.com/zbirenbaum/NvChad.git
+This repo will not work at the moment with the normal NvChad repo due to some changes there (which in my tests have caused minor issues even with a vanilla config). This will be updated soon to work with vanilla NvChad when these issues are fixed and I have the time, but for now you can use my (better from an optimization perspective, especially with this config) fork zbirenbaum/NvChad which can be cloned here: https://github.com/zbirenbaum/NvChad.git
 
 Sorry for any inconvenience.
 ## custom/
