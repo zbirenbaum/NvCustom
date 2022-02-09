@@ -3,6 +3,7 @@ local plugin_status = require("core.utils").load_config().plugins.status
 local plugins = {
    ["nvim-chadterm"] = {
       "zbirenbaum/nvim-chadterm",
+      after = "nvim-treesitter",
       setup = function ()
          vim.schedule_wrap(vim.cmd[[packadd nvim-chadterm]])
       end,
