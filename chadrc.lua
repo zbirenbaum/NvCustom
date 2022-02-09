@@ -9,7 +9,6 @@ vim.g.python_host_skip_check=1
 require "custom.utils.set_globals"
 require "custom.utils.mappings".navigation()
 
-
 M.options = {
    -- NeoVim/Vim options
    clipboard = "unnamedplus",
@@ -107,7 +106,7 @@ M.plugins = {
    },
    options = {
       lspconfig = {
---         setup_lspconf = "custom.plugins.overrides.cmp_configs.lsp_config_cmp",
+         --         setup_lspconf = "custom.plugins.overrides.cmp_configs.lsp_config_cmp",
          --setup_lspconf = require('custom.plugins.overrides.lsp_config_selection'),
       },
    },

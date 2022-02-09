@@ -37,9 +37,9 @@ local plugins = {
    ["neovim/nvim-lspconfig"] = {
       "neovim/nvim-lspconfig",
       module = "lspconfig",
-     setup = function()
+      setup = function()
          vim.cmd[[packadd nvim-lspconfig]]
-     end,
+      end,
       config = function()
          plugin_status = require("core.utils").load_config().plugins.status
          local completion_engine = plugin_status.cmp and "cmp" or plugin_status.coq and "coq"
