@@ -3,8 +3,11 @@ local plugin_status = require("core.utils").load_config().plugins.status
 local plugins = {
    ["nvim-chadterm"] = {
       "zbirenbaum/nvim-chadterm",
+      setup = function ()
+         vim.schedule_wrap(vim.cmd[[packadd nvim-chadterm]])
+      end,
       config = function ()
-         require("chadterm").setup()
+         vim.schedule_wrap(require("chadterm").setup({}))
       end
    },
    ["nvim-neorg/neorg"] = {
