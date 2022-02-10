@@ -15,10 +15,17 @@ local plugins = {
       "nvim-neorg/neorg",
       ft = "norg",
       after = "nvim-treesitter", -- You may want to specify Telescope here as well
-      disable=true,
       setup = function ()
          vim.cmd[[packadd neorg]]
       end,
+      config = function ()
+         require('neorg').setup {
+            load = {
+               ["core.defaults"] = {},
+               ["core.norg.concealer"] = {},
+            },
+         }
+      end
    },
    ["lukas-reineke/indent-blankline.nvim"] = {
       "lukas-reineke/indent-blankline.nvim",
