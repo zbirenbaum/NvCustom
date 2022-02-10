@@ -1,10 +1,4 @@
 local M = {}
---local userPlugins = require "custom.plugins_table" -- path to table
-
--- require('impatient')
--- require('impatient').enable_profile()
-
-vim.g.python_host_skip_check=1
 
 require "custom.utils.set_globals"
 require "custom.utils.mappings".navigation()
@@ -52,10 +46,7 @@ M.ui = {
    theme = "onedark",
 }
 
--- these are plugin related options
 M.plugins = {
-   --  install = userPlugins,
-   -- enable and disable plugins (false for disable)
    status = {
       autosave = false, -- to autosave files
       bufferline = false, -- buffer shown as tabs
@@ -95,8 +86,8 @@ M.plugins = {
       matchparen=true,
       --choose 1
       hop = false,
-      --disabled for testing
       lightspeed = true,
+
       jqx = true,
       toggleterm = false,
       blankline = true, -- beautified blank lines
@@ -104,30 +95,27 @@ M.plugins = {
       colorizer = true,
       comment = true, -- universal commentor
    },
-   options = {
-      lspconfig = {
-         --         setup_lspconf = "custom.plugins.overrides.cmp_configs.lsp_config_cmp",
-         --setup_lspconf = require('custom.plugins.overrides.lsp_config_selection'),
-      },
-   },
-   --default_plugin_config_replace = tbl
+
    default_plugin_config_replace = {
       feline = function () require("custom.plugins.overrides.statusline_builder.builder") end,
-      --      signature="custom.plugins.overrides.cmp_configs.lspsignature_cmp",
-      --      nvim_cmp="custom.plugins.overrides.cmp_configs.cmp",
-      --bufferline="custom.plugins.overrides.bufferline",
       nvim_treesitter = "custom.plugins.overrides.treesitter",
-      --feline="custom.plugins.feline",
-      --nvim_autopairs=require("custom.plugins.autopairs_selection"),
-      --signature="custom.plugins.lspsignature_coq",
    },
    default_plugin_remove= {
       "nvim-telescope/telescope.nvim",
       "lukas-reineke/indent-blankline.nvim",
-      "nvim-telescope/telescope.nvim",
    },
 }
 
 M.mappings = {plugins = {}}
 
 return M
+
+--signature="custom.plugins.overrides.cmp_configs.lspsignature_cmp",
+--nvim_cmp="custom.plugins.overrides.cmp_configs.cmp",
+--bufferline="custom.plugins.overrides.bufferline",
+--feline="custom.plugins.feline",
+--nvim_autopairs=require("custom.plugins.autopairs_selection"),
+--signature="custom.plugins.lspsignature_coq",
+--setup_lspconf = "custom.plugins.overrides.cmp_configs.lsp_config_cmp",
+--setup_lspconf = require('custom.plugins.overrides.lsp_config_selection'),
+--default_plugin_config_replace = tbl

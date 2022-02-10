@@ -1,3 +1,5 @@
+vim.g.python_host_skip_check=1
+
 vim.g.clipboard = {
   name= 'unnamedplus',
   copy = {
