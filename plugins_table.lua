@@ -1,16 +1,20 @@
 local plugin_status = require("core.utils").load_config().plugins.status
 
 local plugins = {
-   ["nvim-chadterm"] = {
-      "zbirenbaum/nvim-chadterm",
-      after = "nvim-treesitter",
-      setup = function ()
-         vim.schedule_wrap(vim.cmd[[packadd nvim-chadterm]])
-      end,
-      config = function ()
-         vim.schedule_wrap(require("chadterm").setup({}))
-      end
+   ['glacambre/firenvim'] = {
+    'glacambre/firenvim',
+    run = function() vim.fn['firenvim#install'](0) end
    },
+   -- ["nvim-chadterm"] = {
+   --    "zbirenbaum/nvim-chadterm",
+   --    after = "nvim-treesitter",
+   --    setup = function ()
+   --       vim.schedule_wrap(vim.cmd[[packadd nvim-chadterm]])
+   --    end,
+   --    config = function ()
+   --       vim.schedule_wrap(require("chadterm").setup({}))
+   --    end
+   -- },
    ["nvim-neorg/neorg"] = {
       "nvim-neorg/neorg",
       ft = "norg",

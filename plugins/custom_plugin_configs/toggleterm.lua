@@ -58,18 +58,32 @@ local function horizontal_mappings(mapping)
    })
 end
 
-horizontal_mappings "<C-x>"
-float_mappings "<A-i>"
-
-function _G.set_terminal_keymaps()
-   local opts = { noremap = true }
-   vim.api.nvim_buf_set_keymap(0, "t", "<esc>", [[<C-\><C-n>]], opts)
-   vim.api.nvim_buf_set_keymap(0, "t", "jk", "<esc>", opts)
-   vim.api.nvim_buf_set_keymap(0, "t", "<C-w>h", [[<C-\><C-n><C-W>h]], opts)
-   vim.api.nvim_buf_set_keymap(0, "t", "<C-w>j", [[<C-\><C-n><C-W>j]], opts)
-   vim.api.nvim_buf_set_keymap(0, "t", "<C-w>k", [[<C-\><C-n><C-W>k]], opts)
-   vim.api.nvim_buf_set_keymap(0, "t", "<C-w>l", [[<C-\><C-n><C-W>l]], opts)
+local function vertical_mappings(mapping)
+   vim.api.nvim_set_keymap("n", mapping, '<Cmd>execute v:count . "ToggleTerm direction=vertical"<CR>', {
+      silent = true,
+      noremap = true,
+   })
+   vim.api.nvim_set_keymap("t", mapping, '<Cmd>execute v:count . "ToggleTerm direction=vertical"<CR>', {
+      silent = true,
+      noremap = true,
+   })
 end
+
+horizontal_mappings "<C-x>"
+horizontal_mappings "<leader>h"
+vertical_mappings "<leader>v"
+float_mappings "<A-i>"
+require("custom.utils.mappings").terminal()
+
+-- function _G.set_terminal_keymaps()
+--    local opts = { noremap = true }
+--    vim.api.nvim_buf_set_keymap(0, "t", "<esc>", [[<C-\><C-n>]], opts)
+--    vim.api.nvim_buf_set_keymap(0, "t", "jk", "<esc>", opts)
+--    vim.api.nvim_buf_set_keymap(0, "t", "<C-w>h", [[<C-\><C-n><C-W>h]], opts)
+--    vim.api.nvim_buf_set_keymap(0, "t", "<C-w>j", [[<C-\><C-n><C-W>j]], opts)
+--    vim.api.nvim_buf_set_keymap(0, "t", "<C-w>k", [[<C-\><C-n><C-W>k]], opts)
+--    vim.api.nvim_buf_set_keymap(0, "t", "<C-w>l", [[<C-\><C-n><C-W>l]], opts)
+-- end
 --
 -- -- if you only want these mappings for toggle term use term://*toggleterm#* instead
 -- vim.cmd "autocmd! TermOpen term://* lua set_terminal_keymaps()"
