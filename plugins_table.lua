@@ -1,20 +1,61 @@
-local plugin_status = require("core.utils").load_config().plugins.status
+ local plugin_status = require("custom.status")
 
-local plugins = {
-   ['glacambre/firenvim'] = {
-    'glacambre/firenvim',
-    run = function() vim.fn['firenvim#install'](0) end
+ local user_plugins = {
+   ['ms-jpq/coq_nvim'] = {
+      'ms-jpq/coq_nvim',
+      branch = 'coq',
+      disable = not plugin_status.coq,
+      event = "BufReadPost",
+      config = function()
+         require("custom.plugins.completion_plugins.coq_configs.coq").config()
+      end,
+      setup = function()
+         require("custom.plugins.completion_plugins.coq_configs.coq").setup()
+      end,
+      requires = {
+         {'ms-jpq/coq.artifacts', branch = 'artifacts'},
+         {'ms-jpq/coq.thirdparty', branch = '3p'},
+      },
    },
-   -- ["nvim-chadterm"] = {
-   --    "zbirenbaum/nvim-chadterm",
-   --    after = "nvim-treesitter",
-   --    setup = function ()
-   --       vim.schedule_wrap(vim.cmd[[packadd nvim-chadterm]])
-   --    end,
-   --    config = function ()
-   --       vim.schedule_wrap(require("chadterm").setup({}))
-   --    end
-   -- },
+   ["L3MON4D3/LuaSnip"] = {
+      "L3MON4D3/LuaSnip",
+      wants = "friendly-snippets",
+      after = "nvim-cmp",
+      config = function()
+         local luasnip = require("luasnip")
+         luasnip.config.set_config({
+            defaults = {
+               history = true,
+               updateevents = "TextChanged,TextChangedI",
+            }
+         })
+         require("luasnip.loaders.from_vscode").load()
+      end,
+   },
+   ["rafamadriz/friendly-snippets"] = {
+      "rafamadriz/friendly-snippets",
+      disable = not plugin_status.cmp,
+      event = "InsertEnter",
+   },
+   ["hrsh7th/nvim-cmp"] = {
+      "hrsh7th/nvim-cmp", --float menu
+      --      branch = "feat/completion-menu-borders",
+      after = "friendly-snippets",
+      disable = not plugin_status.cmp,
+      config = function()
+         require "custom.plugins.completion_plugins.cmp_configs.cmp"
+      end,
+   },
+   ["saadparwaiz1/cmp_luasnip"] = {
+      "saadparwaiz1/cmp_luasnip",
+      disable = not plugin_status.cmp,
+      after = "LuaSnip",
+   },
+   ["hrsh7th/cmp-nvim-lua"] = {
+      "hrsh7th/cmp-nvim-lua",
+      disable = not plugin_status.cmp,
+      after = "cmp_luasnip",
+   },
    ["nvim-neorg/neorg"] = {
       "nvim-neorg/neorg",
       ft = "norg",
@@ -31,12 +72,9 @@ local plugins = {
          }
       end
    },
-   ["lukas-reineke/indent-blankline.nvim"] = {
-      "lukas-reineke/indent-blankline.nvim",
-      after = "nvim-treesitter",
-      config = function ()
-         require("custom.plugins.custom_plugin_configs.indent_blankline")
-      end,
+   ['glacambre/firenvim'] = {
+    'glacambre/firenvim',
+    run = function() vim.fn['firenvim#install'](0) end
    },
    ["nathom/filetype.nvim"] = {
       "nathom/filetype.nvim",
@@ -99,47 +137,6 @@ local plugins = {
       "onsails/lspkind-nvim",
    },
    -- completion stuff
-   ['ms-jpq/coq_nvim'] = {
-      'ms-jpq/coq_nvim',
-      branch = 'coq',
-      disable = not plugin_status.coq,
-      event = "BufReadPost",
-      config = function()
-         require("custom.plugins.completion_plugins.coq_configs.coq").config()
-      end,
-      setup = function()
-         require("custom.plugins.completion_plugins.coq_configs.coq").setup()
-      end,
-      requires = {
-         {'ms-jpq/coq.artifacts', branch = 'artifacts'},
-         {'ms-jpq/coq.thirdparty', branch = '3p'},
-      },
-   },
-   -- load luasnips + cmp related in insert mode only
-   ["rafamadriz/friendly-snippets"] = {
-      "rafamadriz/friendly-snippets",
-      disable = not plugin_status.cmp,
-      event = "InsertEnter",
-   },
-   ["hrsh7th/nvim-cmp"] = {
-      "hrsh7th/nvim-cmp", --float menu
-      --      branch = "feat/completion-menu-borders",
-      after = "friendly-snippets",
-      disable = not plugin_status.cmp,
-      config = function()
-         require "custom.plugins.completion_plugins.cmp_configs.cmp"
-      end,
-   },
-   ["saadparwaiz1/cmp_luasnip"] = {
-      "saadparwaiz1/cmp_luasnip",
-      disable = not plugin_status.cmp,
-      after = "LuaSnip",
-   },
-   ["hrsh7th/cmp-nvim-lua"] = {
-      "hrsh7th/cmp-nvim-lua",
-      disable = not plugin_status.cmp,
-      after = "cmp_luasnip",
-   },
    ["hrsh7th/cmp-nvim-lsp"] = {
       "hrsh7th/cmp-nvim-lsp",
       disable = not plugin_status.cmp,
@@ -236,21 +233,6 @@ local plugins = {
          require("core.utils").packer_lazy_load "neoscroll.nvim"
       end,
    },
-   ["L3MON4D3/LuaSnip"] = {
-      "L3MON4D3/LuaSnip",
-      wants = "friendly-snippets",
-      after = "nvim-cmp",
-      config = function()
-         local luasnip = require("luasnip")
-         luasnip.config.set_config({
-            defaults = {
-               history = true,
-               updateevents = "TextChanged,TextChangedI",
-            }
-         })
-         require("luasnip.loaders.from_vscode").load()
-      end,
-   },
    ["chentau/marks.nvim"] = {
       "chentau/marks.nvim",
       disable = not plugin_status.marks,
@@ -262,5 +244,9 @@ local plugins = {
       end,
    },
 }
+ return user_plugins
 
-return plugins
+-- local plugin_status = require("core.utils").load_config()
+-- local plugins = {
+--
+-- return plugins
