@@ -284,9 +284,9 @@ C.diagnostics={
 
 C.progress = {
    provider = function()
+      local client= vim.lsp.buf_get_clients(0)
       local Lsp = vim.lsp.util.get_progress_messages()[1]
-
-      if Lsp then
+      if Lsp and client and client[1].name ~= "ccls" then
          local msg = Lsp.message or ""
          local percentage = Lsp.percentage or 0
          local title = Lsp.title or ""

@@ -1,3 +1,4 @@
+
 local util = require 'lspconfig.util'
 
 -- https://clangd.llvm.org/extensions.html#switch-between-sourceheader
@@ -40,8 +41,8 @@ util.default_config.capabilities or vim.lsp.protocol.make_client_capabilities(),
 
 M.config_table = function(attach, capabilities)
    return {
-      cmd = { 'clangd' },
-      filetypes = { 'c', 'cpp', 'objc', 'objcpp' },
+      filetypes = { 'c', 'cpp', 'objc', 'objcpp'},
+      cmd = {'clangd'},
       root_dir = function(fname)
          local filename = util.path.is_absolute(fname) and fname or util.path.join(vim.loop.cwd(), fname)
          return root_pattern(filename)
@@ -61,3 +62,4 @@ M.config_table = function(attach, capabilities)
 end
 
 return M
+

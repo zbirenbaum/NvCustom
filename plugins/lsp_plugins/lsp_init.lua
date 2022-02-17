@@ -30,7 +30,7 @@ M.setup_lsp = function(completion_engine)
    if not completion_engine then completion_engine = {} end
    local lspconfig = require "lspconfig"
    local default_servers = {}
-   local custom_servers = {"sumneko_lua", "pylance", "clangd", "clangd-gpu"}
+   local custom_servers = {"sumneko_lua", "pylance", "ccls"}
    local default_config = default_lsp_config(attach, capabilities)
 
    for _, lsp in ipairs(custom_servers) do
