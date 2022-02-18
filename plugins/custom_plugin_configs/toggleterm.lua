@@ -70,8 +70,8 @@ local function vertical_mappings(mapping)
 end
 
 horizontal_mappings "<C-x>"
-horizontal_mappings "<leader>h"
-vertical_mappings "<leader>v"
+-- horizontal_mappings "<leader>h"
+-- vertical_mappings "<leader>v"
 float_mappings "<A-i>"
 require("custom.utils.mappings").terminal()
 
