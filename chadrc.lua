@@ -33,6 +33,7 @@ M.options = {
       insert_nav = true, -- navigation in insertmode
       window_nav = true,
       theme_toggler = false,
+      terminal_linenr = true,
       -- used for updater
       update_url = "https://github.com/NvChad/NvChad",
       update_branch = "main",
