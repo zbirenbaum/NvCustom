@@ -243,10 +243,4 @@ local user_plugins = {
          require("core.utils").packer_lazy_load "marks.nvim"
       end,
    },
-}
-return user_plugins
-
--- local plugin_status = require("core.utils").load_config()
--- local plugins = {
-   --
-   -- return plugins
+} return user_plugins
