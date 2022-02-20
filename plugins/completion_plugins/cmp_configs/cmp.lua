@@ -13,16 +13,15 @@ cmp.setup {
    formatting = {
       format = lspkind.cmp_format({with_text = false, maxwidth = 50})
    },
-   completion = {
-      autocomplete = {
-         require('cmp.types').cmp.TriggerEvent.InsertEnter,
-         require('cmp.types').cmp.TriggerEvent.TextChanged,
-      },
-   },
    window = {
       completion = {
-         border='rounded',
+         border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+         --winhighlight = 'NormalFloat:NormalFloat,FloatBorder:FloatBorder',
          scrollbar = '║',
+         autocomplete = {
+            require('cmp.types').cmp.TriggerEvent.InsertEnter,
+            require('cmp.types').cmp.TriggerEvent.TextChanged,
+         },
       },
       documentation = {
          border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },

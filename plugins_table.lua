@@ -1,6 +1,6 @@
- local plugin_status = require("custom.status")
+local plugin_status = require("custom.status")
 
- local user_plugins = {
+local user_plugins = {
    ['ms-jpq/coq_nvim'] = {
       'ms-jpq/coq_nvim',
       branch = 'coq',
@@ -39,7 +39,7 @@
    },
    ["hrsh7th/nvim-cmp"] = {
       "hrsh7th/nvim-cmp", --float menu
-      --      branch = "feat/completion-menu-borders",
+      branch = "dev",
       after = "friendly-snippets",
       disable = not plugin_status.cmp,
       config = function()
@@ -73,8 +73,8 @@
       end
    },
    ['glacambre/firenvim'] = {
-    'glacambre/firenvim',
-    run = function() vim.fn['firenvim#install'](0) end
+      'glacambre/firenvim',
+      run = function() vim.fn['firenvim#install'](0) end
    },
    ["nathom/filetype.nvim"] = {
       "nathom/filetype.nvim",
@@ -244,9 +244,9 @@
       end,
    },
 }
- return user_plugins
+return user_plugins
 
 -- local plugin_status = require("core.utils").load_config()
 -- local plugins = {
---
--- return plugins
+   --
+   -- return plugins
