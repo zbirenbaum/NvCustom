@@ -2,6 +2,7 @@ local M = {}
 
 require "custom.utils.set_globals"
 require "custom.utils.mappings".navigation()
+require "custom.plugins.overrides.hl_override"
 
 M.options = {
    -- NeoVim/Vim options
@@ -55,6 +56,7 @@ M.plugins = {
    },
    status = require("custom.status"),
    default_plugin_remove= {
+      "NvChad/nvim-base16.lua",
       "akinsho/bufferline.nvim",
       "nvim-telescope/telescope.nvim",
    },

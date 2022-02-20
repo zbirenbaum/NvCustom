@@ -1,12 +1,15 @@
 local function highlight(tbl)
    for group, hl in pairs(tbl) do
-      print(group)
       vim.api.nvim_set_hl(0, group, hl)
    end
 end
-   -- treesitter
+local core = {
+   Normal={bg=nil},
+   Folded={fg=nil, bg=nil},
+}
 local treesitter = require("custom.highlights.treesitter")
 local others = require("custom.highlights.others")
+highlight(core)
 highlight(treesitter)
 highlight(others)
 -- highlight("TSAttribute", theme.base0A, nil, "none", nil)
@@ -37,8 +40,7 @@ highlight(others)
 -- highlight("TSStrike", theme.base00, nil, "strikethrough", nil)
 -- highlight("TSLiteral", theme.base09, nil, "none", nil)
 -- highlight("TSURI", theme.base09, nil, "underline", nil)
--- highlight("TSTypeBuiltin", theme.base0A, nil, "none", nil)
--- highlight("TSVariableBuiltin", theme.base09, nil, "none", nil)
+-- highlight("TSTypeBuiltin", theme.base0A, nil, "none", nil) highlight("TSVariableBuiltin", theme.base09, nil, "none", nil)
 -- highlight("TSDefinition", nil, nil, "underline", theme.base04)
 -- highlight("TSDefinitionUsage", nil, nil, "underline", theme.base04)
 -- highlight("TSCurrentScope", nil, nil, "bold", nil)

@@ -1,7 +1,7 @@
 local theme = require("custom.highlights.kitty_conf")
 
 local others = {
-   Normal={fg=theme.base05,bg=theme.base00},
+--   Normal={fg=theme.base05,bg=theme.base00},
    Bold={fg=nil,bg=nil,bold=true},
    Debug={fg=theme.base08,bg=nil},
    Directory={fg=theme.base0D,bg=nil},
