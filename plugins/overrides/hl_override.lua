@@ -1,3 +1,4 @@
+require("custom.highlights.hl")
 local cmd=vim.cmd
 -- Define bg color
 -- @param group Group
