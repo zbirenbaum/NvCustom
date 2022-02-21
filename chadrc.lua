@@ -47,6 +47,7 @@ M.ui = {
 }
 
 M.plugins = {
+   options={packer={init_file="custom.plugins.packer_init"}},
    install = "custom.plugins_table",
    default_plugin_config_replace = {
       feline = function () require("custom.plugins.overrides.statusline_builder.builder") end,
