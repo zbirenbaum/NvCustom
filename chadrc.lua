@@ -55,8 +55,6 @@ M.plugins = {
    },
    status = require("custom.status"),
    default_plugin_remove= {
-      "akinsho/bufferline.nvim",
-      "nvim-telescope/telescope.nvim",
    },
 }
 

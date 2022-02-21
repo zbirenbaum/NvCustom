@@ -186,14 +186,6 @@ local user_plugins = {
       end,
    },
    --misc plugins
-   ["akinsho/toggleterm.nvim"] = {
-      "akinsho/toggleterm.nvim",
-      disable = not plugin_status.toggleterm,
-      event = "BufReadPost",
-      config = function()
-         require "custom.plugins.custom_plugin_configs.toggleterm"
-      end,
-   },
    ["ggandor/lightspeed.nvim"] = {
       "ggandor/lightspeed.nvim",
       disable = not plugin_status.lightspeed,
