@@ -130,10 +130,10 @@ local user_plugins = {
    ["folke/trouble.nvim"] = {
       "folke/trouble.nvim",
       requires = "kyazdani42/nvim-web-devicons",
-      after = "nvim-lspconfig",
+      after = {"nvim-web-devicons", "nvim-lspconfig", "nvim-treesitter"},
       disable = not plugin_status.trouble,
       config = function()
-         require("custom.plugins.custom_plugin_configs.trouble")
+         vim.defer_fn(function() require("custom.plugins.custom_plugin_configs.trouble") end, 100)
       end
    },
    ["onsails/lspkind-nvim"] = {

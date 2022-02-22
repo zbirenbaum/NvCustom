@@ -34,6 +34,9 @@ M.debug = function ()
    else
       nvim_gdb()
    end
+   vim.keymap.set('n', "<leader>t", function ()
+      vim.cmd[[TroubleToggle]]
+   end, opts)
 end
 
 M.terminal = function ()

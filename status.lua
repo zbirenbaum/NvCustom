@@ -23,7 +23,7 @@ local status = {
   dap = true,
   tabline=false,
   --organized diagnostics
-  trouble = false,
+  trouble = true,
   --vscode style ex mode
   cmdline = false,
   lspkind = true,
