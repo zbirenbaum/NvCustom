@@ -74,7 +74,10 @@ local user_plugins = {
    },
    ['glacambre/firenvim'] = {
       'glacambre/firenvim',
-      run = function() vim.fn['firenvim#install'](0) end
+      run = function()
+         vim.fn['firenvim#install'](0)
+      end,
+      disable = not plugin_status.firenvim,
    },
    ["nathom/filetype.nvim"] = {
       "nathom/filetype.nvim",
@@ -163,14 +166,22 @@ local user_plugins = {
       end,
    },
    --dap stuff
+   -- ["sakhnik/nvim-gdb"] = {
+   --    'sakhnik/nvim-gdb',
+   -- },
    ['mfussenegger/nvim-dap'] = {
       'mfussenegger/nvim-dap',
       disable = not plugin_status.dap,
-      config = function ()
-         require "custom.plugins.dap.dap_setup".config()
-      end,
+      opt=true,
+      event = "BufReadPost",
       setup = function ()
-         require("custom.utils.mappings").dap()
+         vim.schedule(function ()
+            vim.cmd[[packadd nvim-dap]]
+            vim.cmd[[packadd one-small-step-for-vimkind]]
+            vim.cmd[[packadd DAPInstall.nvim]]
+            require("custom.utils.mappings").debug()
+            vim.schedule_wrap(require("custom.plugins.dap.dap_setup").config())
+         end)
       end,
       requires = {
          "Pocco81/DAPInstall.nvim",

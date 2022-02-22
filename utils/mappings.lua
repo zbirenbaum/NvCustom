@@ -10,20 +10,30 @@ M.navigation = function ()
    ]]
 end
 
-M.dap = function ()
-   vim.keymap.set('n', '<C-b>', function () require("dap").toggle_breakpoint() end, opts)
-   vim.keymap.set('n', '<Leader>r', function () require("dap").repl.toggle() end, opts)
-   vim.keymap.set('n', '<Leader>d', function () require("dapui").toggle() end, opts)
-   vim.keymap.set('n', '<C-o>', function () require("dap").step_out() end, opts)
-   vim.keymap.set('n', '<C-n>', function () require("dap").step_into() end, opts)
-   vim.keymap.set('n', '<C-c>',
-   function()
-      if vim.bo.filetype == "lua" and not require("dap").session() then
-         require("osv").run_this()
-      else
-         require("dap").continue()
-      end
-   end, opts)
+M.debug = function ()
+   local dap = function ()
+      vim.keymap.set('n', '<C-b>', function () require("dap").toggle_breakpoint() end, opts)
+      vim.keymap.set('n', '<Leader>r', function () require("dap").repl.toggle() end, opts)
+      vim.keymap.set('n', '<Leader>d', function () require("dapui").toggle() end, opts)
+      vim.keymap.set('n', '<C-o>', function () require("dap").step_out() end, opts)
+      vim.keymap.set('n', '<C-n>', function () require("dap").step_into() end, opts)
+      vim.keymap.set('n', '<C-c>',
+      function()
+         if vim.bo.filetype == "lua" and not require("dap").session() then
+            require("osv").run_this()
+         else
+            require("dap").continue()
+         end
+      end, opts)
+   end
+   local nvim_gdb = function ()
+      print("gdb")
+   end
+   if vim.bo.filetype ~= "cpp" and vim.bo.filetype ~= "c" and vim.bo.filetype ~= "cuda" then
+      dap()
+   else
+      nvim_gdb()
+   end
 end
 
 M.terminal = function ()

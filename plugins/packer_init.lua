@@ -1,5 +1,4 @@
 vim.cmd "packadd packer.nvim"
-print("fuck")
 
 local present, packer = pcall(require, "packer")
 
@@ -29,6 +28,7 @@ if not present then
 end
 
 packer.init {
+   transitive_opt = true,
    display = {
       open_fn = function()
          return require("packer.util").float { border = "single" }

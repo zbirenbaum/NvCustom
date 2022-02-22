@@ -45,6 +45,7 @@ local status = {
   cheatsheet = false, -- fuzzy search your commands/keymappings
   colorizer = true,
   comment = true, -- universal commentor
+  firenvim = false,
 }
 
 return status
