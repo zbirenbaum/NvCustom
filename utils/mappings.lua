@@ -27,7 +27,6 @@ M.debug = function ()
       end, opts)
    end
    local nvim_gdb = function ()
-      print("gdb")
    end
    if vim.bo.filetype ~= "cpp" and vim.bo.filetype ~= "c" and vim.bo.filetype ~= "cuda" then
       dap()
