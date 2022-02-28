@@ -2,9 +2,9 @@ require("toggleterm").setup {
    -- size can be a number or function which is passed the current terminal
    size = function(term)
       if term.direction == "horizontal" then
-         return 10
+         return 15
       elseif term.direction == "vertical" then
-         return vim.o.columns * 0.4
+         return vim.o.columns * 0.5
       end
    end,
 
@@ -26,7 +26,7 @@ require("toggleterm").setup {
       -- the 'curved' border is a custom border type
       -- not natively supported but implemented in this plugin.
       border = "single", --'single' | 'double' | 'shadow' | 'curved' | ... other options supported by win open
-      width = math.floor(vim.o.columns * 0.7),
+      width = math.floor(vim.o.columns * 0.5),
       height = 15,
       winblend = 0,
       highlights = {
@@ -69,9 +69,9 @@ local function vertical_mappings(mapping)
    })
 end
 
-horizontal_mappings "<C-x>"
+horizontal_mappings "<C-s>"
 -- horizontal_mappings "<leader>h"
--- vertical_mappings "<leader>v"
+vertical_mappings "<C-x>"
 float_mappings "<A-i>"
 require("custom.utils.mappings").terminal()
 

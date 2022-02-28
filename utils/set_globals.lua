@@ -1,5 +1,4 @@
 vim.g.python_host_skip_check=1
-
 vim.g.clipboard = {
   name= 'unnamedplus',
   copy = {
@@ -14,12 +13,13 @@ vim.g.clipboard = {
 
 vim.g.python3_host_prog = "/home/zach/.virtualenvs/py3nvim/bin/python"
 vim.g.python_host_prog = "/home/zach/.virtualenvs/py2nvim/bin/python"
+vim.o.showcmd = false
+vim.o.showmode = false
 --vim.cmd[[ set shada = '200,f1,<200,:50,/50 ]]
---vim.o.nosc = true
 --vim.o.cmdheight = 0
 
-vim.cmd[[ set noshowmode ]]
-vim.cmd[[ set nosc ]]
+-- vim.cmd[[ set noshowmode ]]
+-- vim.cmd[[ set nosc ]]
 
 --disable builtins
 ----already done by nvchad

@@ -2,12 +2,15 @@
 local opts = { noremap = true, silent = true }
 local M = {}
 M.navigation = function ()
-   vim.cmd [[ 
-   au VimEnter * lua 
-   \ vim.keymap.set('n', '<C-l>', '$', {silent=true, noremap=true})
-   \ vim.keymap.set('n', '<C-h>', '^', {silent=true, noremap=true})
-   \ vim.keymap.set('c', '<C-c>', '<C-e>', {silent=true, noremap=true}) 
-   ]]
+   vim.api.nvim_create_autocmd({
+      event = {"VimEnter"},
+      callback = function ()
+         vim.keymap.set('n', '<c-l>', '$', {silent=true, noremap=true})
+         vim.keymap.set('n', '<c-h>', '^', {silent=true, noremap=true})
+         vim.keymap.set('c', '<c-c>', '<c-e>', {silent=true, noremap=true})
+      end,
+      once = true,
+   })
 end
 
 M.debug = function ()
@@ -48,7 +51,3 @@ M.terminal = function ()
 end
 
 return M
-
--- vim.api.nvim_buf_set_keymap(0, "n", "<C-l>", "$", opts)
--- vim.api.nvim_buf_set_keymap(0, "n", "<C-h>", "^", opts)
---vim.api.nvim_buf_set_keymap(0, "n", "<C-w>b", "<CMD>terminal w3m www.duckduckgo.com<CR>",opts)

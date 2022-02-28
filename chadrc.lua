@@ -20,7 +20,7 @@ M.options = {
    expandtab = true,
    shiftwidth = 3,
    smartindent = true,
-   tabstop = 8, -- Number of spaces that a <Tab> in the file counts for
+   tabstop = 3, -- Number of spaces that a <Tab> in the file counts for
    timeoutlen = 400,
    -- interval for writing swap file to disk, also used by gitsigns
    updatetime = 250,
@@ -56,6 +56,7 @@ M.plugins = {
    },
    status = require("custom.status"),
    default_plugin_remove= {
+      "NvChad/nvim-base16.lua",
       "akinsho/bufferline.nvim",
       "nvim-telescope/telescope.nvim",
    },

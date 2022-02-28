@@ -1,6 +1,13 @@
 local plugin_status = require("custom.status")
 
 local user_plugins = {
+   ["zbirenbaum/nvim-base16.lua"] = {
+      "zbirenbaum/nvim-base16.lua",
+      after = "packer.nvim",
+      config = function()
+         require("custom.colors").init()
+      end,
+   },
    ['ms-jpq/coq_nvim'] = {
       'ms-jpq/coq_nvim',
       branch = 'coq',
