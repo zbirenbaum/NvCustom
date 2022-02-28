@@ -93,6 +93,7 @@ local user_plugins = {
       config = function()
          require "custom.plugins.completion_plugins.cmp_configs.cmp"
       end,
+      requires = {"onsails/lspkind-nvim"}
    },
    ["saadparwaiz1/cmp_luasnip"] = {
       "saadparwaiz1/cmp_luasnip",
@@ -183,9 +184,6 @@ local user_plugins = {
       config = function()
          vim.defer_fn(function() require("custom.plugins.custom_plugin_configs.trouble") end, 100)
       end
-   },
-   ["onsails/lspkind-nvim"] = {
-      "onsails/lspkind-nvim",
    },
    -- completion stuff
    ["hrsh7th/cmp-nvim-lsp"] = {
