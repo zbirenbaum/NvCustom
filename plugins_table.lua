@@ -32,7 +32,7 @@ local user_plugins = {
       disable = not plugin_status.feline,
       opt = true,
       after = {"nvim-base16.lua", "nvim-web-devicons"},
-      config = function() vim.defer_fn(function() require("custom.plugins.overrides.statusline_builder.builder") end, 20) end
+      config = function() vim.defer_fn(function() require("custom.plugins.overrides.statusline_builder.builder") end, 25) end
    },
    ["nvim-treesitter/nvim-treesitter"] = {
       "nvim-treesitter/nvim-treesitter",
