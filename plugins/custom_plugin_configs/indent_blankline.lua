@@ -1,6 +1,6 @@
-local colors = require("custom.colors").get()
 vim.opt.list = true
 vim.opt.listchars:append("eol:↴")
+local colors = require("custom.colors").get()
 require("indent_blankline").setup {
    filetype_exclude = {
       "help",
@@ -22,6 +22,7 @@ require("indent_blankline").setup {
    vim.api.nvim_set_hl(0, "IndentBlanklineContextChar", {nocombine=true, fg=colors.grey_fg}),
    vim.api.nvim_set_hl(0, "IndentBlanklineContextStart", {nocombine=true, underline=true, special=colors.grey_fg}),
 }
+vim.cmd 'if &ft == "packer" | echo "" | else | silent! e %'
 
 -- highlight IndentBlanklineContextChar guifg=#00FF00 gui=nocombine
 -- highlight IndentBlanklineContextStart guisp=#00FF00 gui=underline

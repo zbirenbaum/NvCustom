@@ -50,12 +50,15 @@ M.plugins = {
    options={packer={init_file="custom.plugins.packer_init"}},
    install = "custom.plugins_table",
    default_plugin_config_replace = {
+      better_escape="custom.plugins.overrides.better_escape",
       feline = function () require("custom.plugins.overrides.statusline_builder.builder") end,
 --      nvim_treesitter = "custom.plugins.overrides.treesitter",
       indent_blankline = function () require("custom.plugins.custom_plugin_configs.indent_blankline") end
    },
    status = require("custom.status"),
    default_plugin_remove= {
+      "NvChad/nvim-colorizer.lua",
+      "feline-nvim/feline.nvim",
       "NvChad/nvim-base16.lua",
       "akinsho/bufferline.nvim",
       "nvim-telescope/telescope.nvim",

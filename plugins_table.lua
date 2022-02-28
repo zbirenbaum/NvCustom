@@ -4,31 +4,42 @@ local user_plugins = {
    ["NvChad/nvim-colorizer.lua"] = {
       "NvChad/nvim-colorizer.lua",
       disable = not plugin_status.colorizer,
-      opt = true,
       after = {"indent-blankline.nvim"},
-      config = function() vim.schedule_wrap(require("plugins.configs.others").colorizer()) end,
+      config = function()
+         vim.defer_fn(function ()
+            require("plugins.configs.others").colorizer()
+         end, 5)
+      end,
    },
    ["kyazdani42/nvim-web-devicons"] = {
       "kyazdani42/nvim-web-devicons",
       opt = true,
-      after = {"nvim-base16.lua", "nvim-treesitter"},
+      after = {"nvim-base16.lua"},
       config = function () require("custom.plugins.overrides.icons").setup() end
-   },
-   ["nvim-treesitter/nvim-treesitter"] = {
-      "nvim-treesitter/nvim-treesitter",
-      opt = true,
-      event = {"BufRead", "BufNewFile"},
-      config = function ()
-         require("custom.plugins.overrides.treesitter")
-      end,
    },
    ["lukas-reineke/indent-blankline.nvim"] = {
       "lukas-reineke/indent-blankline.nvim",
       disable = not plugin_status.blankline,
-      opt = true,
-      after = {"nvim-base16.lua", "nvim-treesitter"},
+      after = {"feline.nvim"},
       config = function()
-         vim.schedule_wrap(require("custom.plugins.custom_plugin_configs.indent_blankline"))
+         vim.defer_fn(function ()
+            require("custom.plugins.custom_plugin_configs.indent_blankline")
+         end, 10)
+      end,
+   },
+   ["feline-nvim/feline.nvim"] = {
+      "feline-nvim/feline.nvim",
+      disable = not plugin_status.feline,
+      opt = true,
+      after = {"nvim-base16.lua", "nvim-web-devicons"},
+      config = function() vim.defer_fn(function() require("custom.plugins.overrides.statusline_builder.builder") end, 20) end
+   },
+   ["nvim-treesitter/nvim-treesitter"] = {
+      "nvim-treesitter/nvim-treesitter",
+      opt = true,
+      event = {"BufReadPost", "BufNewFile"},
+      config = function ()
+         require("custom.plugins.overrides.treesitter")
       end,
    },
    ["zbirenbaum/nvim-base16.lua"] = {
