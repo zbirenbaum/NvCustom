@@ -41,6 +41,7 @@ packer.init {
       },
       clone_timeout = 6000, -- seconds
    },
+   auto_reload_compiled = false,
    auto_clean = true,
    compile_on_sync = true,
 }
