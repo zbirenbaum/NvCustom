@@ -2,8 +2,7 @@
 local opts = { noremap = true, silent = true }
 local M = {}
 M.navigation = function ()
-   vim.api.nvim_create_autocmd({
-      event = {"VimEnter"},
+   vim.api.nvim_create_autocmd({"VimEnter"},{
       callback = function ()
          vim.keymap.set('n', '<c-l>', '$', {silent=true, noremap=true})
          vim.keymap.set('n', '<c-h>', '^', {silent=true, noremap=true})
