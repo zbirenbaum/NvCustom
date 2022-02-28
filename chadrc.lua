@@ -61,6 +61,7 @@ M.plugins = {
       "nvim-telescope/telescope.nvim",
       "nvim-treesitter/nvim-treesitter",
       "kyazdani42/nvim-web-devicons",
+      "lukas-reineke/indent-blankline.nvim",
    },
 }
 

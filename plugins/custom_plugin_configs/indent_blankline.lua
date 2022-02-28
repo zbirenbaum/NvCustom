@@ -1,3 +1,4 @@
+local colors = require("custom.colors").get()
 vim.opt.list = true
 vim.opt.listchars:append("eol:↴")
 require("indent_blankline").setup {
@@ -16,4 +17,11 @@ require("indent_blankline").setup {
    show_end_of_line = true,
    show_trailing_blankline_indent = false,
    show_first_indent_level = false,
+   show_current_context=true,
+   show_current_context_start=true,
+   vim.api.nvim_set_hl(0, "IndentBlanklineContextChar", {nocombine=true, fg=colors.grey_fg}),
+   vim.api.nvim_set_hl(0, "IndentBlanklineContextStart", {nocombine=true, underline=true, special=colors.grey_fg}),
 }
+
+-- highlight IndentBlanklineContextChar guifg=#00FF00 gui=nocombine
+-- highlight IndentBlanklineContextStart guisp=#00FF00 gui=underline
