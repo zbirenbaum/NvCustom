@@ -1,5 +1,3 @@
-vim.opt.list = true
-vim.opt.listchars:append("eol:↴")
 local colors = require("custom.colors").get()
 require("indent_blankline").setup {
    filetype_exclude = {

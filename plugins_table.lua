@@ -37,7 +37,7 @@ local user_plugins = {
    ["nvim-treesitter/nvim-treesitter"] = {
       "nvim-treesitter/nvim-treesitter",
       opt = true,
-      event = {"BufReadPost", "BufNewFile"},
+      event = {"BufRead", "BufNewFile"},
       config = function ()
          require("custom.plugins.overrides.treesitter")
       end,
