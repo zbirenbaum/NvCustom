@@ -1,11 +1,19 @@
 local plugin_status = require("custom.status")
 
 local user_plugins = {
+   ["nvim-treesitter/nvim-treesitter"] = {
+      "nvim-treesitter/nvim-treesitter",
+      opt = true,
+      event = {"BufRead", "BufNewFile"},
+      config = function ()
+         require("custom.plugins.overrides.treesitter")
+      end,
+   },
    ["zbirenbaum/nvim-base16.lua"] = {
       "zbirenbaum/nvim-base16.lua",
       after = "packer.nvim",
       config = function()
-         require("custom.colors").init()
+         vim.schedule_wrap(require("custom.colors").init())
       end,
    },
    ['ms-jpq/coq_nvim'] = {
@@ -173,9 +181,6 @@ local user_plugins = {
       end,
    },
    --dap stuff
-   -- ["sakhnik/nvim-gdb"] = {
-   --    'sakhnik/nvim-gdb',
-   -- },
    ['mfussenegger/nvim-dap'] = {
       'mfussenegger/nvim-dap',
       disable = not plugin_status.dap,
@@ -215,8 +220,9 @@ local user_plugins = {
    ["ggandor/lightspeed.nvim"] = {
       "ggandor/lightspeed.nvim",
       disable = not plugin_status.lightspeed,
+      after = "nvim-treesitter",
       config = function()
-         require "custom.plugins.custom_plugin_configs.lightspeed"
+         vim.schedule_wrap(require "custom.plugins.custom_plugin_configs.lightspeed")
       end,
       event = "BufReadPost"
    },

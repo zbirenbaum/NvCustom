@@ -7,5 +7,4 @@ vim.schedule(function()
          use_languagetree = true,
       },
    }
-   vim.cmd 'if &ft == "packer" | echo "" | else | silent! e %'
 end)

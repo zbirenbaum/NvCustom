@@ -51,7 +51,7 @@ M.plugins = {
    install = "custom.plugins_table",
    default_plugin_config_replace = {
       feline = function () require("custom.plugins.overrides.statusline_builder.builder") end,
-      nvim_treesitter = "custom.plugins.overrides.treesitter",
+--      nvim_treesitter = "custom.plugins.overrides.treesitter",
       indent_blankline = function () require("custom.plugins.custom_plugin_configs.indent_blankline") end
    },
    status = require("custom.status"),
@@ -59,6 +59,7 @@ M.plugins = {
       "NvChad/nvim-base16.lua",
       "akinsho/bufferline.nvim",
       "nvim-telescope/telescope.nvim",
+      "nvim-treesitter/nvim-treesitter",
    },
 }
 
