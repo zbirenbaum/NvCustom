@@ -1,6 +1,11 @@
 local plugin_status = require("custom.status")
 
 local user_plugins = {
+   ["kyazdani42/nvim-web-devicons"] = {
+     "kyazdani42/nvim-web-devicons",
+      after = "nvim-base16.lua",
+      config = function () require("custom.plugins.overrides.icons").setup() end
+   },
    ["nvim-treesitter/nvim-treesitter"] = {
       "nvim-treesitter/nvim-treesitter",
       opt = true,

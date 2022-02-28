@@ -60,6 +60,7 @@ M.plugins = {
       "akinsho/bufferline.nvim",
       "nvim-telescope/telescope.nvim",
       "nvim-treesitter/nvim-treesitter",
+      "kyazdani42/nvim-web-devicons",
    },
 }
 

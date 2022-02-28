@@ -1,7 +1,7 @@
 local cmd = vim.cmd
 
 local override = require("core.utils").load_config().ui.hl_override
-local colors = require("colors").get()
+local colors = require("custom.colors").get()
 local ui = require("core.utils").load_config().ui
 
 local black = colors.black
@@ -66,7 +66,7 @@ fg("cursorlinenr", white)
 fg("EndOfBuffer", black)
 
 -- For floating windows
-fg("FloatBorder", grey)
+fg("FloatBorder", grey) --changed bc bright blue hurts my eyes after a while
 bg("NormalFloat", darker_black)
 
 -- Pmenu
@@ -92,7 +92,7 @@ if ui.transparency then
    bg("Folded", "NONE")
    fg("Folded", "NONE")
    fg("Comment", grey)
-   fg_bg("Normal", white, "NONE")
+   fg_bg("Normal", white, "NONE") --due to api replacing undefineds, needs to be set
 end
 
 -- [[ Plugin Highlights
@@ -149,6 +149,7 @@ fg_bg("TelescopeResultsTitle", darker_black, darker_black)
 
 bg("TelescopeSelection", black2)
 
+--I don't use this and kinda a pain to convert
 -- keybinds cheatsheet
 
 -- fg_bg("CheatsheetBorder", black, black)
