@@ -38,6 +38,7 @@ local user_plugins = {
       "nvim-treesitter/nvim-treesitter",
       opt = true,
       event = {"BufRead", "BufNewFile"},
+      requires = {'nvim-treesitter/playground'},
       config = function ()
          require("custom.plugins.overrides.treesitter")
       end,

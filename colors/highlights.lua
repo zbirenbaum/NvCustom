@@ -25,6 +25,12 @@ local yellow = colors.yellow
 local orange = colors.orange
 local one_bg3 = colors.one_bg3
 
+local violet = "#a038ba"
+local teal = "#54d7cb"
+
+vim.api.nvim_set_hl(0, "TSVariable", {fg=teal})
+vim.api.nvim_set_hl(0, "TSField", {fg=orange})
+vim.api.nvim_set_hl(0, "TSKeyWord", {fg=violet})
 -- functions for setting highlights
 local fg = function (group, color, sp)
    local hl = {fg=color}
