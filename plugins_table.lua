@@ -234,7 +234,7 @@ local user_plugins = {
    ["theHamsta/nvim-dap-virtual-text"] = {
       "theHamsta/nvim-dap-virtual-text",
       after = "nvim-dap",
-      disable = not plugin_status.dap,
+      disable = not plugin_status.dap_vtext,
       config = function ()
          require("nvim-dap-virtual-text").setup()
       end,

@@ -21,6 +21,7 @@ local status = {
    coq = false,
    cmp = true,
    dap = true,
+   dap_vtext=false,
    tabline=false,
    --organized diagnostics
    trouble = true,
