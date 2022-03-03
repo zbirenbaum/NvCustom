@@ -52,7 +52,9 @@ end
 
 -- Comments
 if ui.italic_comments then
-   fg("Comment", grey_fg, "italic")
+   vim.api.nvim_set_hl(0, "TSComment", {fg=grey_fg, italic=true, bold=true})
+   vim.api.nvim_set_hl(0, "Comment", {fg=grey_fg, italic=true, bold=true})
+   -- fg("Comment", grey_fg, "italic")
 else
    fg("Comment", grey_fg)
 end
