@@ -1,5 +1,6 @@
 local M = {}
 
+require "custom.utils.hot_reload"
 require "custom.utils.set_globals"
 require "custom.utils.mappings".navigation()
 
