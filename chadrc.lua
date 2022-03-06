@@ -58,6 +58,8 @@ M.plugins = {
    },
    status = require("custom.status"),
    default_plugin_remove= {
+      "NvChad/extensions",
+      "nvim-lua/plenary.nvim",
       "NvChad/nvim-colorizer.lua",
       "feline-nvim/feline.nvim",
       "NvChad/nvim-base16.lua",

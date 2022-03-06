@@ -1,4 +1,4 @@
-local present, packer = pcall(require, "custom.plugins.packer_init")
+-- local present, packer = pcall(require, "custom.plugins.packer_init")
 local plugin_status = require("custom.status")
 
 local user_plugins = {
@@ -332,8 +332,9 @@ local user_plugins = {
    },
 }
 
-return packer.startup(function(use)
-   for _, v in pairs(user_plugins) do
-      use(v)
-   end
-end)
+return user_plugins
+-- return packer.startup(function(use)
+--    for _, v in pairs(user_plugins) do
+--       use(v)
+--    end
+-- end)
