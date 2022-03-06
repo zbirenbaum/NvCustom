@@ -334,8 +334,3 @@ local user_plugins = {
 }
 
 return user_plugins
--- return packer.startup(function(use)
---    for _, v in pairs(user_plugins) do
---       use(v)
---    end
--- end)
