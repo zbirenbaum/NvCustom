@@ -1,8 +1,13 @@
 local M = {}
 
-require "custom.utils.hot_reload"
-require "custom.utils.set_globals"
-require "custom.utils.mappings".navigation()
+vim.api.nvim_create_autocmd({"VimEnter"}, {
+   callback = function ()
+      require "custom.utils.hot_reload"
+      require "custom.utils.set_globals"
+      require "custom.utils.mappings".navigation()
+   end,
+   once = true,
+})
 
 M.options = {
    -- NeoVim/Vim options
@@ -53,7 +58,7 @@ M.plugins = {
    default_plugin_config_replace = {
       better_escape="custom.plugins.overrides.better_escape",
       feline = function () require("custom.plugins.overrides.statusline_builder.builder") end,
---      nvim_treesitter = "custom.plugins.overrides.treesitter",
+      --      nvim_treesitter = "custom.plugins.overrides.treesitter",
       indent_blankline = function () require("custom.plugins.custom_plugin_configs.indent_blankline") end
    },
    status = require("custom.status"),
