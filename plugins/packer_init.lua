@@ -41,6 +41,10 @@ packer.init {
       },
       clone_timeout = 6000, -- seconds
    },
+   profile = {
+      enable = true,
+      threshold = .1
+   },
    auto_reload_compiled = false,
    auto_clean = true,
    compile_on_sync = true,

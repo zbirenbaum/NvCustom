@@ -16,6 +16,7 @@ local status = {
    marks = false,
    gps = false,
    luadev = false,
+   better_escape = true,
 
    -- Completions, choose 1
    coq = false,

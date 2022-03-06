@@ -1,6 +1,24 @@
+local present, packer = pcall(require, "custom.plugins.packer_init")
 local plugin_status = require("custom.status")
 
 local user_plugins = {
+   ["lewis6991/impatient.nvim"] = { "lewis6991/impatient.nvim" },
+   ["wbthomason/packer.nvim"] = {"wbthomason/packer.nvim", event = "VimEnter"},
+   ["lewis6991/gitsigns.nvim"] = {
+      "lewis6991/gitsigns.nvim",
+      disable = not plugin_status.gitsigns,
+      opt = true,
+      config = function () require("plugins.configs.others").gitsigns() end,
+      setup = function()
+         require("core.utils").packer_lazy_load "gitsigns.nvim"
+      end,
+   },
+   ["max397574/better-escape.nvim"] = {
+      "max397574/better-escape.nvim",
+      disable = not plugin_status.better_escape,
+      event = "InsertCharPre",
+      config = function () require("plugins.configs.others").better_escape() end,
+   },
    ["NvChad/nvim-colorizer.lua"] = {
       "NvChad/nvim-colorizer.lua",
       disable = not plugin_status.colorizer,
@@ -42,6 +60,16 @@ local user_plugins = {
          require("custom.plugins.overrides.treesitter")
       end,
    },
+   ["numToStr/Comment.nvim"] = {
+      "numToStr/Comment.nvim",
+      disable = not plugin_status.comment,
+      module = "Comment",
+      keys = { "gcc" },
+      config = function() require("plugins.configs.others").comment() end,
+      setup = function()
+         require("core.mappings").comment()
+      end,
+   },
    ["zbirenbaum/nvim-base16.lua"] = {
       "zbirenbaum/nvim-base16.lua",
       after = "packer.nvim",
@@ -65,6 +93,7 @@ local user_plugins = {
          {'ms-jpq/coq.thirdparty', branch = '3p'},
       },
    },
+
    ["L3MON4D3/LuaSnip"] = {
       "L3MON4D3/LuaSnip",
       wants = "friendly-snippets",
@@ -100,6 +129,7 @@ local user_plugins = {
       disable = not plugin_status.cmp,
       after = "LuaSnip",
    },
+
    ["hrsh7th/cmp-nvim-lua"] = {
       "hrsh7th/cmp-nvim-lua",
       disable = not plugin_status.cmp,
@@ -143,12 +173,14 @@ local user_plugins = {
          vim.cmd[[packadd nvim-lspconfig]]
       end,
       config = function()
-         plugin_status = require("core.utils").load_config().plugins.status
-         local completion_engine = plugin_status.cmp and "cmp" or plugin_status.coq and "coq"
-         if completion_engine == "coq" then
-            return false
-         end
-         require("custom.plugins.lsp_plugins.lsp_init").setup_lsp(completion_engine)
+         vim.schedule(function()
+            plugin_status = require("core.utils").load_config().plugins.status
+            local completion_engine = plugin_status.cmp and "cmp" or plugin_status.coq and "coq"
+            if completion_engine == "coq" then
+               return false
+            end
+            require("custom.plugins.lsp_plugins.lsp_init").setup_lsp(completion_engine)
+         end, 20)
       end,
    },
    ["ray-x/lsp_signature.nvim"] = {
@@ -298,4 +330,10 @@ local user_plugins = {
          require("core.utils").packer_lazy_load "marks.nvim"
       end,
    },
-}  return user_plugins
+}
+
+return packer.startup(function(use)
+   for _, v in pairs(user_plugins) do
+      use(v)
+   end
+end)
