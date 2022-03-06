@@ -2,6 +2,7 @@
 local plugin_status = require("custom.status")
 
 local user_plugins = {
+   ["nvim-lua/plenary.nvim"] = {"nvim-lua/plenary.nvim"},
    ["lewis6991/impatient.nvim"] = { "lewis6991/impatient.nvim" },
    ["wbthomason/packer.nvim"] = {"wbthomason/packer.nvim", event = "VimEnter"},
    ["lewis6991/gitsigns.nvim"] = {
