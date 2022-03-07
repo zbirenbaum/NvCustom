@@ -24,10 +24,14 @@ colors.blue_blacks = {
 colors.blue_reds = {
    "#FFBDE6",
    "#FFC6FF",
+   "#804FB3",
    "#9145B6",
+   "#9969C7",
+   "#B589D6",
+   "#552586",
+   "#7209b7",
    "#b5179e",
    "#ED5EDD",
-   "#7209b7",
 }
 colors.red_greens = {
    "#fffae5",
