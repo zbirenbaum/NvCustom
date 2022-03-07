@@ -29,9 +29,11 @@ vim.schedule(function()
 end)
 
 
-vim.api.nvim_create_autocmd({"CursorHold"},{
-   callback = function ()
-      vim.cmd[[:TSHighlightCapturesUnderCursor]]
-   end,
-   once = false,
-})
+local opts = { noremap = true, silent = true }
+vim.keymap.set('n', '<C-k>', function() vim.cmd[[:TSHighlightCapturesUnderCursor]] end, opts)
+-- vim.api.nvim_create_autocmd({"CursorHold"},{
+--    callback = function ()
+--       vim.cmd[[:TSHighlightCapturesUnderCursor]]
+--    end,
+--    once = false,
+-- })

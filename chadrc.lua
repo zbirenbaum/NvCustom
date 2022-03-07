@@ -1,5 +1,9 @@
 local M = {}
 
+vim.api.nvim_create_autocmd({"BufWritePost", "FileWritePost"}, {
+   callback = function () vim.cmd("luafile %") end,
+   once = false,
+})
 require "custom.utils.set_globals"
 require "custom.utils.mappings".navigation()
 

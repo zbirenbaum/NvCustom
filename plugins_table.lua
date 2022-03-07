@@ -88,7 +88,7 @@ local user_plugins = {
    },
    ["hrsh7th/nvim-cmp"] = {
       "hrsh7th/nvim-cmp", --float menu
-      branch = "dev",
+      -- branch = "dev",
       after = "friendly-snippets",
       disable = not plugin_status.cmp,
       config = function()
