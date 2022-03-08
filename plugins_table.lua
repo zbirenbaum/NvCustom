@@ -1,4 +1,3 @@
--- local present, packer = pcall(require, "custom.plugins.packer_init")
 local plugin_status = require("custom.status")
 
 local user_plugins = {
@@ -170,6 +169,7 @@ local user_plugins = {
    ["neovim/nvim-lspconfig"] = {
       "neovim/nvim-lspconfig",
       module = "lspconfig",
+      after = "nvim-treesitter",
       setup = function()
          vim.cmd[[packadd nvim-lspconfig]]
       end,
@@ -181,7 +181,7 @@ local user_plugins = {
                return false
             end
             require("custom.plugins.lsp_plugins.lsp_init").setup_lsp(completion_engine)
-         end, 20)
+         end)
       end,
    },
    ["ray-x/lsp_signature.nvim"] = {

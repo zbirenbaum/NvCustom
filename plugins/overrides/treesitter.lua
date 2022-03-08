@@ -1,4 +1,4 @@
-vim.schedule(function()
+local start = function()
    require "nvim-treesitter"
    require("nvim-treesitter.configs").setup {
       indent = { enable = false },
@@ -7,4 +7,6 @@ vim.schedule(function()
          use_languagetree = true,
       },
    }
-end)
+end
+
+vim.schedule(start)
