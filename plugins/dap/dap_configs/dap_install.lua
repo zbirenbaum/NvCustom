@@ -1,6 +1,4 @@
 local dap_install = require("dap-install")
-
-
 local dbg_path = require("dap-install.config.settings").options["installation_path"] .. "jsnode/"
 local fn = vim.fn
 local dap = require('dap');
@@ -17,7 +15,7 @@ dap_install.config(
       {
         type = "node2",
         request = "launch",
-        program = '${file}',      -- program = "/home/zach/development/pylance/pylance-ext/extension/dist/result.js",
+        program = '${file}',
         cwd = fn.getcwd(),
         sourceMaps = true,
         protocol = "inspector",
