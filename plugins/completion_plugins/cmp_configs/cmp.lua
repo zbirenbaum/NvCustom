@@ -1,4 +1,5 @@
 local present, cmp = pcall(require, "cmp")
+
 local lspkind = require("custom.plugins.completion_plugins.cmp_configs.lspkind")
 if not present then
    return
@@ -16,7 +17,8 @@ cmp.setup {
    window = {
       completion = {
          border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-         --winhighlight = 'NormalFloat:NormalFloat,FloatBorder:FloatBorder',
+         --for dev brnach
+         winhighlight= 'Normal:CmpBorderedWindow_Normal,NormalFloat:CmpBorderedWindow_FloatBorder,CursorLine:Visual,Search:None',
          scrollbar = '║',
          autocomplete = {
             require('cmp.types').cmp.TriggerEvent.InsertEnter,
@@ -73,7 +75,7 @@ cmp.setup {
       { name = "nvim_lsp", group_index = 2},
       { name = "path", group_index = 2},
 --      { name = "luasnip", group_index = 2 },
---      { name = "buffer", group_index = 3 },
+      { name = "buffer", group_index = 5 },
       { name = "nvim_lua", group_index = 1 },
    },
    sorting = {
@@ -113,7 +115,8 @@ local highlights = {
 for group, hl in pairs(highlights) do
    vim.api.nvim_set_hl(0, group, hl)
 end
--- vim.cmd [[highlight! CmpItemKindText guifg=LightGrey]]
+
+-- vim.cmd[[highlight! CmpBorderedWindow_FloatBorder guifg=#565c64]]
 -- vim.cmd [[highlight! CmpItemKindFunction guifg=#C586C0]]
 -- vim.cmd [[highlight! CmpItemKindClass guifg=Orange]]
 -- vim.cmd [[highlight! CmpItemKindKeyword guifg=#f90c71]]
