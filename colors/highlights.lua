@@ -50,6 +50,7 @@ local fg_bg = function (group, fg_color, bg_color, sp)
    vim.api.nvim_set_hl(0, group, hl)
 end
 
+vim.api.nvim_set_hl(0, "TSVariable", {fg=colors.white})
 -- Comments
 if ui.italic_comments then
    vim.api.nvim_set_hl(0, "TSComment", {fg=grey_fg, italic=true, bold=true})
