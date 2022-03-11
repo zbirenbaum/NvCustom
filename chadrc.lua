@@ -1,9 +1,9 @@
 local M = {}
 
+require "custom.utils.set_globals"
 vim.api.nvim_create_autocmd({"VimEnter"}, {
    callback = function ()
       require "custom.utils.hot_reload"
-      require "custom.utils.set_globals"
       require "custom.utils.mappings".navigation()
    end,
    once = true,
