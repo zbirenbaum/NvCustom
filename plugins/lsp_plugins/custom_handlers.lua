@@ -1,11 +1,15 @@
 local function check_unused (diagnostic)
-   if diagnostic.severity == vim.diagnostic.severity.HINT and
-      string.match(string.lower(diagnostic.message), "never read") or
-      string.match(string.lower(diagnostic.message), "unused") then
-      return true
+   if diagnostic.severity ~= vim.diagnostic.severity.HINT then return end
+   local d_msg = string.lower(diagnostic.message)
+   local match_msgs = {"unused", "never read", "not accessed"}
+   for _, msg in ipairs(match_msgs) do
+      if string.match(d_msg, msg) then
+         return true
+      end
    end
    return false
 end
+
 local function ignore_vtext(diagnostic)
    if check_unused(diagnostic) then return nil end
    return diagnostic.message
