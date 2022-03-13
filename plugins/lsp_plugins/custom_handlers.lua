@@ -1,3 +1,34 @@
+local dim = require("custom.plugins.lsp_plugins.dim_unused.dim_hl")
+local results = {}
+setmetatable(results, {__mode = "v"})  -- make values weak
+local darkened = function (color)
+   if results[color] then
+      return results[color]
+   else
+      results[color] = dim.darken(color, 0.75)
+      return results[color]
+   end
+end
+
+local highlight_word = function(bufnr, ns, line, from, to)
+   local ts_hi = dim.get_treesitter_hl(line, from)
+   local final = #ts_hi >= 1 and ts_hi[#ts_hi]
+   if type(final) ~= "string" then
+      final = "Normal"
+   end
+   local hl = vim.api.nvim_get_hl_by_name(final, true)
+   local color = string.format("#%x", hl["foreground"] or 0)
+   if #color ~= 7 then
+      color = "#ffffff"
+   end
+   vim.api.nvim_set_hl(ns, string.format("%sDimmed", final), {
+      fg = darkened(color),
+      undercurl = false,
+      underline = false,
+   })
+   vim.api.nvim_buf_add_highlight(bufnr, ns, string.format("%sDimmed", final), line, from, to)
+end
+
 local function check_unused (diagnostic)
    if diagnostic.severity ~= vim.diagnostic.severity.HINT then return end
    local d_msg = string.lower(diagnostic.message)
@@ -16,13 +47,12 @@ local function ignore_vtext(diagnostic)
 end
 
 vim.diagnostic.handlers["dim/unused"] = {
-   show = function(_, _, diagnostics, _)
-      local highlight_word=require("custom.plugins.lsp_plugins.dim_unused.dim_hl")
+   show = function(_, bufnr, diagnostics, _)
       local ns = vim.api.nvim_create_namespace("dim")
       vim.api.nvim__set_hl_ns(ns)
       for _, diagnostic in ipairs(diagnostics) do
          if check_unused(diagnostic) then
-            highlight_word(ns, diagnostic.lnum, diagnostic.col, diagnostic.end_col)
+            highlight_word(bufnr, ns, diagnostic.lnum, diagnostic.col, diagnostic.end_col)
          end
       end
    end,
