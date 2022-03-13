@@ -17,7 +17,7 @@ vim.diagnostic.handlers["dim/unused"] = {
          if diagnostic.severity == vim.diagnostic.severity.HINT and
             string.match(string.lower(diagnostic.message), "never read") or
             string.match(string.lower(diagnostic.message), "unused") then
-               highlight_word(ns, diagnostic.lnum, diagnostic.col, diagnostic.end_col)
+            highlight_word(ns, diagnostic.lnum, diagnostic.col, diagnostic.end_col)
          end
       end
    end,
