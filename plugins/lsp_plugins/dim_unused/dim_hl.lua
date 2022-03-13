@@ -59,7 +59,7 @@ local darken = function(hex, amount, bg)
   return blend(hex, bg or "#000000", math.abs(amount))
 end
 
-local highlight_word = function(dim, ns, line, from, to)
+local highlight_word = function(ns, line, from, to)
   local ts_hi = get_treesitter_hl(line, from)
   local final = #ts_hi >= 1 and ts_hi[#ts_hi]
   if type(final) ~= "string" then
@@ -71,7 +71,7 @@ local highlight_word = function(dim, ns, line, from, to)
     color = "#ffffff"
   end
   vim.api.nvim_set_hl(
-    dim.ns,
+    ns,
     string.format("%sDimmed", final),
     { fg = darken(color, 0.75), undercurl = false, underline = false }
   )

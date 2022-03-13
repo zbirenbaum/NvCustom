@@ -7,7 +7,6 @@ local start = function()
          use_languagetree = true,
       },
    }
-  require("custom.plugins.lsp_plugins.dim_unused.dim").setup({disable_lsp_decorations=true})
 end
 
 vim.schedule(start)

@@ -1,13 +1,5 @@
 local M = {}
 
-local function ignore_vtext(diagnostic)
-   if diagnostic.severity == vim.diagnostic.severity.HINT and string.match(string.lower(diagnostic.message), "never read") or string.match(string.lower(diagnostic.message), "unused") then
-      return nil
-   else
-      return diagnostic.message
-   end
-end
-
 M.setup_capabilities = function()
    local capabilities = vim.lsp.protocol.make_client_capabilities()
    capabilities.textDocument.completion.completionItem.documentationFormat = { "markdown", "plaintext" }
@@ -19,32 +11,24 @@ M.setup_capabilities = function()
    capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
    capabilities.textDocument.completion.completionItem.tagSupport = { valueSet = { 1 } }
    capabilities.textDocument.completion.completionItem.resolveSupport = {
-      properties = { "documentation",
-      "detail",
-      "additionalTextEdits",
-   },
-}
-return capabilities
+      properties = {
+         "documentation",
+         "detail",
+         "additionalTextEdits",
+      },
+   }
+   return capabilities
 end
 
 M.config_handlers = function()
-
    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single",})
    vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {border = "single",})
    vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-      virtual_text = {
-         prefix = "",
-         format = function(diagnostic)
-            return ignore_vtext(diagnostic)
-         end,
-      },
-      signs = true,
-      underline = false,
-      update_in_insert = false, -- update diagnostics insert mode
    })
 end
 
 M.config_diagnostics = function ()
+   require("custom.plugins.lsp_plugins.custom_handlers")
    local function lspSymbol(name, icon)
       local hl = "DiagnosticSign" .. name
       vim.fn.sign_define(hl, { text = icon, numhl = hl, texthl = hl })
