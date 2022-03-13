@@ -1,4 +1,3 @@
--- It's good practice to namespace custom handlers to avoid collisions
 local function check_unused (diagnostic)
    if diagnostic.severity == vim.diagnostic.severity.HINT and
       string.match(string.lower(diagnostic.message), "never read") or
@@ -13,7 +12,7 @@ local function ignore_vtext(diagnostic)
 end
 
 vim.diagnostic.handlers["dim/unused"] = {
-   show = function(namespace, bufnr, diagnostics, _)
+   show = function(_, _, diagnostics, _)
       local highlight_word=require("custom.plugins.lsp_plugins.dim_unused.dim_hl")
       local ns = vim.api.nvim_create_namespace("dim")
       vim.api.nvim__set_hl_ns(ns)
@@ -23,12 +22,12 @@ vim.diagnostic.handlers["dim/unused"] = {
          end
       end
    end,
-   hide = function (namespace, bufnr, diagnostics, _)
+   hide = function (_, bufnr, _, _)
       local ns = vim.api.nvim_create_namespace("dim")
       vim.api.nvim_buf_clear_namespace(bufnr, ns, 0, -1)
    end
 }
--- Users can configure the handler
+
 vim.diagnostic.config({
    ["dim/unused"] = {},
    virtual_text = {

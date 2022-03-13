@@ -17,7 +17,7 @@ local user_plugins = {
       "max397574/better-escape.nvim",
       disable = not plugin_status.better_escape,
       event = "InsertCharPre",
-      config = function () require("plugins.configs.others").better_escape() end,
+      config = function () require("custom.plugins.overrides.better_escape") end,
    },
    ["NvChad/nvim-colorizer.lua"] = {
       "NvChad/nvim-colorizer.lua",
