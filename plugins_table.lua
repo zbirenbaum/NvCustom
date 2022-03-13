@@ -112,7 +112,7 @@ local user_plugins = {
    ["rafamadriz/friendly-snippets"] = {
       "rafamadriz/friendly-snippets",
       disable = not plugin_status.cmp,
-      event = "InsertEnter",
+      event = {"InsertEnter", "CursorHold"},
    },
    ["hrsh7th/nvim-cmp"] = {
       "hrsh7th/nvim-cmp", --float menu

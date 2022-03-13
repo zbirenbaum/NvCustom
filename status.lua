@@ -10,14 +10,12 @@ local status = {
    telescope_media = true, -- see media files in telescope picker
    truezen = true, -- no distraction mode for nvim
    nvimtree=false,
-
    --My Plugins
    autopairs = true,
    marks = false,
    gps = false,
    luadev = false,
    better_escape = true,
-
    -- Completions, choose 1
    coq = false,
    cmp = true,
