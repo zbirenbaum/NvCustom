@@ -17,8 +17,6 @@ cmp.setup {
    window = {
       completion = {
          border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-         --for dev brnach
-         winhighlight= 'Normal:CmpBorderedWindow_Normal,NormalFloat:CmpBorderedWindow_FloatBorder,CursorLine:Visual,Search:None',
          scrollbar = '║',
          autocomplete = {
             require('cmp.types').cmp.TriggerEvent.InsertEnter,
@@ -93,8 +91,6 @@ cmp.setup {
 --set max height of items
 vim.cmd [[ set pumheight=6 ]]
 --set highlights
-
---lsp kind
 local highlights = {
    CmpItemKindText = {fg="LightGrey"},
    CmpItemKindFunction = {fg="#C586C0"},
@@ -112,6 +108,7 @@ local highlights = {
    CmpItemAbbrMatch = {fg="#569CD6", bg="NONE"},
    CmpItemAbbrMatchFuzzy = {fg="#569CD6", bg="NONE"},
 }
+vim.api.nvim_set_hl(0, 'CmpBorderedWindow_FloatBorder', {fg='#565c64'})
 for group, hl in pairs(highlights) do
    vim.api.nvim_set_hl(0, group, hl)
 end

@@ -1,13 +1,10 @@
 local dim = require("custom.plugins.lsp_plugins.dim_unused.dim_hl")
 local results = {}
 setmetatable(results, {__mode = "v"})  -- make values weak
+
 local darkened = function (color)
-   if results[color] then
-      return results[color]
-   else
-      results[color] = dim.darken(color, 0.75)
-      return results[color]
-   end
+   if not results[color] then results[color] = dim.darken(color, 0.75) end
+   return results[color]
 end
 
 local highlight_word = function(bufnr, ns, line, from, to)
