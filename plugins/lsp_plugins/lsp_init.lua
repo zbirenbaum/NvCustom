@@ -1,5 +1,3 @@
-local lsp_setup = require("custom.plugins.lsp_plugins.nvim_lsp_setup")
-
 local default_lsp_config = function(attach, capabilities)
    local default_config = {
       on_attach = attach,
@@ -23,8 +21,8 @@ end
 local M = {}
 
 M.setup_lsp = function(completion_engine)
+   local lsp_setup = require("custom.plugins.lsp_plugins.nvim_lsp_setup")
    lsp_setup.config_handlers()
-   lsp_setup.config_diagnostics()
    local attach = lsp_setup.attach()
    local capabilities = lsp_setup.setup_capabilities()
    if not completion_engine then completion_engine = {} end
