@@ -58,6 +58,7 @@ M.plugins = {
    default_plugin_config_replace = {
       better_escape="custom.plugins.overrides.better_escape",
       feline = function () require("custom.plugins.overrides.statusline_builder.builder") end,
+      nvim_tree = "custom.plugins.overrides.nvimtree",
       --      nvim_treesitter = "custom.plugins.overrides.treesitter",
       indent_blankline = function () require("custom.plugins.custom_plugin_configs.indent_blankline") end
    },

@@ -1,6 +1,20 @@
 local plugin_status = require("custom.status")
+local override_req = require("core.utils").override_req
+local plugin_settings = require("core.utils").load_config().plugins
 
 local user_plugins = {
+   ["kyazdani42/nvim-tree.lua"] = {
+      "kyazdani42/nvim-tree.lua",
+      cmd = { "NvimTreeToggle", "NvimTreeFocus" },
+      config = function()
+         vim.cmd[[packadd nvim-tree.lua]]
+         require("custom.plugins.overrides.nvimtree").config()
+      end,
+      setup = function()
+         require("custom.plugins.overrides.nvimtree").setup()
+         require("core.mappings").nvimtree()
+      end,
+   },
    ["nvim-lua/plenary.nvim"] = {"nvim-lua/plenary.nvim"},
    ["lewis6991/impatient.nvim"] = { "lewis6991/impatient.nvim" },
    ["wbthomason/packer.nvim"] = {"wbthomason/packer.nvim", event = "VimEnter"},

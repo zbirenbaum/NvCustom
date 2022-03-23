@@ -9,7 +9,7 @@ local status = {
    neoscroll = true, -- smooth scroll
    telescope_media = true, -- see media files in telescope picker
    truezen = true, -- no distraction mode for nvim
-   nvimtree=false,
+   nvimtree=true,
    --My Plugins
    autopairs = true,
    marks = false,
