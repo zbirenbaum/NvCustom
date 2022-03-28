@@ -1,5 +1,6 @@
 local plen_job = require('plenary.job')
 local M = {}
+
 M.new = function(command, agent_job_status)
    vim.api.nvim_buf_set_var(0, 'plen_job_status', agent_job_status)
    local user_data = require("custom.utils.copilot.setup").get_cred()
@@ -11,14 +12,14 @@ M.new = function(command, agent_job_status)
          ["GITHUB_USER"] = user_data.user,
          ["GITHUB_TOKEN"] = user_data.token,
       },
-      on_start = function()
-         agent_job_status.status = 'started'
-         print("started")
-      end,
-      on_stdout = function(out)
-         agent_job_status.out = out
-         print("out")
-      end,
+      -- on_start = function()
+      --    agent_job_status.status = 'started'
+      --    print("started")
+      -- end,
+      -- on_stdout = function(out)
+      --    agent_job_status.out = out
+      --    print("out")
+      -- end,
       on_stderr = function(err, code)
          agent_job_status.err = {err, code}
          print("err")
