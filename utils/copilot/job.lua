@@ -18,7 +18,6 @@ M.new = function(command, agent_job_status)
       on_stdout = function(out)
          agent_job_status.out = out
          print("out")
-         print(vim.inspect(out))
       end,
       on_stderr = function(err, code)
          agent_job_status.err = {err, code}
@@ -27,7 +26,7 @@ M.new = function(command, agent_job_status)
       end,
       on_exit = function(code)
          agent_job_status.status = 'exited'
-         print("exited")
+         print("exited: " .. code)
       end
    }
    local job = plen_job:new(args)
