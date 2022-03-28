@@ -1,0 +1,5 @@
+--> {"method": "initialize", "jsonrpc": "2.0", "id": 1, "params": {"capabilities": {}}}
+<-- {"jsonrpc":"2.0","id":1,"result":{"capabilities":{"textDocumentSync":{"openClose":true,"change":2}}}}
+--> {"method": "setEditorInfo", "jsonrpc": "2.0", "id": 2, "params": {"editorPluginInfo": {"version": "1.1.0", "name": "copilot.vim"}, "editorInfo": {"version": "0.7.0-dev+1337-g72652cbc4-dirty", "name": "Neovim"}}}
+<-- {"jsonrpc":"2.0","id":2,"result":"OK"}
+agent exited with status 143

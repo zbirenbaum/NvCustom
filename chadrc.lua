@@ -5,6 +5,7 @@ vim.api.nvim_create_autocmd({"VimEnter"}, {
    callback = function ()
       require "custom.utils.hot_reload"
       require "custom.utils.mappings".navigation()
+      -- require "custom.utils.copilot.test_agent"
    end,
    once = true,
 })
