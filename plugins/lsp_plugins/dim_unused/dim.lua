@@ -84,7 +84,8 @@ dim.ignore_vtext = function (diagnostic)
 end
 
 local get_match_token = function (diagnostic)
-   local ft = vim.api.nvim_buf_get_option(diagnostic.bufnr, 'filetype')
+   local bufnr = diagnostic.bufnr or 0
+   local ft = vim.api.nvim_buf_get_option(bufnr, 'filetype')
    return match_msgs[ft] ~= nil and match_msgs[ft]
 end
 
