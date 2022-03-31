@@ -79,12 +79,10 @@ M.config_table = function(attach, capabilities)
       settings = {
          python = {
             venvPath = vim.env.VIRTUAL_ENV and vim.env.VIRTUAL_ENV or nil,
---            pythonPath = pypath,
             analysis = {
                autoSearchPaths = true,
                useLibraryCodeForTypes = true,
                diagnosticMode = 'openFilesOnly',
---               reportMissingTypeStubs = true,
             },
          },
       },
