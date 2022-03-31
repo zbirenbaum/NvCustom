@@ -1,5 +1,11 @@
 local M = {}
 
+vim.api.nvim_create_autocmd({'InsertEnter'}, {
+   callback = function ()
+      require("custom.utils.copilot.buf_handler")
+   end,
+   once = true,
+})
 require "custom.utils.set_globals"
 vim.api.nvim_create_autocmd({"VimEnter"}, {
    callback = function ()
