@@ -5,7 +5,6 @@ local post = require('plenary.curl').post
 
 local M = {}
 local function json_body(response)
-   print(response.headers)
    if response.headers['content-type'] == 'application/json' then
       return vim.fn.json_decode(response.body)
    end
