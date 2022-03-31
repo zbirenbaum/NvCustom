@@ -31,5 +31,5 @@ M.get_cred = function ()
    local user = oauth_user(token)
    return {user = user, token = token}
 end
---
+
 return M

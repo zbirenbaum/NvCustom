@@ -1,4 +1,5 @@
 local present, cmp = pcall(require, "cmp")
+require('cmp_nvim_lsp').setup()
 
 local lspkind = require("custom.plugins.completion_plugins.cmp_configs.lspkind")
 if not present then
@@ -70,11 +71,12 @@ cmp.setup {
       ghost_text = true,
    },
    sources = {
+      { name = "copilot-cmp", group_index = 1},
       { name = "nvim_lsp", group_index = 2},
       { name = "path", group_index = 2},
 --      { name = "luasnip", group_index = 2 },
       { name = "buffer", group_index = 5 },
-      { name = "nvim_lua", group_index = 1 },
+      { name = "nvim_lua", group_index = 2 },
    },
    sorting = {
       comparators = {
@@ -113,22 +115,3 @@ for group, hl in pairs(highlights) do
    vim.api.nvim_set_hl(0, group, hl)
 end
 
--- vim.cmd[[highlight! CmpBorderedWindow_FloatBorder guifg=#565c64]]
--- vim.cmd [[highlight! CmpItemKindFunction guifg=#C586C0]]
--- vim.cmd [[highlight! CmpItemKindClass guifg=Orange]]
--- vim.cmd [[highlight! CmpItemKindKeyword guifg=#f90c71]]
--- vim.cmd [[highlight! CmpItemKindSnippet guifg=#565c64]]
--- vim.cmd [[highlight! CmpItemKindConstructor guifg=#ae43f0]]
--- vim.cmd [[highlight! CmpItemKindVariable guibg=NONE guifg=#9CDCFE]]
--- vim.cmd [[highlight! CmpItemKindInterface guibg=NONE guifg=#f90c71]]
--- vim.cmd [[highlight! CmpItemKindFolder guifg=#2986cc]]
--- vim.cmd [[highlight! CmpItemKindReference guifg=#922b21]]
--- vim.cmd [[highlight! CmpItemKindMethod guifg=#C586C0]]
--- vim.cmd [[highlight! CmpItemMenu guibg=#C586C0 guifg=#C586C0]]
--- --background
--- --vim.cmd [[highlight! Pmenu guibg=#10171f]]
--- --vim.cmd [[highlight! PmenuSel guibg=NONE guifg=NONE gui=underline guisp=#569CD6]]
--- --menu items
--- vim.cmd [[highlight! CmpItemAbbr guibg=NONE guifg=#565c64]]
--- vim.cmd [[highlight! CmpItemAbbrMatch guibg=NONE guifg=#569CD6]]
--- vim.cmd [[highlight! CmpItemAbbrMatchFuzzy guibg=NONE guifg=#569CD6]]
