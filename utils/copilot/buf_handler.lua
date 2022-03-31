@@ -13,7 +13,6 @@ end
 local get_completions = function()
    local params = lsp_util.get_completion_params()
    completions = vim.lsp.buf_request(0, 'getCompletions', params, completion_handler)
-   print(vim.inspect(vim.lsp.buf_request_sync(0, 'getCompletions', params, 600)))
 end
 local send_editor_info = function (a, b, c, d)
    local responses = vim.lsp.buf_request_sync(0, 'setEditorInfo', {
@@ -51,6 +50,12 @@ vim.lsp.start_client({
    autostart = true,
    on_init = function(client, _)
       vim.lsp.buf_attach_client(0, client.id)
+      vim.api.nvim_create_autocmd({'BufEnter'}, {
+         callback = function ()
+            if not vim.lsp.buf_get_clients(0)[client.id] then vim.lsp.buf_attach_client(0, client.id) end
+         end,
+         once = false,
+      })
    end,
    on_attach = function()
       send_editor_info()
