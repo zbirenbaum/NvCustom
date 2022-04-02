@@ -42,7 +42,20 @@ M.options = {
       -- used for updater
       update_url = "https://github.com/NvChad/NvChad",
       update_branch = "main",
-   }
+   },
+   terminal = {
+      behavior = {
+         close_on_exit = true,
+      },
+      window = {
+         vsplit_ratio = 0.5,
+         split_ratio = 0.3,
+      },
+      location = {
+         horizontal = "belowright",
+         vertical = "belowright",
+      },
+   },
 }
 -- ui configs
 M.ui = {
@@ -63,12 +76,12 @@ M.plugins = {
    },
    status = require("custom.status"),
    default_plugin_remove= {
-      "NvChad/extensions",
+      -- "NvChad/extensions",
       "nvim-lua/plenary.nvim",
       "NvChad/nvim-colorizer.lua",
       "feline-nvim/feline.nvim",
       "NvChad/nvim-base16.lua",
-      "akinsho/bufferline.nvim",
+      -- "akinsho/bufferline.nvim",
       "nvim-telescope/telescope.nvim",
       "nvim-treesitter/nvim-treesitter",
       "kyazdani42/nvim-web-devicons",
