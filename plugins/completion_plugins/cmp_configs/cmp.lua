@@ -1,7 +1,7 @@
-local present, cmp = pcall(require, "cmp")
+-- require('custom.utils.copilot.copilot-cmp.setup').setup()
+-- require('cmp').register_source('copilot-cmp', 'custom.utils.copilot.copilot-cmp')
 
-require('custom.utils.copilot.copilot-cmp.setup').setup()
-require('cmp').register_source('copilot-cmp', 'custom.utils.copilot.copilot-cmp')
+local present, cmp = pcall(require, "cmp")
 
 local lspkind = require("custom.plugins.completion_plugins.cmp_configs.lspkind")
 if not present then

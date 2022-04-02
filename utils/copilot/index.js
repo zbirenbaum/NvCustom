@@ -1,1 +1,0 @@
-/home/zach/.local/share/nvim/site/pack/packer/opt/copilot.vim/copilot/index.js

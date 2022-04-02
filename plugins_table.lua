@@ -4,12 +4,11 @@ local user_plugins = {
    ["nvim-lua/plenary.nvim"] = {"nvim-lua/plenary.nvim"},
    ["lewis6991/impatient.nvim"] = { "lewis6991/impatient.nvim" },
    ["wbthomason/packer.nvim"] = {"wbthomason/packer.nvim", event = "VimEnter"},
-   ["zbirenbaum/copilot.vim"] = {
-      "zbirenbaum/copilot.vim",
+   ["zbirenbaum/copilot.lua"] = {
+      "zbirenbaum/copilot.lua",
       after = "cmp_luasnip",
       setup = function ()
-         vim.g.copilot_no_tab_map = true
-         vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
+         require("copilot")
       end,
    },
    ["lewis6991/gitsigns.nvim"] = {
