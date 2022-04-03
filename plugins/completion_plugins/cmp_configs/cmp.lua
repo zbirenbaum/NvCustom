@@ -1,6 +1,6 @@
--- require('custom.utils.copilot.copilot-cmp.setup').setup()
--- require('cmp').register_source('copilot-cmp', 'custom.utils.copilot.copilot-cmp')
+-- require('copilot.copilot-cmp.setup').setup()
 
+require('copilot_cmp').setup()
 local present, cmp = pcall(require, "cmp")
 
 local lspkind = require("custom.plugins.completion_plugins.cmp_configs.lspkind")
@@ -73,12 +73,12 @@ cmp.setup {
       ghost_text = true,
    },
    sources = {
-      { name = "copilot-cmp", group_index = 1},
-      { name = "nvim_lsp", group_index = 2},
+      { name = "copilot", group_index = 1},
+      { name = "nvim_lsp", group_index = 3},
       { name = "path", group_index = 2},
---      { name = "luasnip", group_index = 2 },
-      { name = "buffer", group_index = 5 },
-      { name = "nvim_lua", group_index = 2 },
+      -- { name = "luasnip", group_index = 2 },
+      -- { name = "buffer", group_index = 5 },
+      { name = "nvim_lua", group_index = 4 },
    },
    sorting = {
       comparators = {

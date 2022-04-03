@@ -6,10 +6,14 @@ local user_plugins = {
    ["wbthomason/packer.nvim"] = {"wbthomason/packer.nvim", event = "VimEnter"},
    ["zbirenbaum/copilot.lua"] = {
       "zbirenbaum/copilot.lua",
-      after = "cmp_luasnip",
-      setup = function ()
-         require("copilot")
+      after = 'feline.nvim',
+      config = function ()
+         vim.defer_fn(function() require("copilot") end, 100)
       end,
+   },
+   ["zbirenbaum/copilot-cmp"] = {
+      "zbirenbaum/copilot-cmp",
+      after = {"copilot.lua", "nvim-cmp"},
    },
    ["lewis6991/gitsigns.nvim"] = {
       "lewis6991/gitsigns.nvim",
