@@ -4,7 +4,17 @@ local user_plugins = {
    ["nvim-lua/plenary.nvim"] = {"nvim-lua/plenary.nvim"},
    ["lewis6991/impatient.nvim"] = { "lewis6991/impatient.nvim" },
    ["wbthomason/packer.nvim"] = {"wbthomason/packer.nvim", event = "VimEnter"},
-   -- ["github/copilot.vim"] = {"github/copilot.vim"},
+   ["zbirenbaum/copilot.lua"] = {
+      "zbirenbaum/copilot.lua",
+      after = 'feline.nvim',
+      config = function ()
+         vim.defer_fn(function() require("copilot") end, 100)
+      end,
+   },
+   ["zbirenbaum/copilot-cmp"] = {
+      "zbirenbaum/copilot-cmp",
+      after = {"copilot.lua", "nvim-cmp"},
+   },
    ["lewis6991/gitsigns.nvim"] = {
       "lewis6991/gitsigns.nvim",
       disable = not plugin_status.gitsigns,
