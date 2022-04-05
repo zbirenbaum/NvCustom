@@ -6,9 +6,11 @@ local user_plugins = {
    ["wbthomason/packer.nvim"] = {"wbthomason/packer.nvim", event = "VimEnter"},
    ["zbirenbaum/copilot.lua"] = {
       "zbirenbaum/copilot.lua",
-      after = 'feline.nvim',
+      event = "InsertEnter",
       config = function ()
-         vim.defer_fn(function() require("copilot") end, 100)
+         vim.schedule(function()
+            require("copilot")
+         end)
       end,
    },
    ["zbirenbaum/copilot-cmp"] = {
@@ -126,8 +128,8 @@ local user_plugins = {
       event = {"InsertEnter", "CursorHold"},
    },
    ["hrsh7th/nvim-cmp"] = {
-      "hrsh7th/nvim-cmp", --float menu
-      branch = "dev",
+      "hrsh7th/nvim-cmp",
+      branch = "dev", --float menu
       after = "friendly-snippets",
       disable = not plugin_status.cmp,
       config = function()

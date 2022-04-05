@@ -75,7 +75,7 @@ cmp.setup {
       { name = "path", group_index = 2},
       -- { name = "luasnip", group_index = 2 },
       -- { name = "buffer", group_index = 5 },
-      -- { name = "nvim_lua", group_index = 2 },
+      { name = "nvim_lua", group_index = 2 },
    },
    sorting = {
       comparators = {
@@ -89,6 +89,7 @@ cmp.setup {
    },
    preselect = cmp.PreselectMode.Item,
 }
+
 --set max height of items
 vim.cmd [[ set pumheight=6 ]]
 --set highlights
