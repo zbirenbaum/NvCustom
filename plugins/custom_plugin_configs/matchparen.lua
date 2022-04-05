@@ -1,5 +1,5 @@
 vim.g.loaded_matchparen = 1
-require('matchparen').setup()
+require("matchparen").setup()
 --vim.g.loaded_matchparen = 1
 --print("fuck")
 

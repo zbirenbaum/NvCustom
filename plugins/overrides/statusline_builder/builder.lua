@@ -2,8 +2,8 @@ local colors = require("colors").get()
 -- local lsp = require "feline.providers.lsp"
 
 local components = {
-   active = {},
-   inactive = {},
+  active = {},
+  inactive = {},
 }
 table.insert(components.active, {})
 table.insert(components.active, {})
@@ -22,7 +22,6 @@ table.insert(left, ct.mode.mode_string)
 --table.insert(left, ct.mode.right_sep)
 table.insert(left, ct.dir)
 table.insert(left, ct.file)
-
 
 table.insert(left, ct.lsp)
 table.insert(left, ct.diagnostics.errors)
@@ -51,26 +50,25 @@ components.active[1] = left
 components.active[2] = middle
 components.active[3] = right
 
-
 local InactiveStatusHL = {
-   fg = colors.one_bg2,
-   bg = "NONE",
-   style = "underline",
+  fg = colors.one_bg2,
+  bg = "NONE",
+  style = "underline",
 }
 
 components.inactive = {
-   {
-      {
-         provider = " ",
-         hl = InactiveStatusHL,
-      },
-   },
+  {
+    {
+      provider = " ",
+      hl = InactiveStatusHL,
+    },
+  },
 }
 
-require("feline").setup {
-   colors = {
-      bg = colors.statusline_bg,
-      fg = colors.fg,
-   },
-   components = components,
-}
+require("feline").setup({
+  colors = {
+    bg = colors.statusline_bg,
+    fg = colors.fg,
+  },
+  components = components,
+})

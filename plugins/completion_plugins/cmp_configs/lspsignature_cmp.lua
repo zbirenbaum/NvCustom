@@ -1,11 +1,11 @@
 local lspsignature = require("lsp_signature")
-lspsignature.setup {
+lspsignature.setup({
   bind = true,
   doc_lines = 1,
   floating_window = false,
   fix_pos = true,
   hint_enable = true,
-  always_trigger=false,
+  always_trigger = false,
   floating_window_above_cur_line = true, -- try to place the floating above the current line when possible Note:
   floating_window_off_x = 1, -- adjust float windows x position.
   floating_window_off_y = 0, -- adjust float windows y position.
@@ -20,7 +20,6 @@ lspsignature.setup {
   },
   zindex = 200, -- by default it will be on top of all floating windows, set to 50 send it to bottom
   padding = "", -- character to pad on left and right of signature can be ' ', or '|'  etc
-  transparency=20,
-}
+  transparency = 20,
+})
 require("lsp_signature").status_line(20)
-

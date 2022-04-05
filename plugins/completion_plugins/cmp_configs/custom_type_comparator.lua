@@ -1,15 +1,11 @@
-local types = require('cmp.types')
-local misc = require('cmp.utils.misc')
-
-
-
-
+local types = require("cmp.types")
+local misc = require("cmp.utils.misc")
 
 local compare = {}
 -- local cmp = require "cmp"
 -- cmp.setup {
 --     -- ... rest of your setup ...
--- 
+--
 --     sorting = {
 --         comparators = {
 --             cmp.config.compare.offset,
@@ -26,7 +22,7 @@ local compare = {}
 
 --CompletionItemKind = {}
 -- local lookuptable = {
---   
+--
 -- }
 W = {}
 W.TypeParameter = 1
@@ -54,7 +50,7 @@ W.Struct = 22
 W.Event = 23
 W.Operator = 24
 W.Text = 1
--- 
+--
 compare.disable_snip = function(entry1, entry2)
   local kind1 = entry1:get_kind()
   local kind2 = entry2:get_kind()
@@ -105,8 +101,4 @@ compare.kind_sort = function(entry1, entry2)
   end
 end
 
-
-
-
 return compare
-

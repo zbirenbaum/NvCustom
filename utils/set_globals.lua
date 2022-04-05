@@ -1,13 +1,14 @@
 vim.g.clipboard = {
-  name= 'unnamedplus',
+  name = "unnamedplus",
   copy = {
-    ["+"] ='xclip -i -selection clipboard',
-    ["*"]= 'xclip -i -selection primary', },
-  paste= {
-    ["+"] = 'xclip -o -selection clipboard',
-    ["*"] = 'xclip -o -selection primary',
+    ["+"] = "xclip -i -selection clipboard",
+    ["*"] = "xclip -i -selection primary",
   },
-  cache_enabled = 0
+  paste = {
+    ["+"] = "xclip -o -selection clipboard",
+    ["*"] = "xclip -o -selection primary",
+  },
+  cache_enabled = 0,
 }
 vim.g.loaded_matchparen = 1
 vim.g.python_host_skip_check = 1

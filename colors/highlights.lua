@@ -26,42 +26,42 @@ local orange = colors.orange
 local one_bg3 = colors.one_bg3
 
 -- functions for setting highlights
-local fg = function (group, color, sp)
-   local hl = {fg=color}
-   if sp ~= nil then
-      hl[sp] = true
-   end
-   vim.api.nvim_set_hl(0, group, hl)
+local fg = function(group, color, sp)
+  local hl = { fg = color }
+  if sp ~= nil then
+    hl[sp] = true
+  end
+  vim.api.nvim_set_hl(0, group, hl)
 end
 
-local bg = function (group, color, sp)
-   local hl = {bg=color}
-   if sp ~= nil then
-      hl[sp] = true
-   end
-   vim.api.nvim_set_hl(0, group, hl)
+local bg = function(group, color, sp)
+  local hl = { bg = color }
+  if sp ~= nil then
+    hl[sp] = true
+  end
+  vim.api.nvim_set_hl(0, group, hl)
 end
 
-local fg_bg = function (group, fg_color, bg_color, sp)
-   local hl = {fg=fg_color, bg=bg_color}
-   if sp ~= nil then
-      hl[sp] = true
-   end
-   vim.api.nvim_set_hl(0, group, hl)
+local fg_bg = function(group, fg_color, bg_color, sp)
+  local hl = { fg = fg_color, bg = bg_color }
+  if sp ~= nil then
+    hl[sp] = true
+  end
+  vim.api.nvim_set_hl(0, group, hl)
 end
 
-vim.api.nvim_set_hl(0, "TSVariable", {fg=colors.white})
+vim.api.nvim_set_hl(0, "TSVariable", { fg = colors.white })
 -- Comments
 if ui.italic_comments then
-   vim.api.nvim_set_hl(0, "TSComment", {fg=grey_fg, italic=true, bold=true})
-   vim.api.nvim_set_hl(0, "Comment", {fg=grey_fg, italic=true, bold=true})
-   -- fg("Comment", grey_fg, "italic")
+  vim.api.nvim_set_hl(0, "TSComment", { fg = grey_fg, italic = true, bold = true })
+  vim.api.nvim_set_hl(0, "Comment", { fg = grey_fg, italic = true, bold = true })
+  -- fg("Comment", grey_fg, "italic")
 else
-   fg("Comment", grey_fg)
+  fg("Comment", grey_fg)
 end
 
 -- Disable cursor line
-cmd "hi clear CursorLine"
+cmd("hi clear CursorLine")
 -- Line number
 fg("cursorlinenr", white)
 
@@ -92,10 +92,10 @@ fg("NvimInternalError", red)
 fg("VertSplit", one_bg2)
 
 if ui.transparency then
-   bg("Folded", "NONE")
-   fg("Folded", "NONE")
-   fg("Comment", grey)
-   fg_bg("Normal", white, "NONE") --due to api replacing undefineds, needs to be set
+  bg("Folded", "NONE")
+  fg("Folded", "NONE")
+  fg("Comment", grey)
+  fg_bg("Normal", white, "NONE") --due to api replacing undefineds, needs to be set
 end
 
 -- [[ Plugin Highlights
@@ -174,24 +174,24 @@ bg("TelescopeSelection", black2)
 
 -- Disable some highlight in nvim tree if transparency enabled
 if ui.transparency then
-   bg("NormalFloat", "NONE")
-   bg("NvimTreeNormal", "NONE")
-   bg("NvimTreeNormalNC", "NONE")
-   bg("NvimTreeStatusLineNC", "NONE")
-   fg_bg("NvimTreeVertSplit", grey, "NONE")
+  bg("NormalFloat", "NONE")
+  bg("NvimTreeNormal", "NONE")
+  bg("NvimTreeNormalNC", "NONE")
+  bg("NvimTreeStatusLineNC", "NONE")
+  fg_bg("NvimTreeVertSplit", grey, "NONE")
 
-   -- telescope
-   bg("TelescopeBorder", "NONE")
-   bg("TelescopePrompt", "NONE")
-   bg("TelescopeResults", "NONE")
-   bg("TelescopePromptBorder", "NONE")
-   bg("TelescopePromptNormal", "NONE")
-   bg("TelescopeNormal", "NONE")
-   bg("TelescopePromptPrefix", "NONE")
-   fg("TelescopeBorder", one_bg)
-   fg_bg("TelescopeResultsTitle", black, blue)
+  -- telescope
+  bg("TelescopeBorder", "NONE")
+  bg("TelescopePrompt", "NONE")
+  bg("TelescopeResults", "NONE")
+  bg("TelescopePromptBorder", "NONE")
+  bg("TelescopePromptNormal", "NONE")
+  bg("TelescopeNormal", "NONE")
+  bg("TelescopePromptPrefix", "NONE")
+  fg("TelescopeBorder", one_bg)
+  fg_bg("TelescopeResultsTitle", black, blue)
 end
 
 if #override ~= 0 then
-   require(override)
+  require(override)
 end

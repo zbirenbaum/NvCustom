@@ -1,1 +1,1 @@
-require("neoscroll").setup({mappings={}})
+require("neoscroll").setup({ mappings = {} })
