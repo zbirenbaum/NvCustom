@@ -9,13 +9,12 @@ local user_plugins = {
     event = "InsertEnter",
     config = function()
       vim.schedule(function()
-        require("copilot")
+        require("copilot").setup()
       end)
     end,
   },
   ["zbirenbaum/copilot-cmp"] = {
     "zbirenbaum/copilot-cmp",
-    branch = "cycling_completions",
     after = { "copilot.lua", "nvim-cmp" },
   },
   ["lewis6991/gitsigns.nvim"] = {
