@@ -4,6 +4,12 @@ local user_plugins = {
   ["nvim-lua/plenary.nvim"] = { "nvim-lua/plenary.nvim" },
   ["lewis6991/impatient.nvim"] = { "lewis6991/impatient.nvim" },
   ["wbthomason/packer.nvim"] = { "wbthomason/packer.nvim", event = "VimEnter" },
+  ["zbirenbaum/neodim"] = {
+    "zbirenbaum/neodim",
+    config = function ()
+      require("dim").setup()
+    end
+  },
   ["zbirenbaum/copilot.lua"] = {
     "zbirenbaum/copilot.lua",
     event = {"VimEnter"},
