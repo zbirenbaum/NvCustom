@@ -1,9 +1,9 @@
 local util = require("custom.plugins.lsp_plugins.dim_unused.dim_hl")
+
 local results = {}
 setmetatable(results, { __mode = "v" }) -- make values weak
 local dim = {}
 local hl_map = {}
-local match_msgs = { lua = "unused", c = "never read", python = "not accessed" }
 
 local bufnr_and_namespace_cacher_mt = {
   __index = function(t, bufnr)
@@ -91,22 +91,12 @@ dim.ignore_vtext = function(diagnostic)
   return not dim.detect_unused(diagnostic) and diagnostic.message or nil
 end
 
-local get_match_token = function(diagnostic)
-  local bufnr = diagnostic.bufnr or 0
-  local ft = vim.api.nvim_buf_get_option(bufnr, "filetype")
-  return match_msgs[ft] ~= nil and match_msgs[ft]
-end
-
 dim.detect_unused = function(diagnostics)
   local is_list = vim.tbl_islist(diagnostics)
-  local to_match = is_list and get_match_token(diagnostics[1]) or get_match_token(diagnostics)
-  if to_match == nil then
-    return false
-  end --buffer lsp not supported
   local unused = function(diagnostic)
     if diagnostic.severity == vim.diagnostic.severity.HINT then
-      local found = string.match(string.lower(diagnostic.message), to_match)
-      return found ~= nil and found ~= ""
+      local tags = diagnostic.tags or diagnostic.user_data.lsp.tags
+      return tags and vim.tbl_contains(tags, vim.lsp.protocol.DiagnosticTag.Unnecessary)
     end
     return false
   end
