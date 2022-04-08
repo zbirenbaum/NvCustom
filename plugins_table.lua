@@ -6,11 +6,11 @@ local user_plugins = {
   ["wbthomason/packer.nvim"] = { "wbthomason/packer.nvim", event = "VimEnter" },
   ["zbirenbaum/copilot.lua"] = {
     "zbirenbaum/copilot.lua",
-    event = "InsertEnter",
+    event = {"VimEnter"},
     config = function()
-      vim.schedule(function()
+      vim.defer_fn(function()
         require("copilot").setup()
-      end)
+      end, 100)
     end,
   },
   ["zbirenbaum/copilot-cmp"] = {
