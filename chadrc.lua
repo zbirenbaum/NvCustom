@@ -66,7 +66,10 @@ M.ui = {
 }
 
 M.plugins = {
-  options = { packer = { init_file = "custom.plugins.packer_init" } },
+  options = {
+    packer = { init_file = "custom.plugins.packer_init" },
+    statusline = { hide_disable = true },
+  },
   install = "custom.plugins_table",
   default_plugin_config_replace = {
     better_escape = "custom.plugins.overrides.better_escape",

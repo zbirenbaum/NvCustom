@@ -16,6 +16,7 @@ vim.g.python3_host_prog = "/home/zach/.virtualenvs/py3nvim/bin/python"
 vim.g.python_host_prog = "/home/zach/.virtualenvs/py2nvim/bin/python"
 vim.o.showcmd = false
 vim.o.showmode = false
+vim.o.laststatus = 3
 vim.opt.list = true
 vim.opt.listchars:append("eol:↴")
 
