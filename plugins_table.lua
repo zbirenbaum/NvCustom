@@ -7,7 +7,7 @@ local user_plugins = {
   ["zbirenbaum/neodim"] = {
     "zbirenbaum/neodim",
     config = function ()
-      require("dim").setup()
+      require("neodim").setup({})
     end
   },
   ["zbirenbaum/copilot.lua"] = {

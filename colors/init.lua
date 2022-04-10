@@ -18,7 +18,8 @@ M.init = function(theme)
     -- unload to force reload
     package.loaded["custom.colors.highlights" or false] = nil
     -- then load the highlights
-    require("custom.colors.highlights")
+    require("custom.colors.highlights").apply_colors_highlight()
+    require("custom.colors.highlights").override_ts_hl()
   end
 end
 
@@ -29,6 +30,14 @@ M.get = function(theme)
   end
 
   return require("hl_themes." .. theme)
+end
+
+M.get_base_16 = function(theme)
+  if not theme then
+    theme = vim.g.nvchad_theme
+  end
+
+  return require("themes." .. theme .. '-base16')
 end
 
 return M
