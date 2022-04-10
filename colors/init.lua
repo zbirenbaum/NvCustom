@@ -19,7 +19,6 @@ M.init = function(theme)
     package.loaded["custom.colors.highlights" or false] = nil
     -- then load the highlights
     require("custom.colors.highlights").apply_colors_highlight()
-    require("custom.colors.highlights").override_ts_hl()
   end
 end
 
