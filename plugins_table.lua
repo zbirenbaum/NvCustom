@@ -6,8 +6,14 @@ local user_plugins = {
   ["wbthomason/packer.nvim"] = { "wbthomason/packer.nvim", event = "VimEnter" },
   ["zbirenbaum/neodim"] = {
     "zbirenbaum/neodim",
+    after = {"filetype.nvim"},
     config = function ()
-      require("neodim").setup({})
+      vim.schedule(function()
+        require("neodim").setup({
+          timer_debounce = 200,
+          ft_disable = { "python" },
+        })
+      end)
     end
   },
   ["zbirenbaum/copilot.lua"] = {
@@ -193,7 +199,13 @@ local user_plugins = {
     "nathom/filetype.nvim",
     config = function()
       require("filetype").setup({
+        extensions = {
+          py="python",
+        },
         overrides = { function_extensions = {
+          -- ["py"] = function()
+          --   vim.bo.filetype = "python"
+          -- end,
           ["norg"] = function()
             vim.bo.filetype = "norg"
           end,
