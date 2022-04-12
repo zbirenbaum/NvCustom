@@ -18,6 +18,7 @@ local user_plugins = {
   },
   ["zbirenbaum/copilot.lua"] = {
     "zbirenbaum/copilot.lua",
+    branch = "dev",
     event = {"VimEnter"},
     config = function()
       vim.defer_fn(function()
