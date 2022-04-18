@@ -22,6 +22,7 @@ cmp.setup({
     completion = {
       border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
       scrollbar = "║",
+      winhighlight = 'Normal:CmpMenu,FloatBorder:CmpMenuBorder,CursorLine:CmpSelection,Search:None',
       autocomplete = {
         require("cmp.types").cmp.TriggerEvent.InsertEnter,
         require("cmp.types").cmp.TriggerEvent.TextChanged,
@@ -85,7 +86,7 @@ cmp.setup({
     { name = "path", group_index = 2 },
     -- { name = "luasnip", group_index = 2 },
     -- { name = "buffer", group_index = 5 },
-    -- { name = "nvim_lua", group_index = 2 },
+    { name = "nvim_lua", group_index = 2 },
   },
   sorting = {
     comparators = {
@@ -104,6 +105,7 @@ cmp.setup({
 vim.cmd([[ set pumheight=6 ]])
 --set highlights
 local highlights = {
+  -- type highlights
   CmpItemKindText = { fg = "LightGrey" },
   CmpItemKindFunction = { fg = "#C586C0" },
   CmpItemKindClass = { fg = "Orange" },
@@ -119,8 +121,17 @@ local highlights = {
   CmpItemAbbr = { fg = "#565c64", bg = "NONE" },
   CmpItemAbbrMatch = { fg = "#569CD6", bg = "NONE" },
   CmpItemAbbrMatchFuzzy = { fg = "#569CD6", bg = "NONE" },
+  CmpMenuBorder = { fg="#263341" },
+  CmpMenu = { bg="#10171f" },
+  CmpSelection = { bg="#263341" },
 }
-vim.api.nvim_set_hl(0, "CmpBorderedWindow_FloatBorder", { fg = "#565c64" })
+-- vim.api.nvim_set_hl(0, "CmpBorderedWindow_FloatBorder", { fg = "#565c64" })
 for group, hl in pairs(highlights) do
   vim.api.nvim_set_hl(0, group, hl)
 end
+
+-- CmpMenuBorder = { fg="#263341" },
+  -- CmpMenu = { bg="#10171f" },
+  -- CmpSelection = { bg="#263341" },
+-- vim.cmd([[highlight! CmpMenuBorder guibg=#10171f]])
+-- vim.cmd([[highlight! CmpSelection guibg=NONE guifg=NONE gui=underline guisp=#569CD6]])

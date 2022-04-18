@@ -182,7 +182,6 @@ M.apply_colors_highlight = function()
     bg("NvimTreeNormalNC", "NONE")
     bg("NvimTreeStatusLineNC", "NONE")
     fg_bg("NvimTreeVertSplit", grey, "NONE")
-
     -- telescope
     bg("TelescopeBorder", "NONE")
     bg("TelescopePrompt", "NONE")

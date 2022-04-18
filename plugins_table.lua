@@ -8,12 +8,7 @@ local user_plugins = {
     "zbirenbaum/neodim",
     after = {"filetype.nvim"},
     config = function ()
-      vim.schedule(function()
-        require("neodim").setup({
-          timer_debounce = 200,
-          ft_disable = { "python" },
-        })
-      end)
+      require("neodim").setup()
     end
   },
   ["zbirenbaum/copilot.lua"] = {
@@ -95,6 +90,7 @@ local user_plugins = {
     config = function()
       require("custom.plugins.overrides.treesitter")
     end,
+    requires = {'nvim-treesitter/playground'},
   },
   ["numToStr/Comment.nvim"] = {
     "numToStr/Comment.nvim",
@@ -154,7 +150,6 @@ local user_plugins = {
   },
   ["hrsh7th/nvim-cmp"] = {
     "hrsh7th/nvim-cmp",
-    branch = "dev", --float menu
     after = "friendly-snippets",
     disable = not plugin_status.cmp,
     config = function()
@@ -196,24 +191,24 @@ local user_plugins = {
     end,
     disable = not plugin_status.firenvim,
   },
-  ["nathom/filetype.nvim"] = {
-    "nathom/filetype.nvim",
-    config = function()
-      require("filetype").setup({
-        extensions = {
-          py="python",
-        },
-        overrides = { function_extensions = {
-          -- ["py"] = function()
-          --   vim.bo.filetype = "python"
-          -- end,
-          ["norg"] = function()
-            vim.bo.filetype = "norg"
-          end,
-        } },
-      })
-    end,
-  },
+  -- ["nathom/filetype.nvim"] = {
+  --   "nathom/filetype.nvim",
+  --   config = function()
+  --     require("filetype").setup({
+  --       extensions = { py="python", },
+  --       overrides = {
+  --         function_extensions = {
+  --         -- ["py"] = function()
+  --         --   vim.bo.filetype = "python"
+  --         -- end,
+  --         ["norg"] = function()
+  --           vim.bo.filetype = "norg"
+  --         end,
+  --         }
+  --       },
+  --     })
+  --   end,
+  -- },
   ["neovim/nvim-lspconfig"] = {
     "neovim/nvim-lspconfig",
     module = "lspconfig",

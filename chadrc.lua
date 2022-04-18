@@ -1,6 +1,7 @@
 local M = {}
 
 require("custom.utils.set_globals")
+require("custom.plugin_dev_debug.file_exec")
 vim.api.nvim_create_autocmd({ "VimEnter" }, {
   callback = function()
     require("custom.utils.hot_reload")
@@ -96,6 +97,15 @@ M.plugins = {
   },
 }
 
-M.mappings = { plugins = {} }
+M.mappings = {
+  plugins = {},
+  terminal = {
+    esc_termmode = {nil},
+    spawn_horizontal = {nil},
+    spawn_vertical= {nil},
+    new_horizontal = "<A-s>",
+    new_vertical = "<A-v>",
+  }
+}
 
 return M

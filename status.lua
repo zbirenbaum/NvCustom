@@ -38,9 +38,7 @@ local status = {
   --choose 1
   hop = false,
   lightspeed = true,
-
   jqx = true,
-  toggleterm = false,
   blankline = true, -- beautified blank lines
   cheatsheet = false, -- fuzzy search your commands/keymappings
   colorizer = true,

@@ -29,7 +29,6 @@ M.debug = function()
     --   require("dap").step_into()
     -- end, opts)
     vim.keymap.set({"i", "n"}, "<C-l>", function() require("custom.utils.print_to_buf").clear() end, {silent = true})
-    vim.keymap.set({"i", "n"}, "<C-n>", function() vim.cmd("luafile %") end, {silent = true})
     vim.keymap.set("n", "<C-c>", function()
       if vim.bo.filetype == "lua" and not require("dap").session() then
         require("osv").run_this()

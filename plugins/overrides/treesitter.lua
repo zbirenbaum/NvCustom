@@ -8,5 +8,4 @@ local start = function()
     },
   })
 end
-
 vim.schedule(start)

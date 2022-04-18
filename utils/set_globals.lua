@@ -10,6 +10,8 @@ vim.g.clipboard = {
   },
   cache_enabled = 0,
 }
+vim.o.pumheight = 6
+vim.o.pumwidth = 12
 vim.g.loaded_matchparen = 1
 vim.g.python_host_skip_check = 1
 vim.g.python3_host_prog = "/home/zach/.virtualenvs/py3nvim/bin/python"
@@ -17,6 +19,7 @@ vim.g.python_host_prog = "/home/zach/.virtualenvs/py2nvim/bin/python"
 vim.o.showcmd = false
 vim.o.showmode = false
 vim.o.laststatus = 3
+vim.o.shiftwidth = 2
 vim.opt.list = true
 vim.opt.listchars:append("eol:↴")
 
