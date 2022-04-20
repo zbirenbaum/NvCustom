@@ -268,7 +268,7 @@ local user_plugins = {
     "mfussenegger/nvim-dap",
     disable = not plugin_status.dap,
     opt = true,
-    keys = require("utils.mappings").debug_bindings.mappings,
+    keys = require("custom.utils.mappings").debug_bindings.mappings,
     config = function ()
       require("custom.plugins.dap.dap_setup").config()
       require("custom.utils.mappings").debug()

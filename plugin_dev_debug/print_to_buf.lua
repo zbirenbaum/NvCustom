@@ -19,42 +19,43 @@ M.scroll = function(pos)
     local col  = vim.fn.col(pos[2])
     a.nvim_win_set_cursor(M.win, {line,col})
   end
-  a.nvim_win_call(M.win, to_eob)
+  if M.win ~= a.nvim_get_current_win() then
+    a.nvim_win_call(M.win, to_eob)
+  end
 end
 
 M.clear = function ()
-  local old_buf = M.buf
-  M.buf = a.nvim_create_buf(false, true)
+  local prev_chan = M.chan
   M.chan = a.nvim_open_term(M.buf, {})
-  a.nvim_buf_set_var(M.buf, "printbuf", true)
-  a.nvim_win_set_buf(M.win, M.buf)
-  cmd('bdelete! ' .. old_buf)
+  vim.fn.chanclose(prev_chan)
 end
 
-M.print = function (input)
+M.print = function (input, liveprint)
   if not cnl_valid() or not buf_valid() then M.validate()
   elseif not win_valid() then M.show() end
   if type(input) == "table" then input = vim.inspect(input) end
   if type(input) == "number" then input = tostring(input) end
   input = input:gsub("\n", "\r\n")
-  a.nvim_chan_send(M.chan, input .. '\r\n')
-  M.scroll()
+  vim.schedule(function()
+    vim.schedule(function()
+      a.nvim_chan_send(M.chan, input .. '\r\n')
+      M.scroll()
+    end)
+  end)
+end
+
+M.liveprint = function (input)
+  M.print(input, true)
 end
 
 M.runfile = function ()
+  if M.exists() then M.clear() end
+  local cursorpos = vim.api.nvim_win_get_cursor(0)
   local oldprint = print
-  print = M.print
+  print = M.liveprint
   cmd('luafile %')
   print = oldprint
-end
-
-M.cleanup = function ()
-  if buf_valid() then
-    cmd('bdelete! ' .. M.buf)
-  end
-  if cnl_valid() then
-    cmd('bdelete! ' .. M.buf)
-  end
+  vim.api.nvim_win_set_cursor(0, cursorpos)
 end
 
 M.validate = function()
@@ -62,13 +63,7 @@ M.validate = function()
 end
 
 M.exists = function ()
-  local print_buf = vim.tbl_filter(function(buf)
-    local has_var, _ = pcall(function()
-      a.nvim_buf_get_var(buf, "printbuf")
-    end)
-    return has_var and true
-  end, a.nvim_list_bufs())
-  return not vim.tbl_isempty(print_buf) and print_buf[1] or false
+  return win_valid() and buf_valid() and cnl_valid()
 end
 
 M.show = function ()
@@ -91,13 +86,16 @@ M.create_win = function ()
   a.nvim_set_current_win(oldwin)
 end
 
+M.create_term = function ()
+  M.buf = not buf_valid() and a.nvim_create_buf(false, true) or M.buf
+  M.chan = a.nvim_open_term(M.buf, {})
+  return M.buf
+end
+
 M.new = function ()
   M.create_win()
-  M.buf = a.nvim_create_buf(false, true)
-  M.chan = a.nvim_open_term(M.buf, {})
-  a.nvim_buf_set_var(M.buf, "printbuf", true)
+  M.create_term()
   a.nvim_win_set_buf(M.win, M.buf)
-  return M
 end
 
 M.init = function ()
