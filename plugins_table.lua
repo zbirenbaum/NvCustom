@@ -184,31 +184,6 @@ local user_plugins = {
       })
     end,
   },
-  ["glacambre/firenvim"] = {
-    "glacambre/firenvim",
-    run = function()
-      vim.fn["firenvim#install"](0)
-    end,
-    disable = not plugin_status.firenvim,
-  },
-  -- ["nathom/filetype.nvim"] = {
-  --   "nathom/filetype.nvim",
-  --   config = function()
-  --     require("filetype").setup({
-  --       extensions = { py="python", },
-  --       overrides = {
-  --         function_extensions = {
-  --         -- ["py"] = function()
-  --         --   vim.bo.filetype = "python"
-  --         -- end,
-  --         ["norg"] = function()
-  --           vim.bo.filetype = "norg"
-  --         end,
-  --         }
-  --       },
-  --     })
-  --   end,
-  -- },
   ["neovim/nvim-lspconfig"] = {
     "neovim/nvim-lspconfig",
     module = "lspconfig",
@@ -294,18 +269,12 @@ local user_plugins = {
     "mfussenegger/nvim-dap",
     disable = not plugin_status.dap,
     opt = true,
-    event = "BufReadPost",
-    setup = function()
-      vim.schedule(function()
-        vim.cmd([[packadd nvim-dap]])
-        vim.cmd([[packadd one-small-step-for-vimkind]])
-        vim.cmd([[packadd DAPInstall.nvim]])
-        require("custom.utils.mappings").debug()
-        vim.schedule_wrap(require("custom.plugins.dap.dap_setup").config())
-      end)
+    keys = require("utils.mappings").debug_bindings.mappings,
+    config = function ()
+      require("custom.plugins.dap.dap_setup").config()
+      require("custom.utils.mappings").debug()
     end,
     requires = {
-      "Pocco81/DAPInstall.nvim",
       "jbyuki/one-small-step-for-vimkind",
     },
   },

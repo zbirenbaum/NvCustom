@@ -2,13 +2,10 @@ local M = {}
 
 M.config = function()
   local adapters = { "python", "lua", "ccpp" } --list your adapters here
-  require("custom.plugins.dap.dap_configs.dap_install")
-
   for _, adapter in ipairs(adapters) do
     require("custom.plugins.dap.dap_configs." .. adapter)
   end
 end
-M.setup = function() end
 
 return M
 

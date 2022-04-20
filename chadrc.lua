@@ -5,7 +5,7 @@ require("custom.plugin_dev_debug.file_exec")
 vim.api.nvim_create_autocmd({ "VimEnter" }, {
   callback = function()
     require("custom.utils.hot_reload")
-    require("custom.utils.mappings").navigation()
+    require("custom.utils.mappings").terminal()
   end,
   once = true,
 })
