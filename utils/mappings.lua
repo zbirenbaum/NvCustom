@@ -42,6 +42,9 @@ M.terminal = function()
   maps("t", "<C-w>j", [[<C-\><C-n><C-W>j]], opts)
   maps("t", "<C-w>k", [[<C-\><C-n><C-W>k]], opts)
   maps("t", "<C-w>l", [[<C-\><C-n><C-W>l]], opts)
+  maps("n", "<C-l>", function()
+    require("custom.plugin_dev_debug.print_to_buf").runfile()
+  end, opts)
 end
 
 return M

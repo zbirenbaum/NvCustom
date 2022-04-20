@@ -6,7 +6,7 @@ local user_plugins = {
   ["wbthomason/packer.nvim"] = { "wbthomason/packer.nvim", event = "VimEnter" },
   ["zbirenbaum/neodim"] = {
     "zbirenbaum/neodim",
-    after = {"filetype.nvim"},
+    after = {"filetype.nvim", "nvim-treesitter"},
     config = function ()
       require("neodim").setup()
     end
@@ -90,7 +90,6 @@ local user_plugins = {
     config = function()
       require("custom.plugins.overrides.treesitter")
     end,
-    requires = {'nvim-treesitter/playground'},
   },
   ["numToStr/Comment.nvim"] = {
     "numToStr/Comment.nvim",

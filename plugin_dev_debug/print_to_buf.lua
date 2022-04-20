@@ -1,86 +1,118 @@
+local a = vim.api
+local wo = vim.wo
+local cmd = vim.cmd
+
 local M = {}
 
-M.exists = function ()
-  local print_buf = vim.tbl_filter(function(buf)
-    local has_var, _ = pcall(function()
-      vim.api.nvim_buf_get_var(buf, "printbuf")
-    end)
-    return has_var and true
-  end, vim.api.nvim_list_bufs())
-  return not vim.tbl_isempty(print_buf) and print_buf[1] or false
+local buf_valid = function () return M.buf and a.nvim_buf_is_valid(M.buf) end
+local win_valid = function () return M.win and a.nvim_win_is_valid(M.win) end
+local cnl_valid = function ()
+  return M.chan and not vim.tbl_isempty(vim.tbl_filter(function(cnl)
+    return cnl.id == M.chan
+  end, a.nvim_list_chans()))
+end
+
+M.scroll = function(pos)
+  if not pos then pos = {'$', 0} end
+  local to_eob = function ()
+    local line = vim.fn.line(pos[1])
+    local col  = vim.fn.col(pos[2])
+    a.nvim_win_set_cursor(M.win, {line,col})
+  end
+  a.nvim_win_call(M.win, to_eob)
 end
 
 M.clear = function ()
   local old_buf = M.buf
-  M.buf = vim.api.nvim_create_buf(false, true)
-  vim.api.nvim_buf_set_var(M.buf, "printbuf", true)
-  vim.api.nvim_win_set_buf(M.win, M.buf)
-  vim.cmd('bdelete! ' .. old_buf)
+  M.buf = a.nvim_create_buf(false, true)
+  M.chan = a.nvim_open_term(M.buf, {})
+  a.nvim_buf_set_var(M.buf, "printbuf", true)
+  a.nvim_win_set_buf(M.win, M.buf)
+  cmd('bdelete! ' .. old_buf)
+end
+
+M.print = function (input)
+  if not cnl_valid() or not buf_valid() then M.validate()
+  elseif not win_valid() then M.show() end
+  if type(input) == "table" then input = vim.inspect(input) end
+  if type(input) == "number" then input = tostring(input) end
+  input = input:gsub("\n", "\r\n")
+  a.nvim_chan_send(M.chan, input .. '\r\n')
+  M.scroll()
+end
+
+M.runfile = function ()
+  local oldprint = print
+  print = M.print
+  cmd('luafile %')
+  print = oldprint
+end
+
+M.cleanup = function ()
+  if buf_valid() then
+    cmd('bdelete! ' .. M.buf)
+  end
+  if cnl_valid() then
+    cmd('bdelete! ' .. M.buf)
+  end
+end
+
+M.validate = function()
+  if not M.initialized then M.init() return else M.new() return end
+end
+
+M.exists = function ()
+  local print_buf = vim.tbl_filter(function(buf)
+    local has_var, _ = pcall(function()
+      a.nvim_buf_get_var(buf, "printbuf")
+    end)
+    return has_var and true
+  end, a.nvim_list_bufs())
+  return not vim.tbl_isempty(print_buf) and print_buf[1] or false
+end
+
+M.show = function ()
+  M.create_win()
+  a.nvim_win_set_buf(M.win, M.buf)
+end
+
+M.close = function ()
+  a.nvim_win_close(M.win, true)
+end
+
+M.create_win = function ()
+  local oldwin = a.nvim_get_current_win() --record current window
+  cmd("vsplit")
+  M.win = a.nvim_get_current_win()
+  wo.number = false
+  wo.relativenumber = false
+  wo.numberwidth = 1
+  wo.signcolumn = "no"
+  a.nvim_set_current_win(oldwin)
+end
+
+M.new = function ()
+  M.create_win()
+  M.buf = a.nvim_create_buf(false, true)
+  M.chan = a.nvim_open_term(M.buf, {})
+  a.nvim_buf_set_var(M.buf, "printbuf", true)
+  a.nvim_win_set_buf(M.win, M.buf)
+  return M
 end
 
 M.init = function ()
-  local linked_win = vim.api.nvim_get_current_win()
+  M.initialized = true
+  local linked_win = a.nvim_get_current_win()
   M.print_buf =  M.exists() or M.new()
-  vim.api.nvim_create_autocmd({"WinClosed"},{
+  a.nvim_create_autocmd({"WinClosed"},{
     callback = vim.schedule_wrap(function ()
-      if not vim.api.nvim_win_is_valid(linked_win) then
-        local valid, _ = pcall(function() vim.api.nvim_win_close(M.win, true) end)
-        if not valid then vim.cmd('quit') end
+      if not a.nvim_win_is_valid(linked_win) then
+        local valid, _ = pcall(function() a.nvim_win_close(M.win, true) end)
+        if not valid then cmd('quit') end
       end
     end),
     once = false
   })
-  return M
-end
-
-local splitter = function(tbl, pattern)
-  local result = {}
-  for i, _ in ipairs(tbl) do
-    result[#result+1] = vim.fn.split(tbl[i], pattern)
-  end
-  return vim.tbl_flatten(result)
-end
-
-local function format_table(text)
-  text = vim.fn.split(vim.inspect(text), "\n") -- remove all newlines, have list
-  text = splitter(text, "{\zs")
-  text = splitter(text, "}\zs")
-  return text
-end
-
-M.print = function (text)
-  if not text then return end
-  local setlines = vim.api.nvim_buf_set_lines
-  if type(text) ~= "table" then
-    text = {text}
-    setlines(M.buf, 0, 0, false, text)
-    return
-  end
-  if vim.tbl_islist(text) and type(text[1]) == "table" then
-    for _, tbl in ipairs(text) do
-      M.print(tbl)
-    end
-  else
-    setlines(M.buf, 0, 0, false, format_table(text))
-  end
-end
-
-M.close = function ()
-  vim.api.nvim_win_close(M.win, true)
-end
-
-M.new = function ()
-  M.oldwin = vim.api.nvim_get_current_win() --record current window
-  vim.cmd("vsplit")
-  M.win = vim.api.nvim_get_current_win()
-  vim.wo.number = false 
-  vim.wo.relativenumber = false
-  vim.wo.numberwidth = 1
-  vim.wo.signcolumn = "no"
-  M.buf = vim.api.nvim_create_buf(false, true)
-  vim.api.nvim_buf_set_var(M.buf, "printbuf", true)
-  vim.api.nvim_win_set_buf(M.win, M.buf)
-  vim.api.nvim_set_current_win(M.oldwin)
   return M
 end
 
