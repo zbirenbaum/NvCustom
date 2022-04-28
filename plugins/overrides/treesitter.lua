@@ -4,6 +4,8 @@ local start = function()
     indent = { enable = false },
     highlight = {
       enable = true,
+      disable = {'org'},
+      additional_vim_regex_highlighting = {'org'},
       use_languagetree = true,
     },
   })

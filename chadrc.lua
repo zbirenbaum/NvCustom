@@ -84,7 +84,7 @@ M.plugins = {
   },
   status = require("custom.status"),
   default_plugin_remove = {
-    -- "NvChad/extensions",
+    "NvChad/extensions",
     "nvim-lua/plenary.nvim",
     "NvChad/nvim-colorizer.lua",
     "feline-nvim/feline.nvim",
@@ -103,8 +103,8 @@ M.mappings = {
     esc_termmode = {nil},
     spawn_horizontal = {nil},
     spawn_vertical= {nil},
-    new_horizontal = "<A-s>",
-    new_vertical = "<A-v>",
+    new_horizontal = {nil},
+    new_vertical = {nil},
   }
 }
 

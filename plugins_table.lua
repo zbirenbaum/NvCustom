@@ -4,6 +4,11 @@ local user_plugins = {
   ["nvim-lua/plenary.nvim"] = { "nvim-lua/plenary.nvim" },
   ["lewis6991/impatient.nvim"] = { "lewis6991/impatient.nvim" },
   ["wbthomason/packer.nvim"] = { "wbthomason/packer.nvim", event = "VimEnter" },
+  ["NvChad/nvterm"] = {
+    "NvChad/nvterm",
+    after = { "indent-blankline.nvim" },
+    config = function () require('nvterm').setup() end
+  },
   ["zbirenbaum/neodim"] = {
     "zbirenbaum/neodim",
     after = {"filetype.nvim", "nvim-treesitter"},
@@ -292,6 +297,14 @@ local user_plugins = {
     event = "BufReadPost",
     config = function()
       require("custom.plugins.custom_plugin_configs.toggleterm")
+    end,
+  },
+  ["ggandor/leap.nvim"] = {
+    "ggandor/leap.nvim",
+    disable = not plugin_status.leap,
+    after = "nvim-treesitter",
+    config = function()
+      vim.schedule_wrap(require('custom.plugins.custom_plugin_configs.leap'))
     end,
   },
   ["ggandor/lightspeed.nvim"] = {
