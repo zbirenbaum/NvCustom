@@ -2,6 +2,9 @@ local opts = { noremap = true, silent = true }
 local maps = vim.keymap.set
 local M = {}
 
+M.tab = function ()
+  vim.keymap.set({"i", "n", "t", "v"}, '<C-i>', '<tab>', {silent=true, remap=true})
+end
 local choose_debug_session = function ()
   if vim.bo.filetype == "lua" and not require("dap").session() then require("osv").run_this()
   else require("dap").continue() end

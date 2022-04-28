@@ -4,14 +4,21 @@ local user_plugins = {
   ["nvim-lua/plenary.nvim"] = { "nvim-lua/plenary.nvim" },
   ["lewis6991/impatient.nvim"] = { "lewis6991/impatient.nvim" },
   ["wbthomason/packer.nvim"] = { "wbthomason/packer.nvim", event = "VimEnter" },
+  ["nathom/filetype.nvim"] = {"nathom/filetype.nvim"},
   ["NvChad/nvterm"] = {
     "NvChad/nvterm",
     after = { "indent-blankline.nvim" },
-    config = function () require('nvterm').setup() end
+    config = function () require('nvterm').setup({
+      toggle = {
+        horizontal = "<A-s>",
+        vertical = "<A-v>",
+        float = "<A-i>",
+      }
+    }) end
   },
   ["zbirenbaum/neodim"] = {
     "zbirenbaum/neodim",
-    after = {"filetype.nvim", "nvim-treesitter"},
+    after = {"nvim-treesitter"},
     config = function ()
       require("neodim").setup()
     end
@@ -93,7 +100,7 @@ local user_plugins = {
     opt = true,
     event = { "BufRead", "BufNewFile" },
     config = function()
-      require("custom.plugins.overrides.treesitter")
+      vim.defer_fn(function() require("custom.plugins.overrides.treesitter") end, 20)
     end,
   },
   ["numToStr/Comment.nvim"] = {
@@ -108,7 +115,7 @@ local user_plugins = {
       require("core.mappings").comment()
     end,
   },
-  ["zbirenbaum/nvim-base16.lua"] = {
+  ["NvChad/nvim-base16.lua"] = {
     "zbirenbaum/nvim-base16.lua",
     after = "packer.nvim",
     config = function()
@@ -299,14 +306,14 @@ local user_plugins = {
       require("custom.plugins.custom_plugin_configs.toggleterm")
     end,
   },
-  ["ggandor/leap.nvim"] = {
-    "ggandor/leap.nvim",
-    disable = not plugin_status.leap,
-    after = "nvim-treesitter",
-    config = function()
-      vim.schedule_wrap(require('custom.plugins.custom_plugin_configs.leap'))
-    end,
-  },
+  -- ["ggandor/leap.nvim"] = {
+  --   "ggandor/leap.nvim",
+  --   disable = not plugin_status.leap,
+  --   after = "nvim-treesitter",
+  --   config = function()
+  --     vim.schedule_wrap(require('custom.plugins.custom_plugin_configs.leap'))
+  --   end,
+  -- },
   ["ggandor/lightspeed.nvim"] = {
     "ggandor/lightspeed.nvim",
     disable = not plugin_status.lightspeed,
@@ -360,3 +367,4 @@ local user_plugins = {
 }
 
 return user_plugins
+

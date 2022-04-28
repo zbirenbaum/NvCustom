@@ -4,6 +4,7 @@ require("custom.utils.set_globals")
 require("custom.plugin_dev_debug.file_exec")
 vim.api.nvim_create_autocmd({ "VimEnter" }, {
   callback = function()
+    require("custom.utils.mappings").tab()
     require("custom.utils.hot_reload")
     require("custom.utils.mappings").terminal()
   end,
@@ -96,6 +97,8 @@ M.plugins = {
     "lukas-reineke/indent-blankline.nvim",
   },
 }
+
+M.plugins.user = require(M.plugins.install)
 
 M.mappings = {
   plugins = {},
