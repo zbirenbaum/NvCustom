@@ -7,14 +7,12 @@ local user_plugins = {
   ["nathom/filetype.nvim"] = {"nathom/filetype.nvim"},
   ["NvChad/nvterm"] = {
     "NvChad/nvterm",
-    after = { "indent-blankline.nvim" },
-    config = function () require('nvterm').setup({
-      toggle = {
-        horizontal = "<A-s>",
-        vertical = "<A-v>",
-        float = "<A-i>",
-      }
-    }) end
+    config = function () vim.defer_fn(function()
+      require('nvterm').setup({
+        toggle = {horizontal = "<C-h>", vertical = "<C-v>", float = "<A-i>"}
+        })
+      end, 100)
+    end
   },
   ["zbirenbaum/neodim"] = {
     "zbirenbaum/neodim",
