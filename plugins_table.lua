@@ -180,7 +180,6 @@ local user_plugins = {
   ["nvim-neorg/neorg"] = {
     "nvim-neorg/neorg",
     ft = "norg",
-    after = "nvim-treesitter", -- You may want to specify Telescope here as well
     setup = function()
       vim.cmd([[packadd neorg]])
     end,
@@ -315,11 +314,10 @@ local user_plugins = {
   ["ggandor/lightspeed.nvim"] = {
     "ggandor/lightspeed.nvim",
     disable = not plugin_status.lightspeed,
-    after = "nvim-treesitter",
+    keys = {'f', 's', 'F', 'S'},
     config = function()
       vim.schedule_wrap(require("custom.plugins.custom_plugin_configs.lightspeed"))
     end,
-    event = "BufReadPost",
   },
   ["gennaro-tedesco/nvim-jqx"] = {
     "gennaro-tedesco/nvim-jqx",
