@@ -84,18 +84,7 @@ M.plugins = {
     end,
   },
   status = require("custom.status"),
-  remove = {
-    "NvChad/extensions",
-    "nvim-lua/plenary.nvim",
-    "NvChad/nvim-colorizer.lua",
-    "feline-nvim/feline.nvim",
-    "NvChad/nvim-base16.lua",
-    "akinsho/bufferline.nvim",
-    "nvim-telescope/telescope.nvim",
-    "nvim-treesitter/nvim-treesitter",
-    "kyazdani42/nvim-web-devicons",
-    "lukas-reineke/indent-blankline.nvim",
-  },
+  remove = require("custom.default_plugins"),
 }
 
 M.plugins.user = require(M.plugins.install)
