@@ -1,12 +1,16 @@
 local plugin_status = require("custom.status")
 
 local user_plugins = {
-  ["nvim-lua/plenary.nvim"] = { "nvim-lua/plenary.nvim" },
+  ["nvim-lua/plenary.nvim"] = {
+    module = "plenary",
+    "nvim-lua/plenary.nvim"
+  },
   ["lewis6991/impatient.nvim"] = { "lewis6991/impatient.nvim" },
   ["wbthomason/packer.nvim"] = { "wbthomason/packer.nvim", event = "VimEnter" },
   ["nathom/filetype.nvim"] = {"nathom/filetype.nvim"},
   ["NvChad/nvterm"] = {
     "NvChad/nvterm",
+    event = {"VimEnter"},
     config = function () vim.defer_fn(function()
       require('nvterm').setup({
         toggle = {horizontal = "<C-h>", vertical = "<C-v>", float = "<A-i>"}
@@ -18,7 +22,7 @@ local user_plugins = {
     "zbirenbaum/neodim",
     after = {"nvim-treesitter"},
     config = function ()
-      require("neodim").setup()
+      vim.defer_fn(function() require("neodim").setup() end, 100)
     end
   },
   ["zbirenbaum/copilot.lua"] = {
@@ -98,7 +102,7 @@ local user_plugins = {
     opt = true,
     event = { "BufRead", "BufNewFile" },
     config = function()
-      vim.defer_fn(function() require("custom.plugins.overrides.treesitter") end, 20)
+      vim.defer_fn(function() require("custom.plugins.overrides.treesitter") end, 10)
     end,
   },
   ["numToStr/Comment.nvim"] = {
@@ -196,9 +200,6 @@ local user_plugins = {
     "neovim/nvim-lspconfig",
     module = "lspconfig",
     after = "nvim-treesitter",
-    setup = function()
-      vim.cmd([[packadd nvim-lspconfig]])
-    end,
     config = function()
       vim.schedule(function()
         plugin_status = require("core.utils").load_config().plugins.status
@@ -295,22 +296,6 @@ local user_plugins = {
     end,
   },
   --misc plugins
-  ["akinsho/toggleterm.nvim"] = {
-    "akinsho/toggleterm.nvim",
-    disable = not plugin_status.toggleterm,
-    event = "BufReadPost",
-    config = function()
-      require("custom.plugins.custom_plugin_configs.toggleterm")
-    end,
-  },
-  -- ["ggandor/leap.nvim"] = {
-  --   "ggandor/leap.nvim",
-  --   disable = not plugin_status.leap,
-  --   after = "nvim-treesitter",
-  --   config = function()
-  --     vim.schedule_wrap(require('custom.plugins.custom_plugin_configs.leap'))
-  --   end,
-  -- },
   ["ggandor/lightspeed.nvim"] = {
     "ggandor/lightspeed.nvim",
     disable = not plugin_status.lightspeed,
@@ -321,6 +306,7 @@ local user_plugins = {
   },
   ["gennaro-tedesco/nvim-jqx"] = {
     "gennaro-tedesco/nvim-jqx",
+    cmd = {"JqxList", "JqxQuery"},
     disable = not plugin_status.jqx,
     event = "BufReadPost",
   },
