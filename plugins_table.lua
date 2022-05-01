@@ -10,7 +10,7 @@ local user_plugins = {
     config = function () vim.defer_fn(function()
       require('nvterm').setup({
         toggle = {horizontal = "<C-h>", vertical = "<C-v>", float = "<A-i>"}
-        })
+      })
       end, 100)
     end
   },
