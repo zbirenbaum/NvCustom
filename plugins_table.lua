@@ -27,7 +27,7 @@ local user_plugins = {
   },
   ["zbirenbaum/copilot.lua"] = {
     "zbirenbaum/copilot.lua",
-    branch = "dev",
+    -- branch = "dev",
     event = {"VimEnter"},
     config = function()
       vim.defer_fn(function()
@@ -117,7 +117,7 @@ local user_plugins = {
       require("core.mappings").comment()
     end,
   },
-  ["NvChad/nvim-base16.lua"] = {
+  ["zbirenbaum/nvim-base16.lua"] = {
     "zbirenbaum/nvim-base16.lua",
     after = "packer.nvim",
     config = function()

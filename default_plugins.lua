@@ -3,6 +3,7 @@ local default_plugins = {
  "lewis6991/impatient.nvim",
  "wbthomason/packer.nvim",
  "NvChad/extensions",
+ "NvChad/base46",
  "NvChad/nvim-base16.lua",
  "NvChad/nvterm",
  "kyazdani42/nvim-web-devicons",
