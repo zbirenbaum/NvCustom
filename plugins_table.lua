@@ -10,12 +10,12 @@ local user_plugins = {
   ["nathom/filetype.nvim"] = {"nathom/filetype.nvim"},
   ["NvChad/nvterm"] = {
     "NvChad/nvterm",
+    keys = {"<A-h>", "<A-v>", "<A-i>"},
     event = {"VimEnter"},
-    config = function () vim.defer_fn(function()
+    config = function ()
       require('nvterm').setup({
-        toggle = {horizontal = "<C-h>", vertical = "<C-v>", float = "<A-i>"}
+        toggle = {horizontal = "<A-h>", vertical = "<A-v>", float = "<A-i>"}
       })
-      end, 100)
     end
   },
   ["zbirenbaum/neodim"] = {
