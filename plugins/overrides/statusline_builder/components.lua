@@ -398,12 +398,12 @@ C.location = {
       local total_line = vim.fn.line("$")
 
       if current_line == 1 then
-        return "Top "
+        return "Top"
       elseif current_line == vim.fn.line("$") then
-        return "Bot "
+        return "Bot"
       end
       local result, _ = math.modf((current_line / total_line) * 100)
-      return "" .. result .. "%% "
+      return "" .. result .. "%%"
     end,
 
     enabled = shortline or function(winid)

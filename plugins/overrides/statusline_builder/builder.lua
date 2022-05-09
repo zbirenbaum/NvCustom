@@ -8,11 +8,6 @@ local components = {
 
 components.active[1] = {  --left
   ct.mode.mode_string,
-  ct.tabs.left,
-  ct.tabs.inactive_left,
-  ct.tabs.active,
-  ct.tabs.inactive_right,
-  ct.tabs.right,
   ct.dir,
   ct.file,
   ct.lsp,
@@ -28,6 +23,11 @@ components.active[2] = {  -- right
   ct.git.added,
   ct.git.changed,
   ct.git.removed,
+  ct.tabs.left,
+  ct.tabs.inactive_left,
+  ct.tabs.active,
+  ct.tabs.inactive_right,
+  ct.tabs.right,
   ct.location.loc_icon,
   ct.location.loc_string,
 }
