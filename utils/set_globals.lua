@@ -20,6 +20,7 @@ vim.o.showcmd = false
 vim.o.showmode = false
 vim.o.laststatus = 3
 vim.o.shiftwidth = 2
+vim.o.showtabline = 0 -- shown in statusline
 vim.opt.list = true
 vim.opt.listchars:append("eol:↴")
 

@@ -49,6 +49,14 @@ local chad_mode_hl = function()
   }
 end
 
+C.space = function(cond)
+  return {
+    provider = " ",
+    enabled = cond,
+    hl = { bg = empty, fg = colors.empty },
+  }
+end
+
 C.main_icon = {
   provider = statusline_style.main_icon,
   hl = {
@@ -64,6 +72,7 @@ C.main_icon = {
   },
 }
 
+
 C.file = {
   provider = function()
     local filename = vim.fn.expand("%:t")
@@ -74,18 +83,16 @@ C.file = {
     end
     if icon == nil then
       return " " .. filename .. " "
-      --icon = ""
-      --return icon
     end
     return " " .. icon .. " " .. filename .. " "
   end,
   enabled = shortline or function(winid)
     return vim.api.nvim_win_get_width(tonumber(winid) or 0) > 70
   end,
-  hl = {
-    fg = colors.white,
+  hl = function () return {
+    fg = vim.bo.modified and '#cab873' or colors.white,
     bg = colors.lightbg,
-  },
+  } end,
   left_sep = {
     str = sep_spaces.left,
     hl = {
@@ -327,6 +334,7 @@ C.lsp = {
   end,
   hl = { fg = colors.nord_blue, bg = empty },
 }
+
 C.mode = {
   left_sep = {
     provider = statusline_style.left,
@@ -362,6 +370,7 @@ C.mode = {
     hl = chad_mode_hl,
   },
 }
+
 C.location = {
   left_sep = {
     provider = " " .. statusline_style.left,
@@ -381,8 +390,6 @@ C.location = {
     hl = {
       fg = colors.green,
       bg = empty,
-      --fg = colors.black,
-      --bg = colors.green,
     },
   },
   loc_string = {
@@ -406,50 +413,93 @@ C.location = {
     hl = {
       fg = colors.green,
       bg = empty,
-      --      fg = colors.green,
-      --      bg = colors.one_bg,
     },
   },
 }
 
-C.gps = function(gps)
-  local gps_tbl = {
-    provider = function()
-      local filename = vim.fn.expand("%:t")
-      if filename == nil or filename == "" or filename == " " then
-        return ""
-      else
-        local avail, loc = pcall(gps.get_location)
-        if avail and loc ~= "error" then
-          return loc
-        else
-          return ""
-        end
-      end
-    end,
-    hl = {
-      fg = "#EA2DEF",
-      bg = empty,
-    },
-  }
-  return gps_tbl
+
+local get_tabs = function ()
+  return vim.api.nvim_list_tabpages()
 end
 
-C.signature = function(width)
-  local sig_tbl = {
-    provider = function()
-      if not packer_plugins["lsp_signature.nvim"] or packer_plugins["lsp_signature.nvim"].loaded == false then
-        return ""
-      end
-      local sig = require("lsp_signature").status_line(width)
-      return sig.label
-    end,
+local get_left_tabs = function ()
+  local tab_list = get_tabs()
+  local current = vim.api.nvim_tabpage_get_number(0)
+  if current == 1 then return '' end
+  local tabstring = ''
+  local i = 1
+  while i < current do
+    tabstring = tabstring .. tostring(i) .. '|'
+    i = i + 1
+  end
+  return tabstring
+end
+
+local get_right_tabs = function ()
+  local tab_list = get_tabs()
+  local current = vim.api.nvim_tabpage_get_number(0)
+  if current == tab_list[#tab_list] then return '' end
+  local tabstring = ''
+  local i = current + 1
+  while i <= #tab_list do
+    tabstring =  tabstring .. '|' .. tostring(i)
+    i = i + 1
+  end
+  return tabstring
+end
+
+local tabline_cond = function()
+  return #get_tabs() > 1
+end -- check there is more than 1
+
+C.tabs = {
+  left = {
+    provider = ' [',
+    enabled = tabline_cond,
     hl = {
-      fg = "#EA2DEF",
+      fg = colors.cyan,
       bg = empty,
     },
-  }
-  return sig_tbl
-end
+  },
+  right = {
+    provider =  ']',
+    enabled = tabline_cond,
+    hl = {
+      fg = colors.cyan,
+      bg = empty,
+    },
+  },
+  inactive_left = {
+    provider = function ()
+      return get_left_tabs()
+    end,
+    enabled = tabline_cond,
+    hl = {
+      fg = colors.grey_fg2,
+      bg = empty,
+    }
+  },
+  active = {
+    provider = function ()
+      return tostring(vim.api.nvim_tabpage_get_number(0))
+    end,
+    enabled = tabline_cond,
+    hl = {
+      fg = colors.green,
+      bg = empty,
+      bold = true,
+    }
+  },
+  inactive_right = {
+    provider = function ()
+      return get_right_tabs()
+    end,
+    enabled = tabline_cond,
+    hl = {
+      fg = colors.grey_fg2,
+      bg = empty,
+    }
+  },
+}
 
 return C

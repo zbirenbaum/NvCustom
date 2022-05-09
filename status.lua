@@ -21,18 +21,13 @@ local status = {
   cmp = true,
   dap = true,
   dap_vtext = false,
-  tabline = false,
-  --organized diagnostics
+  -- tab plugins
   trouble = true,
   --vscode style ex mode
   cmdline = false,
   lspkind = true,
   --cmdheight rfc
   cmdheight = false,
-  --its kinda cool and no real slowdown for me, but not lua so disabled out of principle
-  wilder = false,
-  --choose 1
-  vim_matchup = false, -- % magic, match it but improved
   --broken for now
   matchparen = true,
   --choose 1

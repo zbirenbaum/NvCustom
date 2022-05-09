@@ -317,14 +317,6 @@ local user_plugins = {
       require("custom.plugins.custom_plugin_configs.matchparen")
     end,
   },
-  ["seblj/nvim-tabline"] = {
-    "seblj/nvim-tabline",
-    requires = "kyazdani42/nvim-web-devicons",
-    disable = not plugin_status.tabline,
-    config = function()
-      require("custom.plugins.custom_plugin_configs.tabline")
-    end,
-  },
   ["karb94/neoscroll.nvim"] = {
     "karb94/neoscroll.nvim",
     disable = not plugin_status.neoscroll,
