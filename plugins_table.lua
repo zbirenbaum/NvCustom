@@ -7,7 +7,6 @@ local user_plugins = {
   },
   ["lewis6991/impatient.nvim"] = { "lewis6991/impatient.nvim" },
   ["wbthomason/packer.nvim"] = { "wbthomason/packer.nvim", event = "VimEnter" },
-  ["nathom/filetype.nvim"] = {"nathom/filetype.nvim"},
   ["NvChad/nvterm"] = {
     "NvChad/nvterm",
     keys = {"<A-h>", "<A-v>", "<A-i>"},
@@ -99,10 +98,9 @@ local user_plugins = {
   },
   ["nvim-treesitter/nvim-treesitter"] = {
     "nvim-treesitter/nvim-treesitter",
-    opt = true,
-    event = { "BufRead", "BufNewFile" },
     config = function()
-      vim.defer_fn(function() require("custom.plugins.overrides.treesitter") end, 10)
+      local setup = function() require("custom.plugins.overrides.treesitter") end
+      if vim.bo.filetype == 'norg' then setup() else vim.defer_fn(setup, 10) end
     end,
   },
   ["numToStr/Comment.nvim"] = {
@@ -184,21 +182,29 @@ local user_plugins = {
   ["nvim-neorg/neorg"] = {
     "nvim-neorg/neorg",
     ft = "norg",
-    setup = function()
-      vim.cmd([[packadd neorg]])
-    end,
+    after = "nvim-treesitter",
     config = function()
+      vim.api.nvim_create_autocmd({"BufEnter"}, {
+        callback = function ()
+          if vim.bo.filetype == "norg" then vim.bo.autoindent = false end
+        end
+      })
+      vim.opt_local.breakindentopt = 'list:-1'
+      vim.opt_local.formatlistpat = [[^\s*[-~\*]\+\s\+]]
       require("neorg").setup({
         load = {
           ["core.defaults"] = {},
+          ["core.integrations.treesitter"] = {},
           ["core.norg.concealer"] = {},
+          ["core.norg.completion"] = {config = {engine = 'nvim-cmp'}},
+          ["core.integrations.nvim-cmp"] = {},
         },
       })
     end,
   },
   ["neovim/nvim-lspconfig"] = {
     "neovim/nvim-lspconfig",
-    module = "lspconfig",
+    -- module = "lspconfig",
     after = "nvim-treesitter",
     config = function()
       vim.schedule(function()

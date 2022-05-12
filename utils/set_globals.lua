@@ -24,6 +24,9 @@ vim.o.showtabline = 0 -- shown in statusline
 vim.opt.list = true
 vim.opt.listchars:append("eol:↴")
 
+vim.g.do_filetype_lua = 1
+vim.g.did_load_filetypes = 0
+
 vim.g.loaded_2html_plugin = 1
 vim.g.loaded_getscript = 1
 vim.g.loaded_getscriptPlugin = 1
