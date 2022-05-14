@@ -38,31 +38,31 @@ M.debug = function()
   end, opts)
 end
 
-M.terminal = function()
-  local terminal = require("nvterm.terminal")
+M.terminal_mappings = function ()
   local ft_cmds = {
     python = "python3 " .. vim.fn.expand('%'),
   }
+  local toggle_modes = {'n', 't'}
   local mappings = {
-    { 'n', '<C-l>', function () terminal.send(ft_cmds[vim.bo.filetype]) end },
-    { 'n', '<Leader>s', function () terminal.new_or_toggle('horizontal') end },
-    { 'n', '<Leader>v', function () terminal.new_or_toggle('vertical') end },
+    { 'n', '<C-l>', function () require("nvterm.terminal").send(ft_cmds[vim.bo.filetype]) end },
+    { toggle_modes, '<A-h>', function () require("nvterm.terminal").toggle('horizontal') end },
+    { toggle_modes, '<A-v>', function () require("nvterm.terminal").toggle('vertical') end },
+    { toggle_modes, '<A-i>', function () require("nvterm.terminal").toggle('float') end },
   }
-  local create_mappings = function ()
-    for _, mapping in ipairs(mappings) do
-      vim.keymap.set(mapping[1], mapping[2], mapping[3], opts)
-    end
-  end
-  create_mappings()
+  return mappings
+end
+
+M.terminal = function()
   maps("t", "<esc>", [[<C-\><C-n>]], opts)
   maps("t", "jk", "<esc>", opts)
   maps("t", "<C-w>h", [[<C-\><C-n><C-W>h]], opts)
   maps("t", "<C-w>j", [[<C-\><C-n><C-W>j]], opts)
   maps("t", "<C-w>k", [[<C-\><C-n><C-W>k]], opts)
   maps("t", "<C-w>l", [[<C-\><C-n><C-W>l]], opts)
-  -- maps("n", "<C-l>", function()
-    -- require("custom.plugin_dev_debug.print_to_buf").runfile()
-  -- end, opts)
+  local mappings = M.terminal_mappings()
+  for _, mapping in ipairs(mappings) do
+    vim.keymap.set(mapping[1], mapping[2], mapping[3], opts)
+  end
 end
 
 return M

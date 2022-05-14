@@ -9,12 +9,10 @@ local user_plugins = {
   ["wbthomason/packer.nvim"] = { "wbthomason/packer.nvim", event = "VimEnter" },
   ["NvChad/nvterm"] = {
     "NvChad/nvterm",
-    keys = {"<A-h>", "<A-v>", "<A-i>"},
-    event = {"VimEnter"},
+    keys = {'<C-l>', '<A-h>', '<A-v>', '<A-i>'},
     config = function ()
-      require('nvterm').setup({
-        toggle = {horizontal = "<A-h>", vertical = "<A-v>", float = "<A-i>"}
-      })
+      require('nvterm').setup()
+      require('custom.utils.mappings').terminal()
     end
   },
   ["zbirenbaum/neodim"] = {

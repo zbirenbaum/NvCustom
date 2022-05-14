@@ -6,7 +6,6 @@ vim.api.nvim_create_autocmd({ "VimEnter" }, {
   callback = function()
     require("custom.utils.mappings").tab()
     require("custom.utils.hot_reload")
-    require("custom.utils.mappings").terminal()
   end,
   once = true,
 })
