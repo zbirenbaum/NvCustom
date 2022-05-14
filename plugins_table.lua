@@ -7,6 +7,11 @@ local user_plugins = {
   },
   ["lewis6991/impatient.nvim"] = { "lewis6991/impatient.nvim" },
   ["wbthomason/packer.nvim"] = { "wbthomason/packer.nvim", event = "VimEnter" },
+  -- ["luukvbaal/stabilize.nvim"] = {
+    -- "luukvbaal/stabilize.nvim",
+    -- event = { "WinNew" },
+    -- config = function() require("stabilize").setup() end
+  -- },
   ["NvChad/nvterm"] = {
     "NvChad/nvterm",
     keys = {"<A-h>", "<A-v>", "<A-i>"},

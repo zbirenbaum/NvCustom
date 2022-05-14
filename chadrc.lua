@@ -1,5 +1,6 @@
 local M = {}
 
+require("custom.stabilize")
 require("custom.utils.set_globals")
 require("custom.plugin_dev_debug.file_exec")
 vim.api.nvim_create_autocmd({ "VimEnter" }, {
