@@ -182,10 +182,14 @@ local user_plugins = {
     ft = "norg",
     after = "nvim-treesitter",
     config = function()
-      vim.api.nvim_create_autocmd({"BufEnter"}, {
-        callback = function ()
-          if vim.bo.filetype == "norg" then vim.bo.autoindent = false end
-        end
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = "norg",
+        callback = function()
+          vim.opt.foldmethod = "marker"
+          vim.bo.indentexpr = ""
+          vim.bo.autoindent = false
+          vim.bo.smartindent = true
+        end,
       })
       vim.opt_local.breakindentopt = 'list:-1'
       vim.opt_local.formatlistpat = [[^\s*[-~\*]\+\s\+]]

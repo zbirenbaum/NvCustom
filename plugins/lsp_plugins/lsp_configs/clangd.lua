@@ -40,7 +40,7 @@ local default_capabilities = vim.tbl_deep_extend(
 
 M.config_table = function(attach, capabilities)
   return {
-    filetypes = { "c", "cpp", "objc", "objcpp" },
+    filetypes = { "c", "cpp", "cuda" },
     cmd = { "clangd" },
     root_dir = function(fname)
       local filename = util.path.is_absolute(fname) and fname or util.path.join(vim.loop.cwd(), fname)
