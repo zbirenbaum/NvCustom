@@ -4,7 +4,6 @@ local default_plugins = {
  "wbthomason/packer.nvim",
  "NvChad/extensions",
  "NvChad/base46",
- "NvChad/nvim-base16.lua",
  "NvChad/nvterm",
  "kyazdani42/nvim-web-devicons",
  "feline-nvim/feline.nvim",
@@ -30,6 +29,8 @@ local default_plugins = {
  "numToStr/Comment.nvim",
  "kyazdani42/nvim-tree.lua",
  "nvim-telescope/telescope.nvim",
+ "williamboman/nvim-lsp-installer",
+ "folke/which-key.nvim",
 }
 
 return default_plugins

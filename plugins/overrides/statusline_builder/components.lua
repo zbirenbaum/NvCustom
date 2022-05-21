@@ -1,7 +1,7 @@
-local colors = require("colors").get()
+local colors = require("custom.colors").get()
 local lsp = require("feline.providers.lsp")
 local C = {}
-local config = require("core.utils").load_config().plugins.options.statusline
+local config = nvchad.load_config().plugins.options.statusline
 local shortline = config.shortline == false and true
 
 local statusline_style = {

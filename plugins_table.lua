@@ -44,7 +44,7 @@ local user_plugins = {
       require("plugins.configs.others").gitsigns()
     end,
     setup = function()
-      require("core.utils").packer_lazy_load("gitsigns.nvim")
+      nvchad.packer_lazy_load("gitsigns.nvim")
     end,
   },
   ["max397574/better-escape.nvim"] = {
@@ -99,18 +99,6 @@ local user_plugins = {
     config = function()
       local setup = function() require("custom.plugins.overrides.treesitter") end
       if vim.bo.filetype == 'norg' then setup() else vim.defer_fn(setup, 10) end
-    end,
-  },
-  ["numToStr/Comment.nvim"] = {
-    "numToStr/Comment.nvim",
-    disable = not plugin_status.comment,
-    module = "Comment",
-    keys = { "gcc" },
-    config = function()
-      require("plugins.configs.others").comment()
-    end,
-    setup = function()
-      require("core.mappings").comment()
     end,
   },
   ["zbirenbaum/nvim-base16.lua"] = {
@@ -171,7 +159,6 @@ local user_plugins = {
     disable = not plugin_status.cmp,
     after = "LuaSnip",
   },
-
   ["hrsh7th/cmp-nvim-lua"] = {
     "hrsh7th/cmp-nvim-lua",
     disable = not plugin_status.cmp,
@@ -210,7 +197,6 @@ local user_plugins = {
     after = "nvim-treesitter",
     config = function()
       vim.schedule(function()
-        plugin_status = require("core.utils").load_config().plugins.status
         local completion_engine = plugin_status.cmp and "cmp" or plugin_status.coq and "coq"
         if completion_engine == "coq" then
           return false
@@ -261,13 +247,11 @@ local user_plugins = {
     disable = not plugin_status.cmp,
     after = "cmp-nvim-lua",
   },
-
   ["hrsh7th/cmp-buffer"] = {
     "hrsh7th/cmp-buffer",
     disable = not plugin_status.cmp,
     after = "cmp-nvim-lsp",
   },
-
   ["hrsh7th/cmp-path"] = {
     "hrsh7th/cmp-path",
     disable = not plugin_status.cmp,
@@ -333,20 +317,9 @@ local user_plugins = {
       require("custom.plugins.custom_plugin_configs.neoscroll")
     end,
     setup = function()
-      require("core.utils").packer_lazy_load("neoscroll.nvim")
-    end,
-  },
-  ["chentau/marks.nvim"] = {
-    "chentau/marks.nvim",
-    disable = not plugin_status.marks,
-    config = function()
-      require("custom.plugins.custom_plugin_configs.marks")
-    end,
-    setup = function()
-      require("core.utils").packer_lazy_load("marks.nvim")
+      nvchad.packer_lazy_load("neoscroll.nvim")
     end,
   },
 }
 
 return user_plugins
-

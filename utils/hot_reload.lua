@@ -4,7 +4,7 @@ local function on_write_init()
   if string.match(filename, "lua/plugins/init.lua") then
     vim.cmd(cmdstr)
   else
-    local userfile = require("core.utils").load_config().plugins.install
+    local userfile = nvchad.load_config().plugins.install
     local usermatch = type(userfile) == "string" and string.match(filename, userfile)
     if usermatch or string.match(filename, "lua/plugins/init.lua") then
       vim.cmd(cmdstr)

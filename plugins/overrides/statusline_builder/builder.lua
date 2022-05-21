@@ -1,5 +1,5 @@
 local ct = require("custom.plugins.overrides.statusline_builder.components")
-local colors = require("colors").get()
+local colors = require("custom.colors").get()
 
 local components = {
   active = {},

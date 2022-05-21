@@ -92,6 +92,11 @@ cmp.setup({
   },
   sorting = {
     comparators = {
+      function (entry1, entry2)
+        local kind1 = entry1.completion_item.kind
+        local kind2 = entry2.completion_item.kind
+        return kind1 ~= kind2 and kind1 == "Copilot" and true or false
+      end,
       cmp.config.compare.recently_used,
       cmp.config.compare.offset,
       cmp.config.compare.score,
@@ -119,6 +124,7 @@ local highlights = {
   CmpItemKindFolder = { fg = "#2986cc" },
   CmpItemKindReference = { fg = "#922b21" },
   CmpItemKindMethod = { fg = "#C586C0" },
+  CmpItemKindCopilot  = { fg = "#A5BA93" },
   CmpItemMenu = { fg = "#C586C0", bg = "#C586C0" },
   CmpItemAbbr = { fg = "#565c64", bg = "NONE" },
   CmpItemAbbrMatch = { fg = "#569CD6", bg = "NONE" },
