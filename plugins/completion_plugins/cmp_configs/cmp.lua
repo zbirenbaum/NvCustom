@@ -86,9 +86,9 @@ cmp.setup({
     { name = "path", group_index = 2 },
     { name = 'orgmode', group_index = 2 },
     { name = 'neorg', group_index = 2 },
+    { name = "nvim_lua", group_index = 2 },
     -- { name = "luasnip", group_index = 2 },
     -- { name = "buffer", group_index = 5 },
-    { name = "nvim_lua", group_index = 2 },
   },
   sorting = {
     comparators = {
@@ -127,13 +127,6 @@ local highlights = {
   CmpMenu = { bg="#10171f" },
   CmpSelection = { bg="#263341" },
 }
--- vim.api.nvim_set_hl(0, "CmpBorderedWindow_FloatBorder", { fg = "#565c64" })
 for group, hl in pairs(highlights) do
   vim.api.nvim_set_hl(0, group, hl)
 end
-
--- CmpMenuBorder = { fg="#263341" },
-  -- CmpMenu = { bg="#10171f" },
-  -- CmpSelection = { bg="#263341" },
--- vim.cmd([[highlight! CmpMenuBorder guibg=#10171f]])
--- vim.cmd([[highlight! CmpSelection guibg=NONE guifg=NONE gui=underline guisp=#569CD6]])
