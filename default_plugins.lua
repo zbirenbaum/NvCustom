@@ -30,6 +30,7 @@ local default_plugins = {
  "numToStr/Comment.nvim",
  "kyazdani42/nvim-tree.lua",
  "nvim-telescope/telescope.nvim",
+ "folke/which-key.nvim",
 }
 
 return default_plugins

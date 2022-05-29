@@ -11,6 +11,7 @@ vim.g.clipboard = {
   cache_enabled = 0,
 }
 
+vim.o.shadafile = "/home/zach/.local/share/nvim/shada/main.shada"
 vim.o.pumheight = 6
 vim.o.pumwidth = 12
 vim.g.loaded_matchparen = 1

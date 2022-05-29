@@ -3,7 +3,7 @@ local maps = vim.keymap.set
 local M = {}
 
 M.tab = function ()
-  vim.keymap.set({"i", "n", "t", "v"}, '<C-i>', '<tab>', {silent=true, remap=true})
+  maps({"i", "n", "t", "v"}, '<C-i>', '<tab>', {silent=true, remap=true})
 end
 local choose_debug_session = function ()
   if vim.bo.filetype == "lua" and not require("dap").session() then require("osv").run_this()
@@ -50,6 +50,33 @@ M.terminal_mappings = function ()
     { toggle_modes, '<A-i>', function () require("nvterm.terminal").toggle('float') end },
   }
   return mappings
+end
+
+M.lsp = function ()
+  local lsp = vim.lsp.buf
+  local diag = vim.diagnostic
+  maps({"n"}, "gD", function() lsp.declaration() end, opts)
+  maps({"n"}, "gd", function() lsp.definition() end, opts)
+  maps({"n"}, "K", function() lsp.hover() end, opts)
+  maps({"n"}, "gi", function() lsp.implementation() end, opts)
+  maps({"n"}, "<C-k>", function() lsp.signature_help() end, opts)
+  maps({"n"}, "<leader>D", function() lsp.type_definition() end, opts)
+  maps({"n"}, "<leader>ra", function() lsp.rename() end, opts)
+  maps({"n"}, "<leader>ca", function() lsp.code_action() end, opts)
+  maps({"n"}, "gr", function() lsp.references() end, opts)
+  maps({"n"}, "<leader>f", function() diag.open_float() end, opts)
+  maps({"n"}, "[d", function() diag.goto_prev() end, opts)
+  maps({"n"}, "d]", function() diag.goto_next() end, opts)
+  maps({"n"}, "<leader>q", function() vim.diagnostic.setloclist() end, opts)
+  maps({"n"}, "<leader>fm", function() lsp.formatting() end, opts)
+  maps({"n"}, "<leader>wa", function() lsp.add_workspace_folder() end, opts)
+  maps({"n"}, "<leader>wr", function() lsp.remove_workspace_folder() end, opts)
+  maps({"n"}, "<leader>wl", function() print(vim.inspect(lsp.list_workspace_folders())) end, opts)
+end
+
+M.comment = function ()
+  maps({"n"}, "<leader>/", function() require("Comment.api").toggle_current_linewise() end, opts)
+  maps({"v"}, "<leader>/", "<ESC><cmd>lua require('Comment.api').toggle_linewise_op(vim.fn.visualmode())<CR>", opts)
 end
 
 M.terminal = function()

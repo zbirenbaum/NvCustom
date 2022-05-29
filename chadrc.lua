@@ -67,7 +67,6 @@ M.ui = {
 
 M.plugins = {
   options = {
-    packer = { init_file = "custom.plugins.packer_init" },
     statusline = { hide_disable = true },
   },
   install = "custom.plugins_table",
@@ -83,6 +82,7 @@ M.plugins = {
   },
   status = require("custom.status"),
   remove = require("custom.default_plugins"),
+  override = {["wbthomason/packer.nvim"] = require("custom.plugins.packer_init" )},
 }
 
 M.plugins.user = require(M.plugins.install)

@@ -49,6 +49,8 @@ M.config_handlers = function()
   config_diagnostics()
 end
 
+local set_mappings = function ()
+end
 M.attach = function()
   local function attach(_, bufnr)
     local function buf_set_option(...)
@@ -56,8 +58,7 @@ M.attach = function()
     end
     -- Enable completion triggered by <c-x><c-o>
     buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
-
-    require("core.mappings").lspconfig()
+    require("custom.utils.mappings").lsp()
   end
   return attach
 end
