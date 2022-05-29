@@ -24,6 +24,8 @@ vim.o.shiftwidth = 2
 vim.o.showtabline = 0 -- shown in statusline
 vim.opt.list = true
 vim.opt.listchars:append("eol:↴")
+vim.o.signcolumn = "yes"
+vim.o.relativenumber = true
 
 vim.g.do_filetype_lua = 1
 vim.g.did_load_filetypes = 0
