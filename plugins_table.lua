@@ -33,7 +33,7 @@ local user_plugins = {
     after = { "copilot.lua", "nvim-cmp" },
   },
   ["lewis6991/gitsigns.nvim"] = {
-    -- disable = not plugin_status.gitsigns,
+    disable = not plugin_status.gitsigns,
     opt = true,
     config = function()
       require("plugins.configs.others").gitsigns()
@@ -287,7 +287,7 @@ local user_plugins = {
   },
 }
 
-for k, v in pairs(user_plugins) do
+for k, _ in pairs(user_plugins) do
   user_plugins[k][1] = k
 end
 
