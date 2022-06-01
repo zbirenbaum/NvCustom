@@ -3,9 +3,9 @@ local M = {}
 M.apply_colors_highlight = function()
   local cmd = vim.cmd
 
-  local override = nvchad.load_config().ui.hl_override
+  local override = require("core.utils").load_config().ui.hl_override
   local colors = require("custom.colors").get()
-  local ui = nvchad.load_config().ui
+  local ui = require("core.utils").load_config().ui
 
   local black = colors.black
   local black2 = colors.black2

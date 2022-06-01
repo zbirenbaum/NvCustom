@@ -6,7 +6,7 @@ local user_plugins = {
     "nvim-lua/plenary.nvim"
   },
   ["lewis6991/impatient.nvim"] = {},
-  ["wbthomason/packer.nvim"] = { event = "VimEnter" },
+  ["wbthomason/packer.nvim"] = {},
   ["NvChad/nvterm"] = {
     keys = {'<C-l>', '<A-h>', '<A-v>', '<A-i>'},
     config = function ()
@@ -39,7 +39,7 @@ local user_plugins = {
       require("plugins.configs.others").gitsigns()
     end,
     setup = function()
-      nvchad.packer_lazy_load("gitsigns.nvim")
+      require("core.utils").packer_lazy_load("gitsigns.nvim")
     end,
   },
   ["max397574/better-escape.nvim"] = {
@@ -76,8 +76,6 @@ local user_plugins = {
   },
   ["feline-nvim/feline.nvim"] = {
     disable = not plugin_status.feline,
-    opt = true,
-    after = { "nvim-base16.lua", "nvim-web-devicons" },
     config = function()
       vim.defer_fn(function()
         require("custom.plugins.overrides.statusline_builder.builder")
@@ -166,7 +164,7 @@ local user_plugins = {
     after = "nvim-treesitter",
     config = function()
       vim.schedule(function()
-        plugin_status = nvchad.load_config().plugins.status
+        plugin_status = require("core.utils").load_config().plugins.status
         local completion_engine = plugin_status.cmp and "cmp" or plugin_status.coq and "coq"
         if completion_engine == "coq" then
           return false
@@ -275,7 +273,7 @@ local user_plugins = {
       require("custom.plugins.custom_plugin_configs.neoscroll")
     end,
     setup = function()
-      nvchad.packer_lazy_load("neoscroll.nvim")
+      require("core.utils").packer_lazy_load("neoscroll.nvim")
     end,
   },
   ["chentau/marks.nvim"] = {
@@ -284,7 +282,7 @@ local user_plugins = {
       require("custom.plugins.custom_plugin_configs.marks")
     end,
     setup = function()
-      nvchad.packer_lazy_load("marks.nvim")
+      require("core.utils").packer_lazy_load("marks.nvim")
     end,
   },
 }
