@@ -1,4 +1,6 @@
 local default_plugins = {
+  "williamboman/nvim-lsp-installer",
+  "SmiteshP/nvim-gps",
   "nvim-lua/plenary.nvim",
   "lewis6991/impatient.nvim",
   "wbthomason/packer.nvim",
