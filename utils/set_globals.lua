@@ -1,4 +1,8 @@
-vim.g.clipboard = {
+local g = vim.g
+local o = vim.o
+local opt = vim.opt
+
+g.clipboard = {
   name = "unnamedplus",
   copy = {
     ["+"] = "xclip -i -selection clipboard",
@@ -11,41 +15,59 @@ vim.g.clipboard = {
   cache_enabled = 0,
 }
 
-vim.o.shadafile = "/home/zach/.local/share/nvim/shada/main.shada"
-vim.o.pumheight = 6
-vim.o.pumwidth = 12
-vim.g.loaded_matchparen = 1
-vim.g.python_host_skip_check = 1
-vim.g.python3_host_prog = "/home/zach/.virtualenvs/py3nvim/bin/python"
-vim.g.python_host_prog = "/home/zach/.virtualenvs/py2nvim/bin/python"
-vim.o.showcmd = false
-vim.o.showmode = false
-vim.o.laststatus = 3
-vim.o.shiftwidth = 2
-vim.o.showtabline = 0 -- shown in statusline
-vim.opt.list = true
-vim.opt.listchars:append("eol:↴")
-vim.o.signcolumn = "yes"
-vim.o.relativenumber = true
+o.shadafile = "/home/zach/.local/share/nvim/shada/main.shada"
+o.pumheight = 6
+o.pumwidth = 12
+o.showcmd = false
+o.showmode = false
+o.laststatus = 3
+o.shiftwidth = 2
+o.showtabline = 0 -- shown in statusline
+o.signcolumn = "yes"
+o.relativenumber = true
 
-vim.g.do_filetype_lua = 1
-vim.g.did_load_filetypes = 0
+opt.hidden = true
+opt.ignorecase = true
+opt.expandtab = true
+opt.mouse = ""
+opt.shiftwidth = 2
+opt.tabstop = 2
+opt.smartindent = true
+opt.timeoutlen = 400
+opt.updatetime = 250
+opt.undofile = true
+opt.list = true
+opt.listchars:append("eol:↴")
+opt.splitbelow = true
+opt.splitright = true
+opt.termguicolors = true
+opt.relativenumber = true
 
-vim.g.loaded_2html_plugin = 1
-vim.g.loaded_getscript = 1
-vim.g.loaded_getscriptPlugin = 1
-vim.g.loaded_gzip = 1
-vim.g.loaded_logipat = 1
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-vim.g.loaded_netrwSettings = 1
-vim.g.loaded_netrwFileHandlers = 1
-vim.g.loaded_matchit = 1
-vim.g.loaded_tar = 1
-vim.g.loaded_tarPlugin = 1
-vim.g.loaded_rrhelper = 1
-vim.g.loaded_spellfile_plugin = 1
-vim.g.loaded_vimball = 1
-vim.g.loaded_vimballPlugin = 1
-vim.g.loaded_zip = 1
-vim.g.loaded_zipPlugin = 1
+g.mapleader = " "
+g.loaded_matchparen = 1
+g.python_host_skip_check = 1
+g.python3_host_prog = "/home/zach/.virtualenvs/py3nvim/bin/python"
+g.python_host_prog = "/home/zach/.virtualenvs/py2nvim/bin/python"
+
+-- use lua filedetect
+g.do_filetype_lua = 1
+g.did_load_filetypes = 0
+-- disable default plugins
+g.loaded_2html_plugin = 1
+g.loaded_getscript = 1
+g.loaded_getscriptPlugin = 1
+g.loaded_gzip = 1
+g.loaded_logipat = 1
+g.loaded_netrw = 1
+g.loaded_netrwPlugin = 1
+g.loaded_netrwSettings = 1
+g.loaded_netrwFileHandlers = 1
+g.loaded_matchit = 1
+g.loaded_tar = 1
+g.loaded_tarPlugin = 1
+g.loaded_rrhelper = 1
+g.loaded_spellfile_plugin = 1
+g.loaded_vimball = 1
+g.loaded_vimballPlugin = 1
+g.loaded_zip = 1
+g.loaded_zipPlugin = 1

@@ -260,7 +260,6 @@ local user_plugins = {
   ["gennaro-tedesco/nvim-jqx"] = {
     cmd = {"JqxList", "JqxQuery"},
     disable = not plugin_status.jqx,
-    event = "BufReadPost",
   },
   ["monkoose/matchparen.nvim"] = {
     disable = not plugin_status.matchparen,

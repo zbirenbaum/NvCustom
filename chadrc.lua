@@ -19,8 +19,6 @@ M.options = {
   ignorecase = true,
   mapleader = " ",
   mouse = "",
-  number = true,
-  nav_wrapper = true,
   -- relative numbers in normal mode tool at the bottom of options.lua
   numberwidth = 2,
   expandtab = true,
