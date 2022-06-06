@@ -22,6 +22,7 @@ local user_plugins = {
   },
   ["zbirenbaum/copilot.lua"] = {
     -- branch = "dev",
+    disable = not plugin_status.copilot,
     event = {"VimEnter"},
     config = function()
       vim.defer_fn(function()
@@ -30,6 +31,7 @@ local user_plugins = {
     end,
   },
   ["zbirenbaum/copilot-cmp"] = {
+    disable = not plugin_status.copilot,
     after = { "copilot.lua", "nvim-cmp" },
   },
   ["lewis6991/gitsigns.nvim"] = {

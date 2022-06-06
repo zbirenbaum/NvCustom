@@ -40,6 +40,8 @@ local status = {
   colorizer = true,
   comment = true, -- universal commentor
   firenvim = false,
+
+  copilot = true,
 }
 
 return status

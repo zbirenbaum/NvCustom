@@ -61,20 +61,20 @@ cmp.setup({
       behavior = cmp.ConfirmBehavior.Replace,
       select = false,
     }),
-    ["<Tab>"] = function(fallback)
+    ["<Tab>"] = vim.schedule_wrap(function(fallback)
       if cmp.visible() then
         cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
       else
         fallback()
       end
-    end,
-    ["<S-Tab>"] = function(fallback)
+    end),
+    ["<S-Tab>"] = vim.schedule_wrap(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
       else
         fallback()
       end
-    end,
+    end),
   },
   experimental = {
     native_menu = false,
