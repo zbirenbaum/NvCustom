@@ -90,6 +90,17 @@ local user_plugins = {
       if vim.bo.filetype == 'norg' then setup() else vim.defer_fn(setup, 10) end
     end,
   },
+  ["nvim-treesitter/playground"] ={
+    disable = not plugin_status.playground,
+    after="nvim-treesitter",
+    config = function()
+      vim.api.nvim_create_autocmd({"CursorHold"}, {
+        callback=function()
+          vim.cmd(":TSHighlightCapturesUnderCursor")
+        end
+      })
+    end,
+  },
   ["numToStr/Comment.nvim"] = {
     disable = not plugin_status.comment,
     module = "Comment",

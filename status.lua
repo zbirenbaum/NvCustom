@@ -42,6 +42,7 @@ local status = {
   firenvim = false,
 
   copilot = true,
+  playground = false,
 }
 
 return status

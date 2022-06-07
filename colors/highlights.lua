@@ -32,7 +32,9 @@ M.apply_colors_highlight = function()
   local fg = function(group, color, sp)
     local hl = { fg = color }
     if sp ~= nil then
-      hl[sp] = true
+      if type(sp) == "string" then hl[sp] = true
+      else for _, v in ipairs(sp) do hl[v] = true end
+      end
     end
     vim.api.nvim_set_hl(0, group, hl)
   end
@@ -54,8 +56,16 @@ M.apply_colors_highlight = function()
   end
 
   vim.api.nvim_set_hl(0, "TSVariable", { fg = colors.white })
+  fg("TSContant", orange, "bold")
+  fg("TSParameter", orange, {"italic", "bold"})
+  -- fg("TSRepeat", orange, {"italic", "bold"})
+  -- fg("TSKeyword", purple)
+  -- fg("TSKeywordFunction", blue, "bold")
+  -- fg("TSConditional", purple, "bold")
+
   -- Comments
   if ui.italic_comments then
+
     vim.api.nvim_set_hl(0, "TSComment", { fg = grey_fg, italic = true, bold = true })
     vim.api.nvim_set_hl(0, "Comment", { fg = grey_fg, italic = true, bold = true })
     -- fg("Comment", grey_fg, "italic")
@@ -125,21 +135,6 @@ M.apply_colors_highlight = function()
   fg("DiagnosticWarn", yellow)
   fg("DiagnosticInformation", green)
 
-  -- NvimTree
-  fg("NvimTreeEmptyFolderName", folder_bg)
-  fg("NvimTreeEndOfBuffer", darker_black)
-  fg("NvimTreeFolderIcon", folder_bg)
-  fg("NvimTreeFolderName", folder_bg)
-  fg("NvimTreeGitDirty", red)
-  fg("NvimTreeIndentMarker", one_bg2)
-  bg("NvimTreeNormal", darker_black)
-  bg("NvimTreeNormalNC", darker_black)
-  fg("NvimTreeOpenedFolderName", folder_bg)
-  fg("NvimTreeRootFolder", red, "underline") -- enable underline for root folder in nvim tree
-  fg_bg("NvimTreeStatuslineNc", darker_black, darker_black)
-  fg_bg("NvimTreeVertSplit", darker_black, darker_black)
-  fg_bg("NvimTreeWindowPicker", red, black2)
-
   -- Telescope
   fg_bg("TelescopeBorder", darker_black, darker_black)
   fg_bg("TelescopePromptBorder", black2, black2)
@@ -155,33 +150,9 @@ M.apply_colors_highlight = function()
 
   bg("TelescopeSelection", black2)
 
-  --I don't use this and kinda a pain to convert
-  -- keybinds cheatsheet
-
-  -- fg_bg("CheatsheetBorder", black, black)
-  -- bg("CheatsheetSectionContent", black)
-  -- fg("CheatsheetHeading", white)
-  --
-  -- local section_title_colors = {
-  --    white,
-  --    blue,
-  --    red,
-  --    green,
-  --    yellow,
-  --    purple,
-  --    orange,
-  -- }
-  -- for i, color in ipairs(section_title_colors) do
-  --    vim.cmd("highlight CheatsheetTitle", i, " guibg = ", color, " guifg=", black)
-  -- end
-
   -- Disable some highlight in nvim tree if transparency enabled
   if ui.transparency then
     bg("NormalFloat", "NONE")
-    bg("NvimTreeNormal", "NONE")
-    bg("NvimTreeNormalNC", "NONE")
-    bg("NvimTreeStatusLineNC", "NONE")
-    fg_bg("NvimTreeVertSplit", grey, "NONE")
     -- telescope
     bg("TelescopeBorder", "NONE")
     bg("TelescopePrompt", "NONE")
@@ -200,3 +171,24 @@ M.apply_colors_highlight = function()
 end
 
 return M
+
+  -- -- NvimTree
+  -- fg("NvimTreeEmptyFolderName", folder_bg)
+  -- fg("NvimTreeEndOfBuffer", darker_black)
+  -- fg("NvimTreeFolderIcon", folder_bg)
+  -- fg("NvimTreeFolderName", folder_bg)
+  -- fg("NvimTreeGitDirty", red)
+  -- fg("NvimTreeIndentMarker", one_bg2)
+  -- bg("NvimTreeNormal", darker_black)
+  -- bg("NvimTreeNormalNC", darker_black)
+  -- fg("NvimTreeOpenedFolderName", folder_bg)
+  -- fg("NvimTreeRootFolder", red, "underline") -- enable underline for root folder in nvim tree
+  -- fg_bg("NvimTreeStatuslineNc", darker_black, darker_black)
+  -- fg_bg("NvimTreeVertSplit", darker_black, darker_black)
+  -- fg_bg("NvimTreeWindowPicker", red, black2)
+
+  -- transparency
+  -- bg("NvimTreeNormal", "NONE")
+  -- bg("NvimTreeNormalNC", "NONE")
+  -- bg("NvimTreeStatusLineNC", "NONE")
+  -- fg_bg("NvimTreeVertSplit", grey, "NONE")

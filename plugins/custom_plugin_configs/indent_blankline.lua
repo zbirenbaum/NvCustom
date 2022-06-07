@@ -21,7 +21,7 @@ require("indent_blankline").setup({
   vim.api.nvim_set_hl(
     0,
     "IndentBlanklineContextStart",
-    { nocombine = true, underline = true, special = colors.grey_fg }
+    { nocombine = false, underline = true, special = colors.grey_fg }
   ),
 })
 vim.cmd('if &ft == "packer" | echo "" | else | silent! e %')
