@@ -21,12 +21,14 @@ local user_plugins = {
     end
   },
   ["zbirenbaum/copilot.lua"] = {
-    -- branch = "dev",
+    branch = "master",
     disable = not plugin_status.copilot,
-    event = {"VimEnter"},
+    after = "nvim-lspconfig",
     config = function()
       vim.defer_fn(function()
-        require("copilot").setup()
+        require("copilot").setup({
+          ft_disable = {"go"}
+        })
       end, 100)
     end,
   },

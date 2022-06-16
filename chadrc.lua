@@ -1,7 +1,5 @@
 local M = {}
 
-require("custom.utils.set_globals")
-require("custom.plugin_dev_debug.file_exec")
 vim.api.nvim_create_autocmd({ "VimEnter" }, {
   callback = function()
     require("custom.utils.mappings").tab()
@@ -10,52 +8,8 @@ vim.api.nvim_create_autocmd({ "VimEnter" }, {
   once = true,
 })
 
-M.options = {
-  -- NeoVim/Vim options
-  clipboard = "unnamedplus",
-  cmdheight = 1,
-  ruler = false,
-  hidden = true,
-  ignorecase = true,
-  mapleader = " ",
-  mouse = "",
-  -- relative numbers in normal mode tool at the bottom of options.lua
-  numberwidth = 2,
-  expandtab = true,
-  shiftwidth = 2,
-  smartindent = true,
-  tabstop = 2, -- Number of spaces that a <Tab> in the file counts for
-  timeoutlen = 400,
-  -- interval for writing swap file to disk, also used by gitsigns
-  updatetime = 250,
-  undofile = true, -- keep a permanent undo (across restarts)
-  -- NvChad options
-  nvChad = {
-    copy_cut = true, -- copy cut text ( x key ), visual and normal mode
-    copy_del = true, -- copy deleted text ( dd key ), visual and normal mode
-    insert_nav = true, -- navigation in insertmode
-    window_nav = true,
-    theme_toggler = false,
-    terminal_numbers = true,
-    -- used for updater
-    update_url = "https://github.com/NvChad/NvChad",
-    update_branch = "main",
-  },
-  terminal = {
-    behavior = {
-      close_on_exit = true,
-    },
-    window = {
-      vsplit_ratio = 0.5,
-      split_ratio = 0.3,
-    },
-    location = {
-      horizontal = "belowright",
-      vertical = "belowright",
-    },
-  },
-}
--- ui configs
+M.options = { require("custom.utils.set_globals") }
+
 M.ui = {
   hl_override = "custom.plugins.overrides.hl_override",
   italic_comments = true,

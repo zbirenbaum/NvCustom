@@ -23,9 +23,8 @@ o.showmode = false
 o.laststatus = 3
 o.shiftwidth = 2
 o.showtabline = 0 -- shown in statusline
-o.signcolumn = "yes"
-o.relativenumber = true
 
+opt.clipboard = "unnamedplus"
 opt.hidden = true
 opt.ignorecase = true
 opt.expandtab = true
@@ -35,14 +34,27 @@ opt.tabstop = 2
 opt.smartindent = true
 opt.timeoutlen = 400
 opt.updatetime = 250
-opt.undofile = true
+opt.termguicolors = true
+opt.cmdheight = 1
+opt.expandtab = true
+opt.ignorecase = true
+opt.smartcase = true
+opt.smartindent = true
 opt.list = true
 opt.listchars:append("eol:↴")
+opt.termguicolors = true
+opt.fillchars = { eob = " " }
+opt.number = true
+opt.numberwidth = 2
+opt.relativenumber = true
+opt.ruler = false
+opt.undofile = true
+opt.cul = true
+opt.signcolumn = "yes"
 opt.splitbelow = true
 opt.splitright = true
-opt.termguicolors = true
-opt.relativenumber = true
 
+-- globals
 g.mapleader = " "
 g.loaded_matchparen = 1
 g.python_host_skip_check = 1
@@ -52,7 +64,11 @@ g.python_host_prog = "/home/zach/.virtualenvs/py2nvim/bin/python"
 -- use lua filedetect
 g.do_filetype_lua = 1
 g.did_load_filetypes = 0
--- disable default plugins
+g.transparency = true
+
+-- builtin plugin stuff
+g.do_filetype_lua = 1
+g.did_load_filetypes = 0
 g.loaded_2html_plugin = 1
 g.loaded_getscript = 1
 g.loaded_getscriptPlugin = 1
