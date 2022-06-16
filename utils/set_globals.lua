@@ -15,11 +15,12 @@ g.clipboard = {
   cache_enabled = 0,
 }
 
+o.showcmd = false
+o.showmode = false
+o.lazyredraw = 1
 o.shadafile = "/home/zach/.local/share/nvim/shada/main.shada"
 o.pumheight = 6
 o.pumwidth = 12
-o.showcmd = false
-o.showmode = false
 o.laststatus = 3
 o.shiftwidth = 2
 o.showtabline = 0 -- shown in statusline
