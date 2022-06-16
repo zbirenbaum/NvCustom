@@ -1,6 +1,7 @@
 local M = {}
+local autocmd = vim.api.nvim_create_autocmd
 
-vim.api.nvim_create_autocmd({ "VimEnter" }, {
+autocmd({ "VimEnter" }, {
   callback = function()
     require("custom.utils.mappings").tab()
     require("custom.utils.hot_reload")

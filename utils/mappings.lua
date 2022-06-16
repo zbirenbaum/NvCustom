@@ -4,9 +4,12 @@ local M = {}
 
 M.tab = function ()
   maps({"i", "n", "t", "v"}, '<C-i>', '<tab>', {silent=true, remap=true})
+  -- this probably doesn't belong here but neither does a function with one mapping...
+  maps({"n"}, "<ESC>", function() vim.cmd("noh") end, opts)
 end
+
 local choose_debug_session = function ()
-  if vim.bo.filetype == "lua" and not require("dap").session() then require("osv").run_this()
+  if vim.lo.filetype == "lua" and not require("dap").session() then require("osv").run_this()
   else require("dap").continue() end
 end
 
@@ -63,7 +66,7 @@ M.lsp = function ()
   maps({"n"}, "<leader>D", function() lsp.type_definition() end, opts)
   maps({"n"}, "<leader>ra", function() lsp.rename() end, opts)
   maps({"n"}, "<leader>ca", function() lsp.code_action() end, opts)
-  maps({"n"}, "gr", function() lsp.references() end, opts)
+  maps({"n"}, "gr", function() lsp.references({}) end, opts)
   maps({"n"}, "<leader>f", function() diag.open_float() end, opts)
   maps({"n"}, "[d", function() diag.goto_prev() end, opts)
   maps({"n"}, "d]", function() diag.goto_next() end, opts)
@@ -86,10 +89,9 @@ M.terminal = function()
   maps("t", "<C-w>j", [[<C-\><C-n><C-W>j]], opts)
   maps("t", "<C-w>k", [[<C-\><C-n><C-W>k]], opts)
   maps("t", "<C-w>l", [[<C-\><C-n><C-W>l]], opts)
-  local mappings = M.terminal_mappings()
-  for _, mapping in ipairs(mappings) do
+  vim.tbl_map(function(mapping)
     vim.keymap.set(mapping[1], mapping[2], mapping[3], opts)
-  end
+  end, M.terminal_mappings())
 end
 
 return M
