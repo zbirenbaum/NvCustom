@@ -15,9 +15,13 @@ local user_plugins = {
     end
   },
   ["zbirenbaum/neodim"] = {
-    after = {"nvim-treesitter"},
+    event = {"LspAttach"},
     config = function ()
-      vim.defer_fn(function() require("neodim").setup() end, 100)
+      require("neodim").setup({
+        update_in_insert = {
+          enable = false
+        }
+      })
     end
   },
   ["zbirenbaum/copilot.lua"] = {

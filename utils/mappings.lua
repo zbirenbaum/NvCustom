@@ -5,7 +5,13 @@ local M = {}
 M.tab = function ()
   maps({"i", "n", "t", "v"}, '<C-i>', '<tab>', {silent=true, remap=true})
   -- this probably doesn't belong here but neither does a function with one mapping...
-  maps({"n"}, "<ESC>", function() vim.cmd("noh") end, opts)
+  maps({"n"}, "<ESC>", function () vim.cmd("noh") end, opts)
+  maps({'n'}, "<C-l>", function ()
+    local oldprint = print
+    print = require("custom.plugin_dev_debug.print_to_buf").print
+    vim.cmd("source %")
+    vim.schedule(function () print = oldprint end)
+  end, opts)
 end
 
 local choose_debug_session = function ()

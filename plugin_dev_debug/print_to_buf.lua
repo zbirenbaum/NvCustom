@@ -30,7 +30,7 @@ M.clear = function ()
   vim.fn.chanclose(prev_chan)
 end
 
-M.print = function (input, liveprint)
+M.print = function (input)
   if not cnl_valid() or not buf_valid() then M.validate()
   elseif not win_valid() then M.show() end
   if type(input) == "table" then input = vim.inspect(input) end
@@ -45,7 +45,7 @@ M.print = function (input, liveprint)
 end
 
 M.liveprint = function (input)
-  M.print(input, true)
+  M.print(input)
 end
 
 M.runfile = function ()
@@ -95,6 +95,7 @@ end
 M.new = function ()
   M.create_win()
   M.create_term()
+  a.nvim_win_set_option(M.win, "listchars", "eol: ")
   a.nvim_win_set_buf(M.win, M.buf)
 end
 

@@ -54,6 +54,7 @@ opt.cul = true
 opt.signcolumn = "yes"
 opt.splitbelow = true
 opt.splitright = true
+opt.shortmess:append "sI"
 
 -- globals
 g.mapleader = " "
