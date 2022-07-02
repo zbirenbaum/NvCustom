@@ -34,6 +34,7 @@ cmp.setup({
         -- return vim_item
       end
       vim_item.kind = string.format("[%s] %s", symbols[vim_item.kind].icon, vim_item.kind)
+      vim_item.menu = ""
       -- vim_item = lspkind.cmp_format({ with_text = false, maxwidth = 50 })(entry, vim_item)
       return vim_item
     end
