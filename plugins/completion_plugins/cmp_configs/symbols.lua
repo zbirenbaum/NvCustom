@@ -119,6 +119,10 @@ local symbols = {
     icon = "ﳛ",
     text = "Variable"
   },
+  Copilot = {
+    icon = '',
+    text = 'Copilot',
+  },
 }
 
 return symbols
