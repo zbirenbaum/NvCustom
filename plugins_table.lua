@@ -17,11 +17,7 @@ local user_plugins = {
   ["zbirenbaum/neodim"] = {
     event = {"LspAttach"},
     config = function ()
-      require("neodim").setup({
-        update_in_insert = {
-          enable = false
-        }
-      })
+      require("neodim").setup()
     end
   },
   ["zbirenbaum/copilot.lua"] = {

@@ -31,7 +31,6 @@ lspconfig.init({
     Unit = "[] Unit",
     Value = "[] Value",
     Variable = "[ﳛ] Variable",
-    Copilot = "[] Copilot",
   },
 })
 return lspconfig
