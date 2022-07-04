@@ -235,6 +235,12 @@ local user_plugins = {
     disable = not plugin_status.cmp,
     after = "cmp-buffer",
   },
+  ["kylechui/nvim-surround"] = {
+    after = "nvim-cmp",
+    config = function ()
+      require("nvim-surround").setup()
+    end,
+  },
   ["windwp/nvim-autopairs"] = {
     disable = not plugin_status.autopairs or not plugin_status.cmp,
     after = "nvim-cmp",
