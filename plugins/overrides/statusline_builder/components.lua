@@ -1,8 +1,12 @@
+local a = vim.api
 local colors = require("custom.colors").get()
 local lsp = require("feline.providers.lsp")
 local C = {}
-local config = require("core.utils").load_config().plugins.options.statusline
-local shortline = config.shortline == false and true
+
+local test_width = function (winid)
+  local comp = vim.o.laststatus == 3 and vim.o.columns or a.nvim_win_get_width(tonumber(winid) or 0)
+  return comp >= 70
+end
 
 local statusline_style = {
   left = "",
@@ -42,11 +46,7 @@ local mode_colors = {
 }
 
 local chad_mode_hl = function()
-  return {
-    fg = mode_colors[vim.fn.mode()][2],
-    --bg=colors.lightbg,
-    bg = empty,
-  }
+  return { fg = mode_colors[vim.fn.mode()][2], bg = empty, }
 end
 
 C.space = function(cond)
@@ -59,16 +59,10 @@ end
 
 C.main_icon = {
   provider = statusline_style.main_icon,
-  hl = {
-    fg = empty,
-    bg = colors.nord_blue,
-  },
+  hl = { fg = empty, bg = colors.nord_blue, },
   left_sep = {
     str = statusline_style.right,
-    hl = {
-      fg = colors.nord_blue,
-      bg = colors.lightbg,
-    },
+    hl = { fg = colors.nord_blue, bg = colors.lightbg, },
   },
 }
 
@@ -86,9 +80,7 @@ C.file = {
     end
     return " " .. icon .. " " .. filename .. " "
   end,
-  enabled = shortline or function(winid)
-    return vim.api.nvim_win_get_width(tonumber(winid) or 0) > 70
-  end,
+  enabled = test_width,
   hl = function () return {
     fg = vim.bo.modified and '#cab873' or colors.white,
     bg = colors.lightbg,
@@ -109,19 +101,13 @@ C.file = {
   },
 }
 
---   right_sep = { str = statusline_style.right, hl = { fg = colors.lightbg, bg = colors.lightbg2 } },
--- }
-
 C.dir = {
   provider = function()
     local dir_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
     return "  " .. dir_name .. " "
   end,
 
-  enabled = shortline or function(winid)
-    return vim.api.nvim_win_get_width(tonumber(winid) or 0) > 80
-  end,
-
+  enabled = test_width,
   hl = {
     fg = colors.cyan,
     bg = colors.lightbg,
@@ -179,7 +165,7 @@ C.git = {
       if path:find(cwd) ~= nil then
         gitrepo = true
       end
-      return gitrepo and vim.api.nvim_win_get_width(tonumber(winid) or 0) > 70
+      return gitrepo and a.nvim_win_get_width(tonumber(winid) or 0) > 70
     end,
     hl = {
       fg = colors.nord_blue,
@@ -202,7 +188,7 @@ C.git = {
       if path:find(cwd) ~= nil then
         gitrepo = true
       end
-      return gitrepo and vim.api.nvim_win_get_width(tonumber(winid) or 0) > 70
+      return gitrepo and a.nvim_win_get_width(tonumber(winid) or 0) > 70
     end,
     hl = {
       fg = colors.nord_blue,
@@ -232,7 +218,7 @@ C.git = {
       if path:find(cwd) ~= nil then
         gitrepo = true
       end
-      return gitrepo and vim.api.nvim_win_get_width(tonumber(winid) or 0) > 70
+      return gitrepo and a.nvim_win_get_width(tonumber(winid) or 0) > 70
     end,
     hl = {
       bg = colors.lightbg,
@@ -291,7 +277,7 @@ C.diagnostics = {
 
 C.progress = {
   provider = function()
-    local client = vim.lsp.get_active_clients({buf = vim.api.nvim_get_current_buf()})
+    local client = vim.lsp.get_active_clients({buf = a.nvim_get_current_buf()})
     local Lsp = vim.lsp.util.get_progress_messages()[1]
     if Lsp and client and client[1].name ~= "ccls" then
       local msg = Lsp.message or ""
@@ -322,7 +308,7 @@ C.progress = {
     return ""
   end,
   enabled = shortline or function(winid)
-    return vim.api.nvim_win_get_width(tonumber(winid) or 0) > 80
+    return a.nvim_win_get_width(tonumber(winid) or 0) > 80
   end,
   hl = { fg = colors.green, bg = empty },
 }
@@ -332,13 +318,11 @@ C.lsp = {
     local icons = require("custom.plugins.lsp_plugins.lsp_configs.langserver_icons")
     local names = vim.tbl_map(function (client)
       return icons and icons[client.name] or client.name
-    end, vim.lsp.get_active_clients({buf = vim.api.nvim_get_current_buf()}))
+    end, vim.lsp.get_active_clients({buf = a.nvim_get_current_buf()}))
     return table.concat(names, "")
     -- return "  " .. table.concat(names, '')
   end,
-  enabled = shortline or function(winid)
-    return vim.api.nvim_win_get_width(tonumber(winid) or 0) > 70
-  end,
+  enabled = test_width,
   hl = { fg = colors.nord_blue, bg = empty },
 }
 
@@ -382,7 +366,7 @@ C.location = {
   left_sep = {
     provider = " " .. statusline_style.left,
     enabled = shortline or function(winid)
-      return vim.api.nvim_win_get_width(tonumber(winid) or 0) > 90
+      return a.nvim_win_get_width(tonumber(winid) or 0) > 90
     end,
     hl = {
       fg = colors.green,
@@ -392,7 +376,7 @@ C.location = {
   loc_icon = {
     provider = "  " .. statusline_style.position_icon,
     enabled = shortline or function(winid)
-      return vim.api.nvim_win_get_width(tonumber(winid) or 0) > 90
+      return a.nvim_win_get_width(tonumber(winid) or 0) > 90
     end,
     hl = {
       fg = colors.green,
@@ -414,7 +398,7 @@ C.location = {
     end,
 
     enabled = shortline or function(winid)
-      return vim.api.nvim_win_get_width(tonumber(winid) or 0) > 90
+      return a.nvim_win_get_width(tonumber(winid) or 0) > 90
     end,
 
     hl = {
@@ -426,12 +410,12 @@ C.location = {
 
 
 local get_tabs = function ()
-  return vim.api.nvim_list_tabpages()
+  return a.nvim_list_tabpages()
 end
 
 local get_left_tabs = function ()
   local tab_list = get_tabs()
-  local current = vim.api.nvim_tabpage_get_number(0)
+  local current = a.nvim_tabpage_get_number(0)
   if current == 1 then return '' end
   local tabstring = ''
   local i = 1
@@ -444,7 +428,7 @@ end
 
 local get_right_tabs = function ()
   local tab_list = get_tabs()
-  local current = vim.api.nvim_tabpage_get_number(0)
+  local current = a.nvim_tabpage_get_number(0)
   if current == tab_list[#tab_list] then return '' end
   local tabstring = ''
   local i = current + 1
@@ -488,7 +472,7 @@ C.tabs = {
   },
   active = {
     provider = function ()
-      return tostring(vim.api.nvim_tabpage_get_number(0))
+      return tostring(a.nvim_tabpage_get_number(0))
     end,
     enabled = tabline_cond,
     hl = {
