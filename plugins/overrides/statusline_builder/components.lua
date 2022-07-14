@@ -291,7 +291,7 @@ C.diagnostics = {
 
 C.progress = {
   provider = function()
-    local client = vim.lsp.buf_get_clients(0)
+    local client = vim.lsp.get_active_clients({buf = vim.api.nvim_get_current_buf()})
     local Lsp = vim.lsp.util.get_progress_messages()[1]
     if Lsp and client and client[1].name ~= "ccls" then
       local msg = Lsp.message or ""
@@ -328,7 +328,14 @@ C.progress = {
 }
 
 C.lsp = {
-  provider = "lsp_client_names",
+  provider = function()
+    local icons = require("custom.plugins.lsp_plugins.lsp_configs.langserver_icons")
+    local names = vim.tbl_map(function (client)
+      return icons and icons[client.name] or client.name
+    end, vim.lsp.get_active_clients({buf = vim.api.nvim_get_current_buf()}))
+    return table.concat(names, "")
+    -- return "  " .. table.concat(names, '')
+  end,
   enabled = shortline or function(winid)
     return vim.api.nvim_win_get_width(tonumber(winid) or 0) > 70
   end,

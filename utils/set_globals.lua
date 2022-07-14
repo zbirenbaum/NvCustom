@@ -64,13 +64,9 @@ g.python3_host_prog = "/home/zach/.virtualenvs/py3nvim/bin/python"
 g.python_host_prog = "/home/zach/.virtualenvs/py2nvim/bin/python"
 
 -- use lua filedetect
-g.do_filetype_lua = 1
-g.did_load_filetypes = 0
 g.transparency = true
 
 -- builtin plugin stuff
-g.do_filetype_lua = 1
-g.did_load_filetypes = 0
 g.loaded_2html_plugin = 1
 g.loaded_getscript = 1
 g.loaded_getscriptPlugin = 1
