@@ -2,6 +2,10 @@ local g = vim.g
 local o = vim.o
 local opt = vim.opt
 
+-- lang specific settings
+g.python_recommended_style = 0
+g.rust_recommended_style= 0
+-- clipboard support over ssh
 g.clipboard = {
   name = "unnamedplus",
   copy = {
