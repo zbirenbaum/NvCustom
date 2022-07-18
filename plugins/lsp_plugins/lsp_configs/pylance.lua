@@ -190,7 +190,7 @@ require("lspconfig.configs").pylance = {
           diagnosticMode = "workspace",
           stubPath = vim.fn.expand("$HOME/typings"),
           diagnosticSeverityOverrides = {
-            reportMissingTypeStubs = "information",
+            reportMissingTypeStubs = "none",
           },
         },
       },
