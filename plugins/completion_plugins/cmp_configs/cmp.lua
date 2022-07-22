@@ -3,6 +3,8 @@ local luasnip = require("luasnip")
 -- local lspkind = require("custom.plugins.completion_plugins.cmp_configs.lspkind")
 local symbols = require("custom.plugins.completion_plugins.cmp_configs.symbols")
 
+local has_copilot, copilot_cmp = pcall("require", "copilot_cmp.comparators")
+
 if not present then
   return
 end
@@ -105,8 +107,10 @@ cmp.setup({
     { name = "copilot", group_index = 2 },
     { name = "nvim_lsp", group_index = 2 },
     { name = "path", group_index = 2 },
-    -- { name = 'orgmode', group_index = 2 },
     { name = 'neorg', group_index = 2 },
+
+    -- keep disabled
+    -- { name = 'orgmode', group_index = 2 },
     -- { name = "nvim_lua", group_index = 2 },
     -- { name = "luasnip", group_index = 2 },
     -- { name = "buffer", group_index = 5 },
@@ -118,8 +122,8 @@ cmp.setup({
     comparators = {
       -- order matters here
       cmp.config.compare.exact,
-      require("copilot_cmp.comparators").prioritize,
-      require("copilot_cmp.comparators").score,
+      has_copilot and copilot_cmp.prioritize or nil,
+      has_copilot and copilot_cmp.score or nil,
       cmp.config.compare.offset,
       -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
       cmp.config.compare.score,

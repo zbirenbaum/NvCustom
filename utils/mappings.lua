@@ -8,8 +8,8 @@ M.tab = function ()
   maps({"n"}, "<ESC>", function () vim.cmd("noh") end, opts)
   maps({'n'}, "<C-l>", function ()
     local oldprint = print
-    print = require("custom.plugin_dev_debug.print_to_buf").print
-    vim.cmd("source %")
+    print = require("custom.plugin_dev_debug.print_to_buf").liveprint
+    vim.cmd("w | source %")
     vim.schedule(function () print = oldprint end)
   end, opts)
 end

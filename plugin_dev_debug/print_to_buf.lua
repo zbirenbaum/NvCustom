@@ -30,22 +30,26 @@ M.clear = function ()
   vim.fn.chanclose(prev_chan)
 end
 
-M.print = function (input)
-  if not cnl_valid() or not buf_valid() then M.validate()
-  elseif not win_valid() then M.show() end
-  if type(input) == "table" then input = vim.inspect(input) end
-  if type(input) == "number" then input = tostring(input) end
-  input = input:gsub("\n", "\r\n")
-  vim.schedule(function()
+M.print = function (...)
+  local arg = {...}
+  for _, input in ipairs(arg) do
+    if not cnl_valid() or not buf_valid() then M.validate()
+    elseif not win_valid() then M.show() end
+    if type(input) == "table" then input = vim.inspect(input) end
+    if type(input) == "number" then input = tostring(input) end
+    input = input:gsub("\n", "\r\n")
     vim.schedule(function()
-      a.nvim_chan_send(M.chan, input .. '\r\n')
-      M.scroll()
+      vim.schedule(function()
+        a.nvim_chan_send(M.chan, input .. '\r\n')
+        M.scroll()
+      end)
     end)
-  end)
+  end
 end
 
-M.liveprint = function (input)
-  M.print(input)
+M.liveprint = function (...)
+  if M.exists() then M.clear() end
+  M.print(...)
 end
 
 M.runfile = function ()
