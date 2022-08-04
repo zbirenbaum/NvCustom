@@ -211,14 +211,9 @@ local user_plugins = {
     end,
   },
   ["folke/trouble.nvim"] = {
-    requires = "kyazdani42/nvim-web-devicons",
-    after = { "nvim-web-devicons", "nvim-lspconfig", "nvim-treesitter" },
+    cmd = {"Trouble", "TroubleToggle", "TroubleRefresh", "TroubleClose"},
     disable = not plugin_status.trouble,
-    config = function()
-      vim.defer_fn(function()
-        require("custom.plugins.custom_plugin_configs.trouble")
-      end, 100)
-    end,
+    config = function() require("plugins.custom_plugin_configs.trouble") end,
   },
   -- completion stuff
   ["hrsh7th/cmp-nvim-lsp"] = {

@@ -158,7 +158,7 @@ C.git = {
 
   branch = {
     provider = "git_branch",
-    enabled = shortline or function(winid)
+    enabled = function(winid)
       local path = vim.fn.expand("%:p")
       local cwd = vim.fn.getcwd()
       local gitrepo = false
@@ -181,7 +181,7 @@ C.git = {
   },
   branch_bg = {
     provider = "git_branch",
-    enabled = shortline or function(winid)
+    enabled = function(winid)
       local path = vim.fn.expand("%:p")
       local cwd = vim.fn.getcwd()
       local gitrepo = false
@@ -307,7 +307,7 @@ C.progress = {
 
     return ""
   end,
-  enabled = shortline or function(winid)
+  enabled = function(winid)
     return a.nvim_win_get_width(tonumber(winid) or 0) > 80
   end,
   hl = { fg = colors.green, bg = empty },
@@ -365,7 +365,7 @@ C.mode = {
 C.location = {
   left_sep = {
     provider = " " .. statusline_style.left,
-    enabled = shortline or function(winid)
+    enabled = function(winid)
       return a.nvim_win_get_width(tonumber(winid) or 0) > 90
     end,
     hl = {
@@ -375,7 +375,7 @@ C.location = {
   },
   loc_icon = {
     provider = "  " .. statusline_style.position_icon,
-    enabled = shortline or function(winid)
+    enabled = function(winid)
       return a.nvim_win_get_width(tonumber(winid) or 0) > 90
     end,
     hl = {
@@ -397,7 +397,7 @@ C.location = {
       return "" .. result .. "%%"
     end,
 
-    enabled = shortline or function(winid)
+    enabled = function(winid)
       return a.nvim_win_get_width(tonumber(winid) or 0) > 90
     end,
 
@@ -414,7 +414,6 @@ local get_tabs = function ()
 end
 
 local get_left_tabs = function ()
-  local tab_list = get_tabs()
   local current = a.nvim_tabpage_get_number(0)
   if current == 1 then return '' end
   local tabstring = ''
