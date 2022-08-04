@@ -1,0 +1,5 @@
+local base16 = require("base16")
+local colors = require("custom.colors").get("onedark")
+local theme = base16.themes("onedark")
+print(vim.inspect(theme))
+print(vim.inspect(colors))
