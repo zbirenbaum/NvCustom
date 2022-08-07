@@ -5,6 +5,7 @@ local opt = vim.opt
 -- lang specific settings
 g.python_recommended_style = 0
 g.rust_recommended_style= 0
+g.solidity_recommended_style= 0
 -- clipboard support over ssh
 g.clipboard = {
   name = "unnamedplus",
@@ -18,7 +19,6 @@ g.clipboard = {
   },
   cache_enabled = 0,
 }
-
 o.showcmd = false
 o.showmode = false
 o.lazyredraw = 1

@@ -1,6 +1,9 @@
 local plugin_status = require("custom.status")
 
 local user_plugins = {
+  ["dylon/vim-antlr"] = {
+    ft = "antlr4",
+  },
   ["nvim-lua/plenary.nvim"] = {
     module = "plenary",
     "nvim-lua/plenary.nvim"

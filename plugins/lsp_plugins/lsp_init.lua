@@ -30,7 +30,14 @@ M.setup_lsp = function(completion_engine)
   end
   local lspconfig = require("lspconfig")
   local default_servers = { "gopls" }
-  local custom_servers = { "sumneko_lua", "pylance", "clangd", "rust_analyzer" }
+  local custom_servers = {
+    "sumneko_lua",
+    "pylance",
+    "tsserver",
+    "clangd",
+    "rust_analyzer",
+    "solidity_ls"
+  }
   local default_config = default_lsp_config(attach, capabilities)
 
   for _, lsp in ipairs(custom_servers) do

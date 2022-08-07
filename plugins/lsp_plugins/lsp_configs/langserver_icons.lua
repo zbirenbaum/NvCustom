@@ -6,4 +6,6 @@ return {
   ccls = " ",
   clangd = " ",
   copilot = " ",
+  solidity_ls = "ﲹ ",
+  tsserver = " ",
 }
