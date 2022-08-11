@@ -17,12 +17,12 @@ local user_plugins = {
       require('custom.utils.mappings').terminal()
     end
   },
-  ["zbirenbaum/neodim"] = {
-    event = {"LspAttach"},
-    config = function ()
-      require("neodim").setup()
-    end
-  },
+  -- ["zbirenbaum/neodim"] = {
+  --   event = {"LspAttach"},
+  --   config = function ()
+  --     require("neodim").setup()
+  --   end
+  -- },
   ["zbirenbaum/copilot.lua"] = {
     branch = "master",
     disable = not plugin_status.copilot,
