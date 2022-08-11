@@ -1,7 +1,7 @@
 local present, cmp = pcall(require, "cmp")
 local luasnip = require("luasnip")
--- local lspkind = require("custom.plugins.completion_plugins.cmp_configs.lspkind")
-local symbols = require("custom.plugins.completion_plugins.cmp_configs.symbols")
+local lspkind = require("custom.plugins.completion_plugins.cmp_configs.lspkind")
+-- local symbols = require("custom.plugins.completion_plugins.cmp_configs.symbols")
 
 local has_copilot, copilot_cmp = pcall("require", "copilot_cmp.comparators")
 
@@ -26,19 +26,28 @@ cmp.setup({
     winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
   },
   formatting = {
-    fields = { "abbr", "kind" },
-    format = function (entry, vim_item)
-      if not vim_item then return end
-      if entry.source.name == "copilot" then
-        vim_item.kind = "Copilot"
-        vim_item.kind_hl_group = "CmpItemKindCopilot"
-        -- return vim_item
-      end
-      vim_item.kind = string.format("[%s] %s", symbols[vim_item.kind].icon, vim_item.kind)
-      vim_item.menu = ""
+    format = lspkind.cmp_format({
+      mode = "symbol_text",
+      max_width = 50,
+      symbol_map = { Copilot = "" }
+    })
+    -- format = lspkind.cmp_format({
+    --   mode = 'symbol',
+    --   maxwidth = '50'
+    -- })
+    -- fields = { "abbr", "kind" },
+    -- format = function (entry, vim_item)
+    --   if not vim_item then return end
+    --   if entry.source.name == "copilot" then
+    --     vim_item.kind = "Copilot"
+    --     vim_item.kind_hl_group = "CmpItemKindCopilot"
+    --     -- return vim_item
+    --   end
+    --   vim_item.kind = string.format("[%s] %s", symbols[vim_item.kind].icon, vim_item.kind)
+    --   vim_item.menu = ""
       -- vim_item = lspkind.cmp_format({ with_text = false, maxwidth = 50 })(entry, vim_item)
-      return vim_item
-    end
+      -- return vim_item
+    -- end
   },
   window = {
     completion = {
