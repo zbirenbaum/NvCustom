@@ -39,16 +39,16 @@ local user_plugins = {
     disable = not plugin_status.copilot,
     after = { "copilot.lua", "nvim-cmp" },
   },
-  ["lewis6991/gitsigns.nvim"] = {
-    disable = not plugin_status.gitsigns,
-    opt = true,
-    config = function()
-      require("plugins.configs.others").gitsigns()
-    end,
-    setup = function()
-      require("core.utils").packer_lazy_load("gitsigns.nvim")
-    end,
-  },
+  -- ["lewis6991/gitsigns.nvim"] = {
+  --   disable = not plugin_status.gitsigns,
+  --   opt = true,
+  --   config = function()
+  --     require("plugins.configs.others").gitsigns()
+  --   end,
+  --   setup = function()
+  --     require("core.utils").packer_lazy_load("gitsigns.nvim")
+  --   end,
+  -- },
   ["max397574/better-escape.nvim"] = {
     disable = not plugin_status.better_escape,
     event = "InsertCharPre",
