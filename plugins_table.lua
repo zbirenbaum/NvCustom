@@ -109,9 +109,11 @@ local user_plugins = {
   ["numToStr/Comment.nvim"] = {
     disable = not plugin_status.comment,
     module = "Comment",
-    keys = { "gcc" },
-    setup = function () require("custom.utils.mappings").comment() end,
-    config = function() require("Comment").setup() end,
+    keys = { "gcc", "<leader>/" },
+    config = function()
+      require("Comment").setup()
+      require("custom.utils.mappings").comment()
+    end,
   },
   ["zbirenbaum/nvim-base16.lua"] = {
     after = "packer.nvim",

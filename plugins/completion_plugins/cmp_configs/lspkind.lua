@@ -1,5 +1,6 @@
-local lspconfig = require("lspkind")
-lspconfig.init({
+local lspkind = require("lspkind")
+
+lspkind.init({
   symbol_map = {
     Boolean = "[] Boolean",
     Character = "[] Character",
@@ -34,4 +35,5 @@ lspconfig.init({
     Copilot = "[]"
   },
 })
-return lspconfig
+
+return lspkind

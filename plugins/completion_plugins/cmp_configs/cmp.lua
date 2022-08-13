@@ -1,13 +1,11 @@
 local present, cmp = pcall(require, "cmp")
+if not present then return end
+
 local luasnip = require("luasnip")
-local lspkind = require("custom.plugins.completion_plugins.cmp_configs.lspkind")
--- local symbols = require("custom.plugins.completion_plugins.cmp_configs.symbols")
+-- local lspkind = require("custom.plugins.completion_plugins.cmp_configs.lspkind")
+local symbols = require("custom.plugins.completion_plugins.cmp_configs.symbols")
 
 local has_copilot, copilot_cmp = pcall("require", "copilot_cmp.comparators")
-
-if not present then
-  return
-end
 
 local has_words_before = function()
   if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
@@ -26,11 +24,19 @@ cmp.setup({
     winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
   },
   formatting = {
-    format = lspkind.cmp_format({
-      mode = "symbol_text",
-      max_width = 50,
-      symbol_map = { Copilot = "" }
-    })
+    fields = {"kind", "abbr", "menu"},
+    format = function(entry, vim_item)
+      vim_item.menu_hl_group = "CmpItemKind" .. vim_item.kind
+      vim_item.menu = vim_item.kind
+      vim_item.abbr = vim_item.abbr:sub(1, 50)
+      vim_item.kind = '[' .. symbols[vim_item.kind] .. ']'
+      return vim_item
+    end
+    -- format = lspkind.cmp_format({
+    --   mode = "symbol_text",
+    --   max_width = 50,
+    --   symbol_map = { Copilot = "" }
+    -- })
     -- format = lspkind.cmp_format({
     --   mode = 'symbol',
     --   maxwidth = '50'
