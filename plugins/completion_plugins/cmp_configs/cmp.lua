@@ -184,6 +184,7 @@ local highlights = {
   CmpMenu = { bg="#10171f" },
   CmpSelection = { bg="#263341" },
 }
+
 for group, hl in pairs(highlights) do
   vim.api.nvim_set_hl(0, group, hl)
 end
