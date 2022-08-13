@@ -25,10 +25,10 @@ o.lazyredraw = 1
 o.shadafile = "/home/zach/.local/share/nvim/shada/main.shada"
 o.pumheight = 6
 o.pumwidth = 12
-o.laststatus = 3
 o.shiftwidth = 2
 o.showtabline = 0 -- shown in statusline
 
+opt.laststatus = 3
 opt.clipboard = "unnamedplus"
 opt.hidden = true
 opt.ignorecase = true
