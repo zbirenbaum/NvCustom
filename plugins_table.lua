@@ -1,6 +1,40 @@
 local plugin_status = require("custom.status")
 
 local user_plugins = {
+  -- ["NvChad/base46"] = {
+  --   config = function()
+  --     local ok, base46 = pcall(require, "base46")
+  --     if ok then base46.load_theme() end
+  --   end,
+  -- },
+  -- ["EdenEast/nightfox.nvim"] = {
+  --   after = "packer.nvim",
+  --   config = function()
+  --     require("custom.colors.nightfox")
+  --   end,
+  -- },
+  -- ["folke/tokyonight.nvim"] = {
+  --   after = {"packer.nvim"},
+  --   config = function()
+  --     require("custom.colors.tokyonight")
+  --   end,
+  -- },
+
+  --[]
+  ["zbirenbaum/nvim-base16.lua"] = {
+    after = "packer.nvim",
+    config = function()
+      require("custom.colors").init()
+    end,
+  },
+  ["jose-elias-alvarez/null-ls.nvim"] = {
+    ft = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
+    config = function ()
+      vim.defer_fn(function ()
+        require("null-ls").setup({ sources = { require("null-ls").builtins.diagnostics.eslint } })
+      end, 200)
+    end,
+  },
   ["dylon/vim-antlr"] = {
     ft = "antlr4",
   },
@@ -17,12 +51,12 @@ local user_plugins = {
       require('custom.utils.mappings').terminal()
     end
   },
-  -- ["zbirenbaum/neodim"] = {
-  --   event = {"LspAttach"},
-  --   config = function ()
-  --     require("neodim").setup()
-  --   end
-  -- },
+  ["zbirenbaum/neodim"] = {
+    event = {"LspAttach"},
+    config = function ()
+      require("neodim").setup()
+    end
+  },
   ["zbirenbaum/copilot.lua"] = {
     branch = "master",
     disable = not plugin_status.copilot,
@@ -30,6 +64,7 @@ local user_plugins = {
     config = function()
       vim.defer_fn(function()
         require("copilot").setup({
+          copilot_node_command = "/home/zach/.config/nvm/versions/node/v16.14.2/bin/node",
           ft_disable = {"go"}
         })
       end, 100)
@@ -39,16 +74,25 @@ local user_plugins = {
     disable = not plugin_status.copilot,
     after = { "copilot.lua", "nvim-cmp" },
   },
-  -- ["lewis6991/gitsigns.nvim"] = {
-  --   disable = not plugin_status.gitsigns,
-  --   opt = true,
-  --   config = function()
-  --     require("plugins.configs.others").gitsigns()
-  --   end,
-  --   setup = function()
-  --     require("core.utils").packer_lazy_load("gitsigns.nvim")
-  --   end,
-  -- },
+  ["lewis6991/gitsigns.nvim"] = {
+    disable = not plugin_status.gitsigns,
+    opt = true,
+    config = function()
+      require("gitsigns").setup({
+        _extmark_signs = true,
+        signs = {
+           add = { hl = "DiffAdd", text = "│", numhl = "GitSignsAddNr" },
+           change = { hl = "DiffChange", text = "│", numhl = "GitSignsChangeNr" },
+           delete = { hl = "DiffDelete", text = "", numhl = "GitSignsDeleteNr" },
+           topdelete = { hl = "DiffDelete", text = "‾", numhl = "GitSignsDeleteNr" },
+           changedelete = { hl = "DiffChangeDelete", text = "~", numhl = "GitSignsChangeNr" },
+        },
+      })
+    end,
+    setup = function()
+      require("core.utils").packer_lazy_load("gitsigns.nvim")
+    end,
+  },
   ["max397574/better-escape.nvim"] = {
     disable = not plugin_status.better_escape,
     event = "InsertCharPre",
@@ -67,7 +111,8 @@ local user_plugins = {
   },
   ["kyazdani42/nvim-web-devicons"] = {
     opt = true,
-    after = { "nvim-base16.lua" },
+    module='nvim-web-devicons',
+    -- after = { "nvim-base16.lua" },
     config = function()
       require("custom.plugins.overrides.icons").setup()
     end,
@@ -113,12 +158,6 @@ local user_plugins = {
     setup = function () require("custom.utils.mappings").comment() end,
     config = function() require("Comment").setup() end,
   },
-  ["zbirenbaum/nvim-base16.lua"] = {
-    after = "packer.nvim",
-    config = function()
-      require("custom.colors").init()
-    end,
-  },
   ["ms-jpq/coq_nvim"] = {
     branch = "coq",
     disable = not plugin_status.coq,
@@ -134,7 +173,6 @@ local user_plugins = {
       { "ms-jpq/coq.thirdparty", branch = "3p" },
     },
   },
-
   ["L3MON4D3/LuaSnip"] = {
     wants = "friendly-snippets",
     after = "nvim-cmp",
@@ -182,12 +220,7 @@ local user_plugins = {
     after = "nvim-treesitter",
     config = function()
       vim.schedule(function()
-        plugin_status = require("core.utils").load_config().plugins.status
-        local completion_engine = plugin_status.cmp and "cmp" or plugin_status.coq and "coq"
-        if completion_engine == "coq" then
-          return false
-        end
-        require("custom.plugins.lsp_plugins.lsp_init").setup_lsp(completion_engine)
+        require("custom.plugins.lsp_plugins.lsp_init").setup_lsp('cmp')
       end)
     end,
   },
@@ -278,22 +311,24 @@ local user_plugins = {
     cmd = {"JqxList", "JqxQuery"},
     disable = not plugin_status.jqx,
   },
-  ["monkoose/matchparen.nvim"] = {
-    disable = not plugin_status.matchparen,
-    config = function()
-      require("custom.plugins.custom_plugin_configs.matchparen")
-    end,
-  },
-  ["karb94/neoscroll.nvim"] = {
-    -- disable = not plugin_status.neoscroll,
-    opt = true,
-    config = function()
-      require("custom.plugins.custom_plugin_configs.neoscroll")
-    end,
-    setup = function()
-      require("core.utils").packer_lazy_load("neoscroll.nvim")
-    end,
-  },
+  -- ["declancm/cinnamon.nvim"] = {
+  --   event = { "BufRead", "BufNewFile" },
+  --   config = function()
+  --     require("cinnamon").setup({
+  --       default_config = false,
+  --     })
+  --   end,
+  -- },
+  -- ["karb94/neoscroll.nvim"] = {
+  --   -- disable = not plugin_status.neoscroll,
+  --   opt = true,
+  --   config = function()
+  --     require("custom.plugins.custom_plugin_configs.neoscroll")
+  --   end,
+  --   setup = function()
+  --     require("core.utils").packer_lazy_load("neoscroll.nvim")
+  --   end,
+  -- },
   ["chentau/marks.nvim"] = {
     disable = not plugin_status.marks,
     config = function()

@@ -3,9 +3,8 @@ local M = {}
 M.apply_colors_highlight = function()
   local cmd = vim.cmd
 
-  local override = require("core.utils").load_config().ui.hl_override
-  local colors = require("custom.colors").get()
-  local ui = require("core.utils").load_config().ui
+  local override = require("core.utils").load_config().ui.hl_override -- local colors = require("custom.colors").get()
+  local colors = require("custom.colors.scheme")
 
   local black = colors.black
   local black2 = colors.black2
@@ -26,6 +25,8 @@ M.apply_colors_highlight = function()
   local white = colors.white
   local yellow = colors.yellow
   local orange = colors.orange
+  local sun = colors.sun
+  local dark_purple = colors.dark_purple
   local one_bg3 = colors.one_bg3
 
   -- functions for setting highlights
@@ -58,25 +59,21 @@ M.apply_colors_highlight = function()
   vim.api.nvim_set_hl(0, "TSVariable", { fg = colors.white })
   fg("TSContant", orange, "bold")
   fg("TSParameter", orange, {"italic", "bold"})
-  -- fg("TSRepeat", orange, {"italic", "bold"})
-  -- fg("TSKeyword", purple)
+  fg("TSRepeat", sun, {"bold"})
+  fg("TSKeyword", dark_purple)
   -- fg("TSKeywordFunction", blue, "bold")
   -- fg("TSConditional", purple, "bold")
 
   -- Comments
-  if ui.italic_comments then
-
-    vim.api.nvim_set_hl(0, "TSComment", { fg = grey_fg, italic = true, bold = true })
-    vim.api.nvim_set_hl(0, "Comment", { fg = grey_fg, italic = true, bold = true })
-    -- fg("Comment", grey_fg, "italic")
-  else
-    fg("Comment", grey_fg)
-  end
+  vim.api.nvim_set_hl(0, "TSComment", { fg = grey_fg, italic = true, bold = true })
+  vim.api.nvim_set_hl(0, "Comment", { fg = grey_fg, italic = true, bold = true })
 
   -- Disable cursor line
-  cmd("hi clear CursorLine")
+  -- cmd("hi clear CursorLine")
   -- Line number
-  fg("cursorlinenr", white)
+  bg("CursorLine", black )
+  -- fg("cursorlinenr", white)
+  vim.api.nvim_set_hl(0, "CursorLineNR", {fg=dark_purple, italic=false, bold=true})
 
   -- same it bg, so it doesn't appear
   fg("EndOfBuffer", black)
@@ -104,12 +101,10 @@ M.apply_colors_highlight = function()
   fg("NvimInternalError", red)
   fg("VertSplit", one_bg2)
 
-  if ui.transparency then
-    bg("Folded", "NONE")
-    fg("Folded", "NONE")
-    fg("Comment", grey)
-    fg_bg("Normal", white, "NONE") --due to api replacing undefineds, needs to be set
-  end
+  bg("Folded", "NONE")
+  fg("Folded", "NONE")
+  fg("Comment", grey)
+  fg_bg("Normal", white, "NONE") --due to api replacing undefineds, needs to be set
 
   -- [[ Plugin Highlights
 
@@ -123,6 +118,7 @@ M.apply_colors_highlight = function()
   fg_bg("DiffChangeDelete", red, "NONE")
   fg_bg("DiffModified", red, "NONE")
   fg_bg("DiffDelete", red, "NONE")
+  fg_bg("SignColumn", 'NONE', 'NONE')
 
   -- Indent blankline plugin
   fg("IndentBlanklineChar", line)
@@ -151,24 +147,23 @@ M.apply_colors_highlight = function()
   bg("TelescopeSelection", black2)
 
   -- Disable some highlight in nvim tree if transparency enabled
-  if ui.transparency then
-    bg("NormalFloat", "NONE")
-    -- telescope
-    bg("TelescopeBorder", "NONE")
-    bg("TelescopePrompt", "NONE")
-    bg("TelescopeResults", "NONE")
-    bg("TelescopePromptBorder", "NONE")
-    bg("TelescopePromptNormal", "NONE")
-    bg("TelescopeNormal", "NONE")
-    bg("TelescopePromptPrefix", "NONE")
-    fg("TelescopeBorder", one_bg)
-    fg_bg("TelescopeResultsTitle", black, blue)
-  end
+  bg("NormalFloat", "NONE")
+  -- telescope
+  bg("TelescopeBorder", "NONE")
+  bg("TelescopePrompt", "NONE")
+  bg("TelescopeResults", "NONE")
+  bg("TelescopePromptBorder", "NONE")
+  bg("TelescopePromptNormal", "NONE")
+  bg("TelescopeNormal", "NONE")
+  bg("TelescopePromptPrefix", "NONE")
+  fg("TelescopeBorder", one_bg)
+  fg_bg("TelescopeResultsTitle", black, blue)
 
   if #override ~= 0 then
     require(override)
   end
 end
+M.apply_colors_highlight()
 
 return M
 

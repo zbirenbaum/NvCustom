@@ -1,4 +1,5 @@
 local M = {}
+
 local autocmd = vim.api.nvim_create_autocmd
 
 autocmd({ "VimEnter" }, {
@@ -6,6 +7,7 @@ autocmd({ "VimEnter" }, {
     require("custom.utils.filetypes")
     require("custom.utils.mappings").tab()
     require("custom.utils.hot_reload")
+    -- require("custom.testserver").start()
   end,
   once = true,
 })

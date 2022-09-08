@@ -1,1 +1,6 @@
 utils/config_debug/*
+idea.txt
+test.lua
+testserver.lua
+get_selection.lua
+dirlist.lua

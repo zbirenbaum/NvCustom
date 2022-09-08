@@ -31,6 +31,7 @@ M.setup_lsp = function(completion_engine)
   local lspconfig = require("lspconfig")
   local default_servers = { "gopls" }
   local custom_servers = {
+    "denols",
     "sumneko_lua",
     "pylance",
     "tsserver",
