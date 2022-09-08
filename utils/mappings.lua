@@ -94,8 +94,9 @@ M.lsp = function ()
 end
 
 M.comment = function ()
-  maps({"n"}, '<leader>/', function() require('Comment.api').toggle.linewise.current() end, opts)
-
+  maps({"n"}, "<leader>/", function()
+    require("Comment.api").toggle.linewise.current()
+  end, opts)
   maps({"v"}, "<leader>/", "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>", opts)
 end
 

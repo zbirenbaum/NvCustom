@@ -29,7 +29,8 @@ M.get = function(theme)
     theme = vim.g.nvchad_theme
   end
 
-  return require("hl_themes." .. theme)
+  return require("custom.colors.scheme")
+  -- return require("hl_themes." .. theme)
 end
 
 M.get_base_16 = function(theme)
@@ -37,7 +38,8 @@ M.get_base_16 = function(theme)
     theme = vim.g.nvchad_theme
   end
 
-  return require("themes." .. theme .. '-base16')
+  return require("custom.colors.base16")
+  -- return require("themes." .. theme .. '-base16')
 end
 
 return M

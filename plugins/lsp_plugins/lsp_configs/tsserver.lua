@@ -7,7 +7,12 @@ local M = {}
 
 M.config_table = function(attach, capabilities)
   return {
-    init_options = { hostInfo = 'neovim' },
+    init_options = {
+      hostInfo = 'neovim',
+      preferences = {
+        disableSuggestions = true,
+      },
+    },
     cmd = cmd,
     on_attach = attach,
     capabilities = capabilities,
