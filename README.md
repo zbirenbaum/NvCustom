@@ -1,6 +1,6 @@
 # Config Guide
 ## IMPORTANT NOTE:
-This now works with vanilla NvChad and my fork is no longer required, although I do tend to get slightly higher performance when using it.
+This does not currently work with NvChad, it will shortly after the plugin syntax PR is merged.
 
 ## custom/
 ### chadrc.lua
