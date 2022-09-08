@@ -20,11 +20,10 @@ local user_plugins = {
   --   end,
   -- },
 
-  --[]
   ["zbirenbaum/nvim-base16.lua"] = {
     after = "packer.nvim",
     config = function()
-      require("custom.colors").init()
+      require("custom.colors").init('onedark')
     end,
   },
   ["jose-elias-alvarez/null-ls.nvim"] = {

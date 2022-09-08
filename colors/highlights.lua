@@ -1,9 +1,7 @@
 local M = {}
 
 M.apply_colors_highlight = function()
-  local cmd = vim.cmd
 
-  local override = require("core.utils").load_config().ui.hl_override -- local colors = require("custom.colors").get()
   local colors = require("custom.colors.scheme")
 
   local black = colors.black
@@ -159,11 +157,13 @@ M.apply_colors_highlight = function()
   fg("TelescopeBorder", one_bg)
   fg_bg("TelescopeResultsTitle", black, blue)
 
-  if #override ~= 0 then
-    require(override)
-  end
+  local hl = vim.api.nvim_set_hl
+  hl(0, "TabLineFile",{bg="NONE"})
+  hl(0, "TabLine",{bg="#000000"})
+  hl(0, 'Pmenu', {bg='#10171f'})
+  hl(0, 'PmenuSel', {bg='#263341'})
 end
-M.apply_colors_highlight()
+
 
 return M
 
