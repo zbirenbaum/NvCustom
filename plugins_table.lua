@@ -9,7 +9,7 @@ local user_plugins = {
       vim.defer_fn(function()
         require("copilot").setup({
           copilot_node_command = "/home/zach/.config/nvm/versions/node/v16.14.2/bin/node",
-          ft_disable = {"go"}
+          ft_disable = { "go", "dap-repl"}
         })
       end, 100)
     end,
@@ -296,6 +296,7 @@ local user_plugins = {
     end,
     requires = {
       "jbyuki/one-small-step-for-vimkind",
+      "mxsdev/nvim-dap-vscode-js"
     },
   },
   ["theHamsta/nvim-dap-virtual-text"] = {

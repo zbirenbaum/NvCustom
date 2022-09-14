@@ -25,7 +25,7 @@ M.tab = function ()
 end
 
 local choose_debug_session = function ()
-  if vim.lo.filetype == "lua" and not require("dap").session() then require("osv").run_this()
+  if vim.bo.filetype == "lua" and not require("dap").session() then require("osv").run_this()
   else require("dap").continue() end
 end
 
