@@ -1,3 +1,4 @@
+local package_installed = require('custom.utils.functions').package_installed
 local default_lsp_config = function(attach, capabilities)
   local default_config = {
     on_attach = attach,
@@ -31,14 +32,15 @@ M.setup_lsp = function(completion_engine)
   local lspconfig = require("lspconfig")
   local default_servers = { "gopls" }
   local custom_servers = {
-    "denols",
+    -- "denols",
     "sumneko_lua",
     "pylance",
-    "tsserver",
     "clangd",
     "rust_analyzer",
-    "solidity_ls"
+    "solidity_ls",
+    "html",
   }
+  table.insert(custom_servers, package_installed('vue') and 'volar' or 'tsserver')
   local default_config = default_lsp_config(attach, capabilities)
 
   for _, lsp in ipairs(custom_servers) do

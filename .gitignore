@@ -4,3 +4,4 @@ test.lua
 testserver.lua
 get_selection.lua
 dirlist.lua
+float.lua

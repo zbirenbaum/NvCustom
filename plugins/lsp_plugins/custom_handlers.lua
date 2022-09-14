@@ -5,22 +5,20 @@ vim.diagnostic.config({
   signs = {
     filter = function (diagnostic)
       if not diagnostic.user_data then diagnostic.user_data = {} end
-    end
-    --   if diagnostic.severity ~= vim.diagnostic.severity.ERROR then
-    --       diagnostic.user_data.sign_text = "D"
-    --       diagnostic.user_data.sign_hl_group = 'DiagnosticSignWarn'
-    --       return diagnostic
-    --   end
-    --   return diagnostic
-    -- end,
-    -- sign_text = {
-    --   [vim.diagnostic.severity.ERROR] = "B",
-    -- }
+      return diagnostic
+    end,
   },
   underline = false,
   update_in_insert = false, -- update diagnostics insert mode
 })
---
+  --     if diagnostic.severity ~= vim.diagnostic.severity.ERROR then
+  --         diagnostic.user_data.sign_text = "D"
+  --         diagnostic.user_data.sign_hl_group = 'DiagnosticSignWarn'
+  --         return diagnostic
+  --     end
+  -- },
+  -- sign_text = { [vim.diagnostic.severity.ERROR] = "B", },
+-- --
 -- local max_severity = function (line_diagnostics)
 --   local severity = 4
 --   local max_severity_diagnostic

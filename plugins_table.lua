@@ -1,6 +1,26 @@
 local plugin_status = require("custom.status")
 
 local user_plugins = {
+  ["zbirenbaum/copilot.lua"] = {
+    branch = "master",
+    disable = not plugin_status.copilot,
+    after = "nvim-lspconfig",
+    config = function()
+      vim.defer_fn(function()
+        require("copilot").setup({
+          copilot_node_command = "/home/zach/.config/nvm/versions/node/v16.14.2/bin/node",
+          ft_disable = {"go"}
+        })
+      end, 100)
+    end,
+  },
+  ["zbirenbaum/copilot-cmp"] = {
+    disable = not plugin_status.copilot,
+    after = { "copilot.lua", "nvim-cmp" },
+    config = function ()
+      require("copilot_cmp").setup()
+    end
+  },
   -- ["NvChad/base46"] = {
   --   config = function()
   --     local ok, base46 = pcall(require, "base46")
@@ -55,23 +75,6 @@ local user_plugins = {
     config = function ()
       require("neodim").setup()
     end
-  },
-  ["zbirenbaum/copilot.lua"] = {
-    branch = "master",
-    disable = not plugin_status.copilot,
-    after = "nvim-lspconfig",
-    config = function()
-      vim.defer_fn(function()
-        require("copilot").setup({
-          copilot_node_command = "/home/zach/.config/nvm/versions/node/v16.14.2/bin/node",
-          ft_disable = {"go"}
-        })
-      end, 100)
-    end,
-  },
-  ["zbirenbaum/copilot-cmp"] = {
-    disable = not plugin_status.copilot,
-    after = { "copilot.lua", "nvim-cmp" },
   },
   ["lewis6991/gitsigns.nvim"] = {
     disable = not plugin_status.gitsigns,
@@ -250,7 +253,9 @@ local user_plugins = {
   ["folke/trouble.nvim"] = {
     cmd = {"Trouble", "TroubleToggle", "TroubleRefresh", "TroubleClose"},
     disable = not plugin_status.trouble,
-    config = function() require("plugins.custom_plugin_configs.trouble") end,
+    config = function()
+      require("plugins.custom_plugin_configs.trouble")
+    end,
   },
   -- completion stuff
   ["hrsh7th/cmp-nvim-lsp"] = {
