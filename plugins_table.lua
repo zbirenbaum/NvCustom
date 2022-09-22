@@ -8,7 +8,6 @@ local user_plugins = {
     config = function()
       vim.defer_fn(function()
         require("copilot").setup({
-          copilot_node_command = "/home/zach/.config/nvm/versions/node/v16.14.2/bin/node",
           ft_disable = { "go", "dap-repl"}
         })
       end, 100)
@@ -50,7 +49,7 @@ local user_plugins = {
     ft = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
     config = function ()
       vim.defer_fn(function ()
-        require("null-ls").setup({ sources = { require("null-ls").builtins.diagnostics.eslint } })
+        require("custom.plugins.lsp_plugins.null_ls")
       end, 200)
     end,
   },
@@ -100,15 +99,6 @@ local user_plugins = {
     event = "InsertCharPre",
     config = function()
       require("custom.plugins.overrides.better_escape")
-    end,
-  },
-  ["NvChad/nvim-colorizer.lua"] = {
-    disable = not plugin_status.colorizer,
-    after = { "indent-blankline.nvim" },
-    config = function()
-      vim.defer_fn(function()
-        require("plugins.configs.others").colorizer()
-      end, 5)
     end,
   },
   ["kyazdani42/nvim-web-devicons"] = {
@@ -252,9 +242,9 @@ local user_plugins = {
   },
   ["folke/trouble.nvim"] = {
     cmd = {"Trouble", "TroubleToggle", "TroubleRefresh", "TroubleClose"},
-    disable = not plugin_status.trouble,
+    module = 'trouble',
     config = function()
-      require("plugins.custom_plugin_configs.trouble")
+      require("custom.plugins.custom_plugin_configs.trouble")
     end,
   },
   -- completion stuff
