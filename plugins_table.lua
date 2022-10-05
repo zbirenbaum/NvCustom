@@ -17,8 +17,17 @@ local user_plugins = {
     disable = not plugin_status.copilot,
     after = { "copilot.lua", "nvim-cmp" },
     config = function ()
-      require("copilot_cmp").setup()
+      require("copilot_cmp").setup({
+        clear_after_cursor=true,
+      })
     end
+  },
+
+  ["monkoose/matchparen.nvim"] = {
+    after = "nvim-treesitter",
+    config = function()
+      require("matchparen").setup()
+    end,
   },
   -- ["NvChad/base46"] = {
   --   config = function()
