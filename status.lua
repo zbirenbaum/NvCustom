@@ -40,6 +40,7 @@ local status = {
   colorizer = true,
   comment = true, -- universal commentor
   firenvim = false,
+  null_ls = false,
 
   copilot = true,
   playground = false,

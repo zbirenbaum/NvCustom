@@ -5,7 +5,7 @@ local luasnip = require("luasnip")
 -- local lspkind = require("custom.plugins.completion_plugins.cmp_configs.lspkind")
 local symbols = require("custom.plugins.completion_plugins.cmp_configs.symbols")
 
-local has_copilot, copilot_cmp = pcall("require", "copilot_cmp.comparators")
+local has_copilot, copilot_cmp = pcall(require, "copilot_cmp.comparators")
 
 local has_words_before = function()
   if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end

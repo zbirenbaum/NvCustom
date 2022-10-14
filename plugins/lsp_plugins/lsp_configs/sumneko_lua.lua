@@ -6,7 +6,7 @@ M.config_table = function(attach, capabilities)
   local sumneko_binary = "/usr/bin/lua-language-server"
   -- local sumneko_binary = "/bin/lua-language-server"
   -- Make runtime files discoverable to the server
-  local runtime_path = vim.split(package.path, ";")
+  local runtime_path = vim.split(package.path, ";", {})
   table.insert(runtime_path, "lua/?.lua")
   table.insert(runtime_path, "lua/?/init.lua")
 

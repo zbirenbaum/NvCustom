@@ -1,4 +1,5 @@
 local package_installed = require('custom.utils.functions').package_installed
+
 local default_lsp_config = function(attach, capabilities)
   local default_config = {
     on_attach = attach,
@@ -33,6 +34,8 @@ M.setup_lsp = function(completion_engine)
   local default_servers = { "gopls" }
   local custom_servers = {
     -- "denols",
+    -- "vscode_solidity",
+    "eslint",
     "sumneko_lua",
     "pylance",
     "clangd",

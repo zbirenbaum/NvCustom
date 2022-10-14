@@ -31,7 +31,7 @@ end
 
 M.debug_bindings = {
   mappings = {
-    { 'n', "<C-b>" },
+    { 'n', "<Leader>b" },
     { 'n', "<C-o>" },
     { 'n', "<C-O>" },
     { 'n', "<C-n>" },

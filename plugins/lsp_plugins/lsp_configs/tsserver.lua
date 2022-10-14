@@ -9,6 +9,7 @@ M.config_table = function(attach, capabilities)
   return {
     init_options = {
       hostInfo = 'neovim',
+      logVerbosity = 'verbose',
       preferences = {
         disableSuggestions = true,
       },

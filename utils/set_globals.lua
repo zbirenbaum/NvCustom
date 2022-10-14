@@ -66,6 +66,7 @@ g.loaded_matchparen = 1
 g.python_host_skip_check = 1
 g.python3_host_prog = "/home/zach/.virtualenvs/py3nvim/bin/python"
 g.python_host_prog = "/home/zach/.virtualenvs/py2nvim/bin/python"
+g.mouse = "";
 
 -- use lua filedetect
 g.transparency = true

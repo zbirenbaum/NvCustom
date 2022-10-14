@@ -1,5 +1,20 @@
 local get_config = function (options)
   local config = {
+    test = {
+      type = "pwa-node",
+      request = "launch",
+      name = "Debug Mocha Tests",
+      -- trace = true, -- include debugger info
+      runtimeExecutable = "npx",
+      runtimeArgs = {
+        "hardhat",
+        "test",
+      },
+      rootPath = "${workspaceFolder}",
+      cwd = "${workspaceFolder}",
+      console = "integratedTerminal",
+      internalConsoleOptions = "neverOpen",
+    },
     launch = {
       type = "pwa-node",
       request = "launch",
@@ -32,7 +47,6 @@ require("dap-vscode-js").setup({
 })
 
 for _, language in ipairs({ "typescript", "javascript" }) do
-  local opt = get_config({ 'launch' })
-  print(vim.inspect(opt))
+  local opt = get_config({ 'launch', 'test' })
   require("dap").configurations[language] = opt
 end

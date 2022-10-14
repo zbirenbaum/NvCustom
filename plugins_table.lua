@@ -7,9 +7,7 @@ local user_plugins = {
     after = "nvim-lspconfig",
     config = function()
       vim.defer_fn(function()
-        require("copilot").setup({
-          ft_disable = { "go", "dap-repl"}
-        })
+        require('custom.plugins.completion_plugins.copilot');
       end, 100)
     end,
   },
@@ -55,6 +53,7 @@ local user_plugins = {
     end,
   },
   ["jose-elias-alvarez/null-ls.nvim"] = {
+    disable = not plugin_status.null_ls,
     ft = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
     config = function ()
       vim.defer_fn(function ()
@@ -177,8 +176,8 @@ local user_plugins = {
     },
   },
   ["L3MON4D3/LuaSnip"] = {
-    wants = "friendly-snippets",
-    after = "nvim-cmp",
+    -- wants = "friendly-snippets",
+    module = "luasnip",
     config = function()
       local luasnip = require("luasnip")
       luasnip.config.set_config({
@@ -187,15 +186,16 @@ local user_plugins = {
           updateevents = "TextChanged,TextChangedI",
         },
       })
-      require("luasnip.loaders.from_vscode").load()
+      -- require("luasnip.loaders.from_vscode").load()
     end,
   },
   ["rafamadriz/friendly-snippets"] = {
-    disable = not plugin_status.cmp,
-    event = { "InsertEnter", "CursorHold" },
+    disable = true,
+    -- disable = not plugin_status.cmp,
   },
   ["hrsh7th/nvim-cmp"] = {
-    after = "friendly-snippets",
+    -- after = "friendly-snippets",
+    event = { "InsertEnter", "CursorHold" },
     disable = not plugin_status.cmp,
     config = function()
       require("custom.plugins.completion_plugins.cmp_configs.cmp")
@@ -287,16 +287,19 @@ local user_plugins = {
   --dap stuff
   ["mfussenegger/nvim-dap"] = {
     disable = not plugin_status.dap,
-    opt = true,
-    keys = require("custom.utils.mappings").debug_bindings.mappings,
+    module = "dap",
     config = function ()
       require("custom.plugins.dap.dap_setup").config()
+    end,
+    setup = function ()
       require("custom.utils.mappings").debug()
     end,
-    requires = {
-      "jbyuki/one-small-step-for-vimkind",
-      "mxsdev/nvim-dap-vscode-js"
-    },
+  },
+  ["jbyuki/one-small-step-for-vimkind"] = {
+    module = "osv"
+  },
+  ["mxsdev/nvim-dap-vscode-js"] = {
+    module = {'dap', 'dap-vscode-js'}
   },
   ["theHamsta/nvim-dap-virtual-text"] = {
     after = "nvim-dap",
