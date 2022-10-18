@@ -1,6 +1,12 @@
 # Config Guide
 ## IMPORTANT NOTE:
-This does not currently work with NvChad, it will shortly after the plugin syntax PR is merged.
+This does not currently work with NvChad. If I have time in the future I will update this, but at the moment I am too busy with a new job and other repositories to maintain this. I currently am using my own config which was made by pretty much just using sed to remove `custom.` from every require path and writing a short `init.lua`, along with a few other minor changes.
+
+You can find said repo here (although there is still some organizational work to do): https://github.com/zbirenbaum/zvim
+
+NvChad is an awesome project, and I will continue to help maintain it, but given the nature of my current work and editor needs, it does not make sense for me to prioritize making my config (which is very likely larger than NvChad itself at this point) compatible, when it has essentially been standalone for the better part of a year.
+
+
 
 ## custom/
 ### chadrc.lua
